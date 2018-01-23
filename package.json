@@ -1,0 +1,37 @@
+{
+  "name": "income-comparisons-react",
+  "version": "1.0.0",
+  "description": "Measure income amongst Australians",
+  "license": "MIT",
+  "private": true,
+  "contributors": [
+    "Joshua Byrd <phocks@gmail.com>"
+  ],
+  "aunty": "react-app",
+  "scripts": {
+    "start": "aunty serve",
+    "test": "jest"
+  },
+  "jest": {
+    "transform": {
+      ".*": "<rootDir>/node_modules/@abcnews/aunty/src/utils/jest"
+    }
+  },
+  "devDependencies": {
+    "@abcnews/aunty": "^7.6.0",
+    "babel-preset-env": "^1.6.1",
+    "babel-preset-react": "^6.24.1",
+    "jest": "^22.1.4",
+    "react-test-renderer": "^16.2.0"
+  },
+  "dependencies": {
+    "react": "^16.2.0",
+    "react-dom": "^16.2.0",
+    "d3-queue": "^3.0.7",
+    "d3-request": "^1.0.6",
+    "mapbox": "^1.0.0-beta9",
+    "point-in-polygon": "^1.0.1",
+    "spanify": "^1.2.3",
+    "topojson": "^3.0.2"
+  }
+}

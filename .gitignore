@@ -1,0 +1,12 @@
+# dependencies
+/node_modules
+
+# builds
+/build
+
+# misc
+.DS_Store
+npm-debug.log
+
+#secrets
+secret.json
