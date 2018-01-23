@@ -1,4 +1,5 @@
-const React = require('react');
+const React = require("react");
+const ReactDOM = require("react-dom");
 const styles = require("./App.scss");
 const worm = require("./worm.svg");
 
@@ -9,13 +10,13 @@ const inside = require("point-in-polygon");
 const topojson = require("topojson");
 const MapboxClient = require("mapbox");
 
-const Portal = require("preact-portal");
+const Portal = require("react-portal");
 
 // Other Preact components
 const LgaSearch = require("./LgaSearch");
 const IncomeInput = require("./IncomeInput");
 
-// Imports etc.
+// Imports etc
 const config = require("../../secret.json");
 
 // Constants
@@ -40,7 +41,7 @@ function dataLoaded(error, files) {
 }
 
 // Preact app starts here
-class App extends Component {
+class App extends React.Component {
   constructor(props) {
     super(props);
 
@@ -106,20 +107,22 @@ class App extends Component {
     this.addressToLGA(addressString, LGAs);
   }
 
-  render({ projectName }) {
-    return (
-      <div className={styles.root}>
-        <Portal into=".income-input">
-          <IncomeInput />
-        </Portal>
-        <Portal into=".address-input">
-          <LgaSearch
-            onLocaleIntent={this.handleLocaleIntent.bind(this)}
-            localGovernmentArea={this.state.localGovernmentArea}
-          />
-        </Portal>
-      </div>
-    );
+  render() {
+    const el = document.querySelector(".income-input");
+    console.log(el);
+    return (<div className={styles.root}>
+     
+      <IncomeInput />
+    
+    {/* <Portal node={document && document.getElementsByClassName('address-input')}>
+      <LgaSearch
+        onLocaleIntent={this.handleLocaleIntent.bind(this)}
+        localGovernmentArea={this.state.localGovernmentArea}
+      />
+    </Portal> */}
+  </div>)
+
+    
   }
 }
 

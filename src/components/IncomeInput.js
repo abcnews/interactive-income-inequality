@@ -1,12 +1,21 @@
-const React = require('react');
+const React = require("react");
 const styles = require("./IncomeInput.scss");
+const ReactDOM = require("react-dom");
 
-class IncomeInput extends Component {
+const Portal = require("react-portal");
+
+class IncomeInput extends React.Component {
+  handleIncomeChange() {
+    console.log("Income changed...");
+  }
+  handleEstimationChange() {
+    console.log("changed...");
+  }
   showMore(event) {
     console.log(event);
   }
   render() {
-    return (
+    return ReactDOM.createPortal(
       <div className={styles.wrapper}>
         <div className={styles.flexWrapper}>
           <div className={styles.column + " " + styles.one}>
@@ -19,12 +28,20 @@ class IncomeInput extends Component {
             </div>
             <div className={styles.boldtext}>
               Your income before tax is<br />
-              <label>$ <input type="text" /></label> per week
+              <label>
+                ${" "}
+                <input
+                  onChange={this.handleIncomeChange.bind(this)}
+                  type="text"
+                />
+              </label>{" "}
+              per week
             </div>
             <div className={styles.smalltext}>Enter your weekly income</div>
           </div>
           <div className={styles.column + " " + styles.two}>
             <input
+              onChange={this.handleEstimationChange.bind(this)}
               orient="vertical"
               type="range"
               step="1"
@@ -35,9 +52,12 @@ class IncomeInput extends Component {
           </div>
         </div>
         <div>
-          <button onClick={this.showMore.bind(this)}>Show me where I sit</button>
+          <button onClick={this.showMore.bind(this)}>
+            Show me where I sit
+          </button>
         </div>
-      </div>
+      </div>,
+      document.querySelector(".income-input")
     );
   }
 }

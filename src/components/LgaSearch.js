@@ -1,7 +1,7 @@
 const React = require('react');
 const styles = require("./LgaSearch.scss");
 
-class LgaSearch extends Component {
+class LgaSearch extends React.Component {
   constructor(props) {
     super(props);
 
