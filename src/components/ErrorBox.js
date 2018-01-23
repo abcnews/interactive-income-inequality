@@ -1,7 +1,7 @@
-const React = require('react');
+const { h, Component } = require('preact');
 const styles = require('./ErrorBox.css');
 
-class ErrorBox extends React.Component {
+class ErrorBox extends Component {
   componentDidMount() {
     console.error(this.props.error);
   }

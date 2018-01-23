@@ -2,15 +2,14 @@ const { h } = require('preact');
 const render = require('preact-render-to-string');
 const htmlLooksLike = require('html-looks-like');
 
-const App = require('../App');
+const LgaSearch = require('../LgaSearch');
 
-describe('App', () => {
+describe('LgaSearch', () => {
   test('It renders', () => {
-    const actual = render(<App projectName="test-project" />);
+    const actual = render(<LgaSearch />);
     const expected = `
       <div>
-        {{ ... }}
-        <h1>test-project</h1>
+        Find me in {{ ... }}
       </div>
     `;
 
