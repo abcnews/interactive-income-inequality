@@ -1,5 +1,4 @@
 const React = require("react");
-const ReactDOM = require("react-dom");
 const styles = require("./App.scss");
 const worm = require("./worm.svg");
 
@@ -108,21 +107,15 @@ class App extends React.Component {
   }
 
   render() {
-    const el = document.querySelector(".income-input");
-    console.log(el);
-    return (<div className={styles.root}>
-     
-      <IncomeInput />
-    
-    {/* <Portal node={document && document.getElementsByClassName('address-input')}>
-      <LgaSearch
-        onLocaleIntent={this.handleLocaleIntent.bind(this)}
-        localGovernmentArea={this.state.localGovernmentArea}
-      />
-    </Portal> */}
-  </div>)
-
-    
+    return (
+      <div className={styles.root}>
+        <IncomeInput />
+        <LgaSearch
+          onLocaleIntent={this.handleLocaleIntent.bind(this)}
+          localGovernmentArea={this.state.localGovernmentArea}
+        />
+      </div>
+    );
   }
 }
 

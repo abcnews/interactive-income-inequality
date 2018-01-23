@@ -1,4 +1,5 @@
-const React = require('react');
+const React = require("react");
+const ReactDOM = require("react-dom");
 const styles = require("./LgaSearch.scss");
 
 class LgaSearch extends React.Component {
@@ -15,13 +16,14 @@ class LgaSearch extends React.Component {
   }
 
   render() {
-    return (
+    return ReactDOM.createPortal(
       <div className={styles.wrapper}>
         <form onSubmit={this.handleSubmit}>
           <input />
         </form>
         <div>{this.props.localGovernmentArea}</div>
-      </div>
+      </div>,
+      document.querySelector(".address-input")
     );
   }
 }
