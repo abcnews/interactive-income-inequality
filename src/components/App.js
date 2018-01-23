@@ -65,6 +65,7 @@ class App extends React.Component {
       return;
     }
 
+    // Get center of searched address
     searchLongLat = returnedData.entity.features[0].center;
 
     let showLGA;
