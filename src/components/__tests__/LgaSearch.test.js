@@ -1,18 +1,13 @@
-const { h } = require('preact');
-const render = require('preact-render-to-string');
-const htmlLooksLike = require('html-looks-like');
+const React = require('react');
+const renderer = require('react-test-renderer');
 
 const LgaSearch = require('../LgaSearch');
 
 describe('LgaSearch', () => {
   test('It renders', () => {
-    const actual = render(<LgaSearch />);
-    const expected = `
-      <div>
-        Find me in {{ ... }}
-      </div>
-    `;
+    const component = renderer.create(<LgaSearch />);
 
-    htmlLooksLike(actual, expected);
+    let tree = component.toJSON();
+    expect(tree).toMatchSnapshot();
   });
 });

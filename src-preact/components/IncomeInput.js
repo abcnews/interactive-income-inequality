@@ -1,4 +1,5 @@
-const React = require('react');
+const { h, Component } = require("preact");
+
 const styles = require("./IncomeInput.scss");
 
 class IncomeInput extends Component {

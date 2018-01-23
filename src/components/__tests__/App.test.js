@@ -1,19 +1,13 @@
-const { h } = require('preact');
-const render = require('preact-render-to-string');
-const htmlLooksLike = require('html-looks-like');
+const React = require('react');
+const renderer = require('react-test-renderer');
 
 const App = require('../App');
 
 describe('App', () => {
   test('It renders', () => {
-    const actual = render(<App projectName="test-project" />);
-    const expected = `
-      <div>
-        {{ ... }}
-        <h1>test-project</h1>
-      </div>
-    `;
+    const component = renderer.create(<App projectName="test-project" />);
 
-    htmlLooksLike(actual, expected);
+    let tree = component.toJSON();
+    expect(tree).toMatchSnapshot();
   });
 });

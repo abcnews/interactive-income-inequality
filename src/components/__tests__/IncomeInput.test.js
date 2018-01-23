@@ -1,18 +1,13 @@
-const { h } = require('preact');
-const render = require('preact-render-to-string');
-const htmlLooksLike = require('html-looks-like');
+const React = require('react');
+const renderer = require('react-test-renderer');
 
 const IncomeInput = require('../IncomeInput');
 
 describe('IncomeInput', () => {
   test('It renders', () => {
-    const actual = render(<IncomeInput />);
-    const expected = `
-      <div>
-        Find me in {{ ... }}
-      </div>
-    `;
+    const component = renderer.create(<IncomeInput />);
 
-    htmlLooksLike(actual, expected);
+    let tree = component.toJSON();
+    expect(tree).toMatchSnapshot();
   });
 });
