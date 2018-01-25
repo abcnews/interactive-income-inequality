@@ -5,14 +5,19 @@ const ReactDOM = require("react-dom");
 const Portal = require("react-portal");
 
 class IncomeInput extends React.Component {
-  handleIncomeChange() {
-    console.log("Income changed...");
+  constructor(props) {
+    super(props);
+    this.state = { income: "" };
+  }
+  handleIncomeChange(event) {
+    let income = event.target.value;
+    this.setState({ income: income });
   }
   handleEstimationChange() {
     console.log("changed...");
   }
   showMore(event) {
-    console.log(event);
+    console.log(this.state.income);
   }
   render() {
     return ReactDOM.createPortal(
@@ -42,7 +47,7 @@ class IncomeInput extends React.Component {
           <div className={styles.column + " " + styles.two}>
             <input
               onChange={this.handleEstimationChange.bind(this)}
-              orient="vertical"
+              // orient="vertical"
               type="range"
               step="1"
               value="100"
