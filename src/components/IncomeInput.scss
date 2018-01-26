@@ -149,76 +149,41 @@
   input[type="range"]:focus::-ms-fill-upper {
     background: #367ebd;
   }
-  //   input[type="range"] {
-  //     margin: auto;
-  //     -webkit-appearance: none;
-  //     position: relative;
-  //     overflow: hidden;
-  //     height: 40px;
-  //     width: 200px;
-  //     cursor: pointer;
-  //     border-radius: 0; /* iOS */
-  //   }
+}
 
-  //   ::-webkit-slider-runnable-track {
-  //     background: #ddd;
-  //   }
 
-  //   /*
-  //  * 1. Set to 0 width and remove border for a slider without a thumb
-  //  */
-  //   ::-webkit-slider-thumb {
-  //     -webkit-appearance: none;
-  //     width: 20px; /* 1 */
-  //     height: 40px;
-  //     background: #fff;
-  //     box-shadow: -100vw 0 0 100vw dodgerblue;
-  //     border: 2px solid #999; /* 1 */
-  //   }
-
-  //   ::-moz-range-track {
-  //     height: 40px;
-  //     background: #ddd;
-  //   }
-
-  //   ::-moz-range-thumb {
-  //     background: #fff;
-  //     height: 40px;
-  //     width: 20px;
-  //     border: 3px solid #999;
-  //     border-radius: 0 !important;
-  //     box-shadow: -100vw 0 0 100vw dodgerblue;
-  //     box-sizing: border-box;
-  //   }
-
-  //   ::-ms-fill-lower {
-  //     background: dodgerblue;
-  //   }
-
-  //   ::-ms-thumb {
-  //     background: #fff;
-  //     border: 2px solid #999;
-  //     height: 40px;
-  //     width: 20px;
-  //     box-sizing: border-box;
-  //   }
-
-  //   ::-ms-ticks-after {
-  //     display: none;
-  //   }
-
-  //   ::-ms-ticks-before {
-  //     display: none;
-  //   }
-
-  //   ::-ms-track {
-  //     background: #ddd;
-  //     color: transparent;
-  //     height: 40px;
-  //     border: none;
-  //   }
-
-  //   ::-ms-tooltip {
-  //     display: none;
-  //   }
+:global {
+  .ticks {
+    font: 7px sans-serif;
+  }
+  
+  .track,
+  .track-inset,
+  .track-overlay {
+    stroke-linecap: square;
+  }
+  
+  .track {
+    // stroke: #000;
+    // stroke-opacity: 0.3;
+    stroke-width: 10px;
+  }
+  
+  .track-inset {
+    stroke: #ddd;
+    stroke-width: 8px;
+  }
+  
+  .track-overlay {
+    pointer-events: stroke;
+    stroke-width: 50px;
+    cursor: crosshair;
+  }
+  
+  .handle {
+    fill: #fff;
+    stroke: #000;
+    stroke-opacity: 0.5;
+    stroke-width: 1.25px;
+  }
 }
