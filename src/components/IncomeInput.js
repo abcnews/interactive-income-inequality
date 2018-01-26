@@ -4,6 +4,7 @@ const ReactDOM = require("react-dom");
 
 const Portal = require("react-portal");
 
+
 class IncomeInput extends React.Component {
   constructor(props) {
     super(props);
@@ -54,6 +55,7 @@ class IncomeInput extends React.Component {
               min="1"
               max="200"
             />
+            
           </div>
         </div>
         <div>
