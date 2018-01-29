@@ -3,6 +3,7 @@ const styles = require("./IncomeInput.scss");
 const ReactDOM = require("react-dom");
 const Portal = require("react-portal");
 const noUiSlider = require("nouislider");
+const wNumb = require("wnumb");
 
 class IncomeInput extends React.Component {
   constructor(props) {
@@ -97,19 +98,25 @@ class IncomeInput extends React.Component {
     //   svg.style("background-color", d3.hsl(hueActual, 0.8, 0.8));
     // }
 
-    var range = document.getElementById("range");
+    var slider = document.getElementById("range");
 
-    range.style.height = "300px";
-    range.style.margin = "0 auto 30px";
+    slider.style.height = "300px";
+    slider.style.margin = "0 auto 30px";
 
-    noUiSlider.create(range, {
+    noUiSlider.create(slider, {
       start: [50],
-      // connect: true,
+      direction: "rtl",
+      tooltips: wNumb({ decimals: 0, suffix: "%" }),
       orientation: "vertical",
       range: {
-        'min': 0,
-        'max': 100
+        min: 0,
+        max: 100
       }
+    });
+
+    slider.noUiSlider.on("set", () => {
+      console.log("slider set")
+      console.log(slider.noUiSlider.get());
     });
   }
   render() {
