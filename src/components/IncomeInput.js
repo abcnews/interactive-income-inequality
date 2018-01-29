@@ -21,83 +21,6 @@ class IncomeInput extends React.Component {
     console.log(this.state.income);
   }
   componentDidMount() {
-    // var svg = d3.select("svg.range-slider"),
-    //   margin = { right: 20, left: 20, top: 20, bottom: 20 },
-    //   width = +svg.attr("width"),
-    //   height = +svg.attr("height") - margin.top - margin.bottom;
-
-    // var hueActual = 0,
-    //   hueTarget = 70,
-    //   hueAlpha = 0.2,
-    //   hueTimer = d3.timer(hueTween);
-
-    // var y = d3
-    //   .scaleLinear()
-    //   .domain([0, 180])
-    //   .range([0, height])
-    //   .clamp(true);
-
-    // var slider = svg
-    //   .append("g")
-    //   .attr("class", "slider")
-    //   .attr("transform", "translate(" + width / 2 + "," + margin.left + ")");
-
-    // slider
-    //   .append("line")
-    //   .attr("class", "track")
-    //   .attr("y1", y.range()[0])
-    //   .attr("y2", y.range()[1])
-    //   .select(function() {
-    //     return this.parentNode.appendChild(this.cloneNode(true));
-    //   })
-    //   .attr("class", "track-inset")
-    //   .select(function() {
-    //     return this.parentNode.appendChild(this.cloneNode(true));
-    //   })
-    //   .attr("class", "track-overlay")
-    //   .call(
-    //     d3
-    //       .drag()
-    //       .on("start.interrupt", function() {
-    //         slider.interrupt();
-    //       })
-    //       .on("start drag", function() {
-    //         hue(y.invert(d3.event.y));
-    //       })
-    //   );
-
-    // slider
-    //   .insert("g", ".track-overlay")
-    //   .attr("class", "ticks")
-    //   .attr("transform", "translate(0," + 18 + ")")
-    //   .selectAll("text")
-    //   .data(y.ticks(10))
-    //   .enter()
-    //   .append("text")
-    //   .attr("y", y)
-    //   .attr("text-anchor", "middle")
-    //   .text(function(d) {
-    //     return d + "°";
-    //   });
-
-    // var handle = slider
-    //   .insert("circle", ".track-overlay")
-    //   .attr("class", "handle")
-    //   .attr("r", 9);
-
-    // function hue(h) {
-    //   hueTarget = h;
-    //   hueTimer.restart(hueTween);
-    // }
-
-    // function hueTween() {
-    //   var hueError = hueTarget - hueActual;
-    //   if (Math.abs(hueError) < 1e-3) (hueActual = hueTarget), hueTimer.stop();
-    //   else hueActual += hueError * hueAlpha;
-    //   handle.attr("cy", y(hueActual));
-    //   svg.style("background-color", d3.hsl(hueActual, 0.8, 0.8));
-    // }
-
     var slider = document.getElementById("range");
 
     slider.style.height = "300px";
@@ -115,7 +38,7 @@ class IncomeInput extends React.Component {
     });
 
     slider.noUiSlider.on("set", () => {
-      console.log("slider set")
+      console.log("slider set");
       console.log(slider.noUiSlider.get());
     });
   }
