@@ -25,10 +25,10 @@
     "react-test-renderer": "^16.2.0"
   },
   "dependencies": {
-    "d3": "^4.12.2",
     "d3-queue": "^3.0.7",
     "d3-request": "^1.0.6",
     "mapbox": "^1.0.0-beta9",
+    "nouislider": "^11.0.3",
     "point-in-polygon": "^1.0.1",
     "react": "^16.2.0",
     "react-dom": "^16.2.0",

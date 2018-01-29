@@ -2,7 +2,7 @@ const React = require("react");
 const styles = require("./IncomeInput.scss");
 const ReactDOM = require("react-dom");
 const Portal = require("react-portal");
-const d3 = require("d3");
+const noUiSlider = require("nouislider");
 
 class IncomeInput extends React.Component {
   constructor(props) {
@@ -20,82 +20,97 @@ class IncomeInput extends React.Component {
     console.log(this.state.income);
   }
   componentDidMount() {
-    var svg = d3.select("svg.range-slider"),
-      margin = { right: 20, left: 20, top: 20, bottom: 20 },
-      width = +svg.attr("width"),
-      height = +svg.attr("height") - margin.top - margin.bottom;
+    // var svg = d3.select("svg.range-slider"),
+    //   margin = { right: 20, left: 20, top: 20, bottom: 20 },
+    //   width = +svg.attr("width"),
+    //   height = +svg.attr("height") - margin.top - margin.bottom;
 
-    var hueActual = 0,
-      hueTarget = 70,
-      hueAlpha = 0.2,
-      hueTimer = d3.timer(hueTween);
+    // var hueActual = 0,
+    //   hueTarget = 70,
+    //   hueAlpha = 0.2,
+    //   hueTimer = d3.timer(hueTween);
 
-    var y = d3
-      .scaleLinear()
-      .domain([0, 180])
-      .range([0, height])
-      .clamp(true);
+    // var y = d3
+    //   .scaleLinear()
+    //   .domain([0, 180])
+    //   .range([0, height])
+    //   .clamp(true);
 
-    var slider = svg
-      .append("g")
-      .attr("class", "slider")
-      .attr("transform", "translate(" + width / 2 + "," + margin.left + ")");
+    // var slider = svg
+    //   .append("g")
+    //   .attr("class", "slider")
+    //   .attr("transform", "translate(" + width / 2 + "," + margin.left + ")");
 
-    slider
-      .append("line")
-      .attr("class", "track")
-      .attr("y1", y.range()[0])
-      .attr("y2", y.range()[1])
-      .select(function() {
-        return this.parentNode.appendChild(this.cloneNode(true));
-      })
-      .attr("class", "track-inset")
-      .select(function() {
-        return this.parentNode.appendChild(this.cloneNode(true));
-      })
-      .attr("class", "track-overlay")
-      .call(
-        d3
-          .drag()
-          .on("start.interrupt", function() {
-            slider.interrupt();
-          })
-          .on("start drag", function() {
-            hue(y.invert(d3.event.y));
-          })
-      );
+    // slider
+    //   .append("line")
+    //   .attr("class", "track")
+    //   .attr("y1", y.range()[0])
+    //   .attr("y2", y.range()[1])
+    //   .select(function() {
+    //     return this.parentNode.appendChild(this.cloneNode(true));
+    //   })
+    //   .attr("class", "track-inset")
+    //   .select(function() {
+    //     return this.parentNode.appendChild(this.cloneNode(true));
+    //   })
+    //   .attr("class", "track-overlay")
+    //   .call(
+    //     d3
+    //       .drag()
+    //       .on("start.interrupt", function() {
+    //         slider.interrupt();
+    //       })
+    //       .on("start drag", function() {
+    //         hue(y.invert(d3.event.y));
+    //       })
+    //   );
 
-    slider
-      .insert("g", ".track-overlay")
-      .attr("class", "ticks")
-      .attr("transform", "translate(0," + 18 + ")")
-      .selectAll("text")
-      .data(y.ticks(10))
-      .enter()
-      .append("text")
-      .attr("y", y)
-      .attr("text-anchor", "middle")
-      .text(function(d) {
-        return d + "°";
-      });
+    // slider
+    //   .insert("g", ".track-overlay")
+    //   .attr("class", "ticks")
+    //   .attr("transform", "translate(0," + 18 + ")")
+    //   .selectAll("text")
+    //   .data(y.ticks(10))
+    //   .enter()
+    //   .append("text")
+    //   .attr("y", y)
+    //   .attr("text-anchor", "middle")
+    //   .text(function(d) {
+    //     return d + "°";
+    //   });
 
-    var handle = slider
-      .insert("circle", ".track-overlay")
-      .attr("class", "handle")
-      .attr("r", 9);
+    // var handle = slider
+    //   .insert("circle", ".track-overlay")
+    //   .attr("class", "handle")
+    //   .attr("r", 9);
 
-    function hue(h) {
-      hueTarget = h;
-      hueTimer.restart(hueTween);
-    }
+    // function hue(h) {
+    //   hueTarget = h;
+    //   hueTimer.restart(hueTween);
+    // }
 
-    function hueTween() {
-      var hueError = hueTarget - hueActual;
-      if (Math.abs(hueError) < 1e-3) (hueActual = hueTarget), hueTimer.stop();
-      else hueActual += hueError * hueAlpha;
-      handle.attr("cy", y(hueActual));
-      svg.style("background-color", d3.hsl(hueActual, 0.8, 0.8));
-    }
+    // function hueTween() {
+    //   var hueError = hueTarget - hueActual;
+    //   if (Math.abs(hueError) < 1e-3) (hueActual = hueTarget), hueTimer.stop();
+    //   else hueActual += hueError * hueAlpha;
+    //   handle.attr("cy", y(hueActual));
+    //   svg.style("background-color", d3.hsl(hueActual, 0.8, 0.8));
+    // }
+
+    var range = document.getElementById("range");
+
+    range.style.height = "300px";
+    range.style.margin = "0 auto 30px";
+
+    noUiSlider.create(range, {
+      start: [50],
+      // connect: true,
+      orientation: "vertical",
+      range: {
+        'min': 0,
+        'max': 100
+      }
+    });
   }
   render() {
     return ReactDOM.createPortal(
@@ -132,7 +147,8 @@ class IncomeInput extends React.Component {
               min="1"
               max="200"
             /> */}
-            <svg className="range-slider" width="200" height="480" />
+            {/* <svg className="range-slider" width="200" height="480" /> */}
+            <div id="range" />
           </div>
         </div>
         <div>
