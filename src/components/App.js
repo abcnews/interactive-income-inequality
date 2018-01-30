@@ -15,11 +15,16 @@ const Portal = require("react-portal");
 const LgaSearch = require("./LgaSearch");
 const IncomeInput = require("./IncomeInput");
 
+const LGA_GEO_JSON_URL = "http://www.abc.net.au/res/sites/news-projects/income-comparisons-react/master/aus_lga.topo.json"
+
 // Imports etc
-const config = require("../../secret.json");
+const config = {
+  mapbox_token:
+    "cGsuZXlKMUlqb2libVYzY3kxdmJqRnBibVVpTENKaElqb2lZMnBqYXpFM09UbDNNRFV5ZVRKM2NHbDJOV1J4Y0RocE55SjkuS3c0bGhBYkxVazlJUGF6dXRCZTI4dw=="
+}; //require("../../secret.json"); // No real point in a secret config if just on a public server anyway
 
 // Constants
-const MAPBOX_TOKEN = config.mapbox_token;
+const MAPBOX_TOKEN = atob(config.mapbox_token);
 
 // File scope variables
 let searchLongLat = [0, 0];
@@ -99,7 +104,7 @@ class App extends React.Component {
     // Queue up some files to be loaded
     d3Q
       .queue(2)
-      .defer(d3Request.json, "./aus_lga.topo.json")
+      .defer(d3Request.json, LGA_GEO_JSON_URL)
       .awaitAll(dataLoaded);
   }
 
