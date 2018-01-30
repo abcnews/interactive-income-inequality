@@ -23,7 +23,7 @@ class LgaSearch extends React.Component {
         </form>
         <div>{this.props.localGovernmentArea}</div>
       </div>,
-      document.querySelector(".address-input")
+      document.querySelector(".addressinput")
     );
   }
 }

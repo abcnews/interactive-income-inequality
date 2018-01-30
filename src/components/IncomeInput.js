@@ -87,7 +87,7 @@ class IncomeInput extends React.Component {
           </button>
         </div>
       </div>,
-      document.querySelector(".income-input")
+      document.querySelector(".incomeinput")
     );
   }
 }
