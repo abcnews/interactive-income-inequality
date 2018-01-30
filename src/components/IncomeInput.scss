@@ -94,8 +94,24 @@
   justify-content: space-between;
 }
 
+.most-rich {
+  position: relative;
+  top: -4px;
+}
+
 .least-rich {
-  // align-self: flex-end;
+  position: relative;
+  bottom: -6px;
+}
+
+.most-rich-text {
+  position: relative;
+  top: -6px;
+}
+
+.least-rich-text {
+  position: relative;
+  bottom: -1px;
 }
 
 :global {
@@ -189,8 +205,8 @@
     width: 15px;
   }
   .noUi-vertical .noUi-handle {
-    width: 28px;
-    height: 34px;
+    width: 42px;
+    height: 39px;
     left: -6px;
     top: -17px;
   }
@@ -222,27 +238,29 @@
     cursor: ns-resize;
   }
   .noUi-handle {
-    border: 1px solid #d9d9d9;
-    border-radius: 3px;
-    background: #fff;
-    cursor: default;
-    box-shadow: inset 0 0 1px #fff, inset 0 1px 7px #ebebeb, 0 3px 6px -3px #bbb;
+    // border: 1px solid #d9d9d9;
+    // border-radius: 3px;
+    // background: #fff;
+    background-image: url("http://www.abc.net.au/res/sites/news-projects/income-comparisons-react/master/handle.svg");
+    background-repeat: no-repeat;
+    cursor: pointer;
+    // box-shadow: inset 0 0 1px #fff, inset 0 1px 7px #ebebeb, 0 3px 6px -3px #bbb;
   }
   .noUi-active {
-    box-shadow: inset 0 0 1px #fff, inset 0 1px 7px #ddd, 0 3px 6px -3px #bbb;
+    // box-shadow: inset 0 0 1px #fff, inset 0 1px 7px #ddd, 0 3px 6px -3px #bbb;
   }
   /* Handle stripes;
   */
   .noUi-handle:before,
   .noUi-handle:after {
-    content: "";
-    display: block;
-    position: absolute;
-    height: 14px;
-    width: 1px;
-    background: #e8e7e6;
-    left: 14px;
-    top: 6px;
+    // content: "";
+    // display: block;
+    // position: absolute;
+    // height: 14px;
+    // width: 1px;
+    // background: #e8e7e6;
+    // left: 14px;
+    // top: 6px;
   }
   .noUi-handle:after {
     left: 17px;
@@ -382,9 +400,9 @@
     bottom: 120%;
   }
   .noUi-vertical .noUi-tooltip {
-    -webkit-transform: translate(0, -50%);
-    transform: translate(0, -50%);
-    top: 50%;
-    right: 120%;
+    -webkit-transform: translate(0, -40%);
+    transform: translate(0, -40%);
+    top: 40%;
+    right: 100%;
   }
 }

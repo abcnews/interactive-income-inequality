@@ -72,8 +72,18 @@ class IncomeInput extends React.Component {
           </div>
           <div className={styles.column + " " + styles.three}>
             <div className={styles.scaleContainer}>
-              <div className={styles.mostRich}>Most rich</div>
-              <div className={styles.leastRich}>Least rich</div>
+              <div className={styles.mostRich}>
+                <div>
+                  <img src="http://www.abc.net.au/res/sites/news-projects/income-comparisons-react/master/ios-arrow-thin-up.svg" />
+                </div>
+                <div className={styles.mostRichText}>Most rich</div>
+              </div>
+              <div className={styles.leastRich}>
+              <div className={styles.leastRichText}>Least rich</div>
+                <div>
+                  <img src="http://www.abc.net.au/res/sites/news-projects/income-comparisons-react/master/ios-arrow-thin-down.svg" />
+                </div>
+              </div>
             </div>
           </div>
         </div>
