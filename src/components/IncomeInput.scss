@@ -207,8 +207,8 @@
   .noUi-vertical .noUi-handle {
     width: 42px;
     height: 39px;
-    left: -6px;
-    top: -17px;
+    left: 12px;
+    top: -19.55px; // Make sure it doesn't fly off the handle
   }
   html:not([dir="rtl"]) .noUi-horizontal .noUi-handle {
     right: -17px;
@@ -403,6 +403,6 @@
     -webkit-transform: translate(0, -40%);
     transform: translate(0, -40%);
     top: 40%;
-    right: 100%;
+    right: 130%;
   }
 }
