@@ -23,8 +23,8 @@ class IncomeInput extends React.Component {
   componentDidMount() {
     var slider = document.getElementById("range");
 
-    slider.style.height = "300px";
-    slider.style.margin = "0 auto 30px";
+    slider.style.height = "100%";
+    slider.style.margin = "0 auto";
 
     noUiSlider.create(slider, {
       start: [50],
@@ -68,17 +68,13 @@ class IncomeInput extends React.Component {
             <div className={styles.smalltext}>Enter your weekly income</div>
           </div>
           <div className={styles.column + " " + styles.two}>
-            {/* <input
-              onChange={this.handleEstimationChange.bind(this)}
-              // orient="vertical"
-              type="range"
-              step="1"
-              value="100"
-              min="1"
-              max="200"
-            /> */}
-            {/* <svg className="range-slider" width="200" height="480" /> */}
             <div id="range" />
+          </div>
+          <div className={styles.column + " " + styles.three}>
+            <div className={styles.scaleContainer}>
+              <div className={styles.mostRich}>Most rich</div>
+              <div className={styles.leastRich}>Least rich</div>
+            </div>
           </div>
         </div>
         <div>
