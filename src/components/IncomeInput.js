@@ -60,7 +60,7 @@ class IncomeInput extends React.Component {
                 ${" "}
                 <input
                   onChange={this.handleIncomeChange.bind(this)}
-                  type="text"
+                  type="number"
                 />
               </label>{" "}
               per week
@@ -76,10 +76,10 @@ class IncomeInput extends React.Component {
                 <div>
                   <img src="http://www.abc.net.au/res/sites/news-projects/income-comparisons-react/master/ios-arrow-thin-up.svg" />
                 </div>
-                <div className={styles.mostRichText}>Most rich</div>
+                <div className={styles.mostRichText}>Most<br />rich</div>
               </div>
               <div className={styles.leastRich}>
-              <div className={styles.leastRichText}>Least rich</div>
+              <div className={styles.leastRichText}>Least<br />rich</div>
                 <div>
                   <img src="http://www.abc.net.au/res/sites/news-projects/income-comparisons-react/master/ios-arrow-thin-down.svg" />
                 </div>
