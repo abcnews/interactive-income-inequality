@@ -54,9 +54,21 @@ class IncomeInput extends React.Component {
         <div className={styles.flexWrapper}>
           {infoIsSet ? (
             <div className={styles.column + " " + styles.one}>
-              <div className={styles.standardText}>Your income puts you in the $52,000 - $64,999 per annum income
-              bracket for Australia, with 10.23 per cent of other income
-              earners.</div>
+              <div className={styles.standardText}>
+                Your income puts you in the{" "}
+                <span className={styles.resultsStandard}>
+                  $52,000 - $64,999
+                </span>{" "}
+                per annum income bracket for Australia, with{" "}
+                <span className={styles.resultsStandard}>10.23 per cent</span>{" "}
+                of other income earners.
+              </div>
+              <div className={styles.standardText}>
+                Above your bracket are <span className={styles.resultsAbove}>27.12 per cent</span> of income earners
+              </div>
+              <div className={styles.standardText}>
+                Below your bracket are <span className={styles.resultsBelow}>62.65 per cent</span> of income earners
+              </div>
             </div>
           ) : (
             <div className={styles.column + " " + styles.one}>

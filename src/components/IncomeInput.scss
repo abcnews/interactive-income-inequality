@@ -1,7 +1,29 @@
 .wrapper {
   .standard-text {
     color: #111111;
+    font-size: 18px;
+    line-height: 28px;
+    margin-bottom: 1em;
   }
+
+  .results-standard {
+    color: #516c72;
+    font-weight: bold;
+    font-family: ABCSans, Arial, Helvetica, sans-serif;
+  }
+
+  .results-above {
+    color: #00242c;
+    font-weight: bold;
+    font-family: ABCSans, Arial, Helvetica, sans-serif;
+  }
+
+  .results-below {
+    color: #009fa5;
+    font-weight: bold;
+    font-family: ABCSans, Arial, Helvetica, sans-serif;
+  }
+
   .flex-wrapper {
     font-size: 20px;
     color: #143d47;
@@ -20,7 +42,7 @@
   }
 
   .one {
-    // flex-shrink: 1;
+    max-width: 66.666%;
   }
 
   .two {
@@ -199,10 +221,10 @@
     width: 15px;
   }
   .noUi-vertical .noUi-handle {
-    width: 42px;
-    height: 39px;
+    width: 48px; // a bit bigger than
+    height: 48px; // the handle image
     left: 12px;
-    top: -19.55px; // Make sure it doesn't fly off the handle
+    top: -25px; // Make sure it doesn't fly off the handle
   }
   html:not([dir="rtl"]) .noUi-horizontal .noUi-handle {
     right: -17px;
@@ -237,6 +259,7 @@
     // background: #fff;
     background-image: url("http://www.abc.net.au/res/sites/news-projects/income-comparisons-react/master/handle.svg");
     background-repeat: no-repeat;
+    background-position: left center;
     cursor: pointer;
     // box-shadow: inset 0 0 1px #fff, inset 0 1px 7px #ebebeb, 0 3px 6px -3px #bbb;
   }
