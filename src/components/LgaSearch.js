@@ -5,7 +5,6 @@ const styles = require("./LgaSearch.scss");
 class LgaSearch extends React.Component {
   constructor(props) {
     super(props);
-
     this.handleSubmit = this.handleSubmit.bind(this);
   }
 
