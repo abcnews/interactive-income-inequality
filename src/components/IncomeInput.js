@@ -8,7 +8,7 @@ const wNumb = require("wnumb");
 class IncomeInput extends React.Component {
   constructor(props) {
     super(props);
-    this.state = { income: "" };
+    this.state = { income: "", infoIsSet: false };
   }
   handleIncomeChange(event) {
     let income = event.target.value;
@@ -19,6 +19,9 @@ class IncomeInput extends React.Component {
   }
   showMore(event) {
     console.log(this.state.income);
+    if (this.state.income > 1) {
+      this.setState({ infoIsSet: true });
+    }
   }
   componentDidMount() {
     var slider = document.getElementById("range");
@@ -43,30 +46,42 @@ class IncomeInput extends React.Component {
     });
   }
   render() {
+    let infoIsSet = null;
+    if (this.state.infoIsSet) infoIsSet = true;
+    else infoIsSet = false;
     return ReactDOM.createPortal(
       <div className={styles.wrapper}>
         <div className={styles.flexWrapper}>
-          <div className={styles.column + " " + styles.one}>
-            <div className={styles.boldtext}>
-              Where do you think your income bracket sits on the scale of least
-              to most rich Australians?
+          {infoIsSet ? (
+            <div className={styles.column + " " + styles.one}>
+              <div className={styles.standardText}>Your income puts you in the $52,000 - $64,999 per annum income
+              bracket for Australia, with 10.23 per cent of other income
+              earners.</div>
             </div>
-            <div className={styles.smalltext}>
-              Use the slider on the right to estimate your position
+          ) : (
+            <div className={styles.column + " " + styles.one}>
+              <div className={styles.boldtext}>
+                Where do you think your income bracket sits on the scale of
+                least to most rich Australians?
+              </div>
+              <div className={styles.smalltext}>
+                Use the slider on the right to estimate your position
+              </div>
+              <div className={styles.boldtext}>
+                Your income before tax is<br />
+                <label>
+                  ${" "}
+                  <input
+                    onChange={this.handleIncomeChange.bind(this)}
+                    type="number"
+                  />
+                </label>{" "}
+                per week
+              </div>
+              <div className={styles.smalltext}>Enter your weekly income</div>{" "}
             </div>
-            <div className={styles.boldtext}>
-              Your income before tax is<br />
-              <label>
-                ${" "}
-                <input
-                  onChange={this.handleIncomeChange.bind(this)}
-                  type="number"
-                />
-              </label>{" "}
-              per week
-            </div>
-            <div className={styles.smalltext}>Enter your weekly income</div>
-          </div>
+          )}
+
           <div className={styles.column + " " + styles.two}>
             <div id="range" />
           </div>
@@ -76,10 +91,14 @@ class IncomeInput extends React.Component {
                 <div>
                   <img src="http://www.abc.net.au/res/sites/news-projects/income-comparisons-react/master/ios-arrow-thin-up.svg" />
                 </div>
-                <div className={styles.mostRichText}>Most<br />rich</div>
+                <div className={styles.mostRichText}>
+                  Most<br />rich
+                </div>
               </div>
               <div className={styles.leastRich}>
-              <div className={styles.leastRichText}>Least<br />rich</div>
+                <div className={styles.leastRichText}>
+                  Least<br />rich
+                </div>
                 <div>
                   <img src="http://www.abc.net.au/res/sites/news-projects/income-comparisons-react/master/ios-arrow-thin-down.svg" />
                 </div>

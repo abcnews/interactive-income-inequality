@@ -50,7 +50,8 @@ class App extends React.Component {
   constructor(props) {
     super(props);
 
-    this.state = { localGovernmentArea: "Search Local Governments by address" };
+    this.state = { localGovernmentArea: "Search Local Governments by address",
+   };
   }
 
   async addressToLGA(address, localAreas) {
@@ -116,7 +117,7 @@ class App extends React.Component {
   render() {
     let incomeBlock = null;
 
-    
+
     return (
       <div className={styles.root}>
         <IncomeInput />

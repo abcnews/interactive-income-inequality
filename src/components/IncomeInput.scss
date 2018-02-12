@@ -1,117 +1,111 @@
 .wrapper {
-}
+  .standard-text {
+    color: #111111;
+  }
+  .flex-wrapper {
+    font-size: 20px;
+    color: #143d47;
+    display: flex;
+    // flex-direction: row;
+    // align-items: flex-start;
+  }
 
-.flex-wrapper {
-  font-size: 20px;
-  color: #143d47;
-  display: flex;
-  // flex-direction: row;
-  // align-items: flex-start;
-}
+  .column {
+    margin: 0 6px;
+    // flex-grow: 1;
+    // flex-shrink: 1;
+    // flex-basis: 50%;
+    // border: 1px solid #ddd;
+    // flex: 1;
+  }
 
-.column {
-  margin: 0 6px;
-  // flex-grow: 1;
-  // flex-shrink: 1;
-  // flex-basis: 50%;
-  // border: 1px solid #ddd;
-  // flex: 1;
-}
+  .one {
+    // flex-shrink: 1;
+  }
 
-.one {
-  // flex-shrink: 1;
-}
+  .two {
+    text-align: right;
+    // flex-basis: 100px;
+    // min-width: 120px;
+    margin-bottom: 0.8em;
+    margin-left: 55px;
+  }
 
-.two {
-  text-align: right;
-  // flex-basis: 100px;
-  // min-width: 120px;
-  margin-bottom: 0.8em;
-  margin-left: 55px;
-}
+  .three {
+    color: #516c72;
+    font-family: ABCSans, Arial, Helvetica, sans-serif;
+    font-size: 11px;
+    text-align: center;
+    margin-bottom: 0.8rem;
+  }
 
-.three {
-  color: #516c72;
-  font-family: ABCSans, Arial, Helvetica, sans-serif;
-  font-size: 11px;
-  text-align: center;
-  margin-bottom: 0.8rem;
-}
+  .column .boldtext {
+    font-weight: bold;
+    margin-bottom: 0.8rem;
+  }
 
-.column .boldtext {
-  font-weight: bold;
-  margin-bottom: 0.8rem;
-}
+  .column .smalltext {
+    font-family: ABCSans, Arial, Helvetica, sans-serif;
+    font-size: 13px;
+    color: #516c72;
+    margin-bottom: 0.8rem;
+  }
 
-.column .smalltext {
-  font-family: ABCSans, Arial, Helvetica, sans-serif;
-  font-size: 13px;
-  color: #516c72;
-  margin-bottom: 0.8rem;
-}
+  button {
+    margin: auto;
+    margin-top: 0.8em;
+    min-width: 100%;
+    display: block;
+    color: white;
+    background-color: #1c1c1c;
+    text-transform: uppercase;
+    font-family: ABCSans, Arial, Helvetica, sans-serif;
+    padding-top: 15px;
+    padding-bottom: 15px;
+    font-size: 12px;
+    letter-spacing: 2px;
+    border: 0;
+  }
 
-.wrapper button {
-  margin: auto;
-  margin-top: 0.8em;
-  min-width: 100%;
-  display: block;
-  color: white;
-  background-color: #1c1c1c;
-  text-transform: uppercase;
-  font-family: ABCSans, Arial, Helvetica, sans-serif;
-  padding-top: 15px;
-  padding-bottom: 15px;
-  font-size: 12px;
-  letter-spacing: 2px;
-  border: 0;
-}
+  input[type="number"] {
+    background-color: rgba(0, 0, 0, 0);
+    border: none;
+    border-bottom: 2px solid #143d47;
+    outline: none;
+    font-size: 20px;
+    padding: 1px;
+    color: #ff6100;
+    max-width: 80px;
+    border-radius: 0; // Remove round corners on iOS
+    -webkit-appearance: none; // Remove round corners on iOS - legacy
+  }
 
-.wrapper input[type="number"] {
-  background-color: rgba(0, 0, 0, 0);
-  border: none;
-  border-bottom: 2px solid #143d47;
-  outline: none;
-  font-size: 20px;
-  padding: 1px;
-  color: #ff6100;
-  max-width: 80px;
-  border-radius: 0; // Remove round corners on iOS
-  -webkit-appearance: none; // Remove round corners on iOS - legacy
-}
+  .scale-container {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    justify-content: space-between;
+  }
 
-// Range slider .wrapper input[type="range"] {
-//   -webkit-appearance: slider-vertical; // webkit
-//   // position: relative;
-//   // display: inline-block;
-//   height: 200px;
-//   width: 30px;
-// }
+  .most-rich {
+    position: relative;
+    top: -4px;
+  }
 
-.scale-container {
-  display: flex;
-  flex-direction: column;
-  height: 100%;
-  justify-content: space-between;
-}
+  .least-rich {
+    position: relative;
+    bottom: -6px;
+  }
 
-.most-rich {
-  position: relative;
-  top: -4px;
-}
+  .most-rich-text {
+    position: relative;
+    top: -6px;
+  }
 
-.least-rich {
-  position: relative;
-  bottom: -6px;
-}
-
-.most-rich-text {
-  position: relative;
-  top: -6px;
-}
-
-.least-rich-text {
-  position: relative;
-  bottom: -1px;
+  .least-rich-text {
+    position: relative;
+    bottom: -1px;
+  }
 }
 
 :global {
