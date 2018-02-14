@@ -8,7 +8,8 @@ const wNumb = require("wnumb");
 class IncomeInput extends React.Component {
   constructor(props) {
     super(props);
-    this.state = { income: "1200", infoIsSet: false };
+    // Set initial state of component
+    this.state = { income: "1200", infoIsSet: false, incomeBracket: 8 };
   }
 
   handleIncomeChange(event) {
@@ -22,6 +23,7 @@ class IncomeInput extends React.Component {
 
   showMore(event) {
     console.log(this.state.income);
+    console.log(whatIncomeBracket(this.state.income));
     if (this.state.infoIsSet) {
       this.setState({ infoIsSet: false });
     } else {
@@ -107,15 +109,15 @@ class IncomeInput extends React.Component {
                 income earners
               </div>
               <button onClick={this.showMore.bind(this)}>
-              <div className={styles.tryAgain}>
-                <span className={styles.reloadIcon}>
-                  <img
-                    src="http://www.abc.net.au/res/sites/news-projects/income-comparisons-react/master/refresh.svg"
-                    width="20px"
-                    height="20px"
-                  />
-                </span>
-                <span>&nbsp;&nbsp; Try again</span>
+                <div className={styles.tryAgain}>
+                  <span className={styles.reloadIcon}>
+                    <img
+                      src="http://www.abc.net.au/res/sites/news-projects/income-comparisons-react/master/refresh.svg"
+                      width="20px"
+                      height="20px"
+                    />
+                  </span>
+                  <span>&nbsp;&nbsp; Try again</span>
                 </div>
               </button>
             </div>
@@ -151,5 +153,26 @@ class IncomeInput extends React.Component {
     );
   }
 }
+
+function whatIncomeBracket(incomePerWeek) {
+  let incomePerYear = incomePerWeek * 52;
+  console.log(incomePerYear);
+
+  if (incomePerYear >= 156000) return 13;
+  else if (incomePerYear >= 104000) return 12;
+  else if (incomePerYear >= 91000) return 11;
+  else if (incomePerYear >= 78000) return 10;
+  else if (incomePerYear >= 65000) return 9;
+  else if (incomePerYear >= 52000) return 8;
+  else if (incomePerYear >= 41600) return 7;
+  else if (incomePerYear >= 33800) return 6;
+  else if (incomePerYear >= 26000) return 5;
+  else if (incomePerYear >= 20800) return 4;
+  else if (incomePerYear >= 15600) return 3;
+  else if (incomePerYear >= 7800) return 2;
+  else return 1;
+}
+
+console.log(whatIncomeBracket(1200));
 
 module.exports = IncomeInput;
