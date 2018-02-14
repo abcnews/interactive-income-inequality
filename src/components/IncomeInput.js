@@ -5,6 +5,8 @@ const Portal = require("react-portal");
 const noUiSlider = require("nouislider");
 const wNumb = require("wnumb");
 
+const TRANSITION_TIME = 500;
+
 class IncomeInput extends React.Component {
   constructor(props) {
     super(props);
@@ -105,13 +107,31 @@ class IncomeInput extends React.Component {
 
   showMore(event) {
     event.preventDefault();
-    console.log(this.state.income);
+    const wrapperEl = document.querySelector("." + styles.wrapper);
 
-    let incomeBracketNumber = whatIncomeBracket(this.state.income);
-    console.log(this.bracketInfo[incomeBracketNumber - 1]);
-    this.results = this.bracketInfo[incomeBracketNumber - 1];
+    // Fade out the wrapper element
+    addClass(wrapperEl, styles.fadeOut);
 
-    this.setState({ infoIsSet: true });
+    setTimeout(() => {
+      // Wait for a while then do the calculation
+      console.log(wrapperEl);
+      console.log(this.state.income);
+
+      let incomeBracketNumber = whatIncomeBracket(this.state.income);
+      console.log(this.bracketInfo[incomeBracketNumber - 1]);
+      this.results = this.bracketInfo[incomeBracketNumber - 1];
+
+      this.setState({ infoIsSet: true });
+
+      // Fade back in
+      removeClass(wrapperEl, styles.fadeOut);
+      addClass(wrapperEl, styles.fadeIn);
+
+      setTimeout(() => {
+        // Reset styles
+        removeClass(wrapperEl, styles.fadeIn);
+      }, TRANSITION_TIME);
+    }, TRANSITION_TIME);
   }
 
   tryAgain(event) {
@@ -160,17 +180,16 @@ class IncomeInput extends React.Component {
               </div>
               <div className={styles.boldtext}>
                 Your income before tax is<br />
-                
-                  
-                  <form onSubmit={this.showMore.bind(this)}>
-                  <label></label>
-                  $&nbsp; <input
+                <form onSubmit={this.showMore.bind(this)}>
+                  <label />
+                  $&nbsp;{" "}
+                  <input
                     onChange={this.handleIncomeChange.bind(this)}
                     type="number"
                     value={this.state.income}
                   />
-                  
-                &nbsp;&nbsp; per week</form>
+                  &nbsp;&nbsp; per week
+                </form>
               </div>
               <div className={styles.smalltext}>Enter your weekly income</div>{" "}
               <button onClick={this.showMore.bind(this)}>
@@ -269,6 +288,24 @@ function whatIncomeBracket(incomePerWeek) {
   else return 1;
 }
 
-console.log(whatIncomeBracket(1200));
+function hasClass(el, className) {
+  return el.classList
+    ? el.classList.contains(className)
+    : new RegExp("\\b" + className + "\\b").test(el.className);
+}
+
+function addClass(el, className) {
+  if (el.classList) el.classList.add(className);
+  else if (!hasClass(el, className)) el.className += " " + className;
+}
+
+function removeClass(el, className) {
+  if (el.classList) el.classList.remove(className);
+  else
+    el.className = el.className.replace(
+      new RegExp("\\b" + className + "\\b", "g"),
+      ""
+    );
+}
 
 module.exports = IncomeInput;
