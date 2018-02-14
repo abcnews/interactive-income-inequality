@@ -8,7 +8,7 @@ const wNumb = require("wnumb");
 class IncomeInput extends React.Component {
   constructor(props) {
     super(props);
-    this.state = { income: "", infoIsSet: false };
+    this.state = { income: "1200", infoIsSet: false };
   }
 
   handleIncomeChange(event) {
@@ -76,6 +76,7 @@ class IncomeInput extends React.Component {
                   <input
                     onChange={this.handleIncomeChange.bind(this)}
                     type="number"
+                    value={this.state.income}
                   />
                 </label>&nbsp;&nbsp; per week
               </div>

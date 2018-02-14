@@ -14,9 +14,9 @@ const Portal = require("react-portal");
 // Other Preact components
 const LgaSearch = require("./LgaSearch");
 const IncomeInput = require("./IncomeInput");
-const IncomeResult = require("./IncomeResult");
 
-const LGA_GEO_JSON_URL = "http://www.abc.net.au/res/sites/news-projects/income-comparisons-react/master/aus_lga.topo.json"
+const LGA_GEO_JSON_URL =
+  "http://www.abc.net.au/res/sites/news-projects/income-comparisons-react/master/aus_lga.topo.json";
 
 // Imports etc
 const config = {
@@ -50,8 +50,9 @@ class App extends React.Component {
   constructor(props) {
     super(props);
 
-    this.state = { localGovernmentArea: "Search Local Governments by address",
-   };
+    this.state = {
+      localGovernmentArea: "Search Local Governments by address"
+    };
   }
 
   async addressToLGA(address, localAreas) {
@@ -116,7 +117,6 @@ class App extends React.Component {
 
   render() {
     let incomeBlock = null;
-
 
     return (
       <div className={styles.root}>
