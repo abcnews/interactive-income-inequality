@@ -8,6 +8,88 @@ const wNumb = require("wnumb");
 class IncomeInput extends React.Component {
   constructor(props) {
     super(props);
+
+    this.bracketInfo = [
+      {
+        text: "$1 - $7,799",
+        percent: "5.16",
+        percentBelow: "0.00",
+        percentAbove: "94.84"
+      },
+      {
+        text: "$7,800 - $15,599",
+        percent: "8.66",
+        percentBelow: "5.16",
+        percentAbove: "86.18"
+      },
+      {
+        text: "$15,600 - $20,799",
+        percent: "10.43",
+        percentBelow: "13.82",
+        percentAbove: "75.75"
+      },
+      {
+        text: "$20,800 - $25,999",
+        percent: "10.01",
+        percentBelow: "24.25",
+        percentAbove: "65.74"
+      },
+      {
+        text: "$26,000 - $33,799",
+        percent: "9.18",
+        percentBelow: "34.26",
+        percentAbove: "56.56"
+      },
+      {
+        text: "$33,800 - $41,599",
+        percent: "9.19",
+        percentBelow: "43.44",
+        percentAbove: "47.37"
+      },
+      {
+        text: "$41,600 - $51,999",
+        percent: "10.02",
+        percentBelow: "52.63",
+        percentAbove: "37.35"
+      },
+      {
+        text: "$52,000 - $64,999",
+        percent: "10.23",
+        percentBelow: "62.65",
+        percentAbove: "27.12"
+      },
+      {
+        text: "$65,000 - $77,999",
+        percent: "7.02",
+        percentBelow: "72.88",
+        percentAbove: "20.10"
+      },
+      {
+        text: "$78,000 - $90,999",
+        percent: "5.94",
+        percentBelow: "79.90",
+        percentAbove: "14.16"
+      },
+      {
+        text: "$91,000 - $103,999",
+        percent: "4.12",
+        percentBelow: "85.84",
+        percentAbove: "10.04"
+      },
+      {
+        text: "$104,000 - $155,999",
+        percent: "6.20",
+        percentBelow: "89.96",
+        percentAbove: "3.84"
+      },
+      {
+        text: "$156,000 or more",
+        percent: "3.84",
+        percentBelow: "96.16",
+        percentAbove: "0.00"
+      }
+    ];
+    this.results = {};
     // Set initial state of component
     this.state = { income: "1200", infoIsSet: false, incomeBracket: 8 };
   }
@@ -23,7 +105,10 @@ class IncomeInput extends React.Component {
 
   showMore(event) {
     console.log(this.state.income);
-    console.log(whatIncomeBracket(this.state.income));
+
+    let incomeBracketNumber = whatIncomeBracket(this.state.income);
+    console.log(this.bracketInfo[incomeBracketNumber - 1]);
+    this.results = this.bracketInfo[incomeBracketNumber - 1];
 
     this.setState({ infoIsSet: true });
   }
@@ -93,21 +178,27 @@ class IncomeInput extends React.Component {
               <div className={styles.standardText}>
                 Your income puts you in the{" "}
                 <span className={styles.resultsStandard}>
-                  $52,000 - $64,999
+                  {this.results.text}
                 </span>{" "}
                 per annum income bracket for Australia, with{" "}
-                <span className={styles.resultsStandard}>10.23 per cent</span>{" "}
+                <span className={styles.resultsStandard}>
+                  {this.results.percent} per cent
+                </span>{" "}
                 of other income earners.
               </div>
               <div className={styles.standardText}>
                 Above your bracket are{" "}
-                <span className={styles.resultsAbove}>27.12 per cent</span> of
-                income earners
+                <span className={styles.resultsAbove}>
+                  {this.results.percentAbove} per cent
+                </span>{" "}
+                of income earners
               </div>
               <div className={styles.standardText}>
                 Below your bracket are{" "}
-                <span className={styles.resultsBelow}>62.65 per cent</span> of
-                income earners
+                <span className={styles.resultsBelow}>
+                  {this.results.percentBelow} per cent
+                </span>{" "}
+                of income earners
               </div>
               <button onClick={this.tryAgain.bind(this)}>
                 <div className={styles.tryAgain}>
