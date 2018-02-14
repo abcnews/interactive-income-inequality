@@ -104,6 +104,7 @@ class IncomeInput extends React.Component {
   }
 
   showMore(event) {
+    event.preventDefault();
     console.log(this.state.income);
 
     let incomeBracketNumber = whatIncomeBracket(this.state.income);
@@ -159,14 +160,17 @@ class IncomeInput extends React.Component {
               </div>
               <div className={styles.boldtext}>
                 Your income before tax is<br />
-                <label>
-                  $&nbsp;
-                  <input
+                
+                  
+                  <form onSubmit={this.showMore.bind(this)}>
+                  <label></label>
+                  $&nbsp; <input
                     onChange={this.handleIncomeChange.bind(this)}
                     type="number"
                     value={this.state.income}
                   />
-                </label>&nbsp;&nbsp; per week
+                  
+                &nbsp;&nbsp; per week</form>
               </div>
               <div className={styles.smalltext}>Enter your weekly income</div>{" "}
               <button onClick={this.showMore.bind(this)}>
