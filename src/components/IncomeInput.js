@@ -24,11 +24,12 @@ class IncomeInput extends React.Component {
   showMore(event) {
     console.log(this.state.income);
     console.log(whatIncomeBracket(this.state.income));
-    if (this.state.infoIsSet) {
-      this.setState({ infoIsSet: false });
-    } else {
-      this.setState({ infoIsSet: true });
-    }
+
+    this.setState({ infoIsSet: true });
+  }
+
+  tryAgain(event) {
+    this.setState({ infoIsSet: false });
   }
 
   componentDidMount() {
@@ -108,7 +109,7 @@ class IncomeInput extends React.Component {
                 <span className={styles.resultsBelow}>62.65 per cent</span> of
                 income earners
               </div>
-              <button onClick={this.showMore.bind(this)}>
+              <button onClick={this.tryAgain.bind(this)}>
                 <div className={styles.tryAgain}>
                   <span className={styles.reloadIcon}>
                     <img
