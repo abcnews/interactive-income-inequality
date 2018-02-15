@@ -7,6 +7,7 @@ const wNumb = require("wnumb");
 
 // Set up some constants
 const TRANSITION_TIME = 500;
+const PUBLIC_URL_BASE = "http://www.abc.net.au/res/sites/news-projects/income-comparisons-react/master/"
 
 class IncomeInput extends React.Component {
   constructor(props) {
@@ -189,6 +190,7 @@ class IncomeInput extends React.Component {
   }
 
   render() {
+    // Start conditional rendering
     let infoIsSet = null;
     if (this.state.infoIsSet) infoIsSet = true;
     else infoIsSet = false;
@@ -254,7 +256,7 @@ class IncomeInput extends React.Component {
                 <div className={styles.tryAgain}>
                   <span className={styles.reloadIcon}>
                     <img
-                      src="http://www.abc.net.au/res/sites/news-projects/income-comparisons-react/master/refresh.svg"
+                      src={PUBLIC_URL_BASE + "refresh.svg"}
                       width="20px"
                       height="20px"
                     />
@@ -281,7 +283,7 @@ class IncomeInput extends React.Component {
               <div className={styles.scaleContainer}>
                 <div className={styles.mostRich}>
                   <div>
-                    <img src="http://www.abc.net.au/res/sites/news-projects/income-comparisons-react/master/ios-arrow-thin-up.svg" />
+                    <img src={PUBLIC_URL_BASE + "ios-arrow-thin-up.svg"} />
                   </div>
                   <div className={styles.mostRichText}>
                     Most<br />rich
@@ -292,7 +294,7 @@ class IncomeInput extends React.Component {
                     Least<br />rich
                   </div>
                   <div>
-                    <img src="http://www.abc.net.au/res/sites/news-projects/income-comparisons-react/master/ios-arrow-thin-down.svg" />
+                    <img src={PUBLIC_URL_BASE + "ios-arrow-thin-down.svg"} />
                   </div>
                 </div>
               </div>
@@ -300,7 +302,7 @@ class IncomeInput extends React.Component {
               <div className={styles.scaleContainerResults}>
                 <div className={styles.areRicher}>
                   <div>
-                    <img src="http://www.abc.net.au/res/sites/news-projects/income-comparisons-react/master/ios-arrow-thin-up.svg" />
+                    <img src={PUBLIC_URL_BASE + "ios-arrow-thin-up.svg"} />
                   </div>
                   <div className={styles.areRicherText}>
                     <b>{this.results.percentAbove}%</b>
@@ -314,7 +316,7 @@ class IncomeInput extends React.Component {
                     <br />are<br />poorer
                   </div>
                   <div>
-                    <img src="http://www.abc.net.au/res/sites/news-projects/income-comparisons-react/master/ios-arrow-thin-down.svg" />
+                    <img src={PUBLIC_URL_BASE + "ios-arrow-thin-down.svg"} />
                   </div>
                 </div>
               </div>
