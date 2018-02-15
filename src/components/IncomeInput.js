@@ -97,7 +97,7 @@ class IncomeInput extends React.Component {
       income: "1200",
       infoIsSet: false,
       incomeBracket: 8,
-      guess: 50
+      sliderGuess: 50
     };
   }
 
@@ -119,9 +119,6 @@ class IncomeInput extends React.Component {
 
     setTimeout(() => {
       // Wait for a while then do the calculation
-      console.log(wrapperEl);
-      console.log(this.state.income);
-
       let incomeBracketNumber = whatIncomeBracket(this.state.income);
       console.log(this.bracketInfo[incomeBracketNumber - 1]);
       this.results = this.bracketInfo[incomeBracketNumber - 1];
@@ -144,13 +141,13 @@ class IncomeInput extends React.Component {
   }
 
   componentDidMount() {
-    var slider = document.getElementById("range");
+    const slider = document.getElementById("range");
 
     slider.style.height = "100%";
     slider.style.margin = "0 auto";
 
     noUiSlider.create(slider, {
-      start: [this.state.guess],
+      start: [this.state.sliderGuess],
       direction: "rtl",
       tooltips: wNumb({ decimals: 0, suffix: "%" }),
       orientation: "vertical",
@@ -161,8 +158,7 @@ class IncomeInput extends React.Component {
     });
 
     slider.noUiSlider.on("set", () => {
-      console.log("slider set");
-      console.log(slider.noUiSlider.get());
+      this.setState({ sliderGuess: slider.noUiSlider.get() });
     });
   }
 
