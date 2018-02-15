@@ -5,6 +5,7 @@ const Portal = require("react-portal");
 const noUiSlider = require("nouislider");
 const wNumb = require("wnumb");
 
+// Set up some constants
 const TRANSITION_TIME = 500;
 
 class IncomeInput extends React.Component {
@@ -117,10 +118,12 @@ class IncomeInput extends React.Component {
     // Fade out the wrapper element
     addClass(wrapperEl, styles.fadeOut);
 
+    console.log(this.state.sliderGuess);
+
     setTimeout(() => {
       // Wait for a while then do the calculation
       let incomeBracketNumber = whatIncomeBracket(this.state.income);
-      console.log(this.bracketInfo[incomeBracketNumber - 1]);
+
       this.results = this.bracketInfo[incomeBracketNumber - 1];
 
       this.setState({ infoIsSet: true });
@@ -141,12 +144,12 @@ class IncomeInput extends React.Component {
   }
 
   componentDidMount() {
-    const slider = document.getElementById("range");
+    this.slider = document.getElementById("range");
 
-    slider.style.height = "100%";
-    slider.style.margin = "0 auto";
+    this.slider.style.height = "100%";
+    this.slider.style.margin = "0 auto";
 
-    noUiSlider.create(slider, {
+    noUiSlider.create(this.slider, {
       start: [this.state.sliderGuess],
       direction: "rtl",
       tooltips: wNumb({ decimals: 0, suffix: "%" }),
@@ -157,9 +160,16 @@ class IncomeInput extends React.Component {
       }
     });
 
-    slider.noUiSlider.on("set", () => {
-      this.setState({ sliderGuess: slider.noUiSlider.get() });
+    this.slider.noUiSlider.on("set", () => {
+      this.setState({ sliderGuess: this.slider.noUiSlider.get() });
     });
+  }
+
+  componentDidUpdate() {
+    this.slider.style.display = "none";
+    if (!this.state.infoIsSet) {
+      this.slider.style.display = "block";
+    }
   }
 
   render() {
@@ -240,7 +250,13 @@ class IncomeInput extends React.Component {
           )}
 
           <div className={styles.column + " " + styles.two}>
-            <div id="range" />
+            {!infoIsSet ? (
+              <div id="range" />
+            ) : (
+              <div id="range">
+                <div id="range-result" />
+              </div>
+            )}
           </div>
           <div className={styles.column + " " + styles.three}>
             <div className={styles.scaleContainer}>
@@ -271,6 +287,7 @@ class IncomeInput extends React.Component {
 }
 
 function whatIncomeBracket(incomePerWeek) {
+  // Determine which income bracket a weekly income sits in
   let incomePerYear = incomePerWeek * 52;
   console.log(incomePerYear);
 
@@ -289,6 +306,7 @@ function whatIncomeBracket(incomePerWeek) {
   else return 1;
 }
 
+// Helper functions for className manipulation
 function hasClass(el, className) {
   return el.classList
     ? el.classList.contains(className)
