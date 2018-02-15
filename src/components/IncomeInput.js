@@ -93,7 +93,12 @@ class IncomeInput extends React.Component {
     ];
     this.results = {};
     // Set initial state of component
-    this.state = { income: "1200", infoIsSet: false, incomeBracket: 8 };
+    this.state = {
+      income: "1200",
+      infoIsSet: false,
+      incomeBracket: 8,
+      guess: 50
+    };
   }
 
   handleIncomeChange(event) {
@@ -145,7 +150,7 @@ class IncomeInput extends React.Component {
     slider.style.margin = "0 auto";
 
     noUiSlider.create(slider, {
-      start: [50],
+      start: [this.state.guess],
       direction: "rtl",
       tooltips: wNumb({ decimals: 0, suffix: "%" }),
       orientation: "vertical",
