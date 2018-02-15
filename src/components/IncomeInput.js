@@ -167,14 +167,24 @@ class IncomeInput extends React.Component {
 
   componentDidUpdate() {
     if (!this.state.infoIsSet) {
+      // Show the slider
       this.slider.style.display = "block";
     } else {
+      // Remove the slider
       this.slider.style.display = "none";
-      const yourBracketEl = document.querySelector("." + styles.scaleContainerResults);
-      console.log(yourBracketEl);
-      
+
+      this.yourBracketEl = document.querySelector(
+        "." + styles.scaleContainerResults
+      );
+
       // Place element along the percentage
-      yourBracketEl.style.top = `calc(${Number(this.results.percentAbove)}% - 120px)`;
+      this.yourBracketEl.style.top = `calc(${Number(
+        this.results.percentAbove
+      )}% - 120px)`;
+
+      this.resultsBar = document.getElementById("result");
+      console.log(this.resultsBar);
+      this.resultsBar.style.display = "block";
     }
   }
 
@@ -254,9 +264,17 @@ class IncomeInput extends React.Component {
               </button>
             </div>
           )}
-
+          {/******************** COLUMN TWO **********************/}
           <div className={styles.column + " " + styles.two}>
-            <div id="range" />
+            {!infoIsSet ? (
+              <div id="range">
+                {/* <div id="result">hello</div> */}
+              </div>
+            ) : (
+              <div id="range">
+                <div id="result">hello</div>
+              </div>
+            )}
           </div>
           <div className={styles.column + " " + styles.three}>
             {!infoIsSet ? (
