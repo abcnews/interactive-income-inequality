@@ -166,9 +166,15 @@ class IncomeInput extends React.Component {
   }
 
   componentDidUpdate() {
-    this.slider.style.display = "none";
     if (!this.state.infoIsSet) {
       this.slider.style.display = "block";
+    } else {
+      this.slider.style.display = "none";
+      const yourBracketEl = document.querySelector("." + styles.scaleContainerResults);
+      console.log(yourBracketEl);
+      
+      // Place element along the percentage
+      yourBracketEl.style.top = `calc(${Number(this.results.percentAbove)}% - 120px)`;
     }
   }
 
@@ -250,33 +256,51 @@ class IncomeInput extends React.Component {
           )}
 
           <div className={styles.column + " " + styles.two}>
-            {!infoIsSet ? (
-              <div id="range" />
-            ) : (
-              <div id="range">
-                <div id="range-result" />
-              </div>
-            )}
+            <div id="range" />
           </div>
           <div className={styles.column + " " + styles.three}>
-            <div className={styles.scaleContainer}>
-              <div className={styles.mostRich}>
-                <div>
-                  <img src="http://www.abc.net.au/res/sites/news-projects/income-comparisons-react/master/ios-arrow-thin-up.svg" />
+            {!infoIsSet ? (
+              <div className={styles.scaleContainer}>
+                <div className={styles.mostRich}>
+                  <div>
+                    <img src="http://www.abc.net.au/res/sites/news-projects/income-comparisons-react/master/ios-arrow-thin-up.svg" />
+                  </div>
+                  <div className={styles.mostRichText}>
+                    Most<br />rich
+                  </div>
                 </div>
-                <div className={styles.mostRichText}>
-                  Most<br />rich
+                <div className={styles.leastRich}>
+                  <div className={styles.leastRichText}>
+                    Least<br />rich
+                  </div>
+                  <div>
+                    <img src="http://www.abc.net.au/res/sites/news-projects/income-comparisons-react/master/ios-arrow-thin-down.svg" />
+                  </div>
                 </div>
               </div>
-              <div className={styles.leastRich}>
-                <div className={styles.leastRichText}>
-                  Least<br />rich
+            ) : (
+              <div className={styles.scaleContainerResults}>
+                <div className={styles.areRicher}>
+                  <div>
+                    <img src="http://www.abc.net.au/res/sites/news-projects/income-comparisons-react/master/ios-arrow-thin-up.svg" />
+                  </div>
+                  <div className={styles.areRicherText}>
+                    <b>{this.results.percentAbove}%</b>
+                    <br />are<br />richer
+                  </div>
                 </div>
-                <div>
-                  <img src="http://www.abc.net.au/res/sites/news-projects/income-comparisons-react/master/ios-arrow-thin-down.svg" />
+                <div className={styles.yourBracket}>Your bracket</div>
+                <div className={styles.arePoorer}>
+                  <div className={styles.arePoorerText}>
+                    <b>{this.results.percentBelow}%</b>
+                    <br />are<br />poorer
+                  </div>
+                  <div>
+                    <img src="http://www.abc.net.au/res/sites/news-projects/income-comparisons-react/master/ios-arrow-thin-down.svg" />
+                  </div>
                 </div>
               </div>
-            </div>
+            )}
           </div>
         </div>
         <div />
