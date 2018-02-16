@@ -354,7 +354,6 @@ class IncomeInput extends React.Component {
 function whatIncomeBracket(incomePerWeek) {
   // Determine which income bracket a weekly income sits in
   let incomePerYear = incomePerWeek * 52;
-  console.log(incomePerYear);
 
   if (incomePerYear >= 156000) return 13;
   else if (incomePerYear >= 104000) return 12;
@@ -368,6 +367,22 @@ function whatIncomeBracket(incomePerWeek) {
   else if (incomePerYear >= 20800) return 4;
   else if (incomePerYear >= 15600) return 3;
   else if (incomePerYear >= 7800) return 2;
+  else return 1;
+}
+
+function whatIncomeBracketPercent(percent) {
+  if (percent >= 94.84) return 13;
+  else if (percent >= 86.18) return 12;
+  else if (percent >= 75.75) return 11;
+  else if (percent >= 65.74) return 10;
+  else if (percent >= 56.56) return 9;
+  else if (percent >= 47.37) return 8;
+  else if (percent >= 37.35) return 7;
+  else if (percent >= 27.12) return 6;
+  else if (percent >= 20.10) return 5;
+  else if (percent >= 14.16) return 4;
+  else if (percent >= 10.04) return 3;
+  else if (percent >= 3.84) return 2;
   else return 1;
 }
 
