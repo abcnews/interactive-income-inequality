@@ -182,10 +182,25 @@ class IncomeInput extends React.Component {
       // Place element along the percentage
       this.yourBracketEl.style.top = `calc(${Number(
         this.results.percentAbove
-      )}% - 120px)`;
+      )}% - 97px)`;
+
+      this.bracketBox = document.querySelector("." + styles.bracketBox);
+      this.bracketBoxOuter = document.querySelector("." + styles.bracketBoxOuter);
+      console.log(this.bracketBox, this.bracketBoxOuter);
+
+      this.bracketBox.style.top = `calc(${Number(
+        this.results.percentAbove
+      )}%)`;
+
+      this.bracketBoxOuter.style.top = `calc(${Number(
+        this.results.percentAbove
+      )}% - 2px)`;
+
+      this.bracketBox.style.height = this.results.percent + "%";
+      this.bracketBoxOuter.style.height = "calc(" + this.results.percent + "% + 4px)";
 
       this.resultsBar = document.getElementById("result");
-      console.log(this.resultsBar);
+      // console.log(this.resultsBar);
       this.resultsBar.style.display = "block";
     }
   }
