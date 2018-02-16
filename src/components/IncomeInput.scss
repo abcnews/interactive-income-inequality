@@ -227,6 +227,27 @@
   border-bottom: 6px solid #f9f9f9;
 }
 
+.guess-box {
+  position: absolute;
+  width: 23px;
+  height: 30px;
+  border: 2px solid #516C72;
+  top: 0px;
+  left: -4px;
+  z-index: 1;
+}
+
+.guess-box-outer {
+  content: " ";
+  position: absolute;
+  top: -2px;
+  left: -4px;
+  width: 23px;
+  height: 34px;
+  border-top: 6px solid #f9f9f9;
+  border-bottom: 6px solid #f9f9f9;
+}
+
 :global {
   /*! nouislider - 11.0.3 - 2018-01-21 14:04:07 */
   /* Functional styling;

@@ -95,22 +95,20 @@ class IncomeInput extends React.Component {
       }
     ];
     this.results = {};
+    this.guessResults = {};
     // Set initial state of component
     this.state = {
       income: "1200",
       infoIsSet: false,
       incomeBracket: 8,
-      sliderGuess: 50
+      sliderGuess: 50,
+      guessBracket: 7
     };
   }
 
   handleIncomeChange(event) {
     let income = event.target.value;
     this.setState({ income: income });
-  }
-
-  handleEstimationChange() {
-    console.log("changed...");
   }
 
   showMore(event) {
@@ -120,13 +118,13 @@ class IncomeInput extends React.Component {
     // Fade out the wrapper element
     addClass(wrapperEl, styles.fadeOut);
 
-    console.log(this.state.sliderGuess);
-
     setTimeout(() => {
       // Wait for a while then do the calculation
       let incomeBracketNumber = whatIncomeBracket(this.state.income);
+      let guessBracketNumber = this.state.guessBracket;
 
       this.results = this.bracketInfo[incomeBracketNumber - 1];
+      this.guessResults = this.bracketInfo[guessBracketNumber - 1];
 
       this.setState({ infoIsSet: true });
 
@@ -163,13 +161,17 @@ class IncomeInput extends React.Component {
     });
 
     this.slider.noUiSlider.on("set", () => {
-      this.setState({ sliderGuess: this.slider.noUiSlider.get() });
+      let sliderValue = this.slider.noUiSlider.get();
+      console.log(whatIncomeBracketPercent(sliderValue));
+      console.log(sliderValue);
+      this.setState({ sliderGuess: sliderValue });
+      this.setState({ guessBracket: whatIncomeBracketPercent(sliderValue) });
     });
   }
 
   componentDidUpdate() {
     if (!this.state.infoIsSet) {
-      // Show the slider
+      // Show the slider. Reset the interactive
       this.slider.style.display = "block";
     } else {
       // Remove the slider
@@ -184,23 +186,40 @@ class IncomeInput extends React.Component {
         this.results.percentAbove
       )}% + ${this.results.percent / 2}% - 113px)`;
 
+      // Place the bracket box
       this.bracketBox = document.querySelector("." + styles.bracketBox);
-      this.bracketBoxOuter = document.querySelector("." + styles.bracketBoxOuter);
-      console.log(this.bracketBox, this.bracketBoxOuter);
+      this.bracketBoxOuter = document.querySelector(
+        "." + styles.bracketBoxOuter
+      );
 
-      this.bracketBox.style.top = `calc(${Number(
-        this.results.percentAbove
-      )}%)`;
+      this.bracketBox.style.top = `calc(${Number(this.results.percentAbove)}%)`;
 
       this.bracketBoxOuter.style.top = `calc(${Number(
         this.results.percentAbove
       )}% - 2px)`;
 
       this.bracketBox.style.height = this.results.percent + "%";
-      this.bracketBoxOuter.style.height = "calc(" + this.results.percent + "% + 4px)";
+      this.bracketBoxOuter.style.height =
+        "calc(" + this.results.percent + "% + 4px)";
 
+      // Build the guess bracket box
+      this.guessBox = document.querySelector("." + styles.guessBox);
+      this.guessBoxOuter = document.querySelector("." + styles.guessBoxOuter);
+
+      this.guessBox.style.top = `calc(${Number(
+        this.guessResults.percentAbove
+      )}%)`;
+
+      this.guessBoxOuter.style.top = `calc(${Number(
+        this.guessResults.percentAbove
+      )}% - 2px)`;
+
+      this.guessBox.style.height = this.guessResults.percent + "%";
+      this.guessBoxOuter.style.height =
+        "calc(" + this.guessResults.percent + "% + 4px)";
+
+      // Unhide the block (dunno if this is necessary any more)
       this.resultsBar = document.getElementById("result");
-      // console.log(this.resultsBar);
       this.resultsBar.style.display = "block";
     }
   }
@@ -259,14 +278,14 @@ class IncomeInput extends React.Component {
                 <span className={styles.resultsAbove}>
                   {this.results.percentAbove} per cent
                 </span>{" "}
-                of income earners
+                of income earners.
               </div>
               <div className={styles.standardText}>
                 Below your bracket are{" "}
                 <span className={styles.resultsBelow}>
                   {this.results.percentBelow} per cent
                 </span>{" "}
-                of income earners
+                of income earners.
               </div>
               <button onClick={this.tryAgain.bind(this)}>
                 <div className={styles.tryAgain}>
@@ -293,8 +312,12 @@ class IncomeInput extends React.Component {
                 <div id="range" />
                 <div id="result" className={styles.result}>
                   <div className={styles.verticalBar} />
+
                   <div className={styles.bracketBox} />
                   <div className={styles.bracketBoxOuter} />
+
+                  <div className={styles.guessBox} />
+                  <div className={styles.guessBoxOuter} />
                 </div>
               </div>
             )}
@@ -371,18 +394,18 @@ function whatIncomeBracket(incomePerWeek) {
 }
 
 function whatIncomeBracketPercent(percent) {
-  if (percent >= 94.84) return 13;
-  else if (percent >= 86.18) return 12;
-  else if (percent >= 75.75) return 11;
-  else if (percent >= 65.74) return 10;
-  else if (percent >= 56.56) return 9;
-  else if (percent >= 47.37) return 8;
-  else if (percent >= 37.35) return 7;
-  else if (percent >= 27.12) return 6;
-  else if (percent >= 20.10) return 5;
-  else if (percent >= 14.16) return 4;
-  else if (percent >= 10.04) return 3;
-  else if (percent >= 3.84) return 2;
+  if (percent >= 96.16) return 13;
+  else if (percent >= 89.96) return 12;
+  else if (percent >= 85.84) return 11;
+  else if (percent >= 79.90) return 10;
+  else if (percent >= 72.88) return 9;
+  else if (percent >= 62.65) return 8;
+  else if (percent >= 52.63) return 7;
+  else if (percent >= 43.44) return 6;
+  else if (percent >= 34.26) return 5;
+  else if (percent >= 24.25) return 4;
+  else if (percent >= 13.82) return 3;
+  else if (percent >= 5.16) return 2;
   else return 1;
 }
 
