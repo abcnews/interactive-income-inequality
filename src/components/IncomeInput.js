@@ -182,7 +182,7 @@ class IncomeInput extends React.Component {
       // Place element along the percentage
       this.yourBracketEl.style.top = `calc(${Number(
         this.results.percentAbove
-      )}% - 97px)`;
+      )}% + ${this.results.percent / 2}% - 113px)`;
 
       this.bracketBox = document.querySelector("." + styles.bracketBox);
       this.bracketBoxOuter = document.querySelector("." + styles.bracketBoxOuter);
