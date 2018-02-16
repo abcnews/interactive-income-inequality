@@ -15,7 +15,7 @@
 
   .two {
     text-align: right;
-    margin-bottom: 0.8em;
+    // margin-bottom: 0.8em;
     margin-left: 55px;
   }
 
@@ -24,7 +24,7 @@
     font-family: ABCSans, Arial, Helvetica, sans-serif;
     font-size: 11px;
     text-align: center;
-    margin-bottom: 0.8rem;
+    // margin-bottom: 0.8rem;
   }
 
   .column .boldtext {
@@ -186,8 +186,46 @@
   background-color: #00242c;
 }
 
-.vertical-bar {
+
+
+// Styles for range slider containing div 
+.result-container {
   height: 100%;
+  // width: 100%;
+}
+
+.result {
+  height: 100%;
+  position: relative;
+}
+
+.result .vertical-bar {
+  height: 100%;
+  background: linear-gradient(#004656, #30e8c3);
+  width: 15px;
+  border-radius: 3px;
+}
+
+.bracket-box {
+  position: absolute;
+  width: 23px;
+  height: 30px;
+  border: 2px solid #FF6100;
+  top: 0px;
+  left: -4px;
+  z-index: 1;
+}
+
+.bracket-box-outer {
+  content: " ";
+  position: absolute;
+  // z-index: 1;
+  top: -2px;
+  left: -4px;
+  width: 23px;
+  height: 34px;
+  border-top: 6px solid #f9f9f9;
+  border-bottom: 6px solid #f9f9f9;
 }
 
 :global {

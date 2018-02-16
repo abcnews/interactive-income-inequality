@@ -7,7 +7,8 @@ const wNumb = require("wnumb");
 
 // Set up some constants
 const TRANSITION_TIME = 500;
-const PUBLIC_URL_BASE = "http://www.abc.net.au/res/sites/news-projects/income-comparisons-react/master/"
+const PUBLIC_URL_BASE =
+  "http://www.abc.net.au/res/sites/news-projects/income-comparisons-react/master/";
 
 class IncomeInput extends React.Component {
   constructor(props) {
@@ -269,12 +270,17 @@ class IncomeInput extends React.Component {
           {/******************** COLUMN TWO **********************/}
           <div className={styles.column + " " + styles.two}>
             {!infoIsSet ? (
-              <div id="range">
-                {/* <div id="result">hello</div> */}
+              <div className={styles.resultContainer}>
+                <div id="range" />
               </div>
             ) : (
-              <div id="range">
-                <div id="result">hello</div>
+              <div className={styles.resultContainer}>
+                <div id="range" />
+                <div id="result" className={styles.result}>
+                  <div className={styles.verticalBar} />
+                  <div className={styles.bracketBox} />
+                  <div className={styles.bracketBoxOuter} />
+                </div>
               </div>
             )}
           </div>
