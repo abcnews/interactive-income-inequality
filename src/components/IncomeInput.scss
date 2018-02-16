@@ -6,7 +6,7 @@
   }
 
   .column {
-    margin: 0 6px;
+   
   }
 
   .one {
@@ -16,7 +16,8 @@
   .two {
     text-align: right;
     // margin-bottom: 0.8em;
-    margin-left: 55px;
+    margin-left: 50px;
+    max-height: 450px;
   }
 
   .three {
@@ -25,6 +26,9 @@
     font-size: 11px;
     text-align: center;
     // margin-bottom: 0.8rem;
+    max-height: 450px;
+    margin-left: 6px;
+    min-width: 42px;
   }
 
   .column .boldtext {
@@ -44,6 +48,12 @@
     font-size: 18px;
     line-height: 28px;
     margin-bottom: 1em;
+  }
+
+  @media only screen and (max-width: 768px) {
+    .standard-text {
+      font-size: 16px;
+    }
   }
 
   .results-standard {
@@ -70,7 +80,7 @@
 
   .reload-icon img {
     position: relative;
-    top: 4px;
+    top: 5px;
   }
 
   button {
@@ -88,6 +98,12 @@
     letter-spacing: 2px;
     border: 0;
     line-height: 1.5rem;
+  }
+
+  @media only screen and (max-width: 768px) {
+    button {
+      font-size: 11px;
+    }
   }
 
   input[type="number"] {

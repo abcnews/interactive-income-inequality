@@ -296,7 +296,7 @@ class IncomeInput extends React.Component {
                       height="20px"
                     />
                   </span>
-                  <span>&nbsp;&nbsp; Try again</span>
+                  <span>&nbsp;&nbsp;Try again</span>
                 </div>
               </button>
             </div>
@@ -349,14 +349,14 @@ class IncomeInput extends React.Component {
                     <img src={PUBLIC_URL_BASE + "ios-arrow-thin-up.svg"} />
                   </div>
                   <div className={styles.areRicherText}>
-                    <b>{this.results.percentAbove}%</b>
+                    <b>{Math.round(this.results.percentAbove)}%</b>
                     <br />are<br />richer
                   </div>
                 </div>
                 <div className={styles.yourBracket}>Your bracket</div>
                 <div className={styles.arePoorer}>
                   <div className={styles.arePoorerText}>
-                    <b>{this.results.percentBelow}%</b>
+                    <b>{Math.round(this.results.percentBelow)}%</b>
                     <br />are<br />poorer
                   </div>
                   <div>
