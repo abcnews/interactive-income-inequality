@@ -353,7 +353,7 @@ class IncomeInput extends React.Component {
                     <br />are<br />richer
                   </div>
                 </div>
-                <div className={styles.yourBracket}>Your bracket</div>
+                <div className={styles.yourBracket}>Your<br />bracket</div>
                 <div className={styles.arePoorer}>
                   <div className={styles.arePoorerText}>
                     <b>{Math.round(this.results.percentBelow)}%</b>
