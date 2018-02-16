@@ -160,14 +160,17 @@
 
   .your-bracket {
     font-weight: 900;
-    // font-size: 11px;
+    line-height: 13px;
     text-align: left;
     color: #C44B00;
     margin-top: 1.5em;
     margin-bottom: 1.5em;
     position: relative;
     left: 5px;
+    text-transform: uppercase;
   }
+
+  
 }
 
 .fade-out {
@@ -235,6 +238,19 @@
   top: 0px;
   left: -4px;
   z-index: 1;
+  font-family: ABCSans, Arial, Helvetica, sans-serif;
+  font-size: 11px;
+  font-weight: 900;
+  text-transform: uppercase;
+  line-height: 13px;
+  display: flex;
+  align-items: center;
+  // justify-content: center;
+}
+
+.guess-box span {
+  position: relative;
+  left: -33px;
 }
 
 .guess-box-outer {

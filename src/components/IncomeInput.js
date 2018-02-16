@@ -316,7 +316,7 @@ class IncomeInput extends React.Component {
                   <div className={styles.bracketBox} />
                   <div className={styles.bracketBoxOuter} />
 
-                  <div className={styles.guessBox} />
+                  <div className={styles.guessBox}><span>You said</span></div>
                   <div className={styles.guessBoxOuter} />
                 </div>
               </div>
