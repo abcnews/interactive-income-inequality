@@ -7,8 +7,13 @@ require("babel-polyfill"); // for async/await to work
 
 const root = document.querySelector(`[data-${PROJECT_NAME}-root]`);
 
+const scrollyteller = require('@abcnews/scrollyteller').loadOdysseyScrollyteller('', 'u-full', 'mark');
+
+
+
 function init() {
   spanify.hashify(); // Turn anchor hash tags into divs
+  console.log(scrollyteller);
   const App = require("./components/App");
   render(<App projectName={PROJECT_NAME} />, root);
 }

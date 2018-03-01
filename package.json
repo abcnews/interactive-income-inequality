@@ -25,6 +25,7 @@
     "react-test-renderer": "^16.2.0"
   },
   "dependencies": {
+    "@abcnews/scrollyteller": "^1.0.3",
     "d3-queue": "^3.0.7",
     "d3-request": "^1.0.6",
     "mapbox": "^1.0.0-beta9",
