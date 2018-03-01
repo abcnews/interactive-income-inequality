@@ -1,6 +1,5 @@
 const React = require("react");
 const styles = require("./App.scss");
-const worm = require("./worm.svg");
 
 // External modules
 const d3Q = require("d3-queue");
@@ -8,6 +7,7 @@ const d3Request = require("d3-request");
 const inside = require("point-in-polygon");
 const topojson = require("topojson");
 const MapboxClient = require("mapbox");
+const Scrollyteller = require('@abcnews/scrollyteller');
 
 const Portal = require("react-portal");
 
@@ -116,6 +116,7 @@ class App extends React.Component {
   }
 
   render() {
+    const { scrollyteller } = this.props;
     let incomeBlock = null;
 
     return (
@@ -125,6 +126,12 @@ class App extends React.Component {
           onLocaleIntent={this.handleLocaleIntent.bind(this)}
           localGovernmentArea={this.state.localGovernmentArea}
         />
+        <Scrollyteller
+          panels={scrollyteller.panels}
+          className={`Block is-richtext is-piecemeal ${styles.scrollyteller}`}
+          panelClassName="Block-content u-layout u-richtext"
+          onMarker={none => {}}>
+        </Scrollyteller>
       </div>
     );
   }
