@@ -7,7 +7,6 @@ const d3Request = require("d3-request");
 const inside = require("point-in-polygon");
 const topojson = require("topojson");
 const MapboxClient = require("mapbox");
-const Scrollyteller = require("@abcnews/scrollyteller");
 
 const Portal = require("react-portal");
 
