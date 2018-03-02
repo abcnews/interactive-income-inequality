@@ -7,13 +7,14 @@ const d3Request = require("d3-request");
 const inside = require("point-in-polygon");
 const topojson = require("topojson");
 const MapboxClient = require("mapbox");
-const Scrollyteller = require('@abcnews/scrollyteller');
+const Scrollyteller = require("@abcnews/scrollyteller");
 
 const Portal = require("react-portal");
 
-// Other Preact components
+// Other React components
 const LgaSearch = require("./LgaSearch");
 const IncomeInput = require("./IncomeInput");
+const MapScroller = require("./MapScroller");
 
 const LGA_GEO_JSON_URL =
   "http://www.abc.net.au/res/sites/news-projects/income-comparisons-react/master/aus_lga.topo.json";
@@ -126,12 +127,7 @@ class App extends React.Component {
           onLocaleIntent={this.handleLocaleIntent.bind(this)}
           localGovernmentArea={this.state.localGovernmentArea}
         />
-        <Scrollyteller
-          panels={scrollyteller.panels}
-          className={`Block is-richtext is-piecemeal ${styles.scrollyteller}`}
-          panelClassName="Block-content u-layout u-richtext"
-          onMarker={none => {}}>
-        </Scrollyteller>
+        <MapScroller scrollyteller={scrollyteller} />
       </div>
     );
   }
