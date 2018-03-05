@@ -1,5 +1,9 @@
+.scrollyteller {
+  background-color: orange;
+}
+
 :global {
-  .scrollyteller {
-    background-color: purple !important;
+  .Block-content:last-child {
+    margin-bottom: 100vh !important; // So content scrolls off before moving on
   }
 }
