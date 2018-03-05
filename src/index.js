@@ -13,6 +13,8 @@ const scrollyteller = require("@abcnews/scrollyteller").loadOdysseyScrollyteller
   "mark"
 );
 
+
+
 function init() {
   spanify.hashify({ hashList: ["addressinput", "incomeinput"] }); // Turn anchor hash tags into divs
   console.log(scrollyteller);

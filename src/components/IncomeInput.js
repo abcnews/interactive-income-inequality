@@ -102,7 +102,7 @@ class IncomeInput extends React.Component {
       infoIsSet: false,
       incomeBracket: 8,
       sliderGuess: 50,
-      guessBracket: 7
+      guessBracket: 6
     };
   }
 

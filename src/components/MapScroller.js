@@ -9,17 +9,13 @@ class MapScroller extends React.Component {
     // Create props vars passed to this component
     const { scrollyteller } = this.props;
 
-    console.log(scrollyteller.panels)
-
-    const panels = scrollyteller.panels;
-
     return ReactDOM.createPortal(
       <div className={styles.wrapper}>
         <Scrollyteller
-        // panels={panels}
-        className={`Block is-richtext is-piecemeal ${styles.scrollyteller}`}
-        panelClassName="Block-content u-layout u-richtext"
-          
+          panels={scrollyteller.panels}
+          className={`Block is-richtext is-piecemeal ${styles.scrollyteller}`}
+          panelClassName="Block-content u-layout u-richtext"
+          onMarker={console.log}
         />
       </div>,
       scrollyteller.mountNode
