@@ -26,6 +26,8 @@
   },
   "dependencies": {
     "@abcnews/scrollyteller": "^1.0.3",
+    "d3-geo": "^1.9.1",
+    "d3-geo-projection": "^2.3.2",
     "d3-queue": "^3.0.7",
     "d3-request": "^1.0.6",
     "d3-selection": "^1.3.0",

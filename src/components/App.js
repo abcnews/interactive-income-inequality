@@ -108,7 +108,7 @@ class App extends React.Component {
         const topology = topojson.feature(LGAMap, LGAMap.objects.aus_lga);
         LGAs = topology.features;
 
-        this.setState({ mapData: LGAs });
+        this.setState({ mapData: LGAMap });
 
         console.log("Data loaded...");
       });
