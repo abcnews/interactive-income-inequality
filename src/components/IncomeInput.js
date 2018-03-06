@@ -94,6 +94,7 @@ class IncomeInput extends React.Component {
         percentAbove: "0.00"
       }
     ];
+    
     this.results = {};
     this.guessResults = {};
     // Set initial state of component

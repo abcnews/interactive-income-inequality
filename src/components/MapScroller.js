@@ -1,8 +1,12 @@
 const React = require("react");
 const ReactDOM = require("react-dom");
+const Scrollyteller = require("@abcnews/scrollyteller");
+
+// D3 modules
+const d3Selection = require("d3-selection");
+
 const styles = require("./MapScroller.scss");
 
-const Scrollyteller = require("@abcnews/scrollyteller");
 
 class MapScroller extends React.Component {
   render() {
@@ -16,7 +20,9 @@ class MapScroller extends React.Component {
           className={`Block is-richtext is-piecemeal ${styles.scrollyteller}`}
           panelClassName="Block-content u-layout u-richtext"
           onMarker={console.log}
-        />
+        >
+          <canvas className={styles.stage} />
+        </Scrollyteller>
       </div>,
       scrollyteller.mountNode
     );

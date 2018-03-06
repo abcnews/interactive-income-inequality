@@ -1,9 +1,15 @@
-.scrollyteller {
-  background-color: orange;
+.stage {
+  background-color: grey;
+  color: white;
+  width: 100%;
+  height: 100%;
+
 }
 
 :global {
   .Block-content:last-child {
-    margin-bottom: 100vh !important; // So content scrolls off before moving on
+    margin-bottom: 99vh !important; // So content scrolls off before moving on
+    // We use 99vh so that there's a little bit always on the screen
+    // to preserve the feeling of scroll motion
   }
 }
