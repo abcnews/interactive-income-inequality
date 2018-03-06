@@ -122,7 +122,7 @@ class App extends React.Component {
 
   render() {
     const { scrollyteller } = this.props;
-    let incomeBlock = null;
+    // let incomeBlock = null;
 
     return (
       <div className={styles.root}>

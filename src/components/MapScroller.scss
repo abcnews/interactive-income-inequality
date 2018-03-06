@@ -11,4 +11,7 @@
     // We use 99vh so that there's a little bit always on the screen
     // to preserve the feeling of scroll motion
   }
+  .Block.is-richtext {
+    background-color: transparent;
+  }
 }
