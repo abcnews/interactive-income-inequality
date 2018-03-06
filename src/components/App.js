@@ -34,24 +34,14 @@ let LGAs = {};
 // Initialise Mapbox
 const client = new MapboxClient(MAPBOX_TOKEN);
 
-// Once data is loaded do something
-function dataLoaded(error, files) {
-  const LGAMap = files[0];
-
-  // Convert TopoJSON into GeoJSON
-  const topology = topojson.feature(LGAMap, LGAMap.objects.aus_lga);
-  LGAs = topology.features;
-
-  console.log("Data loaded...");
-}
-
 // Preact app starts here
 class App extends React.Component {
   constructor(props) {
     super(props);
 
     this.state = {
-      localGovernmentArea: "Search Local Governments by address"
+      localGovernmentArea: "Search Local Governments by address",
+      mapData: null
     };
   }
 
@@ -103,12 +93,31 @@ class App extends React.Component {
     }));
   }
 
-  componentDidMount() {
+  componentWillMount() {
     // Queue up some files to be loaded
     d3Q
       .queue(2)
       .defer(d3Request.json, LGA_GEO_JSON_URL)
-      .awaitAll(dataLoaded);
+      .awaitAll((error, files) => {
+        // Once all is loaded do this
+        if (error) console.error(error);
+
+        const LGAMap = files[0];
+
+        // Convert TopoJSON into GeoJSON
+        const topology = topojson.feature(LGAMap, LGAMap.objects.aus_lga);
+        LGAs = topology.features;
+
+        this.setState({ mapData: LGAs });
+
+        console.log("Data loaded...");
+      });
+  }
+
+  componentDidMount() {
+    setTimeout(() => {
+      console.log(this.state.mapData);
+    }, 1000);
   }
 
   handleLocaleIntent(addressString) {

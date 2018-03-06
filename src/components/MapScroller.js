@@ -7,8 +7,13 @@ const d3Selection = require("d3-selection");
 
 const styles = require("./MapScroller.scss");
 
+let screenWidth = window.innerWidth;
+let screenHeight = window.innerHeight;
 
 class MapScroller extends React.Component {
+  componentDidMount() {
+    canvasInit();
+  }
   render() {
     // Create props vars passed to this component
     const { scrollyteller } = this.props;
@@ -27,6 +32,12 @@ class MapScroller extends React.Component {
       scrollyteller.mountNode
     );
   }
+}
+
+function canvasInit() {
+  d3Selection
+    .select("." + styles.stage)
+    .style("background-color", "LIGHTSTEELBLUE");
 }
 
 module.exports = MapScroller;
