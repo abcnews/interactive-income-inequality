@@ -16,8 +16,12 @@ class MapScroller extends React.Component {
   }
   render() {
     // Create props vars passed to this component
-    const { scrollyteller } = this.props;
+    const { scrollyteller, mapData } = this.props;
 
+    // Wait for data prop to be passed down
+    // if (mapData == null) return null;
+    // else {
+    console.log(mapData);
     return ReactDOM.createPortal(
       <div className={styles.wrapper}>
         <Scrollyteller
@@ -31,6 +35,7 @@ class MapScroller extends React.Component {
       </div>,
       scrollyteller.mountNode
     );
+    // }
   }
 }
 

@@ -114,11 +114,7 @@ class App extends React.Component {
       });
   }
 
-  componentDidMount() {
-    setTimeout(() => {
-      console.log(this.state.mapData);
-    }, 1000);
-  }
+  componentDidMount() {}
 
   handleLocaleIntent(addressString) {
     this.addressToLGA(addressString, LGAs);
@@ -135,7 +131,15 @@ class App extends React.Component {
           onLocaleIntent={this.handleLocaleIntent.bind(this)}
           localGovernmentArea={this.state.localGovernmentArea}
         />
-        <MapScroller scrollyteller={scrollyteller} />
+        {/* Conditionally render MapScroller if data loaded */}
+        {this.state.mapData ? (
+          <MapScroller
+            scrollyteller={scrollyteller}
+            mapData={this.state.mapData}
+          />
+        ) : (
+          <div />
+        )}
       </div>
     );
   }
