@@ -10,7 +10,7 @@ const d3GeoProjection = require("d3-geo-projection");
 
 const styles = require("./MapScroller.scss");
 
-let screenWidth = window.innerWidth;
+let screenWidth = window.innerWidth - 100;
 let screenHeight = window.innerHeight;
 let margins = 100;
 
@@ -27,7 +27,7 @@ class MapScroller extends React.Component {
       <div className={styles.wrapper}>
         <Scrollyteller
           panels={scrollyteller.panels}
-          className={`Block is-richtext is-piecemeal ${styles.scrollyteller}`}
+          className={`csspositionsticky Block is-richtext is-piecemeal ${styles.scrollyteller}`}
           panelClassName="Block-content u-layout u-richtext"
           onMarker={console.log}
         >

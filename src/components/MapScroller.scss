@@ -1,13 +1,3 @@
-.scrollyteller {
-  overflow: unset !important;
-}
-
-.scrollyteller > div:first-child {
-  position: -webkit-sticky;
-  position: sticky;
-  top: 0px;
-}
-
 
 
 .stage {
@@ -20,14 +10,31 @@
     // We use 99vh so that there's a little bit always on the screen
     // to preserve the feeling of scroll motion
   }
-  .is-piecemeal > .Block-content:nth-child(2) {
-    margin-top: 0px !important;
-  }
+
   .Block.is-richtext {
-    background-color: transparent;
+    background-color: transparent !important;
+  }
+
+  
+
+  // Sticky positioning styles TODO: make fallback for IE11
+  .csspositionsticky {
+    overflow: unset !important;
   }
 
   body {
     overflow: unset !important;
   }
+
+  .csspositionsticky > div:first-child {
+    position: -webkit-sticky;
+    position: sticky;
+    top: 0px;
+    z-index: -1;
+  }
+  .csspositionsticky.is-piecemeal > .Block-content:nth-child(2) {
+    // For position sticky the block takes up space so we don't want margin-top
+    margin-top: 0px !important;
+  }
+  // end Sticky positioning //////
 }
