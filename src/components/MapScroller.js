@@ -10,7 +10,9 @@ const d3GeoProjection = require("d3-geo-projection");
 
 const styles = require("./MapScroller.scss");
 
-let screenWidth = window.innerWidth - 100;
+// documentElement is for Firefox support apparently
+let screenWidth =
+  document.documentElement.clientWidth || document.body.clientWidth; // minus scroll bars
 let screenHeight = window.innerHeight;
 let margins = 100;
 
@@ -27,7 +29,9 @@ class MapScroller extends React.Component {
       <div className={styles.wrapper}>
         <Scrollyteller
           panels={scrollyteller.panels}
-          className={`csspositionsticky Block is-richtext is-piecemeal ${styles.scrollyteller}`}
+          className={`scrolly Block is-richtext is-piecemeal ${
+            styles.scrollyteller
+          }`}
           panelClassName="Block-content u-layout u-richtext"
           onMarker={console.log}
         >
@@ -43,7 +47,6 @@ function canvasInit(mapData) {
   console.log(mapData);
 
   const australiaGeoLga = topojson.feature(mapData, mapData.objects.aus_lga);
-  const sphere = { type: "Sphere" };
 
   console.log(australiaGeoLga);
 
@@ -76,6 +79,8 @@ function canvasInit(mapData) {
   // Draw the inital state of the world
   drawWorld();
 
+  stickifyStage();
+
   // Function for clearing and render a frame of each part of the globe
   function drawWorld() {
     // Clear the canvas ready for redraw
@@ -90,6 +95,43 @@ function canvasInit(mapData) {
     context.fill();
     context.stroke();
   }
+}
+
+function stickifyStage() {
+  
+  if (Modernizr.csspositionsticky) {
+    console.log(Modernizr);
+    document.body.style.overflowX = "visible";
+    document.body.style.overflowY = "visible";
+
+    let scrollyEl = document.querySelector(".scrolly");
+
+    console.log(scrollyEl)
+
+    addClass(scrollyEl, "yes-csspositionsticky")
+  }
+}
+
+// Helpers
+
+function hasClass(el, className) {
+  return el.classList
+    ? el.classList.contains(className)
+    : new RegExp("\\b" + className + "\\b").test(el.className);
+}
+
+function addClass(el, className) {
+  if (el.classList) el.classList.add(className);
+  else if (!hasClass(el, className)) el.className += " " + className;
+}
+
+function removeClass(el, className) {
+  if (el.classList) el.classList.remove(className);
+  else
+    el.className = el.className.replace(
+      new RegExp("\\b" + className + "\\b", "g"),
+      ""
+    );
 }
 
 module.exports = MapScroller;

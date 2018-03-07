@@ -15,26 +15,26 @@
     background-color: transparent !important;
   }
 
-  
 
   // Sticky positioning styles TODO: make fallback for IE11
-  .csspositionsticky {
-    overflow: unset !important;
+  .yes-csspositionsticky {
+    overflow: visible !important;
   }
 
-  body {
-    overflow: unset !important;
-  }
+  // body {
+  //   overflow: visible !important;
+  // }
 
-  .csspositionsticky > div:first-child {
+  .yes-csspositionsticky > div:first-child {
+    width: unset; // to stop horizontal scroll bar
     position: -webkit-sticky;
     position: sticky;
     top: 0px;
     z-index: -1;
   }
-  .csspositionsticky.is-piecemeal > .Block-content:nth-child(2) {
+  .yes-csspositionsticky.is-piecemeal > .Block-content:nth-child(2) {
     // For position sticky the block takes up space so we don't want margin-top
     margin-top: 0px !important;
   }
-  // end Sticky positioning //////
+  // end sticky positioning
 }
