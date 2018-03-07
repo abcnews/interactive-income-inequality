@@ -16,7 +16,7 @@ const IncomeInput = require("./IncomeInput");
 const MapScroller = require("./MapScroller");
 
 const LGA_GEO_JSON_URL =
-  "http://www.abc.net.au/res/sites/news-projects/income-comparisons-react/master/aus_lga.topo.json";
+  "aus_lga.topo.json";
 
 // Imports etc
 const config = {

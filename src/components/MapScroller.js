@@ -83,9 +83,9 @@ function canvasInit(mapData) {
 
     // Draw all landmasses
     context.beginPath();
-    context.strokeStyle = "SANDYBROWN";
-    context.fillStyle = "ROSYBROWN";
-    context.lineWidth = 1.1;
+    context.strokeStyle = "RGBA(188, 143, 143, 0.5)";
+    context.fillStyle = "BLANCHEDALMOND";
+    context.lineWidth = 1.9;
     path(australiaGeoLga);
     context.fill();
     context.stroke();
