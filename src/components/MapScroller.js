@@ -3,6 +3,7 @@ const ReactDOM = require("react-dom");
 const Scrollyteller = require("@abcnews/scrollyteller"); //require("@abcnews/scrollyteller");
 const topojson = require("topojson");
 
+// Load up some helper functions etc
 const utils = require("../lib/utils")
 
 // D3 modules
