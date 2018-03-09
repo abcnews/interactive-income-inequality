@@ -1,13 +1,16 @@
 const React = require("react");
 const ReactDOM = require("react-dom");
-const Scrollyteller = require("../lib/scrollyteller"); //require("@abcnews/scrollyteller");
+const Scrollyteller = require("@abcnews/scrollyteller"); //require("@abcnews/scrollyteller");
 const topojson = require("topojson");
+
+const utils = require("../lib/utils")
 
 // D3 modules
 const d3Selection = require("d3-selection");
 const d3Geo = require("d3-geo");
 const d3GeoProjection = require("d3-geo-projection");
 
+// Import styles
 const styles = require("./MapScroller.scss");
 
 // documentElement is for Firefox support apparently
@@ -17,12 +20,8 @@ let screenHeight = window.innerHeight;
 let margins = screenWidth * 0.05;
 
 function canvasInit(mapData) {
-  console.log(mapData);
-
-  const australiaGeoLga = topojson.feature(mapData, mapData.objects.aus_lga);
+  const australiaGeoLga = topojson.feature(mapData, mapData.objects.LGA_2016_AUST);
   const globe = { type: "Sphere" };
-
-  console.log(australiaGeoLga);
 
   // Set up a D3 projection here
   const projection = d3Geo
@@ -36,15 +35,13 @@ function canvasInit(mapData) {
     .fitExtent(
       // Auto zoom
       [
-        [margins - screenWidth * 0.15, margins],
+        [margins - screenWidth * 0.06, margins],
         [screenWidth - margins, screenHeight - margins]
       ],
       australiaGeoLga
     );
 
   // projection.rotate([-133.7751, 25.2744]);
-
-  console.log(projection.scale());
 
   // projection.scale(1200);
 
@@ -89,16 +86,15 @@ function canvasInit(mapData) {
 }
 
 function stickifyStage() {
-  if (Modernizr.csspositionsticky) {
-    console.log(Modernizr);
+  // Detect whether position: sticky is supported (and not Edge browser) and apply styles
+
+  if (Modernizr.csspositionsticky && utils.detectIE() === false) {
     document.body.style.overflowX = "visible";
     document.body.style.overflowY = "visible";
 
     let scrollyEl = document.querySelector(".scrolly");
 
-    console.log(scrollyEl);
-
-    addClass(scrollyEl, "yes-csspositionsticky");
+    utils.addClass(scrollyEl, "yes-csspositionsticky");
   }
 }
 
@@ -130,26 +126,5 @@ class MapScroller extends React.Component {
     );
   }
 } // End of MapScroller component
-
-// Helper functions etc
-function hasClass(el, className) {
-  return el.classList
-    ? el.classList.contains(className)
-    : new RegExp("\\b" + className + "\\b").test(el.className);
-}
-
-function addClass(el, className) {
-  if (el.classList) el.classList.add(className);
-  else if (!hasClass(el, className)) el.className += " " + className;
-}
-
-function removeClass(el, className) {
-  if (el.classList) el.classList.remove(className);
-  else
-    el.className = el.className.replace(
-      new RegExp("\\b" + className + "\\b", "g"),
-      ""
-    );
-}
 
 module.exports = MapScroller;

@@ -63,15 +63,15 @@ class Scrollyteller extends React.Component {
     }
 
     // Fix some weird IE flickering
-    // clearTimeout(this.scrollTimer);
-    // this.setState({
-    //   isScrolling: true
-    // });
-    // this.scrollTimer = setTimeout(() => {
-    //   this.setState({
-    //     isScrolling: false
-    //   });
-    // }, 100);
+    clearTimeout(this.scrollTimer);
+    this.setState({
+      isScrolling: true
+    });
+    this.scrollTimer = setTimeout(() => {
+      this.setState({
+        isScrolling: false
+      });
+    }, 100);
     // Commenting this this could have fixed Sticky in Edge but alas it didn't oh well
 
     // Work out if the background should be fixed or not

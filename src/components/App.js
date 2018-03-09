@@ -16,9 +16,8 @@ const IncomeInput = require("./IncomeInput");
 const MapScroller = require("./MapScroller");
 
 let LGA_GEO_JSON_URL =
-  "http://www.abc.net.au/res/sites/news-projects/income-comparisons-react/master/aus_lga.topo.json";
-
-  
+  "http://WS204914.aus.aunty.abc.net.au:8000/LGA_2016_AUST_SIMPLIFIED.topo.json";
+// "http://www.abc.net.au/res/sites/news-projects/income-comparisons-react/master/aus_lga.topo.json";
 
 // Imports etc
 const config = {
@@ -31,7 +30,7 @@ const MAPBOX_TOKEN = atob(config.mapbox_token);
 
 // File scope variables
 let searchLongLat = [0, 0];
-let LGAs = {};
+let LGAs = [];
 
 // Initialise Mapbox
 const client = new MapboxClient(MAPBOX_TOKEN);
@@ -70,21 +69,21 @@ class App extends React.Component {
 
     let showLGA;
 
+    // Loop through all Local Government Areas
+    // TODO: maybe make this a separate function
     localAreas.forEach(LGA => {
       let currentLGA = LGA.geometry;
 
-      if (currentLGA.type === "Polygon") {
+      if (currentLGA && currentLGA.type === "Polygon") {
         // Handle Polygon geometry types
         if (inside(searchLongLat, currentLGA.coordinates[0])) {
-          console.log(LGA.properties.LGA_NAME11);
-          showLGA = LGA.properties.LGA_NAME11;
+          showLGA = LGA.properties.LGA_NAME16;
         }
-      } else if (currentLGA.type === "MultiPolygon") {
+      } else if (currentLGA && currentLGA.type === "MultiPolygon") {
         // Handle MultiPolygon geometry type
         currentLGA.coordinates.forEach(polygon => {
           if (inside(searchLongLat, polygon[0])) {
-            console.log(LGA.properties.LGA_NAME11);
-            showLGA = LGA.properties.LGA_NAME11;
+            showLGA = LGA.properties.LGA_NAME16;
           }
         });
       }
@@ -106,8 +105,11 @@ class App extends React.Component {
 
         const LGAMap = files[0];
 
+        console.log(LGAMap);
+
         // Convert TopoJSON into GeoJSON
-        const topology = topojson.feature(LGAMap, LGAMap.objects.aus_lga);
+        const topology = topojson.feature(LGAMap, LGAMap.objects.LGA_2016_AUST); //aus_lga);
+        console.log(topology.features);
         LGAs = topology.features;
 
         this.setState({ mapData: LGAMap });
