@@ -9,7 +9,7 @@ require("babel-polyfill"); // for async/await to work
 
 const root = document.querySelector(`[data-${PROJECT_NAME}-root]`);
 
-const scrollyteller = require("@abcnews/scrollyteller").loadOdysseyScrollyteller(
+const scrollyteller = require("./lib/scrollyteller/src/index.js").loadOdysseyScrollyteller(
   "",
   "u-full",
   "mark"

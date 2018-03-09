@@ -1,6 +1,6 @@
 const React = require("react");
 const ReactDOM = require("react-dom");
-const Scrollyteller = require("@abcnews/scrollyteller");
+const Scrollyteller = require("../lib/scrollyteller"); //require("@abcnews/scrollyteller");
 const topojson = require("topojson");
 
 // D3 modules
@@ -35,7 +35,10 @@ function canvasInit(mapData) {
     .precision(0.5)
     .fitExtent(
       // Auto zoom
-      [[margins - screenWidth * 0.2, margins], [screenWidth - margins, screenHeight - margins]],
+      [
+        [margins - screenWidth * 0.15, margins],
+        [screenWidth - margins, screenHeight - margins]
+      ],
       australiaGeoLga
     );
 
@@ -65,6 +68,8 @@ function canvasInit(mapData) {
   // Draw the inital state of the world
   drawWorld();
 
+  // Check to see if position.sticky is supported
+  // and then apply sticky styles
   stickifyStage();
 
   // Function for clearing and render a frame of each part of the globe
@@ -74,11 +79,11 @@ function canvasInit(mapData) {
 
     // Draw all landmasses
     context.beginPath();
-    context.strokeStyle = "RGBA(50, 205, 50, 0.9)";
-    context.fillStyle = "BLANCHEDALMOND";
-    context.lineWidth = 1.1;
+    context.strokeStyle = "rgba(50, 205, 50, 0.9)";
+    context.fillStyle = "rgba(0,0,0,0)";
+    context.lineWidth = 1;
     path(australiaGeoLga);
-    // context.fill();
+    context.fill();
     context.stroke();
   }
 }
@@ -114,7 +119,9 @@ class MapScroller extends React.Component {
             styles.scrollyteller
           }`}
           panelClassName="Block-content u-layout u-richtext"
-          onMarker={() => {}}
+          onMarker={stuff => {
+            console.log(stuff);
+          }}
         >
           <canvas className={styles.stage} />
         </Scrollyteller>

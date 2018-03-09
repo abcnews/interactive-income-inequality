@@ -1,0 +1,84 @@
+{
+  "_from": "@abcnews/scrollyteller",
+  "_id": "@abcnews/scrollyteller@1.0.3",
+  "_inBundle": false,
+  "_integrity": "sha512-O+cSgRXzf1M3bxw5dlMAvZIIP5QacGrN8rO8G2pQn1dsq/gxEog3ge4JYfBlRfoVyAqbD9LKTW/HJfwZ+imKKA==",
+  "_location": "/@abcnews/scrollyteller",
+  "_phantomChildren": {},
+  "_requested": {
+    "type": "tag",
+    "registry": true,
+    "raw": "@abcnews/scrollyteller",
+    "name": "@abcnews/scrollyteller",
+    "escapedName": "@abcnews%2fscrollyteller",
+    "scope": "@abcnews",
+    "rawSpec": "",
+    "saveSpec": null,
+    "fetchSpec": "latest"
+  },
+  "_requiredBy": [
+    "#USER",
+    "/"
+  ],
+  "_resolved": "https://registry.npmjs.org/@abcnews/scrollyteller/-/scrollyteller-1.0.3.tgz",
+  "_shasum": "c384e487d32be346b0f85c959da3736a81506a57",
+  "_spec": "@abcnews/scrollyteller",
+  "_where": "/Users/byrdj5d/Sites/ABC/income-comparisons-react",
+  "author": {
+    "name": "Nathan Hoad"
+  },
+  "bugs": {
+    "url": "https://github.com/abcnews/scrollyteller/issues"
+  },
+  "bundleDependencies": false,
+  "dependencies": {
+    "@abcnews/alternating-case-to-object": "^2.0.0",
+    "object-assign": "^4.1.1"
+  },
+  "deprecated": false,
+  "description": "A scrollytelling React component",
+  "devDependencies": {
+    "babel-core": "^6.26.0",
+    "babel-loader": "^7.1.2",
+    "babel-preset-env": "^1.6.1",
+    "babel-preset-react": "^6.24.1",
+    "css-loader": "^0.28.7",
+    "enzyme": "^3.3.0",
+    "enzyme-adapter-react-16": "^1.1.1",
+    "imitation": "^1.3.0",
+    "jest": "^21.2.1",
+    "node-sass": "^4.7.2",
+    "react": "^16.2.0",
+    "react-dom": "^16.2.0",
+    "react-test-renderer": "^16.2.0",
+    "sass-loader": "^6.0.6",
+    "style-loader": "^0.19.0",
+    "uglifyjs-webpack-plugin": "^1.1.2",
+    "webpack": "^3.10.0"
+  },
+  "homepage": "https://github.com/abcnews/scrollyteller#readme",
+  "jest": {
+    "transform": {
+      ".*": "./node_modules/imitation/jest"
+    },
+    "setupTestFrameworkScriptFile": "./tests/setup"
+  },
+  "keywords": [
+    "react",
+    "scrollyteller",
+    "scrollytelling"
+  ],
+  "license": "MIT",
+  "main": "lib/index.js",
+  "name": "@abcnews/scrollyteller",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/abcnews/scrollyteller.git"
+  },
+  "scripts": {
+    "build": "webpack",
+    "prepublishOnly": "npm run build && npm run test",
+    "test": "jest"
+  },
+  "version": "1.0.3"
+}
