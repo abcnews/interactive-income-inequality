@@ -105,11 +105,9 @@ class App extends React.Component {
 
         const LGAMap = files[0];
 
-        console.log(LGAMap);
-
         // Convert TopoJSON into GeoJSON
         const topology = topojson.feature(LGAMap, LGAMap.objects.LGA_2016_AUST); //aus_lga);
-        console.log(topology.features);
+
         LGAs = topology.features;
 
         this.setState({ mapData: LGAMap });
