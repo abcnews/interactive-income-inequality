@@ -10,10 +10,19 @@ const utils = require("../lib/utils");
 // D3 modules
 const d3Selection = require("d3-selection");
 const d3Geo = require("d3-geo");
-const d3GeoProjection = require("d3-geo-projection");
+// const d3GeoProjection = require("d3-geo-projection");
 
 // Import styles
 const styles = require("./MapScroller.scss");
+
+// Import story data
+const storyData = require("./storyData.json");
+
+let initialGlobeScale;
+
+// Set defaults
+let currentFocus = "australia";
+let currentLongLat = getItem("australia").longlat;
 
 // documentElement is for Firefox support apparently
 let screenWidth =
@@ -30,8 +39,9 @@ function canvasInit(mapData) {
 
   // Set up a D3 projection here
   const projection = d3Geo
-    .geoOrthographic()
-    .rotate([-133.7751, 25.2744]) // Rotate to Australia
+    .geoConicConformal()
+    //.geoOrthographic()
+    .rotate(invertLongLat(currentLongLat)) // Rotate to Australia
     // .geoMercator()
     // .geoMiller() // Globe projection
     // .translate([screenWidth / 2, screenHeight / 2])
@@ -46,11 +56,11 @@ function canvasInit(mapData) {
       australiaGeoLga
     );
 
-  // projection.rotate([-133.7751, 25.2744]);
+  currentLongLat = getItem("brisbane").longlat;
+  projection.rotate(invertLongLat(currentLongLat));
 
-  // projection.scale(1200);
-
-  // projection.rotate([-27, 153]);
+  // Set initial global scale to handle zoom ins and outs
+  initialGlobeScale = projection.scale();
 
   const canvas = d3Selection
     .select("." + styles.stage)
@@ -63,7 +73,6 @@ function canvasInit(mapData) {
 
   // A non-d3 element selection for Retina dn High DPI scaling
   const canvasEl = document.querySelector("." + styles.stage);
-  console.log(canvasEl);
 
   // Auto-convert canvas to Retina display and High DPI monitor scaling
   canvasDpiScaler(canvasEl, context);
@@ -90,7 +99,7 @@ function canvasInit(mapData) {
     context.beginPath();
     context.strokeStyle = "rgba(50, 205, 50, 0.9)";
     context.fillStyle = "rgba(0,0,0,0)";
-    context.lineWidth = 1;
+    context.lineWidth = 1.1;
     path(australiaGeoLga);
     context.fill();
     context.stroke();
@@ -114,6 +123,10 @@ class MapScroller extends React.Component {
     canvasInit(this.props.mapData);
   }
 
+  doMarker(data) {
+    currentFocus = data.focus;
+  }
+
   render() {
     // Create props vars passed to this component
     const { scrollyteller, mapData } = this.props;
@@ -126,9 +139,7 @@ class MapScroller extends React.Component {
             styles.scrollyteller
           }`}
           panelClassName="Block-content u-layout u-richtext"
-          onMarker={stuff => {
-            console.log(stuff);
-          }}
+          onMarker={this.doMarker.bind(this)}
         >
           <canvas className={styles.stage} />
         </Scrollyteller>
@@ -137,5 +148,14 @@ class MapScroller extends React.Component {
     );
   }
 } // End of MapScroller component
+
+// Heloper for indexing an array of objects
+function getItem(id) {
+  return storyData.locations.find(item => item.id === id);
+}
+
+function invertLongLat(longlat) {
+  return [-longlat[0], -longlat[1]];
+}
 
 module.exports = MapScroller;
