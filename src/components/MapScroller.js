@@ -9,8 +9,10 @@ const utils = require("../lib/utils");
 
 // D3 modules
 const d3Selection = require("d3-selection");
+require("d3-transition");
 const d3Geo = require("d3-geo");
-// const d3GeoProjection = require("d3-geo-projection");
+const d3GeoProjection = require("d3-geo-projection");
+const d3Interpolate = require("d3-interpolate");
 
 // Import styles
 const styles = require("./MapScroller.scss");
@@ -27,13 +29,14 @@ let projection;
 
 // Set defaults
 let currentFocus = "australia";
+let previousFocus = "australia";
 let currentLongLat = getItem("australia").longlat;
 
 // documentElement is for Firefox support apparently
 let screenWidth =
   document.documentElement.clientWidth || document.body.clientWidth; // minus scroll bars
 let screenHeight = window.innerHeight;
-let margins = screenWidth * 0.05;
+let margins = screenWidth * 0.10;
 
 class MapScroller extends React.Component {
   constructor(props) {
@@ -51,11 +54,12 @@ class MapScroller extends React.Component {
 
     // Set up a D3 projection here
     projection = d3Geo
-      .geoConicConformal()
-      //.geoOrthographic()
-      .rotate(invertLongLat(currentLongLat)) // Rotate to Australia
+      // .geoConicConformal()
       // .geoMercator()
-      // .geoMiller() // Globe projection
+      .geoOrthographic()
+      // .geoEquirectangular()
+      // .geoConicEqualArea()
+      .rotate(invertLongLat(currentLongLat)) // Rotate to Australia
       // .translate([screenWidth / 2, screenHeight / 2])
       // .clipAngle(90) // Only display front side of the world
       .precision(0.5)
@@ -73,7 +77,7 @@ class MapScroller extends React.Component {
 
     const canvas = d3Selection
       .select("." + styles.stage)
-      // .style("background-color", "LIGHTSTEELBLUE")
+      .style("background-color", "#f9f9f9")
       .attr("width", screenWidth)
       .attr("height", screenHeight);
 
@@ -103,13 +107,42 @@ class MapScroller extends React.Component {
   }
 
   doMarker(data) {
+    previousFocus = currentFocus;
     currentFocus = data.focus;
+    console.log(previousFocus);
+    console.log(currentFocus);
 
-    
-    if (projection) { // Make sure we are mounted
-      currentLongLat = getItem("brisbane").longlat;
+    // Make sure we are mounted
+    if (projection) {
+      let previousRotation = projection.rotate();
+      let currentRotation = getItem(currentFocus).longlat;
+
+      currentLongLat = getItem(currentFocus).longlat;
       projection.rotate(invertLongLat(currentLongLat));
-      this.drawWorld();
+
+      const dummyTransition = {};
+
+      d3Selection
+        .select(dummyTransition)
+        .transition("transition")
+        .delay(0)
+        .duration(1000)
+        .tween("spinner", () => {
+          let rotationInterpolate = d3Interpolate.interpolate(
+            previousRotation,
+            [-currentRotation[0], -currentRotation[1], 0]
+          );
+
+          // let scaleInterpolate = d3.interpolate(previousScale, currentScale);
+
+          // Return the tween function
+          return time => {
+            projection.rotate(rotationInterpolate(time));
+            // rangeCircle.radius(radiusInterpolate(time));
+            // projection.scale(scaleInterpolate(time));
+            this.drawWorld();
+          };
+        });
     }
   }
 
@@ -119,8 +152,8 @@ class MapScroller extends React.Component {
 
     // Draw all landmasses
     context.beginPath();
-    context.strokeStyle = "rgba(50, 205, 50, 0.9)";
-    context.fillStyle = "rgba(0,0,0,0)";
+    context.strokeStyle = "rgba(255, 255, 255, 0.9)";
+    context.fillStyle = "#1A90AF";
     context.lineWidth = 1.1;
     path(australiaGeoLga);
     context.fill();
