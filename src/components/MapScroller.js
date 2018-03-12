@@ -2,9 +2,10 @@ const React = require("react");
 const ReactDOM = require("react-dom");
 const Scrollyteller = require("@abcnews/scrollyteller"); //require("@abcnews/scrollyteller");
 const topojson = require("topojson");
+const canvasDpiScaler = require("canvas-dpi-scaler");
 
 // Load up some helper functions etc
-const utils = require("../lib/utils")
+const utils = require("../lib/utils");
 
 // D3 modules
 const d3Selection = require("d3-selection");
@@ -21,13 +22,16 @@ let screenHeight = window.innerHeight;
 let margins = screenWidth * 0.05;
 
 function canvasInit(mapData) {
-  const australiaGeoLga = topojson.feature(mapData, mapData.objects.LGA_2016_AUST);
+  const australiaGeoLga = topojson.feature(
+    mapData,
+    mapData.objects.LGA_2016_AUST
+  );
   const globe = { type: "Sphere" };
 
   // Set up a D3 projection here
   const projection = d3Geo
     .geoOrthographic()
-    .rotate([-133.7751, 25.2744])
+    .rotate([-133.7751, 25.2744]) // Rotate to Australia
     // .geoMercator()
     // .geoMiller() // Globe projection
     // .translate([screenWidth / 2, screenHeight / 2])
@@ -56,6 +60,13 @@ function canvasInit(mapData) {
 
   // Set up our canvas drawing context aka pen
   const context = canvas.node().getContext("2d");
+
+  // A non-d3 element selection for Retina dn High DPI scaling
+  const canvasEl = document.querySelector("." + styles.stage);
+  console.log(canvasEl);
+
+  // Auto-convert canvas to Retina display and High DPI monitor scaling
+  canvasDpiScaler(canvasEl, context);
 
   // Build a path generator for our orthographic projection
   const path = d3Geo
@@ -88,7 +99,6 @@ function canvasInit(mapData) {
 
 function stickifyStage() {
   // Detect whether position: sticky is supported (and not Edge browser) and apply styles
-
   if (Modernizr.csspositionsticky && utils.detectIE() === false) {
     document.body.style.overflowX = "visible";
     document.body.style.overflowY = "visible";
