@@ -14,6 +14,7 @@ const d3Geo = require("d3-geo");
 const d3GeoProjection = require("d3-geo-projection");
 const d3Interpolate = require("d3-interpolate");
 const d3Zoom = require("d3-zoom");
+const d3Scale = require("d3-scale");
 
 // Import styles
 const styles = require("./MapScroller.scss");
@@ -30,7 +31,7 @@ let path;
 let projection;
 
 // Set defaults
-let currentFocus = "72330";
+let currentFocus = "72330"; // Middle of Australia (pretty much)
 let previousFocus = "72330";
 let currentLongLat = getItem("australia").longlat;
 
@@ -39,6 +40,11 @@ let screenWidth =
   document.documentElement.clientWidth || document.body.clientWidth; // minus scroll bars
 let screenHeight = window.innerHeight;
 let margins = screenWidth * 0.1;
+
+var colorScale = d3Scale
+  .scaleLinear()
+  .domain([10000, 100000])
+  .range(["#7ACFD4", "#00114B"]);
 
 class MapScroller extends React.Component {
   constructor(props) {
@@ -60,8 +66,6 @@ class MapScroller extends React.Component {
     australiaGeoLga = topojson.feature(mapData, mapData.objects.LGA_2016_AUST);
     const globe = { type: "Sphere" };
 
-    console.log(d3Geo.geoCentroid(australiaGeoLga.features[1].geometry));
-
     // Set up a D3 projection here
     projection = d3Geo
       // .geoConicConformal() // North top
@@ -76,9 +80,6 @@ class MapScroller extends React.Component {
         ],
         australiaGeoLga
       );
-
-    ausProjected = d3GeoProjection.geoProject(australiaGeoLga, projection);
-    console.log(ausProjected);
 
     // Set initial global scale to handle zoom ins and outs
     initialGlobeScale = projection.scale();
@@ -112,6 +113,10 @@ class MapScroller extends React.Component {
         }
       })
       .context(context);
+
+    // let translation = projection([153.0251, -27.4698]);
+
+    // projection.translate([100, 100]);
 
     // Draw the inital state of the world
     this.drawWorld();
@@ -177,12 +182,30 @@ class MapScroller extends React.Component {
     context.clearRect(0, 0, screenWidth, screenHeight);
 
     // Draw all landmasses
+    // context.beginPath();
+    // context.strokeStyle = "rgba(255, 255, 255, 0.9)";
+    // context.fillStyle = "#1A90AF";
+    // context.lineWidth = 1.1;
+    // path(australiaGeoLga);
+    // context.fill();
+    // context.stroke();
+
+    // Loop through all LGAs and aplly colours
+    australiaGeoLga.features.forEach(element => {
+      // console.log(element);
+      context.beginPath();
+      context.fillStyle = colorScale(element.properties.LGA_CODE16);
+      path(element);
+      context.fill();
+    });
+
+    // Draw white outline
     context.beginPath();
-    context.strokeStyle = "rgba(255, 255, 255, 0.9)";
+    context.strokeStyle = "rgba(255, 255, 255, 0.4)";
     context.fillStyle = "#1A90AF";
     context.lineWidth = 1.1;
     path(australiaGeoLga);
-    context.fill();
+    // context.fill();
     context.stroke();
   }
 
