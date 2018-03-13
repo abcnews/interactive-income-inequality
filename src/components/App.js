@@ -8,7 +8,7 @@ const inside = require("point-in-polygon");
 const topojson = require("topojson");
 const MapboxClient = require("mapbox");
 
-const Portal = require("react-portal");
+// const Portal = require("react-portal");
 
 // Other React components
 const LgaSearch = require("./LgaSearch");
@@ -16,7 +16,7 @@ const IncomeInput = require("./IncomeInput");
 const MapScroller = require("./MapScroller");
 
 let LGA_GEO_JSON_URL =
-  "http://WS204914.aus.aunty.abc.net.au:8000/LGA_2016_AUST_SIMPLE.topo.json";
+  "http://WS204914.aus.aunty.abc.net.au:8000/LGA_2016_AUST_MAP.topo.json";
 // "http://www.abc.net.au/res/sites/news-projects/income-comparisons-react/master/aus_lga.topo.json";
 
 // Imports etc

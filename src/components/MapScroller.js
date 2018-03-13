@@ -13,6 +13,7 @@ require("d3-transition");
 const d3Geo = require("d3-geo");
 const d3GeoProjection = require("d3-geo-projection");
 const d3Interpolate = require("d3-interpolate");
+const d3Zoom = require("d3-zoom");
 
 // Import styles
 const styles = require("./MapScroller.scss");
@@ -22,21 +23,22 @@ const storyData = require("./storyData.json");
 
 // File scope vars - not really needed but yeah good to track
 let initialGlobeScale;
+let globeScale = 100;
 let australiaGeoLga;
 let context;
 let path;
 let projection;
 
 // Set defaults
-let currentFocus = "australia";
-let previousFocus = "australia";
+let currentFocus = "72330";
+let previousFocus = "72330";
 let currentLongLat = getItem("australia").longlat;
 
 // documentElement is for Firefox support apparently
 let screenWidth =
   document.documentElement.clientWidth || document.body.clientWidth; // minus scroll bars
 let screenHeight = window.innerHeight;
-let margins = screenWidth * 0.10;
+let margins = screenWidth * 0.1;
 
 class MapScroller extends React.Component {
   constructor(props) {
@@ -49,28 +51,34 @@ class MapScroller extends React.Component {
   }
 
   canvasInit(mapData) {
+    // Check to see if position.sticky is supported
+    // and then apply sticky styles
+    stickifyStage();
+
+    topojson.presimplify(mapData);
+
     australiaGeoLga = topojson.feature(mapData, mapData.objects.LGA_2016_AUST);
     const globe = { type: "Sphere" };
 
+    console.log(d3Geo.geoCentroid(australiaGeoLga.features[1].geometry));
+
     // Set up a D3 projection here
     projection = d3Geo
-      // .geoConicConformal()
-      // .geoMercator()
-      .geoOrthographic()
-      // .geoEquirectangular()
-      // .geoConicEqualArea()
+      // .geoConicConformal() // North top
+      .geoOrthographic() // Global
       .rotate(invertLongLat(currentLongLat)) // Rotate to Australia
-      // .translate([screenWidth / 2, screenHeight / 2])
-      // .clipAngle(90) // Only display front side of the world
       .precision(0.5)
       .fitExtent(
         // Auto zoom
         [
-          [margins - screenWidth * 0.06, margins],
+          [margins /* - screenWidth * 0.06 */, margins],
           [screenWidth - margins, screenHeight - margins]
         ],
         australiaGeoLga
       );
+
+    ausProjected = d3GeoProjection.geoProject(australiaGeoLga, projection);
+    console.log(ausProjected);
 
     // Set initial global scale to handle zoom ins and outs
     initialGlobeScale = projection.scale();
@@ -90,35 +98,50 @@ class MapScroller extends React.Component {
     // Auto-convert canvas to Retina display and High DPI monitor scaling
     canvasDpiScaler(canvasEl, context);
 
+    let clip = d3Geo
+      .geoIdentity()
+      .clipExtent([[0, 0], [screenWidth, screenHeight]]);
+
     // Build a path generator for our orthographic projection
     path = d3Geo
       .geoPath()
-      .projection(projection)
+      .projection({
+        // Here we return a clipped stream of the projection
+        stream: function(s) {
+          return projection.stream(clip.stream(s));
+        }
+      })
       .context(context);
 
     // Draw the inital state of the world
     this.drawWorld();
-
-    // Check to see if position.sticky is supported
-    // and then apply sticky styles
-    stickifyStage();
 
     // Function for clearing and render a frame of each part of the globe
   }
 
   doMarker(data) {
     previousFocus = currentFocus;
-    currentFocus = data.focus;
-    console.log(previousFocus);
+    currentFocus = data.lga + ""; // Turn into string
+    console.log(data);
+
     console.log(currentFocus);
+    console.log(previousFocus);
 
     // Make sure we are mounted
     if (projection) {
       let previousRotation = projection.rotate();
-      let currentRotation = getItem(currentFocus).longlat;
+      let currentRotation = d3Geo.geoCentroid(getLGA(currentFocus).geometry); //getItem(currentFocus).longlat;
 
-      currentLongLat = getItem(currentFocus).longlat;
-      projection.rotate(invertLongLat(currentLongLat));
+      // currentLongLat = getItem(currentFocus).longlat;
+      // projection.rotate(invertLongLat(currentLongLat));
+
+      globeScale = data.zoom || 100;
+      let previousGlobeScale = projection.scale();
+
+      // Zoom in so that percentage set in marker relative to initial 100%
+      let newGlobeScale = initialGlobeScale * (globeScale / 100);
+
+      console.log(globeScale);
 
       const dummyTransition = {};
 
@@ -133,13 +156,16 @@ class MapScroller extends React.Component {
             [-currentRotation[0], -currentRotation[1], 0]
           );
 
-          // let scaleInterpolate = d3.interpolate(previousScale, currentScale);
+          let scaleInterpolate = d3Interpolate.interpolate(
+            previousGlobeScale,
+            newGlobeScale
+          );
 
           // Return the tween function
           return time => {
             projection.rotate(rotationInterpolate(time));
             // rangeCircle.radius(radiusInterpolate(time));
-            // projection.scale(scaleInterpolate(time));
+            projection.scale(scaleInterpolate(time));
             this.drawWorld();
           };
         });
@@ -199,8 +225,60 @@ function getItem(id) {
   return storyData.locations.find(item => item.id === id);
 }
 
+function getLGA(lgaCode) {
+  return australiaGeoLga.features.find(
+    lga => lga.properties.LGA_CODE16 === lgaCode
+  );
+}
+
 function invertLongLat(longlat) {
   return [-longlat[0], -longlat[1]];
+}
+
+// Polyfill for .find()
+// https://tc39.github.io/ecma262/#sec-array.prototype.find
+if (!Array.prototype.find) {
+  Object.defineProperty(Array.prototype, "find", {
+    value: function(predicate) {
+      // 1. Let O be ? ToObject(this value).
+      if (this == null) {
+        throw new TypeError('"this" is null or not defined');
+      }
+
+      var o = Object(this);
+
+      // 2. Let len be ? ToLength(? Get(O, "length")).
+      var len = o.length >>> 0;
+
+      // 3. If IsCallable(predicate) is false, throw a TypeError exception.
+      if (typeof predicate !== "function") {
+        throw new TypeError("predicate must be a function");
+      }
+
+      // 4. If thisArg was supplied, let T be thisArg; else let T be undefined.
+      var thisArg = arguments[1];
+
+      // 5. Let k be 0.
+      var k = 0;
+
+      // 6. Repeat, while k < len
+      while (k < len) {
+        // a. Let Pk be ! ToString(k).
+        // b. Let kValue be ? Get(O, Pk).
+        // c. Let testResult be ToBoolean(? Call(predicate, T, « kValue, k, O »)).
+        // d. If testResult is true, return kValue.
+        var kValue = o[k];
+        if (predicate.call(thisArg, kValue, k, o)) {
+          return kValue;
+        }
+        // e. Increase k by 1.
+        k++;
+      }
+
+      // 7. Return undefined.
+      return undefined;
+    }
+  });
 }
 
 module.exports = MapScroller;
