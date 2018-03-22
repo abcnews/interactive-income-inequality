@@ -8,22 +8,20 @@ const inside = require("point-in-polygon");
 const topojson = require("topojson");
 const MapboxClient = require("mapbox");
 
-// const Portal = require("react-portal");
-
 // Other React components
 const LgaSearch = require("./LgaSearch");
 const IncomeInput = require("./IncomeInput");
 const MapScroller = require("./MapScroller");
 
 let LGA_GEO_JSON_URL =
-  "http://WS204914.aus.aunty.abc.net.au:8000/LGA_2016_AUST_MAP.topo.json";
-// "http://www.abc.net.au/res/sites/news-projects/income-comparisons-react/master/aus_lga.topo.json";
+  // "http://WS204914.aus.aunty.abc.net.au:8000/LGA_2016_AUST_MAP.topo.json";
+"http://www.abc.net.au/res/sites/news-projects/income-comparisons-react/master/LGA_2016_AUST_MAP.topo.json";
 
-// Imports etc
+// Configuration
 const config = {
   mapbox_token:
     "cGsuZXlKMUlqb2libVYzY3kxdmJqRnBibVVpTENKaElqb2lZMnBqYXpFM09UbDNNRFV5ZVRKM2NHbDJOV1J4Y0RocE55SjkuS3c0bGhBYkxVazlJUGF6dXRCZTI4dw=="
-}; //require("../../secret.json"); // No real point in a secret config if just on a public server anyway
+};
 
 // Constants
 const MAPBOX_TOKEN = atob(config.mapbox_token);
@@ -35,7 +33,7 @@ let LGAs = [];
 // Initialise Mapbox
 const client = new MapboxClient(MAPBOX_TOKEN);
 
-// Preact app starts here
+// React app starts here
 class App extends React.Component {
   constructor(props) {
     super(props);
@@ -97,13 +95,13 @@ class App extends React.Component {
   componentWillMount() {
     // Queue up some files to be loaded
     d3Q
-      .queue(2)
+      .queue(1) // Concurrent requests
       .defer(d3Request.json, LGA_GEO_JSON_URL)
       .awaitAll((error, files) => {
         // Once all is loaded do this
         if (error) console.error(error);
 
-        const LGAMap = files[0];
+        const LGAMap = files[0]; // Load the first file
 
         // Convert TopoJSON into GeoJSON
         const topology = topojson.feature(LGAMap, LGAMap.objects.LGA_2016_AUST); //aus_lga);
@@ -112,7 +110,7 @@ class App extends React.Component {
 
         this.setState({ mapData: LGAMap });
 
-        console.log("Data loaded...");
+        console.log("External data loaded...");
       });
   }
 
@@ -124,7 +122,6 @@ class App extends React.Component {
 
   render() {
     const { scrollyteller } = this.props;
-    // let incomeBlock = null;
 
     return (
       <div className={styles.root}>
