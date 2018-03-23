@@ -5,7 +5,7 @@ const topojson = require("topojson");
 const canvasDpiScaler = require("canvas-dpi-scaler");
 
 // Load up some helper functions etc
-const utils = require("../lib/utils");
+const utils = require("../../lib/utils");
 
 // D3 modules
 const d3Selection = require("d3-selection");
@@ -20,7 +20,7 @@ const d3Scale = require("d3-scale");
 const styles = require("./MapScroller.scss");
 
 // Import story data
-const storyData = require("./storyData.json");
+// const storyData = require("./storyData.json");
 
 // File scope vars - not really needed but yeah good to track
 let initialGlobeScale;
@@ -33,7 +33,7 @@ let projection;
 // Set defaults
 let currentFocus = "72330"; // Middle of Australia (pretty much)
 let previousFocus = "72330";
-let currentLongLat = getItem("australia").longlat;
+let currentLongLat = [133.7751, -25.2744] //getItem("australia").longlat;
 
 // documentElement is for Firefox support apparently
 let screenWidth =
@@ -239,9 +239,9 @@ function stickifyStage() {
 }
 
 // Heloper for indexing an array of objects
-function getItem(id) {
-  return storyData.locations.find(item => item.id === id);
-}
+// function getItem(id) {
+//   return storyData.locations.find(item => item.id === id);
+// }
 
 function getLGA(lgaCode) {
   return australiaGeoLga.features.find(

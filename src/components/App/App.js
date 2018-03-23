@@ -9,9 +9,9 @@ const topojson = require("topojson");
 const MapboxClient = require("mapbox");
 
 // Other React components
-const LgaSearch = require("./LgaSearch");
-const IncomeInput = require("./IncomeInput");
-const MapScroller = require("./MapScroller");
+const LgaSearch = require("../LgaSearch/LgaSearch");
+const IncomeInput = require("../IncomeInput/IncomeInput");
+const MapScroller = require("../MapScroller/MapScroller");
 
 // One map for LGA search (complex) and one for Scrolly map (simplified)
 const LGA_GEO_JSON_URL =

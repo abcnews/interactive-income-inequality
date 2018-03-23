@@ -18,7 +18,7 @@ const scrollyteller = require("@abcnews/scrollyteller").loadOdysseyScrollyteller
 function init() {
   spanify.hashify({ hashList: ["addressinput", "incomeinput"] }); // Turn anchor hash tags into divs
 
-  const App = require("./components/App");
+  const App = require("./components/App/App");
   render(
     <App projectName={PROJECT_NAME} scrollyteller={scrollyteller} />,
     root
@@ -28,11 +28,11 @@ function init() {
 init();
 
 if (module.hot) {
-  module.hot.accept("./components/App", () => {
+  module.hot.accept("./components/App/App", () => {
     try {
       init();
     } catch (err) {
-      const ErrorBox = require("./components/ErrorBox");
+      const ErrorBox = require("./components/ErrorBox/ErrorBox");
       render(<ErrorBox error={err} />, root);
     }
   });
