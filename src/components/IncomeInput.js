@@ -23,7 +23,7 @@ class IncomeInput extends React.Component {
     this.state = {
       income: "1200",
       infoIsSet: false,
-      componentState: "initial",
+      narrativeState: "initial",
       incomeBracket: 8,
       sliderGuess: 50,
       guessBracket: 6
@@ -153,6 +153,14 @@ class IncomeInput extends React.Component {
     let infoIsSet = null;
     if (this.state.infoIsSet) infoIsSet = true;
     else infoIsSet = false;
+
+    let narrativeState = "";
+    if (this.state.narrativeState) narrativeState = this.state.narrativeState;
+    // TODO: work out why we're doing it this way instead of just directly assigning value
+    // or using the state directly
+
+    console.log(narrativeState);
+
     return ReactDOM.createPortal(
       <div className={styles.wrapper}>
         <div className={styles.flexWrapper}>

@@ -17,7 +17,7 @@ const scrollyteller = require("@abcnews/scrollyteller").loadOdysseyScrollyteller
 
 function init() {
   spanify.hashify({ hashList: ["addressinput", "incomeinput"] }); // Turn anchor hash tags into divs
-  console.log(scrollyteller);
+
   const App = require("./components/App");
   render(
     <App projectName={PROJECT_NAME} scrollyteller={scrollyteller} />,

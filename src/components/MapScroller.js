@@ -127,10 +127,7 @@ class MapScroller extends React.Component {
   doMarker(data) {
     previousFocus = currentFocus;
     currentFocus = data.lga + ""; // Turn into string
-    console.log(data);
 
-    console.log(currentFocus);
-    console.log(previousFocus);
 
     // Make sure we are mounted
     if (projection) {
@@ -145,8 +142,6 @@ class MapScroller extends React.Component {
 
       // Zoom in so that percentage set in marker relative to initial 100%
       let newGlobeScale = initialGlobeScale * (globeScale / 100);
-
-      console.log(globeScale);
 
       const dummyTransition = {};
 
