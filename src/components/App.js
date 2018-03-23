@@ -13,7 +13,7 @@ const LgaSearch = require("./LgaSearch");
 const IncomeInput = require("./IncomeInput");
 const MapScroller = require("./MapScroller");
 
-// One map for LGA search and one for Scrolly map (for now)
+// One map for LGA search (complex) and one for Scrolly map (simplified)
 const LGA_GEO_JSON_URL =
   // "http://WS204914.aus.aunty.abc.net.au:8000/LGA_2016_AUST_SEARCH.topo.json";
   "http://www.abc.net.au/res/sites/news-projects/income-comparisons-react/master/LGA_2016_AUST_SEARCH.topo.json";

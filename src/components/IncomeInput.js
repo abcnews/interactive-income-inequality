@@ -150,22 +150,22 @@ class IncomeInput extends React.Component {
 
   render() {
     // Start conditional rendering
-    let infoIsSet = null;
-    if (this.state.infoIsSet) infoIsSet = true;
-    else infoIsSet = false;
+    // let infoIsSet = null;
+    // if (this.state.infoIsSet) infoIsSet = true;
+    // else infoIsSet = false;
 
-    let narrativeState = "";
-    if (this.state.narrativeState) narrativeState = this.state.narrativeState;
+    // let narrativeState = "";
+    // if (this.state.narrativeState) narrativeState = this.state.narrativeState;
     // TODO: work out why we're doing it this way instead of just directly assigning value
     // or using the state directly
 
-    console.log(narrativeState);
+    // console.log(narrativeState);
 
     return ReactDOM.createPortal(
       <div className={styles.wrapper}>
         <div className={styles.flexWrapper}>
           {/* Choose whether to display the input or the output text etc. */}
-          {!infoIsSet && (
+          {!this.state.infoIsSet && (
             <div className={styles.column + " " + styles.one}>
               <div className={styles.boldtext}>
                 Where do you think your income bracket sits on the scale of
@@ -174,7 +174,8 @@ class IncomeInput extends React.Component {
               <div className={styles.smalltext}>
                 Use the slider on the right to estimate your position
               </div>
-              <div className={styles.boldtext}>
+
+              {/* <div className={styles.boldtext}>
                 Your income before tax is<br />
                 <form onSubmit={this.showMore.bind(this)}>
                   <label />
@@ -190,11 +191,12 @@ class IncomeInput extends React.Component {
               <div className={styles.smalltext}>Enter your weekly income</div>{" "}
               <button onClick={this.showMore.bind(this)}>
                 Show me where I sit
-              </button>
+              </button> */}
+
             </div>
           )}
 
-          {infoIsSet && (
+          {this.state.infoIsSet && (
             <div className={styles.column + " " + styles.one}>
               <div className={styles.standardText}>
                 Your income puts you in the{" "}
@@ -238,13 +240,13 @@ class IncomeInput extends React.Component {
 
           {/******************** COLUMN TWO **********************/}
           <div className={styles.column + " " + styles.two}>
-            {!infoIsSet && (
+            {!this.state.infoIsSet && (
               <div className={styles.resultContainer}>
                 <div id="range" />
               </div>
             )}
 
-            {infoIsSet && (
+            {this.state.infoIsSet && (
               <div className={styles.resultContainer}>
                 <div id="range" />
                 <div id="result" className={styles.result}>
@@ -261,8 +263,9 @@ class IncomeInput extends React.Component {
               </div>
             )}
           </div>
+
           <div className={styles.column + " " + styles.three}>
-            {!infoIsSet && (
+            {/* {!this.state.infoIsSet && (
               <div className={styles.scaleContainer}>
                 <div className={styles.mostRich}>
                   <div>
@@ -283,7 +286,7 @@ class IncomeInput extends React.Component {
               </div>
             )}
 
-            {infoIsSet && (
+            {this.state.infoIsSet && (
               <div className={styles.scaleContainerResults}>
                 <div className={styles.areRicher}>
                   <div>
@@ -307,8 +310,9 @@ class IncomeInput extends React.Component {
                   </div>
                 </div>
               </div>
-            )}
+            )} */}
           </div>
+          
         </div>
         <div />
       </div>,
