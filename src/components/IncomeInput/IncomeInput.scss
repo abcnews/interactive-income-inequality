@@ -1,12 +1,11 @@
 .wrapper {
   .flex-wrapper {
     font-size: 20px;
-    color: #143d47;
+    color: #000000;
     display: flex;
   }
 
   .column {
-   
   }
 
   .one {
@@ -17,6 +16,7 @@
     text-align: right;
     // margin-bottom: 0.8em;
     margin-left: 50px;
+    min-height: 300px;
     max-height: 450px;
   }
 
@@ -178,7 +178,7 @@
     font-weight: 900;
     line-height: 13px;
     text-align: left;
-    color: #C44B00;
+    color: #c44b00;
     margin-top: 1.5em;
     margin-bottom: 1.5em;
     position: relative;
@@ -186,8 +186,6 @@
     text-transform: uppercase;
     white-space: nowrap;
   }
-
-  
 }
 
 .fade-out {
@@ -206,9 +204,7 @@
   background-color: #00242c;
 }
 
-
-
-// Styles for range slider containing div 
+// Styles for range slider containing div
 .result-container {
   height: 100%;
   // width: 100%;
@@ -221,7 +217,7 @@
 
 .result .vertical-bar {
   height: 100%;
-  background: linear-gradient(#004656, #30e8c3);
+  background: linear-gradient(#00114b, #e1e6da);
   width: 15px;
   border-radius: 3px;
 }
@@ -230,7 +226,7 @@
   position: absolute;
   width: 23px;
   height: 30px;
-  border: 2px solid #FF6100;
+  border: 2px solid #ff6100;
   top: 0px;
   left: -4px;
   z-index: 1;
@@ -251,7 +247,7 @@
   position: absolute;
   width: 23px;
   height: 30px;
-  border: 2px solid #516C72;
+  border: 2px solid #516c72;
   top: 0px;
   left: -4px;
   z-index: 1;
@@ -385,7 +381,21 @@
   * Giving the connect element a border radius causes issues with using transform: scale
   */
   .noUi-target {
-    background: linear-gradient(#004656, #30e8c3);
+    background: linear-gradient(
+      #00114b 3.84%,
+      #002875 10.04%,
+      #03418d 14.16%,
+      #085b96 20.1%,
+      #0f75a0 27.12%,
+      #188cad 37.35%,
+      #24a3bc 47.37%,
+      #3fb2c6 56.56%,
+      #5ec0cd 65.74%,
+      #7acfd4 75.75%,
+      #9cd9ce 86.18%,
+      #bfe3cd 94.84%,
+      #e1e6da 100%
+    );
     border-radius: 3px;
   }
   .noUi-connects {
