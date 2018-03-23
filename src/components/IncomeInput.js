@@ -23,6 +23,7 @@ class IncomeInput extends React.Component {
     this.state = {
       income: "1200",
       infoIsSet: false,
+      componentState: "initial",
       incomeBracket: 8,
       sliderGuess: 50,
       guessBracket: 6
@@ -156,7 +157,7 @@ class IncomeInput extends React.Component {
       <div className={styles.wrapper}>
         <div className={styles.flexWrapper}>
           {/* Choose whether to display the input or the output text etc. */}
-          {!infoIsSet ? (
+          {!infoIsSet && (
             <div className={styles.column + " " + styles.one}>
               <div className={styles.boldtext}>
                 Where do you think your income bracket sits on the scale of
@@ -183,7 +184,9 @@ class IncomeInput extends React.Component {
                 Show me where I sit
               </button>
             </div>
-          ) : (
+          )}
+
+          {infoIsSet && (
             <div className={styles.column + " " + styles.one}>
               <div className={styles.standardText}>
                 Your income puts you in the{" "}
@@ -224,13 +227,16 @@ class IncomeInput extends React.Component {
               </button>
             </div>
           )}
+
           {/******************** COLUMN TWO **********************/}
           <div className={styles.column + " " + styles.two}>
-            {!infoIsSet ? (
+            {!infoIsSet && (
               <div className={styles.resultContainer}>
                 <div id="range" />
               </div>
-            ) : (
+            )}
+
+            {infoIsSet && (
               <div className={styles.resultContainer}>
                 <div id="range" />
                 <div id="result" className={styles.result}>
@@ -248,7 +254,7 @@ class IncomeInput extends React.Component {
             )}
           </div>
           <div className={styles.column + " " + styles.three}>
-            {!infoIsSet ? (
+            {!infoIsSet && (
               <div className={styles.scaleContainer}>
                 <div className={styles.mostRich}>
                   <div>
@@ -267,7 +273,9 @@ class IncomeInput extends React.Component {
                   </div>
                 </div>
               </div>
-            ) : (
+            )}
+
+            {infoIsSet && (
               <div className={styles.scaleContainerResults}>
                 <div className={styles.areRicher}>
                   <div>
@@ -301,6 +309,7 @@ class IncomeInput extends React.Component {
   }
 }
 
+// Helper functions for sorting income brackets
 function whatIncomeBracket(incomePerWeek) {
   // Determine which income bracket a weekly income sits in
   let incomePerYear = incomePerWeek * 52;
