@@ -35,6 +35,10 @@ class IncomeInput extends React.Component {
     this.setState({ income: income });
   }
 
+  lockIn() {
+    this.setState({ narrativeState: "slider-locked" });
+  }
+
   showMore(event) {
     event.preventDefault();
     const wrapperEl = document.querySelector("." + styles.wrapper);
@@ -165,7 +169,7 @@ class IncomeInput extends React.Component {
       <div className={styles.wrapper}>
         <div className={styles.flexWrapper}>
           {/* Choose whether to display the input or the output text etc. */}
-          {!this.state.infoIsSet && (
+          {this.state.narrativeState === "initial" && (
             <div className={styles.column + " " + styles.one}>
               <div className={styles.boldtext}>
                 Where do you think your income bracket sits on the scale of
@@ -174,6 +178,10 @@ class IncomeInput extends React.Component {
               <div className={styles.smalltext}>
                 Use the slider on the right to estimate your position
               </div>
+
+              <div className={styles.push4} />
+
+              <button onClick={this.lockIn.bind(this)}>Lock it in</button>
 
               {/* <div className={styles.boldtext}>
                 Your income before tax is<br />
@@ -192,11 +200,10 @@ class IncomeInput extends React.Component {
               <button onClick={this.showMore.bind(this)}>
                 Show me where I sit
               </button> */}
-
             </div>
           )}
 
-          {this.state.infoIsSet && (
+          {this.state.narrativeState !== "initial" && (
             <div className={styles.column + " " + styles.one}>
               <div className={styles.standardText}>
                 Your income puts you in the{" "}
@@ -240,13 +247,13 @@ class IncomeInput extends React.Component {
 
           {/******************** COLUMN TWO **********************/}
           <div className={styles.column + " " + styles.two}>
-            {!this.state.infoIsSet && (
+            {this.state.narrativeState === "initial" && (
               <div className={styles.resultContainer}>
                 <div id="range" />
               </div>
             )}
 
-            {this.state.infoIsSet && (
+            {this.state.narrativeState !== "initial" && (
               <div className={styles.resultContainer}>
                 <div id="range" />
                 <div id="result" className={styles.result}>
@@ -312,7 +319,6 @@ class IncomeInput extends React.Component {
               </div>
             )} */}
           </div>
-          
         </div>
         <div />
       </div>,

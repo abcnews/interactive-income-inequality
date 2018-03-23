@@ -1,8 +1,15 @@
 .wrapper {
   .flex-wrapper {
-    font-size: 20px;
     color: #000000;
     display: flex;
+  }
+
+  .push3 {
+    // Just a hack styling to nudge some things
+    height: 3px;
+  }
+  .push4 {
+    height: 4px;
   }
 
   .column {
@@ -10,6 +17,7 @@
 
   .one {
     // max-width: 66.666%;
+    padding-left: 4px;
   }
 
   .two {
@@ -33,21 +41,23 @@
 
   .column .boldtext {
     font-weight: bold;
-    margin-bottom: 0.8rem;
+    margin-bottom: 1rem;
+    font-size: 20px;
+    line-height: 28px;
   }
 
   .column .smalltext {
     font-family: ABCSans, Arial, Helvetica, sans-serif;
     font-size: 13px;
     color: #516c72;
-    margin-bottom: 0.8rem;
+    margin-bottom: 1rem;
   }
 
   .standard-text {
     color: #111111;
     font-size: 18px;
     line-height: 28px;
-    margin-bottom: 1em;
+    margin-bottom: 1rem;
   }
 
   @media only screen and (max-width: 768px) {
@@ -84,16 +94,15 @@
   }
 
   button {
-    margin: auto;
-    margin-top: 0.8em;
-    min-width: 100%;
+    width: 100%;
+    max-width: 256px;
     display: block;
     color: white;
     background-color: #1c1c1c;
     text-transform: uppercase;
     font-family: ABCSans, Arial, Helvetica, sans-serif;
-    padding-top: 15px;
-    padding-bottom: 15px;
+    padding-top: 12px;
+    padding-bottom: 12px;
     font-size: 12px;
     letter-spacing: 2px;
     border: 0;
