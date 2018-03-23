@@ -13,9 +13,14 @@ const LgaSearch = require("./LgaSearch");
 const IncomeInput = require("./IncomeInput");
 const MapScroller = require("./MapScroller");
 
-let LGA_GEO_JSON_URL =
+// One map for LGA search and one for Scrolly map (for now)
+const LGA_GEO_JSON_URL =
+  // "http://WS204914.aus.aunty.abc.net.au:8000/LGA_2016_AUST_SEARCH.topo.json";
+  "http://www.abc.net.au/res/sites/news-projects/income-comparisons-react/master/LGA_2016_AUST_SEARCH.topo.json";
+
+const SCROLLER_GEO_JSON_URL =
   // "http://WS204914.aus.aunty.abc.net.au:8000/LGA_2016_AUST_MAP.topo.json";
-"http://www.abc.net.au/res/sites/news-projects/income-comparisons-react/master/LGA_2016_AUST_MAP.topo.json";
+  "http://www.abc.net.au/res/sites/news-projects/income-comparisons-react/master/LGA_2016_AUST_MAP.topo.json";
 
 // Configuration
 const config = {
@@ -40,7 +45,8 @@ class App extends React.Component {
 
     this.state = {
       localGovernmentArea: "Search Local Governments by address",
-      mapData: null
+      mapData: null,
+      mapDataScroller: null
     };
   }
 
@@ -95,20 +101,22 @@ class App extends React.Component {
   componentWillMount() {
     // Queue up some files to be loaded
     d3Q
-      .queue(1) // Concurrent requests
+      .queue(2) // Concurrent requests
       .defer(d3Request.json, LGA_GEO_JSON_URL)
+      .defer(d3Request.json, SCROLLER_GEO_JSON_URL)
       .awaitAll((error, files) => {
         // Once all is loaded do this
         if (error) console.error(error);
 
         const LGAMap = files[0]; // Load the first file
+        const LGAMapScroller = files[1];
 
         // Convert TopoJSON into GeoJSON
         const topology = topojson.feature(LGAMap, LGAMap.objects.LGA_2016_AUST); //aus_lga);
 
         LGAs = topology.features;
 
-        this.setState({ mapData: LGAMap });
+        this.setState({ mapData: LGAMap, mapDataScroller: LGAMapScroller });
 
         console.log("External data loaded...");
       });
@@ -131,14 +139,12 @@ class App extends React.Component {
           localGovernmentArea={this.state.localGovernmentArea}
         />
         {/* Conditionally render MapScroller if data loaded */}
-        {this.state.mapData ? (
+        {this.state.mapData && (
           <MapScroller
             scrollyteller={scrollyteller}
-            mapData={this.state.mapData}
+            mapData={this.state.mapDataScroller}
           />
-        ) : (
-          <div />
-        )}
+        ) }
       </div>
     );
   }
