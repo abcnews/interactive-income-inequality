@@ -5,6 +5,9 @@ const Portal = require("react-portal");
 const noUiSlider = require("nouislider");
 const wNumb = require("wnumb");
 
+const FromLocaleString = require("../../lib/fromlocalestring");
+const fromLocaleString = new FromLocaleString();
+
 // Set up some constants
 const TRANSITION_TIME = 500;
 const PUBLIC_URL_BASE =
@@ -31,7 +34,8 @@ class IncomeInput extends React.Component {
   }
 
   handleIncomeChange(event) {
-    let income = event.target.value;
+    let income = fromLocaleString.number(event.target.value);
+    console.log(fromLocaleString.number("13,000"));
     this.setState({ income: income });
   }
 
@@ -42,6 +46,7 @@ class IncomeInput extends React.Component {
   showResult(event) {
     event.preventDefault();
     this.setState({ narrativeState: "result" });
+
     // const wrapperEl = document.querySelector("." + styles.wrapper);
 
     // // Fade out the wrapper element
@@ -204,9 +209,16 @@ class IncomeInput extends React.Component {
                   $&nbsp;{" "}
                   <input
                     onChange={this.handleIncomeChange.bind(this)}
-                    type="number"
-                    value={this.state.income}
+                    type="text"
+                    value={Number(this.state.income).toLocaleString('en', {useGrouping:true})}
                   />
+                  
+                  {// TODO: try comma grouping two way conversion
+                    /* <input
+                    onChange={this.handleIncomeChange.bind(this)}
+                    type="text"
+                    value={Number(this.state.income).toLocaleString('en', {useGrouping:true})}
+                  /> */}
                   &nbsp;&nbsp; per week
                 </form>
               </div>
