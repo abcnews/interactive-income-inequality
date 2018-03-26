@@ -55,6 +55,12 @@ class IncomeInput extends React.Component {
     console.log(this.state.income);
     console.log(this.state.incomeBracket);
 
+    let incomeBracketNumber = whatIncomeBracket(this.state.income);
+    let guessBracketNumber = this.state.guessBracket;
+
+    this.results = this.bracketInfo[incomeBracketNumber - 1];
+    this.guessResults = this.bracketInfo[guessBracketNumber - 1];
+
     // const wrapperEl = document.querySelector("." + styles.wrapper);
 
     // // Fade out the wrapper element
