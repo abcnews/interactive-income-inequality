@@ -36,39 +36,41 @@ class IncomeInput extends React.Component {
   }
 
   lockIn() {
-    this.setState({ narrativeState: "slider-locked" });
+    this.setState({ narrativeState: "locked" });
   }
 
-  showMore(event) {
+  showResult(event) {
     event.preventDefault();
-    const wrapperEl = document.querySelector("." + styles.wrapper);
+    this.setState({ narrativeState: "result" });
+    // const wrapperEl = document.querySelector("." + styles.wrapper);
 
-    // Fade out the wrapper element
-    addClass(wrapperEl, styles.fadeOut);
+    // // Fade out the wrapper element
+    // addClass(wrapperEl, styles.fadeOut);
 
-    setTimeout(() => {
-      // Wait for a while then do the calculation
-      let incomeBracketNumber = whatIncomeBracket(this.state.income);
-      let guessBracketNumber = this.state.guessBracket;
+    // setTimeout(() => {
+    //   // Wait for a while then do the calculation
+    //   let incomeBracketNumber = whatIncomeBracket(this.state.income);
+    //   let guessBracketNumber = this.state.guessBracket;
 
-      this.results = this.bracketInfo[incomeBracketNumber - 1];
-      this.guessResults = this.bracketInfo[guessBracketNumber - 1];
+    //   this.results = this.bracketInfo[incomeBracketNumber - 1];
+    //   this.guessResults = this.bracketInfo[guessBracketNumber - 1];
 
-      this.setState({ infoIsSet: true });
+    //   this.setState({ infoIsSet: true });
 
-      // Fade back in
-      removeClass(wrapperEl, styles.fadeOut);
-      addClass(wrapperEl, styles.fadeIn);
+    //   // Fade back in
+    //   removeClass(wrapperEl, styles.fadeOut);
+    //   addClass(wrapperEl, styles.fadeIn);
 
-      setTimeout(() => {
-        // Reset styles
-        removeClass(wrapperEl, styles.fadeIn);
-      }, TRANSITION_TIME);
-    }, TRANSITION_TIME);
+    //   setTimeout(() => {
+    //     // Reset styles
+    //     removeClass(wrapperEl, styles.fadeIn);
+    //   }, TRANSITION_TIME);
+    // }, TRANSITION_TIME);
   }
 
   tryAgain(event) {
     this.setState({ infoIsSet: false });
+    this.setState({ narrativeState: "initial" });
   }
 
   componentDidMount() {
@@ -182,10 +184,22 @@ class IncomeInput extends React.Component {
               <div className={styles.push4} />
 
               <button onClick={this.lockIn.bind(this)}>Lock it in</button>
+            </div>
+          )}
 
-              {/* <div className={styles.boldtext}>
+          {this.state.narrativeState === "locked" && (
+            <div className={styles.column + " " + styles.one}>
+              <div className={styles.boldtext}>
+                Where do you think your income bracket sits on the scale of
+                least to most rich Australians?
+              </div>
+              <div className={styles.smalltext}>
+                Use the slider on the right to estimate your position
+              </div>
+              <div className={styles.push4} />
+              <div className={styles.boldtext}>
                 Your income before tax is<br />
-                <form onSubmit={this.showMore.bind(this)}>
+                <form onSubmit={this.showResult.bind(this)}>
                   <label />
                   $&nbsp;{" "}
                   <input
@@ -197,13 +211,13 @@ class IncomeInput extends React.Component {
                 </form>
               </div>
               <div className={styles.smalltext}>Enter your weekly income</div>{" "}
-              <button onClick={this.showMore.bind(this)}>
+              <button onClick={this.showResult.bind(this)}>
                 Show me where I sit
-              </button> */}
+              </button>
             </div>
           )}
 
-          {this.state.narrativeState !== "initial" && (
+          {this.state.narrativeState === "result" && (
             <div className={styles.column + " " + styles.one}>
               <div className={styles.standardText}>
                 Your income puts you in the{" "}
@@ -245,15 +259,14 @@ class IncomeInput extends React.Component {
             </div>
           )}
 
-          {/******************** COLUMN TWO **********************/}
           <div className={styles.column + " " + styles.two}>
-            {this.state.narrativeState === "initial" && (
+            {this.state.narrativeState && (
               <div className={styles.resultContainer}>
                 <div id="range" />
               </div>
             )}
 
-            {this.state.narrativeState !== "initial" && (
+            {this.state.narrativeState === "this-will-never-fire" && (
               <div className={styles.resultContainer}>
                 <div id="range" />
                 <div id="result" className={styles.result}>
