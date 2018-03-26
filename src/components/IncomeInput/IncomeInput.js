@@ -24,7 +24,7 @@ class IncomeInput extends React.Component {
     this.guessResults = {};
     // Set initial state of component
     this.state = {
-      income: "1200",
+      income: 1200,
       infoIsSet: false,
       narrativeState: "initial",
       incomeBracket: 8,
@@ -33,10 +33,15 @@ class IncomeInput extends React.Component {
     };
   }
 
+  // Fires on keypress when in the income input
   handleIncomeChange(event) {
     let income = fromLocaleString.number(event.target.value);
-    console.log(fromLocaleString.number("13,000"));
-    this.setState({ income: income });
+    if (isNaN(income)) return;
+
+    this.setState({
+      income: income,
+      incomeBracket: whatIncomeBracketNet(income)
+    });
   }
 
   lockIn() {
@@ -46,6 +51,9 @@ class IncomeInput extends React.Component {
   showResult(event) {
     event.preventDefault();
     this.setState({ narrativeState: "result" });
+
+    console.log(this.state.income);
+    console.log(this.state.incomeBracket);
 
     // const wrapperEl = document.querySelector("." + styles.wrapper);
 
@@ -203,22 +211,17 @@ class IncomeInput extends React.Component {
               </div>
               <div className={styles.push4} />
               <div className={styles.boldtext}>
-                Your income before tax is<br />
+                What's your weekly take-home pay?:<br />
                 <form onSubmit={this.showResult.bind(this)}>
                   <label />
                   $&nbsp;{" "}
                   <input
                     onChange={this.handleIncomeChange.bind(this)}
                     type="text"
-                    value={Number(this.state.income).toLocaleString('en', {useGrouping:true})}
+                    value={Number(this.state.income).toLocaleString("en", {
+                      useGrouping: true
+                    })}
                   />
-                  
-                  {// TODO: try comma grouping two way conversion
-                    /* <input
-                    onChange={this.handleIncomeChange.bind(this)}
-                    type="text"
-                    value={Number(this.state.income).toLocaleString('en', {useGrouping:true})}
-                  /> */}
                   &nbsp;&nbsp; per week
                 </form>
               </div>
@@ -385,6 +388,22 @@ function whatIncomeBracketPercent(percent) {
   else if (percent >= 24.25) return 4;
   else if (percent >= 13.82) return 3;
   else if (percent >= 5.16) return 2;
+  else return 1;
+}
+
+function whatIncomeBracketNet(incomeNetPerWeek) {
+  if (incomeNetPerWeek >= 2128) return 13;
+  else if (incomeNetPerWeek >= 1498) return 12;
+  else if (incomeNetPerWeek >= 1340) return 11;
+  else if (incomeNetPerWeek >= 1175) return 10;
+  else if (incomeNetPerWeek >= 1006) return 9;
+  else if (incomeNetPerWeek >= 837) return 8;
+  else if (incomeNetPerWeek >= 702) return 7;
+  else if (incomeNetPerWeek >= 593) return 6;
+  else if (incomeNetPerWeek >= 471) return 5;
+  else if (incomeNetPerWeek >= 390) return 4;
+  else if (incomeNetPerWeek >= 300) return 3;
+  else if (incomeNetPerWeek >= 150) return 2;
   else return 1;
 }
 
