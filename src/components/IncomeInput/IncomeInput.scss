@@ -74,18 +74,21 @@
   .results-standard {
     color: #ff6100;
     // font-weight: bold;
+    font-variant-numeric: oldstyle-nums;
     font-family: ABCSans, Arial, Helvetica, sans-serif;
   }
 
   .results-above {
     color: #333;
     font-weight: bold;
+    font-variant-numeric: oldstyle-nums;
     // font-family: ABCSans, Arial, Helvetica, sans-serif;
   }
 
   .results-below {
     color: #333;
     font-weight: bold;
+    font-variant-numeric: oldstyle-nums;
     // font-family: ABCSans, Arial, Helvetica, sans-serif;
   }
 

@@ -63,6 +63,8 @@ class IncomeInput extends React.Component {
     console.log("This how far you were off: ");
     console.log(difference);
 
+    this.setState({ guessMessage: getGuessMessage(difference) });
+
     let incomeBracketNumber = whatIncomeBracket(this.state.income);
     let guessBracketNumber = this.state.guessBracket;
 
@@ -262,7 +264,9 @@ class IncomeInput extends React.Component {
           {this.state.narrativeState === "result" && (
             <div className={styles.column + " " + styles.one}>
               <div className={styles.opacityTransition}>
-                <div className={styles.standardText + " " + styles.guessMessage}>
+                <div
+                  className={styles.standardText + " " + styles.guessMessage}
+                >
                   {/* Not even close! or Spot on! etc */}
                   {this.state.guessMessage}
                 </div>
@@ -438,6 +442,33 @@ function whatIncomeBracketNet(incomeNetPerWeek) {
   else if (incomeNetPerWeek >= 300) return 3;
   else if (incomeNetPerWeek >= 150) return 2;
   else return 1;
+}
+
+function getGuessMessage(difference) {
+  switch (difference) {
+    case 12:
+    case 11:
+      return "Not even close...";
+    case 10:
+    case 9:
+      return "Way off...";
+    case 8:
+    case 7:
+      return "Not too bad..."
+    case 6:
+    case 5:
+      return "Not bad..."
+    case 4:
+    case 3:
+      return "Pretty close..."
+    case 2:
+    case 1:
+      return "Almost got it..."
+    case 0:
+      return "Spot on!"
+    default:
+      return "Good try...";
+  }
 }
 
 // Helper functions for className manipulation
