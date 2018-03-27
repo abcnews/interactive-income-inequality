@@ -119,6 +119,16 @@ class IncomeInput extends React.Component {
   }
 
   componentDidUpdate() {
+    // Set up the fade-ins
+    const fadeInEl = document.querySelector("." + styles.opacityTransition);
+
+    if (fadeInEl) {
+      setTimeout(() => {
+        addClass(fadeInEl, styles.opacityFull);
+      }, 1);
+    }
+
+    // Calculate 
     if (!this.state.infoIsSet) {
       // Show the slider. Reset the interactive
       this.slider.style.display = "block";
@@ -215,26 +225,28 @@ class IncomeInput extends React.Component {
               <div className={styles.smalltext}>
                 Use the slider on the right to estimate your position
               </div>
-              <div className={styles.push4} />
-              <div className={styles.boldtext}>
-                What's your weekly take-home pay?:<br />
-                <form onSubmit={this.showResult.bind(this)}>
-                  <label />
-                  $&nbsp;{" "}
-                  <input
-                    onChange={this.handleIncomeChange.bind(this)}
-                    type="text"
-                    value={Number(this.state.income).toLocaleString("en", {
-                      useGrouping: true
-                    })}
-                  />
-                  &nbsp;&nbsp; per week
-                </form>
+              <div className={styles.push4} /> {/* Just a spacer */}
+              <div className={styles.opacityTransition}>
+                <div className={styles.boldtext}>
+                  What's your weekly take-home pay?:<br />
+                  <form onSubmit={this.showResult.bind(this)}>
+                    <label />
+                    $&nbsp;{" "}
+                    <input
+                      onChange={this.handleIncomeChange.bind(this)}
+                      type="text"
+                      value={Number(this.state.income).toLocaleString("en", {
+                        useGrouping: true
+                      })}
+                    />
+                    &nbsp;&nbsp; per week
+                  </form>
+                </div>
+                <div className={styles.smalltext}>Enter your weekly income</div>{" "}
+                <button onClick={this.showResult.bind(this)}>
+                  Show me where I sit
+                </button>
               </div>
-              <div className={styles.smalltext}>Enter your weekly income</div>{" "}
-              <button onClick={this.showResult.bind(this)}>
-                Show me where I sit
-              </button>
             </div>
           )}
 

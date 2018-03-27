@@ -207,6 +207,19 @@
   transition: opacity 0.5s ease-in;
 }
 
+.opacity-transition {
+  opacity: 0;
+  transition: opacity 0.5s;
+}
+
+.opacity-full {
+  opacity: 1;
+}
+
+.opacity-none {
+  opacity: 0;
+}
+
 .bracket-chart {
   height: 230px;
 
