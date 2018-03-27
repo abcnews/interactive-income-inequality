@@ -26,10 +26,11 @@ class IncomeInput extends React.Component {
     this.state = {
       income: 1200,
       infoIsSet: false,
-      narrativeState: "initial",
+      narrativeState: "initial", // locked, result
       incomeBracket: 8,
       sliderGuess: 50,
-      guessBracket: 6
+      guessBracket: 6,
+      guessMessage: "Not even close!"
     };
   }
 
@@ -54,6 +55,13 @@ class IncomeInput extends React.Component {
 
     console.log(this.state.income);
     console.log(this.state.incomeBracket);
+
+    let difference = Math.abs(
+      this.state.incomeBracket - this.state.guessBracket
+    );
+
+    console.log("This how far you were off: ");
+    console.log(difference);
 
     let incomeBracketNumber = whatIncomeBracket(this.state.income);
     let guessBracketNumber = this.state.guessBracket;
@@ -120,15 +128,16 @@ class IncomeInput extends React.Component {
 
   componentDidUpdate() {
     // Set up the fade-ins
-    const fadeInEl = document.querySelector("." + styles.opacityTransition);
+    // TODO: make work with multiple fade in elements
+    const fadeInEl = document.querySelectorAll("." + styles.opacityTransition);
 
-    if (fadeInEl) {
+    if (fadeInEl[0]) {
       setTimeout(() => {
-        addClass(fadeInEl, styles.opacityFull);
-      }, 1);
+        addClass(fadeInEl[0], styles.opacityFull);
+      }, 1); // Wait a little while or else the transition don't work
     }
 
-    // Calculate 
+    // Calculate after all info is set
     if (!this.state.infoIsSet) {
       // Show the slider. Reset the interactive
       this.slider.style.display = "block";
@@ -252,43 +261,49 @@ class IncomeInput extends React.Component {
 
           {this.state.narrativeState === "result" && (
             <div className={styles.column + " " + styles.one}>
-              <div className={styles.standardText}>
-                Your income puts you in the{" "}
-                <span className={styles.resultsStandard}>
-                  {this.results.text}
-                </span>{" "}
-                per annum income bracket for Australia, with{" "}
-                <span className={styles.resultsStandard}>
-                  {this.results.percent} per cent
-                </span>{" "}
-                of other income earners.
-              </div>
-              <div className={styles.standardText}>
-                Above your bracket are{" "}
-                <span className={styles.resultsAbove}>
-                  {this.results.percentAbove} per cent
-                </span>{" "}
-                of income earners.
-              </div>
-              <div className={styles.standardText}>
-                Below your bracket are{" "}
-                <span className={styles.resultsBelow}>
-                  {this.results.percentBelow} per cent
-                </span>{" "}
-                of income earners.
-              </div>
-              <button onClick={this.tryAgain.bind(this)}>
-                <div className={styles.tryAgain}>
-                  <span className={styles.reloadIcon}>
-                    <img
-                      src={PUBLIC_URL_BASE + "refresh.svg"}
-                      width="20px"
-                      height="20px"
-                    />
-                  </span>
-                  <span>&nbsp;&nbsp;Try again</span>
+              <div className={styles.opacityTransition}>
+                <div className={styles.standardText + " " + styles.guessMessage}>
+                  {/* Not even close! or Spot on! etc */}
+                  {this.state.guessMessage}
                 </div>
-              </button>
+                <div className={styles.standardText}>
+                  Your income puts you in the{" "}
+                  <span className={styles.resultsStandard}>
+                    {this.results.text}
+                  </span>{" "}
+                  per annum income bracket for Australia, with{" "}
+                  <span className={styles.resultsStandard}>
+                    {this.results.percent} per cent
+                  </span>{" "}
+                  of other income earners.
+                </div>
+                <div className={styles.standardText}>
+                  Above your bracket are{" "}
+                  <span className={styles.resultsAbove}>
+                    {this.results.percentAbove} per cent
+                  </span>{" "}
+                  of income earners.
+                </div>
+                <div className={styles.standardText}>
+                  Below your bracket are{" "}
+                  <span className={styles.resultsBelow}>
+                    {this.results.percentBelow} per cent
+                  </span>{" "}
+                  of income earners.
+                </div>
+                <button onClick={this.tryAgain.bind(this)}>
+                  <div className={styles.tryAgain}>
+                    <span className={styles.reloadIcon}>
+                      <img
+                        src={PUBLIC_URL_BASE + "refresh.svg"}
+                        width="20px"
+                        height="20px"
+                      />
+                    </span>
+                    <span>&nbsp;&nbsp;Try again</span>
+                  </div>
+                </button>
+              </div>
             </div>
           )}
 

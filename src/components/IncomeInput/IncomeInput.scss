@@ -60,6 +60,11 @@
     margin-bottom: 1rem;
   }
 
+  .guess-message {
+    font-weight: bold;
+    color: black;
+  }
+
   @media only screen and (max-width: 768px) {
     .standard-text {
       font-size: 16px;
@@ -67,21 +72,21 @@
   }
 
   .results-standard {
-    color: #516c72;
-    font-weight: bold;
+    color: #ff6100;
+    // font-weight: bold;
     font-family: ABCSans, Arial, Helvetica, sans-serif;
   }
 
   .results-above {
-    color: #00242c;
+    color: #333;
     font-weight: bold;
-    font-family: ABCSans, Arial, Helvetica, sans-serif;
+    // font-family: ABCSans, Arial, Helvetica, sans-serif;
   }
 
   .results-below {
-    color: #009fa5;
+    color: #333;
     font-weight: bold;
-    font-family: ABCSans, Arial, Helvetica, sans-serif;
+    // font-family: ABCSans, Arial, Helvetica, sans-serif;
   }
 
   .try-again span {
