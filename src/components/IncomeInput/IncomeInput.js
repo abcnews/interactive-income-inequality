@@ -52,6 +52,13 @@ class IncomeInput extends React.Component {
   showResult(event) {
     event.preventDefault();
 
+    this.spaces = document.getElementsByClassName(styles.barSpacer);
+
+    // Fade in the spaces
+    for (var i = 0; i < this.spaces.length; i++) {
+      this.spaces[i].style = "opacity: 1";
+    }
+
     // Grow the slider
     this.slider.style.height = "374px"; //getRandomInt(200, 350) + "px";
 
@@ -105,6 +112,10 @@ class IncomeInput extends React.Component {
     this.setState({ infoIsSet: false });
     this.setState({ narrativeState: "initial" });
     this.slider.style.height = "350px";
+
+    for (var i = 0; i < this.spaces.length; i++) {
+      this.spaces[i].style = "opacity: 0";
+    }
   }
 
   attachSlider() {
@@ -337,17 +348,28 @@ class IncomeInput extends React.Component {
               ) : (
                 <div className={styles.scaleLabels}>Richest</div>
               )}
-
-              <div id="range" />
-
+              <div className={styles.spacerContainer}>
+                <div className={styles.barSpacer + " " + styles.space1} />
+                <div className={styles.barSpacer + " " + styles.space2} />
+                <div className={styles.barSpacer + " " + styles.space3} />
+                <div className={styles.barSpacer + " " + styles.space4} />
+                <div className={styles.barSpacer + " " + styles.space5} />
+                <div className={styles.barSpacer + " " + styles.space6} />
+                <div className={styles.barSpacer + " " + styles.space7} />
+                <div className={styles.barSpacer + " " + styles.space8} />
+                <div className={styles.barSpacer + " " + styles.space9} />
+                <div className={styles.barSpacer + " " + styles.space10} />
+                <div className={styles.barSpacer + " " + styles.space11} />
+                <div className={styles.barSpacer + " " + styles.space12} />
+                <div id="range" />
+              </div>
               {this.state.narrativeState === "result" ? (
                 <div className={styles.scaleLabels}>
                   {this.results.percentBelow}% are poorer
-                  </div>
+                </div>
               ) : (
                 <div className={styles.scaleLabels}>Poorest</div>
               )}
-             
             </div>
 
             {/* Render results */}

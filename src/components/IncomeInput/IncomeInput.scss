@@ -18,12 +18,13 @@
   .one {
     // max-width: 66.666%;
     padding-left: 4px;
+    padding-right: 4px;
   }
 
   .two {
     text-align: center;
     // margin-bottom: 0.8em;
-    margin-left: 50px;
+    // margin-left: 50px;
     height: 424px;
     display: flex;
     align-items: center;
@@ -74,7 +75,6 @@
   }
 
   .results-container {
-    
   }
 
   .results-standard {
@@ -324,6 +324,71 @@
   border-bottom: 6px solid #f9f9f9;
 }
 
+.spacer-container {
+  position: relative;
+}
+
+.bar-spacer {
+  background-color: #f9f9f9;
+  height: 2px;
+  width: 15px;
+  position: absolute;
+  left: 0;
+  right: 0;
+  margin: 0 auto;
+  z-index: 1;
+  opacity: 0;
+  transition: opacity 0.3s;
+}
+
+.space1 {
+  top: 3.84%;
+}
+
+.space2 {
+  top: 10.04%;
+}
+
+.space3 {
+  top: 14.16%;
+}
+
+.space4 {
+  top: 20.1%;
+}
+
+.space5 {
+  top: 27.12%;
+}
+
+.space6 {
+  top: 37.35%;
+}
+
+.space7 {
+  top: 47.37%;
+}
+
+.space8 {
+  top: 56.56%;
+}
+
+.space9 {
+  top: 65.74%;
+}
+
+.space10 {
+  top: 75.75%;
+}
+
+.space11 {
+  top: 86.18%;
+}
+
+.space12 {
+  top: 94.84%;
+}
+
 :global {
   /*! nouislider - 11.0.3 - 2018-01-21 14:04:07 */
   /* Functional styling;
@@ -430,7 +495,7 @@
   .noUi-target {
     background: linear-gradient(
       #00114b 0%,
-      #001D62 3.84%,
+      #001d62 3.84%,
       #002875 10.04%,
       #03418d 14.16%,
       #085b96 20.1%,
@@ -446,7 +511,7 @@
     );
     border-radius: 3px;
   }
-  
+
   .noUi-connects {
     border-radius: 3px;
   }
