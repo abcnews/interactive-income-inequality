@@ -338,7 +338,7 @@
   margin: 0 auto;
   z-index: 1;
   opacity: 0;
-  transition: opacity 0.3s;
+  transition: opacity 0.3s ease-out;
 }
 
 .space1 {
