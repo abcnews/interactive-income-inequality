@@ -21,11 +21,13 @@
   }
 
   .two {
-    text-align: right;
+    text-align: center;
     // margin-bottom: 0.8em;
     margin-left: 50px;
-    min-height: 300px;
-    max-height: 450px;
+    height: 424px;
+    display: flex;
+    align-items: center;
+    // transition: height 0.5s; // TODO: adjust height to trigger transition
   }
 
   .three {
@@ -71,9 +73,13 @@
     }
   }
 
+  .results-container {
+    
+  }
+
   .results-standard {
     color: #ff6100;
-    // font-weight: bold;
+    font-weight: bold;
     font-variant-numeric: oldstyle-nums;
     font-family: ABCSans, Arial, Helvetica, sans-serif;
   }
@@ -99,6 +105,16 @@
   .reload-icon img {
     position: relative;
     top: 5px;
+  }
+
+  .scale-labels {
+    /* Richest: */
+    font-family: ABCSans, Arial, Helvetica, sans-serif;
+    font-size: 13px;
+    color: #333333;
+    white-space: nowrap;
+    min-width: 115px;
+    font-variant-numeric: oldstyle-nums;
   }
 
   button {
@@ -137,36 +153,36 @@
   }
 
   // Third column stuff
-  .scale-container {
-    display: flex;
-    flex-direction: column;
-    height: 100%;
-    justify-content: space-between;
-  }
+  // .scale-container {
+  //   display: flex;
+  //   flex-direction: column;
+  //   height: 100%;
+  //   justify-content: space-between;
+  // }
 
-  .scale-container-results {
-    position: relative;
-  }
+  // .scale-container-results {
+  //   position: relative;
+  // }
 
-  .most-rich {
-    position: relative;
-    top: -4px;
-  }
+  // .most-rich {
+  //   position: relative;
+  //   top: -4px;
+  // }
 
-  .least-rich {
-    position: relative;
-    bottom: -6px;
-  }
+  // .least-rich {
+  //   position: relative;
+  //   bottom: -6px;
+  // }
 
-  .most-rich-text {
-    position: relative;
-    top: -6px;
-  }
+  // .most-rich-text {
+  //   position: relative;
+  //   top: -6px;
+  // }
 
-  .least-rich-text {
-    position: relative;
-    bottom: -1px;
-  }
+  // .least-rich-text {
+  //   position: relative;
+  //   bottom: -1px;
+  // }
 
   // Results third column
   .are-richer {
@@ -207,17 +223,17 @@
 
 .fade-out {
   opacity: 0;
-  transition: opacity 0.5s ease-out;
+  transition: opacity 0.3s ease-out;
 }
 
 .fade-in {
   opacity: 1;
-  transition: opacity 0.5s ease-in;
+  transition: opacity 0.3s ease-in;
 }
 
 .opacity-transition {
   opacity: 0;
-  transition: opacity 0.5s;
+  transition: opacity 0.3s;
 }
 
 .opacity-full {
@@ -235,8 +251,9 @@
 }
 
 // Styles for range slider containing div
+
 .result-container {
-  height: 100%;
+  // height: 89%;
   // width: 100%;
 }
 
@@ -412,7 +429,8 @@
   */
   .noUi-target {
     background: linear-gradient(
-      #00114b 3.84%,
+      #00114b 0%,
+      #001D62 3.84%,
       #002875 10.04%,
       #03418d 14.16%,
       #085b96 20.1%,
@@ -428,6 +446,7 @@
     );
     border-radius: 3px;
   }
+  
   .noUi-connects {
     border-radius: 3px;
   }

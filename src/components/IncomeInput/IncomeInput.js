@@ -51,6 +51,10 @@ class IncomeInput extends React.Component {
 
   showResult(event) {
     event.preventDefault();
+
+    // Grow the slider
+    this.slider.style.height = "374px"; //getRandomInt(200, 350) + "px";
+
     this.setState({ narrativeState: "result" });
 
     console.log(this.state.income);
@@ -100,13 +104,15 @@ class IncomeInput extends React.Component {
   tryAgain(event) {
     this.setState({ infoIsSet: false });
     this.setState({ narrativeState: "initial" });
+    this.slider.style.height = "350px";
   }
 
-  componentDidMount() {
+  attachSlider() {
     this.slider = document.getElementById("range");
 
-    this.slider.style.height = "100%";
+    this.slider.style.height = "350px";
     this.slider.style.margin = "0 auto";
+    this.slider.style.transition = "height 0.3s";
 
     noUiSlider.create(this.slider, {
       start: [this.state.sliderGuess],
@@ -128,7 +134,18 @@ class IncomeInput extends React.Component {
     });
   }
 
+  componentDidMount() {
+    this.attachSlider();
+  }
+
   componentDidUpdate() {
+    // Test height change
+    // this.slider.style.height = getRandomInt(200, 350) + "px";
+
+    // if (this.state.narrativeState === "initial") {
+    //   this.attachSlider();
+    // }
+
     // Set up the fade-ins
     // TODO: make work with multiple fade in elements
     const fadeInEl = document.querySelectorAll("." + styles.opacityTransition);
@@ -312,32 +329,49 @@ class IncomeInput extends React.Component {
           )}
 
           <div className={styles.column + " " + styles.two}>
-            {this.state.narrativeState && (
-              <div className={styles.resultContainer}>
-                <div id="range" />
-              </div>
-            )}
-
-            {this.state.narrativeState === "this-will-never-fire" && (
-              <div className={styles.resultContainer}>
-                <div id="range" />
-                <div id="result" className={styles.result}>
-                  <div className={styles.verticalBar} />
-
-                  <div className={styles.bracketBox} />
-                  <div className={styles.bracketBoxOuter} />
-
-                  <div className={styles.guessBox}>
-                    <span>You said</span>
-                  </div>
-                  <div className={styles.guessBoxOuter} />
+            <div className={styles.resultContainer}>
+              {this.state.narrativeState === "result" ? (
+                <div className={styles.scaleLabels}>
+                  {this.results.percentAbove}% are richer
                 </div>
-              </div>
+              ) : (
+                <div className={styles.scaleLabels}>Richest</div>
+              )}
+
+              <div id="range" />
+
+              {this.state.narrativeState === "result" ? (
+                <div className={styles.scaleLabels}>
+                  {this.results.percentBelow}% are poorer
+                  </div>
+              ) : (
+                <div className={styles.scaleLabels}>Poorest</div>
+              )}
+             
+            </div>
+
+            {/* Render results */}
+            {this.state.narrativeState === "result" && (
+              <div />
+              // <div className={styles.resultContainer}>
+              //   <div id="range" />
+              //   <div id="result" className={styles.result}>
+              //     <div className={styles.verticalBar} />
+
+              //     <div className={styles.bracketBox} />
+              //     <div className={styles.bracketBoxOuter} />
+
+              //     <div className={styles.guessBox}>
+              //       <span>You said</span>
+              //     </div>
+              //     <div className={styles.guessBoxOuter} />
+              //   </div>
+              // </div>
             )}
           </div>
 
-          <div className={styles.column + " " + styles.three}>
-            {/* {!this.state.infoIsSet && (
+          {/* <div className={styles.column + " " + styles.three}> */}
+          {/* {!this.state.infoIsSet && (
               <div className={styles.scaleContainer}>
                 <div className={styles.mostRich}>
                   <div>
@@ -383,7 +417,7 @@ class IncomeInput extends React.Component {
                 </div>
               </div>
             )} */}
-          </div>
+          {/* </div> */}
         </div>
         <div />
       </div>,
@@ -454,18 +488,18 @@ function getGuessMessage(difference) {
       return "Way off...";
     case 8:
     case 7:
-      return "Not too bad..."
+      return "Not too bad...";
     case 6:
     case 5:
-      return "Not bad..."
+      return "Not bad...";
     case 4:
     case 3:
-      return "Pretty close..."
+      return "Pretty close...";
     case 2:
     case 1:
-      return "Almost got it..."
+      return "Almost got it...";
     case 0:
-      return "Spot on!"
+      return "Spot on!";
     default:
       return "Good try...";
   }
@@ -490,6 +524,13 @@ function removeClass(el, className) {
       new RegExp("\\b" + className + "\\b", "g"),
       ""
     );
+}
+
+// Helper random number
+function getRandomInt(min, max) {
+  min = Math.ceil(min);
+  max = Math.floor(max);
+  return Math.floor(Math.random() * (max - min)) + min; //The maximum is exclusive and the minimum is inclusive
 }
 
 module.exports = IncomeInput;
