@@ -349,7 +349,387 @@ class IncomeInput extends React.Component {
               ) : (
                 <div className={styles.scaleLabels}>Richest</div>
               )}
-              <div className={styles.spacerContainer}>
+
+              <div className={styles.bracketContainer}>
+                <div
+                  className={
+                    styles.resultBracket +
+                    " " +
+                    styles.bracket13 +
+                    " " +
+                    (this.state.incomeBracket === 13 && styles.bracketYours) +
+                    " " +
+                    (this.state.guessBracket === 13 && styles.bracketGuess) +
+                    " " +
+                    (this.state.narrativeState === "result"
+                      ? styles.opacityFull
+                      : styles.opacityNone)
+                  }
+                />
+                <div
+                  className={
+                    styles.resultBracket +
+                    " " +
+                    styles.bracket12 +
+                    " " +
+                    (this.state.incomeBracket === 12 && styles.bracketYours) +
+                    " " +
+                    (this.state.guessBracket === 12 && styles.bracketGuess) +
+                    " " +
+                    (this.state.narrativeState === "result"
+                      ? styles.opacityFull
+                      : styles.opacityNone)
+                  }
+                />
+                <div
+                  className={
+                    styles.resultBracket +
+                    " " +
+                    styles.bracket11 +
+                    " " +
+                    (this.state.incomeBracket === 11 && styles.bracketYours) +
+                    " " +
+                    (this.state.guessBracket === 11 && styles.bracketGuess) +
+                    " " +
+                    (this.state.narrativeState === "result"
+                      ? styles.opacityFull
+                      : styles.opacityNone)
+                  }
+                />
+                <div
+                  className={
+                    styles.resultBracket +
+                    " " +
+                    styles.bracket10 +
+                    " " +
+                    (this.state.incomeBracket === 10 && styles.bracketYours) +
+                    " " +
+                    (this.state.guessBracket === 10 && styles.bracketGuess) +
+                    " " +
+                    (this.state.narrativeState === "result"
+                      ? styles.opacityFull
+                      : styles.opacityNone)
+                  }
+                />
+                <div
+                  className={
+                    styles.resultBracket +
+                    " " +
+                    styles.bracket9 +
+                    " " +
+                    (this.state.incomeBracket === 9 && styles.bracketYours) +
+                    " " +
+                    (this.state.guessBracket === 9 && styles.bracketGuess) +
+                    " " +
+                    (this.state.narrativeState === "result"
+                      ? styles.opacityFull
+                      : styles.opacityNone)
+                  }
+                />
+                <div
+                  className={
+                    styles.resultBracket +
+                    " " +
+                    styles.bracket8 +
+                    " " +
+                    (this.state.incomeBracket === 8 && styles.bracketYours) +
+                    " " +
+                    (this.state.guessBracket === 8 && styles.bracketGuess) +
+                    " " +
+                    (this.state.narrativeState === "result"
+                      ? styles.opacityFull
+                      : styles.opacityNone)
+                  }
+                />
+                <div
+                  className={
+                    styles.resultBracket +
+                    " " +
+                    styles.bracket7 +
+                    " " +
+                    (this.state.incomeBracket === 7 && styles.bracketYours) +
+                    " " +
+                    (this.state.guessBracket === 7 && styles.bracketGuess) +
+                    " " +
+                    (this.state.narrativeState === "result"
+                      ? styles.opacityFull
+                      : styles.opacityNone)
+                  }
+                />
+                <div
+                  className={
+                    styles.resultBracket +
+                    " " +
+                    styles.bracket6 +
+                    " " +
+                    (this.state.incomeBracket === 6 && styles.bracketYours) +
+                    " " +
+                    (this.state.guessBracket === 6 && styles.bracketGuess) +
+                    " " +
+                    (this.state.narrativeState === "result"
+                      ? styles.opacityFull
+                      : styles.opacityNone)
+                  }
+                />
+                <div
+                  className={
+                    styles.resultBracket +
+                    " " +
+                    styles.bracket5 +
+                    " " +
+                    (this.state.incomeBracket === 5 && styles.bracketYours) +
+                    " " +
+                    (this.state.guessBracket === 5 && styles.bracketGuess) +
+                    " " +
+                    (this.state.narrativeState === "result"
+                      ? styles.opacityFull
+                      : styles.opacityNone)
+                  }
+                />
+                <div
+                  className={
+                    styles.resultBracket +
+                    " " +
+                    styles.bracket4 +
+                    " " +
+                    (this.state.incomeBracket === 4 && styles.bracketYours) +
+                    " " +
+                    (this.state.guessBracket === 4 && styles.bracketGuess) +
+                    " " +
+                    (this.state.narrativeState === "result"
+                      ? styles.opacityFull
+                      : styles.opacityNone)
+                  }
+                />
+                <div
+                  className={
+                    styles.resultBracket +
+                    " " +
+                    styles.bracket3 +
+                    " " +
+                    (this.state.incomeBracket === 3 && styles.bracketYours) +
+                    " " +
+                    (this.state.guessBracket === 3 && styles.bracketGuess) +
+                    " " +
+                    (this.state.narrativeState === "result"
+                      ? styles.opacityFull
+                      : styles.opacityNone)
+                  }
+                />
+                <div
+                  className={
+                    styles.resultBracket +
+                    " " +
+                    styles.bracket2 +
+                    " " +
+                    (this.state.incomeBracket === 2 && styles.bracketYours) +
+                    " " +
+                    (this.state.guessBracket === 2 && styles.bracketGuess) +
+                    " " +
+                    (this.state.narrativeState === "result"
+                      ? styles.opacityFull
+                      : styles.opacityNone)
+                  }
+                />
+                <div
+                  className={
+                    styles.resultBracket +
+                    " " +
+                    styles.bracket1 +
+                    " " +
+                    (this.state.incomeBracket === 1 && styles.bracketYours) +
+                    " " +
+                    (this.state.guessBracket === 1 && styles.bracketGuess) +
+                    " " +
+                    (this.state.narrativeState === "result"
+                      ? styles.opacityFull
+                      : styles.opacityNone)
+                  }
+                />
+
+                <div
+                  className={
+                    styles.resultBracketText +
+                    " " +
+                    styles.resultBracketText13 +
+                    " " +
+                    (this.state.incomeBracket === 13 &&
+                    this.state.narrativeState === "result"
+                      ? styles.visibilityVisible
+                      : styles.visibilityHidden)
+                  }
+                >
+                  Your<br />bracket
+                </div>
+                <div
+                  className={
+                    styles.resultBracketText +
+                    " " +
+                    styles.resultBracketText12 +
+                    " " +
+                    (this.state.incomeBracket === 12 &&
+                    this.state.narrativeState === "result"
+                      ? styles.visibilityVisible
+                      : styles.visibilityHidden)
+                  }
+                >
+                  Your<br />bracket
+                </div>
+                <div
+                  className={
+                    styles.resultBracketText +
+                    " " +
+                    styles.resultBracketText11 +
+                    " " +
+                    (this.state.incomeBracket === 11 &&
+                    this.state.narrativeState === "result"
+                      ? styles.visibilityVisible
+                      : styles.visibilityHidden)
+                  }
+                >
+                  Your<br />bracket
+                </div>
+                <div
+                  className={
+                    styles.resultBracketText +
+                    " " +
+                    styles.resultBracketText10 +
+                    " " +
+                    (this.state.incomeBracket === 10 &&
+                    this.state.narrativeState === "result"
+                      ? styles.visibilityVisible
+                      : styles.visibilityHidden)
+                  }
+                >
+                  Your<br />bracket
+                </div>
+                <div
+                  className={
+                    styles.resultBracketText +
+                    " " +
+                    styles.resultBracketText9 +
+                    " " +
+                    (this.state.incomeBracket === 9 &&
+                    this.state.narrativeState === "result"
+                      ? styles.visibilityVisible
+                      : styles.visibilityHidden)
+                  }
+                >
+                  Your<br />bracket
+                </div>
+                <div
+                  className={
+                    styles.resultBracketText +
+                    " " +
+                    styles.resultBracketText8 +
+                    " " +
+                    (this.state.incomeBracket === 8 &&
+                    this.state.narrativeState === "result"
+                      ? styles.visibilityVisible
+                      : styles.visibilityHidden)
+                  }
+                >
+                  Your<br />bracket
+                </div>
+                <div
+                  className={
+                    styles.resultBracketText +
+                    " " +
+                    styles.resultBracketText7 +
+                    " " +
+                    (this.state.incomeBracket === 7 &&
+                    this.state.narrativeState === "result"
+                      ? styles.visibilityVisible
+                      : styles.visibilityHidden)
+                  }
+                >
+                  Your<br />bracket
+                </div>
+                <div
+                  className={
+                    styles.resultBracketText +
+                    " " +
+                    styles.resultBracketText6 +
+                    " " +
+                    (this.state.incomeBracket === 6 &&
+                    this.state.narrativeState === "result"
+                      ? styles.visibilityVisible
+                      : styles.visibilityHidden)
+                  }
+                >
+                  Your<br />bracket
+                </div>
+                <div
+                  className={
+                    styles.resultBracketText +
+                    " " +
+                    styles.resultBracketText5 +
+                    " " +
+                    (this.state.incomeBracket === 5 &&
+                    this.state.narrativeState === "result"
+                      ? styles.visibilityVisible
+                      : styles.visibilityHidden)
+                  }
+                >
+                  Your<br />bracket
+                </div>
+                <div
+                  className={
+                    styles.resultBracketText +
+                    " " +
+                    styles.resultBracketText4 +
+                    " " +
+                    (this.state.incomeBracket === 4 &&
+                    this.state.narrativeState === "result"
+                      ? styles.visibilityVisible
+                      : styles.visibilityHidden)
+                  }
+                >
+                  Your<br />bracket
+                </div>
+                <div
+                  className={
+                    styles.resultBracketText +
+                    " " +
+                    styles.resultBracketText3 +
+                    " " +
+                    (this.state.incomeBracket === 3 &&
+                    this.state.narrativeState === "result"
+                      ? styles.visibilityVisible
+                      : styles.visibilityHidden)
+                  }
+                >
+                  Your<br />bracket
+                </div>
+                <div
+                  className={
+                    styles.resultBracketText +
+                    " " +
+                    styles.resultBracketText2 +
+                    " " +
+                    (this.state.incomeBracket === 2 &&
+                    this.state.narrativeState === "result"
+                      ? styles.visibilityVisible
+                      : styles.visibilityHidden)
+                  }
+                >
+                  Your<br />bracket
+                </div>
+                <div
+                  className={
+                    styles.resultBracketText +
+                    " " +
+                    styles.resultBracketText1 +
+                    " " +
+                    (this.state.incomeBracket === 1 &&
+                    this.state.narrativeState === "result"
+                      ? styles.visibilityVisible
+                      : styles.visibilityHidden)
+                  }
+                >
+                  Your<br />bracket
+                </div>
+
                 <div className={styles.barSpacer + " " + styles.space1} />
                 <div className={styles.barSpacer + " " + styles.space2} />
                 <div className={styles.barSpacer + " " + styles.space3} />
@@ -362,8 +742,15 @@ class IncomeInput extends React.Component {
                 <div className={styles.barSpacer + " " + styles.space10} />
                 <div className={styles.barSpacer + " " + styles.space11} />
                 <div className={styles.barSpacer + " " + styles.space12} />
+
                 <div id="range" />
               </div>
+
+              {/* <div className={styles.bracketContainer}>
+                
+                <div id="range" />
+              </div> */}
+
               {this.state.narrativeState === "result" ? (
                 <div className={styles.scaleLabels}>
                   {this.results.percentBelow}% are poorer
