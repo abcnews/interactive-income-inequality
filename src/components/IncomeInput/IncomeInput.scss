@@ -471,78 +471,158 @@
   background-color: #ff6100;
 }
 
+// This is the text on the right that says "Your bracket"
+
 .result-bracket-text {
   position: absolute;
   left: 60%;
   z-index: 1;
   text-align: left;
   font-family: ABCSans, Arial, Helvetica, sans-serif;
-  font-size: 13px;
+  font-size: 11px;
   color: #c94700;
-  line-height: 13px;
+  line-height: 11px;
+  text-transform: uppercase;
 }
 
 .result-bracket-text13 {
   top: 0%;
 }
 
-
 .result-bracket-text12 {
-  top: calc(3.84% + 3.1% - 13px);
+  top: calc(3.84% + 3.1% - 11px);
   // height: 6.2%;
 }
 
 .result-bracket-text11 {
-  top: calc(10.04% + 2.06% - 13px);
+  top: calc(10.04% + 2.06% - 11px);
   // height: 4.12%;
 }
 
 .result-bracket-text10 {
-  top: calc(14.16% + 2.97% - 13px);
+  top: calc(14.16% + 2.97% - 11px);
   // height: 5.94%;
 }
 
 .result-bracket-text9 {
-  top: calc(20.1% + 3.51% - 13px);
+  top: calc(20.1% + 3.51% - 11px);
   // height: 7.02%;
 }
 
 .result-bracket-text8 {
-  top: calc(27.12% + 5.115% - 13px);
+  top: calc(27.12% + 5.115% - 11px);
   // height: 10.23%;
 }
 
 .result-bracket-text7 {
-  top: calc(37.35% + 5.01% - 13px);
+  top: calc(37.35% + 5.01% - 11px);
   // height: 10.02%;
 }
 
 .result-bracket-text6 {
-  top: calc(47.37% + 4.595% - 13px);
+  top: calc(47.37% + 4.595% - 11px);
   height: 9.19%;
 }
 
 .result-bracket-text5 {
-  top: calc(56.56% + 4.59% - 13px);
+  top: calc(56.56% + 4.59% - 11px);
   // height: 9.18%;
 }
 
 .result-bracket-text4 {
-  top: calc(65.74% + 5.005% - 13px);
+  top: calc(65.74% + 5.005% - 11px);
   // height: 10.01%;
 }
 
 .result-bracket-text3 {
-  top: calc(75.75% + 5.215% - 13px);
+  top: calc(75.75% + 5.215% - 11px);
   // height: 10.43%;
 }
 
 .result-bracket-text2 {
-  top: calc(86.18% + 4.33% - 13px);
+  top: calc(86.18% + 4.33% - 11px);
   // height: 8.66%;
 }
 
 .result-bracket-text1 {
+  bottom: 0;
+  // height: 5.16%;
+}
+
+// This is the text on the left "Your guess"
+
+.result-guess-text {
+  position: absolute;
+  right: 60%;
+  z-index: 1;
+  text-align: right;
+  font-family: ABCSans, Arial, Helvetica, sans-serif;
+  font-size: 11px;
+  color: black;
+  line-height: 11px;
+  text-transform: uppercase;
+}
+
+.result-guess-text13 {
+  top: 0%;
+}
+
+.result-guess-text12 {
+  top: calc(3.84% + 3.1% - 11px);
+  // height: 6.2%;
+}
+
+.result-guess-text11 {
+  top: calc(10.04% + 2.06% - 11px);
+  // height: 4.12%;
+}
+
+.result-guess-text10 {
+  top: calc(14.16% + 2.97% - 11px);
+  // height: 5.94%;
+}
+
+.result-guess-text9 {
+  top: calc(20.1% + 3.51% - 11px);
+  // height: 7.02%;
+}
+
+.result-guess-text8 {
+  top: calc(27.12% + 5.115% - 11px);
+  // height: 10.23%;
+}
+
+.result-guess-text7 {
+  top: calc(37.35% + 5.01% - 11px);
+  // height: 10.02%;
+}
+
+.result-guess-text6 {
+  top: calc(47.37% + 4.595% - 11px);
+  height: 9.19%;
+}
+
+.result-guess-text5 {
+  top: calc(56.56% + 4.59% - 11px);
+  // height: 9.18%;
+}
+
+.result-guess-text4 {
+  top: calc(65.74% + 5.005% - 11px);
+  // height: 10.01%;
+}
+
+.result-guess-text3 {
+  top: calc(75.75% + 5.215% - 11px);
+  // height: 10.43%;
+}
+
+.result-guess-text2 {
+  top: calc(86.18% + 4.33% - 11px);
+  // height: 8.66%;
+}
+
+.result-guess-text1 {
   bottom: 0;
   // height: 5.16%;
 }
@@ -556,7 +636,7 @@
 }
 
 .visibility-visible {
-  visibility: visible
+  visibility: visible;
 }
 
 .visibility-hidden {

@@ -546,7 +546,13 @@ class IncomeInput extends React.Component {
                       : styles.opacityNone)
                   }
                 />
+                {/* ----------------------------------------------------------------
 
+
+                NEXT SECTION YOUR BRACKET
+
+
+                ----------------------------------------------------------------*/}
                 <div
                   className={
                     styles.resultBracketText +
@@ -728,6 +734,194 @@ class IncomeInput extends React.Component {
                   }
                 >
                   Your<br />bracket
+                </div>
+
+
+                {/*########################################################################
+                ANOTHER SECTION GUESS 
+                ########################################################################*/}
+
+                <div
+                  className={
+                    styles.resultGuessText +
+                    " " +
+                    styles.resultGuessText13 +
+                    " " +
+                    (this.state.guessBracket === 13 &&
+                    this.state.narrativeState === "result"
+                      ? styles.visibilityVisible
+                      : styles.visibilityHidden)
+                  }
+                >
+                  Your<br />guess
+                </div>
+                <div
+                  className={
+                    styles.resultGuessText +
+                    " " +
+                    styles.resultGuessText12 +
+                    " " +
+                    (this.state.guessBracket === 12 &&
+                    this.state.narrativeState === "result"
+                      ? styles.visibilityVisible
+                      : styles.visibilityHidden)
+                  }
+                >
+                  Your<br />guess
+                </div>
+                <div
+                  className={
+                    styles.resultGuessText +
+                    " " +
+                    styles.resultGuessText11 +
+                    " " +
+                    (this.state.guessBracket === 11 &&
+                    this.state.narrativeState === "result"
+                      ? styles.visibilityVisible
+                      : styles.visibilityHidden)
+                  }
+                >
+                  Your<br />guess
+                </div>
+                <div
+                  className={
+                    styles.resultGuessText +
+                    " " +
+                    styles.resultGuessText10 +
+                    " " +
+                    (this.state.guessBracket === 10 &&
+                    this.state.narrativeState === "result"
+                      ? styles.visibilityVisible
+                      : styles.visibilityHidden)
+                  }
+                >
+                  Your<br />guess
+                </div>
+                <div
+                  className={
+                    styles.resultGuessText +
+                    " " +
+                    styles.resultGuessText9 +
+                    " " +
+                    (this.state.guessBracket === 9 &&
+                    this.state.narrativeState === "result"
+                      ? styles.visibilityVisible
+                      : styles.visibilityHidden)
+                  }
+                >
+                  Your<br />guess
+                </div>
+                <div
+                  className={
+                    styles.resultGuessText +
+                    " " +
+                    styles.resultGuessText8 +
+                    " " +
+                    (this.state.guessBracket === 8 &&
+                    this.state.narrativeState === "result"
+                      ? styles.visibilityVisible
+                      : styles.visibilityHidden)
+                  }
+                >
+                  Your<br />guess
+                </div>
+                <div
+                  className={
+                    styles.resultGuessText +
+                    " " +
+                    styles.resultGuessText7 +
+                    " " +
+                    (this.state.guessBracket === 7 &&
+                    this.state.narrativeState === "result"
+                      ? styles.visibilityVisible
+                      : styles.visibilityHidden)
+                  }
+                >
+                  Your<br />guess
+                </div>
+                <div
+                  className={
+                    styles.resultGuessText +
+                    " " +
+                    styles.resultGuessText6 +
+                    " " +
+                    (this.state.guessBracket === 6 &&
+                    this.state.narrativeState === "result"
+                      ? styles.visibilityVisible
+                      : styles.visibilityHidden)
+                  }
+                >
+                  Your<br />guess
+                </div>
+                <div
+                  className={
+                    styles.resultGuessText +
+                    " " +
+                    styles.resultGuessText5 +
+                    " " +
+                    (this.state.guessBracket === 5 &&
+                    this.state.narrativeState === "result"
+                      ? styles.visibilityVisible
+                      : styles.visibilityHidden)
+                  }
+                >
+                  Your<br />guess
+                </div>
+                <div
+                  className={
+                    styles.resultGuessText +
+                    " " +
+                    styles.resultGuessText4 +
+                    " " +
+                    (this.state.guessBracket === 4 &&
+                    this.state.narrativeState === "result"
+                      ? styles.visibilityVisible
+                      : styles.visibilityHidden)
+                  }
+                >
+                  Your<br />guess
+                </div>
+                <div
+                  className={
+                    styles.resultGuessText +
+                    " " +
+                    styles.resultGuessText3 +
+                    " " +
+                    (this.state.guessBracket === 3 &&
+                    this.state.narrativeState === "result"
+                      ? styles.visibilityVisible
+                      : styles.visibilityHidden)
+                  }
+                >
+                  Your<br />guess
+                </div>
+                <div
+                  className={
+                    styles.resultGuessText +
+                    " " +
+                    styles.resultGuessText2 +
+                    " " +
+                    (this.state.guessBracket === 2 &&
+                    this.state.narrativeState === "result"
+                      ? styles.visibilityVisible
+                      : styles.visibilityHidden)
+                  }
+                >
+                  Your<br />guess
+                </div>
+                <div
+                  className={
+                    styles.resultGuessText +
+                    " " +
+                    styles.resultGuessText1 +
+                    " " +
+                    (this.state.guessBracket === 1 &&
+                    this.state.narrativeState === "result"
+                      ? styles.visibilityVisible
+                      : styles.visibilityHidden)
+                  }
+                >
+                  Your<br />guess
                 </div>
 
                 <div className={styles.barSpacer + " " + styles.space1} />
