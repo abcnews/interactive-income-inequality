@@ -532,27 +532,42 @@ function getGuessMessageAboveOrBelow(difference) {
   switch (difference) {
     case 12:
     case 11:
-      return "Not even close...";
+      return "Keep dreaming...";
     case 10:
     case 9:
       return "Way off...";
     case 8:
     case 7:
-      return "Not too bad...";
+      return "You're reaching...";
     case 6:
     case 5:
-      return "Not bad...";
+      return "A bit of an overestimation...";
     case 4:
     case 3:
-      return "Pretty close...";
+      return "A few brackets over...";
     case 2:
     case 1:
-      return "Almost got it...";
+      return "Just a little over...";
     case 0:
       return "Spot on!";
     case -1:
     case -2:
       return "Just a little under...";
+    case -3:
+    case -4:
+      return "A few brackets under...";
+    case -5:
+    case -6:
+      return "A moderate underestimation...";
+    case -7:
+    case -8:
+      return "A large underestimation...";
+    case -9:
+    case -10:
+      return "Way off...";
+    case -11:
+    case -12:
+      return "Not even close...";
     default:
       return "Good try...";
   }
