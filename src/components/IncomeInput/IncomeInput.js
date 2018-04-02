@@ -64,12 +64,12 @@ class IncomeInput extends React.Component {
 
     this.setState({ narrativeState: "result" });
 
-    // let difference = getDifference(
-    //   this.state.incomeBracket,
-    //   this.state.guessBracket
-    // );
+    let difference = getDifference(
+      this.state.incomeBracket,
+      this.state.guessBracket
+    );
 
-    // this.setState({ guessMessage: getGuessMessageAboveOrBelow(difference) });
+    this.setState({ guessMessage: getGuessMessageAboveOrBelow(difference) });
 
     let incomeBracketNumber = whatIncomeBracket(this.state.income);
     let guessBracketNumber = this.state.guessBracket;
