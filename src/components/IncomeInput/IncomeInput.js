@@ -64,18 +64,12 @@ class IncomeInput extends React.Component {
 
     this.setState({ narrativeState: "result" });
 
-    console.log(this.state.income);
-    console.log(this.state.incomeBracket);
+    // let difference = getDifference(
+    //   this.state.incomeBracket,
+    //   this.state.guessBracket
+    // );
 
-    let difference = getDifference(
-      this.state.incomeBracket,
-      this.state.guessBracket
-    );
-
-    console.log("This how far you were off: ");
-    console.log(difference);
-
-    this.setState({ guessMessage: getGuessMessageAboveOrBelow(difference) });
+    // this.setState({ guessMessage: getGuessMessageAboveOrBelow(difference) });
 
     let incomeBracketNumber = whatIncomeBracket(this.state.income);
     let guessBracketNumber = this.state.guessBracket;
@@ -143,6 +137,14 @@ class IncomeInput extends React.Component {
       console.log(sliderValue);
       this.setState({ sliderGuess: sliderValue });
       this.setState({ guessBracket: whatIncomeBracketPercent(sliderValue) });
+
+      // Get user feedback message when slider changed
+      let difference = getDifference(
+        this.state.incomeBracket,
+        this.state.guessBracket
+      );
+  
+      this.setState({ guessMessage: getGuessMessageAboveOrBelow(difference) });
     });
   }
 
@@ -181,58 +183,58 @@ class IncomeInput extends React.Component {
     }
 
     // Calculate after all info is set
-    if (!this.state.infoIsSet) {
-      // Show the slider. Reset the interactive
-      this.slider.style.display = "block";
-    } else {
-      // Remove the slider
-      this.slider.style.display = "none";
+    // if (!this.state.infoIsSet) {
+    //   // Show the slider. Reset the interactive
+    //   this.slider.style.display = "block";
+    // } else {
+    //   // Remove the slider
+    //   this.slider.style.display = "none";
 
-      this.yourBracketEl = document.querySelector(
-        "." + styles.scaleContainerResults
-      );
+    //   this.yourBracketEl = document.querySelector(
+    //     "." + styles.scaleContainerResults
+    //   );
 
-      // Place element along the percentage
-      this.yourBracketEl.style.top = `calc(${Number(
-        this.results.percentAbove
-      )}% + ${this.results.percent / 2}% - 113px)`;
+    //   // Place element along the percentage
+    //   this.yourBracketEl.style.top = `calc(${Number(
+    //     this.results.percentAbove
+    //   )}% + ${this.results.percent / 2}% - 113px)`;
 
-      // Place the bracket box
-      this.bracketBox = document.querySelector("." + styles.bracketBox);
-      this.bracketBoxOuter = document.querySelector(
-        "." + styles.bracketBoxOuter
-      );
+    //   // Place the bracket box
+    //   this.bracketBox = document.querySelector("." + styles.bracketBox);
+    //   this.bracketBoxOuter = document.querySelector(
+    //     "." + styles.bracketBoxOuter
+    //   );
 
-      this.bracketBox.style.top = `calc(${Number(this.results.percentAbove)}%)`;
+    //   this.bracketBox.style.top = `calc(${Number(this.results.percentAbove)}%)`;
 
-      this.bracketBoxOuter.style.top = `calc(${Number(
-        this.results.percentAbove
-      )}% - 2px)`;
+    //   this.bracketBoxOuter.style.top = `calc(${Number(
+    //     this.results.percentAbove
+    //   )}% - 2px)`;
 
-      this.bracketBox.style.height = this.results.percent + "%";
-      this.bracketBoxOuter.style.height =
-        "calc(" + this.results.percent + "% + 4px)";
+    //   this.bracketBox.style.height = this.results.percent + "%";
+    //   this.bracketBoxOuter.style.height =
+    //     "calc(" + this.results.percent + "% + 4px)";
 
-      // Build the guess bracket box
-      this.guessBox = document.querySelector("." + styles.guessBox);
-      this.guessBoxOuter = document.querySelector("." + styles.guessBoxOuter);
+    //   // Build the guess bracket box
+    //   this.guessBox = document.querySelector("." + styles.guessBox);
+    //   this.guessBoxOuter = document.querySelector("." + styles.guessBoxOuter);
 
-      this.guessBox.style.top = `calc(${Number(
-        this.guessResults.percentAbove
-      )}%)`;
+    //   this.guessBox.style.top = `calc(${Number(
+    //     this.guessResults.percentAbove
+    //   )}%)`;
 
-      this.guessBoxOuter.style.top = `calc(${Number(
-        this.guessResults.percentAbove
-      )}% - 2px)`;
+    //   this.guessBoxOuter.style.top = `calc(${Number(
+    //     this.guessResults.percentAbove
+    //   )}% - 2px)`;
 
-      this.guessBox.style.height = this.guessResults.percent + "%";
-      this.guessBoxOuter.style.height =
-        "calc(" + this.guessResults.percent + "% + 4px)";
+    //   this.guessBox.style.height = this.guessResults.percent + "%";
+    //   this.guessBoxOuter.style.height =
+    //     "calc(" + this.guessResults.percent + "% + 4px)";
 
-      // Unhide the block (dunno if this is necessary any more)
-      this.resultsBar = document.getElementById("result");
-      this.resultsBar.style.display = "block";
-    }
+    //   // Unhide the block (dunno if this is necessary any more)
+    //   this.resultsBar = document.getElementById("result");
+    //   this.resultsBar.style.display = "block";
+    // }
   }
 
   render() {
