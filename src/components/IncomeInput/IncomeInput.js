@@ -158,6 +158,18 @@ class IncomeInput extends React.Component {
     //   this.attachSlider();
     // }
 
+    // Hide slider handles
+    const tooltipEl = document.querySelector(".noUi-tooltip");
+    const handleEl = document.querySelector(".noUi-handle");
+
+    if (this.state.narrativeState === "result") {
+      tooltipEl.style = "visibility: hidden";
+      handleEl.style = "visibility: hidden";
+    } else {
+      tooltipEl.style = "visibility: visible";
+      handleEl.style = "visibility: visible";
+    }
+
     // Set up the fade-ins
     // TODO: make work with multiple fade in elements
     const fadeInEl = document.querySelectorAll("." + styles.opacityTransition);
@@ -735,7 +747,6 @@ class IncomeInput extends React.Component {
                 >
                   Your<br />bracket
                 </div>
-
 
                 {/*########################################################################
                 ANOTHER SECTION GUESS 
