@@ -67,14 +67,15 @@ class IncomeInput extends React.Component {
     console.log(this.state.income);
     console.log(this.state.incomeBracket);
 
-    let difference = Math.abs(
-      this.state.incomeBracket - this.state.guessBracket
+    let difference = getDifference(
+      this.state.incomeBracket,
+      this.state.guessBracket
     );
 
     console.log("This how far you were off: ");
     console.log(difference);
 
-    this.setState({ guessMessage: getGuessMessage(difference) });
+    this.setState({ guessMessage: getGuessMessageAboveOrBelow(difference) });
 
     let incomeBracketNumber = whatIncomeBracket(this.state.income);
     let guessBracketNumber = this.state.guessBracket;
@@ -525,6 +526,45 @@ function getGuessMessage(difference) {
     default:
       return "Good try...";
   }
+}
+
+function getGuessMessageAboveOrBelow(difference) {
+  switch (difference) {
+    case 12:
+    case 11:
+      return "Not even close...";
+    case 10:
+    case 9:
+      return "Way off...";
+    case 8:
+    case 7:
+      return "Not too bad...";
+    case 6:
+    case 5:
+      return "Not bad...";
+    case 4:
+    case 3:
+      return "Pretty close...";
+    case 2:
+    case 1:
+      return "Almost got it...";
+    case 0:
+      return "Spot on!";
+    case -1:
+    case -2:
+      return "Just a little under...";
+    default:
+      return "Good try...";
+  }
+}
+
+function getDifference(income, guess) {
+  return guess - income;
+}
+
+// Always positive number returned (we will use getDifference() instead)
+function getAbsoluteDifference(income, guess) {
+  return Math.abs(income - guess);
 }
 
 // Helper functions for className manipulation
