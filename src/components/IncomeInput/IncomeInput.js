@@ -190,7 +190,10 @@ class IncomeInput extends React.Component {
 
     if (fadeInEl[0]) {
       setTimeout(() => {
-        addClass(fadeInEl[0], styles.opacityFull);
+        for (let i = 0; i < fadeInEl.length; i++) {
+          addClass(fadeInEl[i], styles.opacityFull);
+        }
+        
       }, 1); // Wait a little while or else the transition don't work
     }
 
@@ -599,8 +602,8 @@ class IncomeInput extends React.Component {
                     " " +
                     (this.state.incomeBracket === 13 &&
                     this.state.narrativeState === "result"
-                      ? styles.visibilityVisible
-                      : styles.visibilityHidden)
+                      ? styles.opacityFull
+                      : styles.opacityNone)
                   }
                 >
                   Your<br />bracket
@@ -613,8 +616,8 @@ class IncomeInput extends React.Component {
                     " " +
                     (this.state.incomeBracket === 12 &&
                     this.state.narrativeState === "result"
-                      ? styles.visibilityVisible
-                      : styles.visibilityHidden)
+                      ? styles.opacityFull
+                      : styles.opacityNone)
                   }
                 >
                   Your<br />bracket
@@ -627,8 +630,8 @@ class IncomeInput extends React.Component {
                     " " +
                     (this.state.incomeBracket === 11 &&
                     this.state.narrativeState === "result"
-                      ? styles.visibilityVisible
-                      : styles.visibilityHidden)
+                      ? styles.opacityFull
+                      : styles.opacityNone)
                   }
                 >
                   Your<br />bracket
@@ -641,8 +644,8 @@ class IncomeInput extends React.Component {
                     " " +
                     (this.state.incomeBracket === 10 &&
                     this.state.narrativeState === "result"
-                      ? styles.visibilityVisible
-                      : styles.visibilityHidden)
+                      ? styles.opacityFull
+                      : styles.opacityNone)
                   }
                 >
                   Your<br />bracket
@@ -655,8 +658,8 @@ class IncomeInput extends React.Component {
                     " " +
                     (this.state.incomeBracket === 9 &&
                     this.state.narrativeState === "result"
-                      ? styles.visibilityVisible
-                      : styles.visibilityHidden)
+                      ? styles.opacityFull
+                      : styles.opacityNone)
                   }
                 >
                   Your<br />bracket
@@ -669,8 +672,8 @@ class IncomeInput extends React.Component {
                     " " +
                     (this.state.incomeBracket === 8 &&
                     this.state.narrativeState === "result"
-                      ? styles.visibilityVisible
-                      : styles.visibilityHidden)
+                      ? styles.opacityFull
+                      : styles.opacityNone)
                   }
                 >
                   Your<br />bracket
@@ -683,8 +686,8 @@ class IncomeInput extends React.Component {
                     " " +
                     (this.state.incomeBracket === 7 &&
                     this.state.narrativeState === "result"
-                      ? styles.visibilityVisible
-                      : styles.visibilityHidden)
+                      ? styles.opacityFull
+                      : styles.opacityNone)
                   }
                 >
                   Your<br />bracket
@@ -697,8 +700,8 @@ class IncomeInput extends React.Component {
                     " " +
                     (this.state.incomeBracket === 6 &&
                     this.state.narrativeState === "result"
-                      ? styles.visibilityVisible
-                      : styles.visibilityHidden)
+                      ? styles.opacityFull
+                      : styles.opacityNone)
                   }
                 >
                   Your<br />bracket
@@ -711,8 +714,8 @@ class IncomeInput extends React.Component {
                     " " +
                     (this.state.incomeBracket === 5 &&
                     this.state.narrativeState === "result"
-                      ? styles.visibilityVisible
-                      : styles.visibilityHidden)
+                      ? styles.opacityFull
+                      : styles.opacityNone)
                   }
                 >
                   Your<br />bracket
@@ -725,8 +728,8 @@ class IncomeInput extends React.Component {
                     " " +
                     (this.state.incomeBracket === 4 &&
                     this.state.narrativeState === "result"
-                      ? styles.visibilityVisible
-                      : styles.visibilityHidden)
+                      ? styles.opacityFull
+                      : styles.opacityNone)
                   }
                 >
                   Your<br />bracket
@@ -739,8 +742,8 @@ class IncomeInput extends React.Component {
                     " " +
                     (this.state.incomeBracket === 3 &&
                     this.state.narrativeState === "result"
-                      ? styles.visibilityVisible
-                      : styles.visibilityHidden)
+                      ? styles.opacityFull
+                      : styles.opacityNone)
                   }
                 >
                   Your<br />bracket
@@ -753,8 +756,8 @@ class IncomeInput extends React.Component {
                     " " +
                     (this.state.incomeBracket === 2 &&
                     this.state.narrativeState === "result"
-                      ? styles.visibilityVisible
-                      : styles.visibilityHidden)
+                      ? styles.opacityFull
+                      : styles.opacityNone)
                   }
                 >
                   Your<br />bracket
@@ -767,8 +770,8 @@ class IncomeInput extends React.Component {
                     " " +
                     (this.state.incomeBracket === 1 &&
                     this.state.narrativeState === "result"
-                      ? styles.visibilityVisible
-                      : styles.visibilityHidden)
+                      ? styles.opacityFull
+                      : styles.opacityNone)
                   }
                 >
                   Your<br />bracket
@@ -786,8 +789,8 @@ class IncomeInput extends React.Component {
                     " " +
                     (this.state.guessBracket === 13 &&
                     this.state.narrativeState === "result"
-                      ? styles.visibilityVisible
-                      : styles.visibilityHidden)
+                      ? styles.opacityFull
+                      : styles.opacityNone)
                   }
                 >
                   Your<br />guess
@@ -800,8 +803,8 @@ class IncomeInput extends React.Component {
                     " " +
                     (this.state.guessBracket === 12 &&
                     this.state.narrativeState === "result"
-                      ? styles.visibilityVisible
-                      : styles.visibilityHidden)
+                      ? styles.opacityFull
+                      : styles.opacityNone)
                   }
                 >
                   Your<br />guess
@@ -814,8 +817,8 @@ class IncomeInput extends React.Component {
                     " " +
                     (this.state.guessBracket === 11 &&
                     this.state.narrativeState === "result"
-                      ? styles.visibilityVisible
-                      : styles.visibilityHidden)
+                      ? styles.opacityFull
+                      : styles.opacityNone)
                   }
                 >
                   Your<br />guess
@@ -828,8 +831,8 @@ class IncomeInput extends React.Component {
                     " " +
                     (this.state.guessBracket === 10 &&
                     this.state.narrativeState === "result"
-                      ? styles.visibilityVisible
-                      : styles.visibilityHidden)
+                      ? styles.opacityFull
+                      : styles.opacityNone)
                   }
                 >
                   Your<br />guess
@@ -842,8 +845,8 @@ class IncomeInput extends React.Component {
                     " " +
                     (this.state.guessBracket === 9 &&
                     this.state.narrativeState === "result"
-                      ? styles.visibilityVisible
-                      : styles.visibilityHidden)
+                      ? styles.opacityFull
+                      : styles.opacityNone)
                   }
                 >
                   Your<br />guess
@@ -856,8 +859,8 @@ class IncomeInput extends React.Component {
                     " " +
                     (this.state.guessBracket === 8 &&
                     this.state.narrativeState === "result"
-                      ? styles.visibilityVisible
-                      : styles.visibilityHidden)
+                      ? styles.opacityFull
+                      : styles.opacityNone)
                   }
                 >
                   Your<br />guess
@@ -870,8 +873,8 @@ class IncomeInput extends React.Component {
                     " " +
                     (this.state.guessBracket === 7 &&
                     this.state.narrativeState === "result"
-                      ? styles.visibilityVisible
-                      : styles.visibilityHidden)
+                      ? styles.opacityFull
+                      : styles.opacityNone)
                   }
                 >
                   Your<br />guess
@@ -884,8 +887,8 @@ class IncomeInput extends React.Component {
                     " " +
                     (this.state.guessBracket === 6 &&
                     this.state.narrativeState === "result"
-                      ? styles.visibilityVisible
-                      : styles.visibilityHidden)
+                      ? styles.opacityFull
+                      : styles.opacityNone)
                   }
                 >
                   Your<br />guess
@@ -898,8 +901,8 @@ class IncomeInput extends React.Component {
                     " " +
                     (this.state.guessBracket === 5 &&
                     this.state.narrativeState === "result"
-                      ? styles.visibilityVisible
-                      : styles.visibilityHidden)
+                      ? styles.opacityFull
+                      : styles.opacityNone)
                   }
                 >
                   Your<br />guess
@@ -912,8 +915,8 @@ class IncomeInput extends React.Component {
                     " " +
                     (this.state.guessBracket === 4 &&
                     this.state.narrativeState === "result"
-                      ? styles.visibilityVisible
-                      : styles.visibilityHidden)
+                      ? styles.opacityFull
+                      : styles.opacityNone)
                   }
                 >
                   Your<br />guess
@@ -926,8 +929,8 @@ class IncomeInput extends React.Component {
                     " " +
                     (this.state.guessBracket === 3 &&
                     this.state.narrativeState === "result"
-                      ? styles.visibilityVisible
-                      : styles.visibilityHidden)
+                      ? styles.opacityFull
+                      : styles.opacityNone)
                   }
                 >
                   Your<br />guess
@@ -940,8 +943,8 @@ class IncomeInput extends React.Component {
                     " " +
                     (this.state.guessBracket === 2 &&
                     this.state.narrativeState === "result"
-                      ? styles.visibilityVisible
-                      : styles.visibilityHidden)
+                      ? styles.opacityFull
+                      : styles.opacityNone)
                   }
                 >
                   Your<br />guess
@@ -954,8 +957,8 @@ class IncomeInput extends React.Component {
                     " " +
                     (this.state.guessBracket === 1 &&
                     this.state.narrativeState === "result"
-                      ? styles.visibilityVisible
-                      : styles.visibilityHidden)
+                      ? styles.opacityFull
+                      : styles.opacityNone)
                   }
                 >
                   Your<br />guess
