@@ -5,11 +5,12 @@ const Portal = require("react-portal");
 const noUiSlider = require("nouislider");
 const wNumb = require("wnumb");
 
+
+
 const FromLocaleString = require("../../lib/fromlocalestring");
 const fromLocaleString = new FromLocaleString();
 
 // Set up some constants
-const TRANSITION_TIME = 500;
 const PUBLIC_URL_BASE =
   "http://www.abc.net.au/res/sites/news-projects/income-comparisons-react/master/";
 
@@ -26,11 +27,11 @@ class IncomeInput extends React.Component {
     this.state = {
       income: 1200,
       infoIsSet: false,
-      narrativeState: "initial", // locked, result
+      narrativeState: "initial", // locked, calculate, result
       incomeBracket: 8,
       sliderGuess: 50,
       guessBracket: 6,
-      guessMessage: "Not even close!"
+      guessMessage: "Nice try..."
     };
   }
 
@@ -49,9 +50,7 @@ class IncomeInput extends React.Component {
     this.setState({ narrativeState: "locked" });
   }
 
-  showResult(event) {
-    event.preventDefault();
-
+  splitUpBar() {
     this.spaces = document.getElementsByClassName(styles.barSpacer);
 
     // Fade in the spaces
@@ -61,8 +60,21 @@ class IncomeInput extends React.Component {
 
     // Grow the slider
     this.slider.style.height = "374px"; //getRandomInt(200, 350) + "px";
+  }
 
-    this.setState({ narrativeState: "result" });
+  calculateResult(event) {
+    if (event) event.preventDefault();
+    // Result is already calculated technically, but the user doesn't know that
+
+    this.setState({ narrativeState: "calculate" });
+
+    console.log(this.state);
+
+    setTimeout(this.showResult.bind(this), 1500);
+  }
+
+  showResult() {
+    
 
     let difference = getDifference(
       this.state.incomeBracket,
@@ -76,6 +88,10 @@ class IncomeInput extends React.Component {
 
     this.results = this.bracketInfo[incomeBracketNumber - 1];
     this.guessResults = this.bracketInfo[guessBracketNumber - 1];
+
+    this.setState({ narrativeState: "result" });
+
+    setTimeout(this.splitUpBar.bind(this), 1300);
 
     // const wrapperEl = document.querySelector("." + styles.wrapper);
 
@@ -118,7 +134,7 @@ class IncomeInput extends React.Component {
 
     this.slider.style.height = "350px";
     this.slider.style.margin = "0 auto";
-    this.slider.style.transition = "height 0.3s";
+    this.slider.style.transition = "height 0.5s";
 
     noUiSlider.create(this.slider, {
       start: [this.state.sliderGuess],
@@ -143,7 +159,7 @@ class IncomeInput extends React.Component {
         this.state.incomeBracket,
         this.state.guessBracket
       );
-  
+
       this.setState({ guessMessage: getGuessMessageAboveOrBelow(difference) });
     });
   }
@@ -283,7 +299,7 @@ class IncomeInput extends React.Component {
               <div className={styles.opacityTransition}>
                 <div className={styles.boldtext}>
                   What's your weekly take-home pay?:<br />
-                  <form onSubmit={this.showResult.bind(this)}>
+                  <form onSubmit={this.calculateResult.bind(this)}>
                     <label />
                     $&nbsp;{" "}
                     <input
@@ -297,9 +313,17 @@ class IncomeInput extends React.Component {
                   </form>
                 </div>
                 <div className={styles.smalltext}>Enter your weekly income</div>{" "}
-                <button onClick={this.showResult.bind(this)}>
+                <button onClick={this.calculateResult.bind(this)}>
                   Show me where I sit
                 </button>
+              </div>
+            </div>
+          )}
+
+          {this.state.narrativeState === "calculate" && (
+            <div className={styles.column + " " + styles.one}>
+              <div className={styles.calculatingResult + " " + styles.opacityTransition}>
+                <div>Calculating result...</div>
               </div>
             </div>
           )}
