@@ -137,6 +137,7 @@ class App extends React.Component {
         <LgaSearch
           onLocaleIntent={this.handleLocaleIntent.bind(this)}
           localGovernmentArea={this.state.localGovernmentArea}
+          mapData={this.state.mapData}
         />
         {/* Conditionally render MapScroller if data loaded */}
         {this.state.mapData && (

@@ -2,7 +2,6 @@ const React = require("react");
 const ReactDOM = require("react-dom");
 const styles = require("./LgaSearch.scss");
 
-
 class LgaSearch extends React.Component {
   constructor(props) {
     super(props);
@@ -16,7 +15,11 @@ class LgaSearch extends React.Component {
     this.props.onLocaleIntent(event.target["0"].value);
   }
 
-  handleChange() {}
+  handleChange(event) {
+    if (event) console.log(event.target.value)
+    // console.log("changed...");
+    // console.log(this.props.mapData)
+  }
 
   render() {
     const value = "Hello";
@@ -29,7 +32,6 @@ class LgaSearch extends React.Component {
           />
         </form>
         <div>{this.props.localGovernmentArea}</div>
-        
       </div>,
       document.querySelector(".addressinput")
     );
