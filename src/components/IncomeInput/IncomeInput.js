@@ -1159,7 +1159,7 @@ function getGuessMessageAboveOrBelow(difference) {
       return "You're reaching...";
     case 6:
     case 5:
-      return "A bit of an overestimation...";
+      return "A bit of a stretch...";
     case 4:
     case 3:
     case 2:
@@ -1171,7 +1171,7 @@ function getGuessMessageAboveOrBelow(difference) {
     case -1:
       return "Just a little under...";
     case -2:
-      return "2 backets under...";
+      return "A few backets under...";
     case -3:
     case -4:
     case -5:
