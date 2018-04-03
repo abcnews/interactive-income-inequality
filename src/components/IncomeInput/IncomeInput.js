@@ -5,8 +5,6 @@ const Portal = require("react-portal");
 const noUiSlider = require("nouislider");
 const wNumb = require("wnumb");
 
-
-
 const FromLocaleString = require("../../lib/fromlocalestring");
 const fromLocaleString = new FromLocaleString();
 
@@ -25,7 +23,7 @@ class IncomeInput extends React.Component {
     this.guessResults = {};
     // Set initial state of component
     this.state = {
-      income: 1200,
+      income: 800,
       infoIsSet: false,
       narrativeState: "initial", // locked, calculate, result
       incomeBracket: 8,
@@ -74,8 +72,6 @@ class IncomeInput extends React.Component {
   }
 
   showResult() {
-    
-
     let difference = getDifference(
       this.state.incomeBracket,
       this.state.guessBracket
@@ -322,7 +318,11 @@ class IncomeInput extends React.Component {
 
           {this.state.narrativeState === "calculate" && (
             <div className={styles.column + " " + styles.one}>
-              <div className={styles.calculatingResult + " " + styles.opacityTransition}>
+              <div
+                className={
+                  styles.calculatingResult + " " + styles.opacityTransition
+                }
+              >
                 <div>Calculating result...</div>
               </div>
             </div>
@@ -1162,18 +1162,18 @@ function getGuessMessageAboveOrBelow(difference) {
       return "A bit of an overestimation...";
     case 4:
     case 3:
-      return "A few brackets over...";
     case 2:
+      return "A few brackets over...";
     case 1:
       return "Just a little over...";
     case 0:
       return "Spot on!";
     case -1:
-    case -2:
       return "Just a little under...";
+    case -2:
+      return "2 backets under...";
     case -3:
     case -4:
-      return "A few brackets under...";
     case -5:
     case -6:
       return "A moderate underestimation...";
