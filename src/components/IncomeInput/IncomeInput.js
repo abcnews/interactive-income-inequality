@@ -1174,7 +1174,7 @@ function getGuessMessageAboveOrBelow(difference) {
     case -1:
       return "Just a little under...";
     case -2:
-      return "A few backets under...";
+      return "A few brackets under...";
     case -3:
     case -4:
     case -5:

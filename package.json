@@ -41,7 +41,6 @@
     "point-in-polygon": "^1.0.1",
     "react": "^16.2.0",
     "react-dom": "^16.2.0",
-    "react-loading": "^1.0.4",
     "react-portal": "^4.1.3",
     "spanify": "^1.2.5",
     "topojson": "^3.0.2",
