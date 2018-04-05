@@ -1,3 +1,7 @@
+/**
+ * IncomeInput is a component that calculates a persons's income bracket
+ * and uses a slider to compare income brackets.
+ */
 const React = require("react");
 const styles = require("./IncomeInput.scss");
 const ReactDOM = require("react-dom");
@@ -49,6 +53,9 @@ class IncomeInput extends React.Component {
   }
 
   splitUpBar() {
+    // Don't split bar if already trying again
+    if (this.state.narrativeState !== "result") return;
+
     this.spaces = document.getElementsByClassName(styles.barSpacer);
 
     // Fade in the spaces
@@ -57,17 +64,17 @@ class IncomeInput extends React.Component {
     }
 
     // Grow the slider
-    this.slider.style.height = "374px"; //getRandomInt(200, 350) + "px";
+    this.slider.style.height = "374px";
   }
 
+  // Result is already calculated technically, but the user doesn't know that
   calculateResult(event) {
     if (event) event.preventDefault();
-    // Result is already calculated technically, but the user doesn't know that
 
+    // Show calculating state
     this.setState({ narrativeState: "calculate" });
 
-    console.log(this.state);
-
+    // Wait a while then show result
     setTimeout(this.showResult.bind(this), 1500);
   }
 
@@ -88,31 +95,6 @@ class IncomeInput extends React.Component {
     this.setState({ narrativeState: "result" });
 
     setTimeout(this.splitUpBar.bind(this), 1300);
-
-    // const wrapperEl = document.querySelector("." + styles.wrapper);
-
-    // // Fade out the wrapper element
-    // addClass(wrapperEl, styles.fadeOut);
-
-    // setTimeout(() => {
-    //   // Wait for a while then do the calculation
-    //   let incomeBracketNumber = whatIncomeBracket(this.state.income);
-    //   let guessBracketNumber = this.state.guessBracket;
-
-    //   this.results = this.bracketInfo[incomeBracketNumber - 1];
-    //   this.guessResults = this.bracketInfo[guessBracketNumber - 1];
-
-    //   this.setState({ infoIsSet: true });
-
-    //   // Fade back in
-    //   removeClass(wrapperEl, styles.fadeOut);
-    //   addClass(wrapperEl, styles.fadeIn);
-
-    //   setTimeout(() => {
-    //     // Reset styles
-    //     removeClass(wrapperEl, styles.fadeIn);
-    //   }, TRANSITION_TIME);
-    // }, TRANSITION_TIME);
   }
 
   tryAgain(event) {
@@ -143,10 +125,10 @@ class IncomeInput extends React.Component {
       }
     });
 
+    // Event fires when slider is set
     this.slider.noUiSlider.on("set", () => {
       let sliderValue = this.slider.noUiSlider.get();
-      console.log(whatIncomeBracketPercent(sliderValue));
-      console.log(sliderValue);
+
       this.setState({ sliderGuess: sliderValue });
       this.setState({ guessBracket: whatIncomeBracketPercent(sliderValue) });
 
@@ -165,13 +147,6 @@ class IncomeInput extends React.Component {
   }
 
   componentDidUpdate() {
-    // Test height change
-    // this.slider.style.height = getRandomInt(200, 350) + "px";
-
-    // if (this.state.narrativeState === "initial") {
-    //   this.attachSlider();
-    // }
-
     // Hide slider handles
     const tooltipEl = document.querySelector(".noUi-tooltip");
     const handleEl = document.querySelector(".noUi-handle");
@@ -185,7 +160,6 @@ class IncomeInput extends React.Component {
     }
 
     // Set up the fade-ins
-    // TODO: make work with multiple fade in elements
     const fadeInEl = document.querySelectorAll("." + styles.opacityTransition);
 
     if (fadeInEl[0]) {
@@ -193,78 +167,11 @@ class IncomeInput extends React.Component {
         for (let i = 0; i < fadeInEl.length; i++) {
           addClass(fadeInEl[i], styles.opacityFull);
         }
-        
       }, 1); // Wait a little while or else the transition don't work
     }
-
-    // Calculate after all info is set
-    // if (!this.state.infoIsSet) {
-    //   // Show the slider. Reset the interactive
-    //   this.slider.style.display = "block";
-    // } else {
-    //   // Remove the slider
-    //   this.slider.style.display = "none";
-
-    //   this.yourBracketEl = document.querySelector(
-    //     "." + styles.scaleContainerResults
-    //   );
-
-    //   // Place element along the percentage
-    //   this.yourBracketEl.style.top = `calc(${Number(
-    //     this.results.percentAbove
-    //   )}% + ${this.results.percent / 2}% - 113px)`;
-
-    //   // Place the bracket box
-    //   this.bracketBox = document.querySelector("." + styles.bracketBox);
-    //   this.bracketBoxOuter = document.querySelector(
-    //     "." + styles.bracketBoxOuter
-    //   );
-
-    //   this.bracketBox.style.top = `calc(${Number(this.results.percentAbove)}%)`;
-
-    //   this.bracketBoxOuter.style.top = `calc(${Number(
-    //     this.results.percentAbove
-    //   )}% - 2px)`;
-
-    //   this.bracketBox.style.height = this.results.percent + "%";
-    //   this.bracketBoxOuter.style.height =
-    //     "calc(" + this.results.percent + "% + 4px)";
-
-    //   // Build the guess bracket box
-    //   this.guessBox = document.querySelector("." + styles.guessBox);
-    //   this.guessBoxOuter = document.querySelector("." + styles.guessBoxOuter);
-
-    //   this.guessBox.style.top = `calc(${Number(
-    //     this.guessResults.percentAbove
-    //   )}%)`;
-
-    //   this.guessBoxOuter.style.top = `calc(${Number(
-    //     this.guessResults.percentAbove
-    //   )}% - 2px)`;
-
-    //   this.guessBox.style.height = this.guessResults.percent + "%";
-    //   this.guessBoxOuter.style.height =
-    //     "calc(" + this.guessResults.percent + "% + 4px)";
-
-    //   // Unhide the block (dunno if this is necessary any more)
-    //   this.resultsBar = document.getElementById("result");
-    //   this.resultsBar.style.display = "block";
-    // }
   }
 
   render() {
-    // Start conditional rendering
-    // let infoIsSet = null;
-    // if (this.state.infoIsSet) infoIsSet = true;
-    // else infoIsSet = false;
-
-    // let narrativeState = "";
-    // if (this.state.narrativeState) narrativeState = this.state.narrativeState;
-    // TODO: work out why we're doing it this way instead of just directly assigning value
-    // or using the state directly
-
-    // console.log(narrativeState);
-
     return ReactDOM.createPortal(
       <div className={styles.wrapper}>
         <div className={styles.flexWrapper}>
@@ -995,73 +902,8 @@ class IncomeInput extends React.Component {
             </div>
 
             {/* Render results */}
-            {this.state.narrativeState === "result" && (
-              <div />
-              // <div className={styles.resultContainer}>
-              //   <div id="range" />
-              //   <div id="result" className={styles.result}>
-              //     <div className={styles.verticalBar} />
-
-              //     <div className={styles.bracketBox} />
-              //     <div className={styles.bracketBoxOuter} />
-
-              //     <div className={styles.guessBox}>
-              //       <span>You said</span>
-              //     </div>
-              //     <div className={styles.guessBoxOuter} />
-              //   </div>
-              // </div>
-            )}
+            {this.state.narrativeState === "result" && <div />}
           </div>
-
-          {/* <div className={styles.column + " " + styles.three}> */}
-          {/* {!this.state.infoIsSet && (
-              <div className={styles.scaleContainer}>
-                <div className={styles.mostRich}>
-                  <div>
-                    <img src={PUBLIC_URL_BASE + "ios-arrow-thin-up.svg"} />
-                  </div>
-                  <div className={styles.mostRichText}>
-                    Most<br />rich
-                  </div>
-                </div>
-                <div className={styles.leastRich}>
-                  <div className={styles.leastRichText}>
-                    Least<br />rich
-                  </div>
-                  <div>
-                    <img src={PUBLIC_URL_BASE + "ios-arrow-thin-down.svg"} />
-                  </div>
-                </div>
-              </div>
-            )}
-
-            {this.state.infoIsSet && (
-              <div className={styles.scaleContainerResults}>
-                <div className={styles.areRicher}>
-                  <div>
-                    <img src={PUBLIC_URL_BASE + "ios-arrow-thin-up.svg"} />
-                  </div>
-                  <div className={styles.areRicherText}>
-                    <b>{Math.round(this.results.percentAbove)}%</b>
-                    <br />are<br />richer
-                  </div>
-                </div>
-                <div className={styles.yourBracket}>
-                  Your<br />bracket
-                </div>
-                <div className={styles.arePoorer}>
-                  <div className={styles.arePoorerText}>
-                    <b>{Math.round(this.results.percentBelow)}%</b>
-                    <br />are<br />poorer
-                  </div>
-                  <div>
-                    <img src={PUBLIC_URL_BASE + "ios-arrow-thin-down.svg"} />
-                  </div>
-                </div>
-              </div>
-            )} */}
-          {/* </div> */}
         </div>
         <div />
       </div>,
@@ -1122,33 +964,6 @@ function whatIncomeBracketNet(incomeNetPerWeek) {
   else return 1;
 }
 
-function getGuessMessage(difference) {
-  switch (difference) {
-    case 12:
-    case 11:
-      return "Not even close...";
-    case 10:
-    case 9:
-      return "Way off...";
-    case 8:
-    case 7:
-      return "Not too bad...";
-    case 6:
-    case 5:
-      return "Not bad...";
-    case 4:
-    case 3:
-      return "Pretty close...";
-    case 2:
-    case 1:
-      return "Almost got it...";
-    case 0:
-      return "Spot on!";
-    default:
-      return "Good try...";
-  }
-}
-
 function getGuessMessageAboveOrBelow(difference) {
   switch (difference) {
     case 12:
@@ -1196,11 +1011,6 @@ function getGuessMessageAboveOrBelow(difference) {
 
 function getDifference(income, guess) {
   return guess - income;
-}
-
-// Always positive number returned (we will use getDifference() instead)
-function getAbsoluteDifference(income, guess) {
-  return Math.abs(income - guess);
 }
 
 // Helper functions for className manipulation
