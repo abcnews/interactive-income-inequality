@@ -42,6 +42,7 @@
     "react": "^16.2.0",
     "react-dom": "^16.2.0",
     "react-portal": "^4.1.3",
+    "react-select": "^1.2.1",
     "spanify": "^1.2.5",
     "topojson": "^3.0.2",
     "wnumb": "^1.1.0"

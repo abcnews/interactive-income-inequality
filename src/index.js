@@ -2,6 +2,8 @@ const React = require("react");
 const { render } = require("react-dom");
 const spanify = require("spanify");
 
+require('react-select/dist/react-select.css');
+
 require("./lib/modernizr.js"); // Detect browser features
 
 const PROJECT_NAME = "income-comparisons";

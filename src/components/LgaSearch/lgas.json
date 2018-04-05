@@ -1,0 +1,2256 @@
+{
+  "lgas": [
+    {
+      "LGA_CODE_2016": 10050,
+      "LGA": "Albury (C)"
+    },
+    {
+      "LGA_CODE_2016": 10130,
+      "LGA": "Armidale Regional (A)"
+    },
+    {
+      "LGA_CODE_2016": 10250,
+      "LGA": "Ballina (A)"
+    },
+    {
+      "LGA_CODE_2016": 10300,
+      "LGA": "Balranald (A)"
+    },
+    {
+      "LGA_CODE_2016": 10470,
+      "LGA": "Bathurst Regional (A)"
+    },
+    {
+      "LGA_CODE_2016": 10550,
+      "LGA": "Bega Valley (A)"
+    },
+    {
+      "LGA_CODE_2016": 10600,
+      "LGA": "Bellingen (A)"
+    },
+    {
+      "LGA_CODE_2016": 10650,
+      "LGA": "Berrigan (A)"
+    },
+    {
+      "LGA_CODE_2016": 10750,
+      "LGA": "Blacktown (C)"
+    },
+    {
+      "LGA_CODE_2016": 10800,
+      "LGA": "Bland (A)"
+    },
+    {
+      "LGA_CODE_2016": 10850,
+      "LGA": "Blayney (A)"
+    },
+    {
+      "LGA_CODE_2016": 10900,
+      "LGA": "Blue Mountains (C)"
+    },
+    {
+      "LGA_CODE_2016": 10950,
+      "LGA": "Bogan (A)"
+    },
+    {
+      "LGA_CODE_2016": 11100,
+      "LGA": "Botany Bay (C)"
+    },
+    {
+      "LGA_CODE_2016": 11150,
+      "LGA": "Bourke (A)"
+    },
+    {
+      "LGA_CODE_2016": 11200,
+      "LGA": "Brewarrina (A)"
+    },
+    {
+      "LGA_CODE_2016": 11250,
+      "LGA": "Broken Hill (C)"
+    },
+    {
+      "LGA_CODE_2016": 11300,
+      "LGA": "Burwood (A)"
+    },
+    {
+      "LGA_CODE_2016": 11350,
+      "LGA": "Byron (A)"
+    },
+    {
+      "LGA_CODE_2016": 11400,
+      "LGA": "Cabonne (A)"
+    },
+    {
+      "LGA_CODE_2016": 11450,
+      "LGA": "Camden (A)"
+    },
+    {
+      "LGA_CODE_2016": 11500,
+      "LGA": "Campbelltown (C) (NSW)"
+    },
+    {
+      "LGA_CODE_2016": 11520,
+      "LGA": "Canada Bay (A)"
+    },
+    {
+      "LGA_CODE_2016": 11570,
+      "LGA": "Canterbury-Bankstown (A)"
+    },
+    {
+      "LGA_CODE_2016": 11600,
+      "LGA": "Carrathool (A)"
+    },
+    {
+      "LGA_CODE_2016": 11650,
+      "LGA": "Central Coast (C) (NSW)"
+    },
+    {
+      "LGA_CODE_2016": 11700,
+      "LGA": "Central Darling (A)"
+    },
+    {
+      "LGA_CODE_2016": 11720,
+      "LGA": "Cessnock (C)"
+    },
+    {
+      "LGA_CODE_2016": 11730,
+      "LGA": "Clarence Valley (A)"
+    },
+    {
+      "LGA_CODE_2016": 11750,
+      "LGA": "Cobar (A)"
+    },
+    {
+      "LGA_CODE_2016": 11800,
+      "LGA": "Coffs Harbour (C)"
+    },
+    {
+      "LGA_CODE_2016": 12000,
+      "LGA": "Coolamon (A)"
+    },
+    {
+      "LGA_CODE_2016": 12150,
+      "LGA": "Coonamble (A)"
+    },
+    {
+      "LGA_CODE_2016": 12350,
+      "LGA": "Cowra (A)"
+    },
+    {
+      "LGA_CODE_2016": 12380,
+      "LGA": "Cumberland (A)"
+    },
+    {
+      "LGA_CODE_2016": 12700,
+      "LGA": "Dungog (A)"
+    },
+    {
+      "LGA_CODE_2016": 12730,
+      "LGA": "Edward River (A)"
+    },
+    {
+      "LGA_CODE_2016": 12750,
+      "LGA": "Eurobodalla (A)"
+    },
+    {
+      "LGA_CODE_2016": 12850,
+      "LGA": "Fairfield (C)"
+    },
+    {
+      "LGA_CODE_2016": 12870,
+      "LGA": "Federation (A)"
+    },
+    {
+      "LGA_CODE_2016": 12900,
+      "LGA": "Forbes (A)"
+    },
+    {
+      "LGA_CODE_2016": 12930,
+      "LGA": "Georges River (A)"
+    },
+    {
+      "LGA_CODE_2016": 12950,
+      "LGA": "Gilgandra (A)"
+    },
+    {
+      "LGA_CODE_2016": 13010,
+      "LGA": "Glen Innes Severn (A)"
+    },
+    {
+      "LGA_CODE_2016": 13310,
+      "LGA": "Goulburn Mulwaree (A)"
+    },
+    {
+      "LGA_CODE_2016": 13340,
+      "LGA": "Greater Hume Shire (A)"
+    },
+    {
+      "LGA_CODE_2016": 13450,
+      "LGA": "Griffith (C)"
+    },
+    {
+      "LGA_CODE_2016": 13510,
+      "LGA": "Gundagai (A)"
+    },
+    {
+      "LGA_CODE_2016": 13550,
+      "LGA": "Gunnedah (A)"
+    },
+    {
+      "LGA_CODE_2016": 13660,
+      "LGA": "Gwydir (A)"
+    },
+    {
+      "LGA_CODE_2016": 13800,
+      "LGA": "Hawkesbury (C)"
+    },
+    {
+      "LGA_CODE_2016": 13850,
+      "LGA": "Hay (A)"
+    },
+    {
+      "LGA_CODE_2016": 13910,
+      "LGA": "Hilltops (A)"
+    },
+    {
+      "LGA_CODE_2016": 14000,
+      "LGA": "Hornsby (A)"
+    },
+    {
+      "LGA_CODE_2016": 14100,
+      "LGA": "Hunters Hill (A)"
+    },
+    {
+      "LGA_CODE_2016": 14170,
+      "LGA": "Inner West (A)"
+    },
+    {
+      "LGA_CODE_2016": 14200,
+      "LGA": "Inverell (A)"
+    },
+    {
+      "LGA_CODE_2016": 14300,
+      "LGA": "Junee (A)"
+    },
+    {
+      "LGA_CODE_2016": 14350,
+      "LGA": "Kempsey (A)"
+    },
+    {
+      "LGA_CODE_2016": 14400,
+      "LGA": "Kiama (A)"
+    },
+    {
+      "LGA_CODE_2016": 14500,
+      "LGA": "Ku-ring-gai (A)"
+    },
+    {
+      "LGA_CODE_2016": 14550,
+      "LGA": "Kyogle (A)"
+    },
+    {
+      "LGA_CODE_2016": 14600,
+      "LGA": "Lachlan (A)"
+    },
+    {
+      "LGA_CODE_2016": 14650,
+      "LGA": "Lake Macquarie (C)"
+    },
+    {
+      "LGA_CODE_2016": 14700,
+      "LGA": "Lane Cove (A)"
+    },
+    {
+      "LGA_CODE_2016": 14750,
+      "LGA": "Leeton (A)"
+    },
+    {
+      "LGA_CODE_2016": 14850,
+      "LGA": "Lismore (C)"
+    },
+    {
+      "LGA_CODE_2016": 14870,
+      "LGA": "Lithgow (C)"
+    },
+    {
+      "LGA_CODE_2016": 14900,
+      "LGA": "Liverpool (C)"
+    },
+    {
+      "LGA_CODE_2016": 14920,
+      "LGA": "Liverpool Plains (A)"
+    },
+    {
+      "LGA_CODE_2016": 14950,
+      "LGA": "Lockhart (A)"
+    },
+    {
+      "LGA_CODE_2016": 15050,
+      "LGA": "Maitland (C)"
+    },
+    {
+      "LGA_CODE_2016": 15240,
+      "LGA": "Mid-Coast (A)"
+    },
+    {
+      "LGA_CODE_2016": 15270,
+      "LGA": "Mid-Western Regional (A)"
+    },
+    {
+      "LGA_CODE_2016": 15300,
+      "LGA": "Moree Plains (A)"
+    },
+    {
+      "LGA_CODE_2016": 15350,
+      "LGA": "Mosman (A)"
+    },
+    {
+      "LGA_CODE_2016": 15520,
+      "LGA": "Murray River (A)"
+    },
+    {
+      "LGA_CODE_2016": 15560,
+      "LGA": "Murrumbidgee (A)"
+    },
+    {
+      "LGA_CODE_2016": 15650,
+      "LGA": "Muswellbrook (A)"
+    },
+    {
+      "LGA_CODE_2016": 15700,
+      "LGA": "Nambucca (A)"
+    },
+    {
+      "LGA_CODE_2016": 15750,
+      "LGA": "Narrabri (A)"
+    },
+    {
+      "LGA_CODE_2016": 15800,
+      "LGA": "Narrandera (A)"
+    },
+    {
+      "LGA_CODE_2016": 15850,
+      "LGA": "Narromine (A)"
+    },
+    {
+      "LGA_CODE_2016": 15900,
+      "LGA": "Newcastle (C)"
+    },
+    {
+      "LGA_CODE_2016": 15950,
+      "LGA": "North Sydney (A)"
+    },
+    {
+      "LGA_CODE_2016": 15990,
+      "LGA": "Northern Beaches (A)"
+    },
+    {
+      "LGA_CODE_2016": 16100,
+      "LGA": "Oberon (A)"
+    },
+    {
+      "LGA_CODE_2016": 16150,
+      "LGA": "Orange (C)"
+    },
+    {
+      "LGA_CODE_2016": 16200,
+      "LGA": "Parkes (A)"
+    },
+    {
+      "LGA_CODE_2016": 16260,
+      "LGA": "Parramatta (C)"
+    },
+    {
+      "LGA_CODE_2016": 16350,
+      "LGA": "Penrith (C)"
+    },
+    {
+      "LGA_CODE_2016": 16380,
+      "LGA": "Port Macquarie-Hastings (A)"
+    },
+    {
+      "LGA_CODE_2016": 16400,
+      "LGA": "Port Stephens (A)"
+    },
+    {
+      "LGA_CODE_2016": 16490,
+      "LGA": "Queanbeyan-Palerang Regional (A)"
+    },
+    {
+      "LGA_CODE_2016": 16550,
+      "LGA": "Randwick (C)"
+    },
+    {
+      "LGA_CODE_2016": 16610,
+      "LGA": "Richmond Valley (A)"
+    },
+    {
+      "LGA_CODE_2016": 16650,
+      "LGA": "Rockdale (C)"
+    },
+    {
+      "LGA_CODE_2016": 16700,
+      "LGA": "Ryde (C)"
+    },
+    {
+      "LGA_CODE_2016": 16900,
+      "LGA": "Shellharbour (C)"
+    },
+    {
+      "LGA_CODE_2016": 16950,
+      "LGA": "Shoalhaven (C)"
+    },
+    {
+      "LGA_CODE_2016": 17000,
+      "LGA": "Singleton (A)"
+    },
+    {
+      "LGA_CODE_2016": 17040,
+      "LGA": "Snowy Monaro Regional (A)"
+    },
+    {
+      "LGA_CODE_2016": 17080,
+      "LGA": "Snowy Valleys (A)"
+    },
+    {
+      "LGA_CODE_2016": 17100,
+      "LGA": "Strathfield (A)"
+    },
+    {
+      "LGA_CODE_2016": 17150,
+      "LGA": "Sutherland Shire (A)"
+    },
+    {
+      "LGA_CODE_2016": 17200,
+      "LGA": "Sydney (C)"
+    },
+    {
+      "LGA_CODE_2016": 17310,
+      "LGA": "Tamworth Regional (A)"
+    },
+    {
+      "LGA_CODE_2016": 17350,
+      "LGA": "Temora (A)"
+    },
+    {
+      "LGA_CODE_2016": 17400,
+      "LGA": "Tenterfield (A)"
+    },
+    {
+      "LGA_CODE_2016": 17420,
+      "LGA": "The Hills Shire (A)"
+    },
+    {
+      "LGA_CODE_2016": 17550,
+      "LGA": "Tweed (A)"
+    },
+    {
+      "LGA_CODE_2016": 17620,
+      "LGA": "Upper Hunter Shire (A)"
+    },
+    {
+      "LGA_CODE_2016": 17640,
+      "LGA": "Upper Lachlan Shire (A)"
+    },
+    {
+      "LGA_CODE_2016": 17650,
+      "LGA": "Uralla (A)"
+    },
+    {
+      "LGA_CODE_2016": 17750,
+      "LGA": "Wagga Wagga (C)"
+    },
+    {
+      "LGA_CODE_2016": 17850,
+      "LGA": "Walcha (A)"
+    },
+    {
+      "LGA_CODE_2016": 17900,
+      "LGA": "Walgett (A)"
+    },
+    {
+      "LGA_CODE_2016": 17950,
+      "LGA": "Warren (A)"
+    },
+    {
+      "LGA_CODE_2016": 18020,
+      "LGA": "Warrumbungle Shire (A)"
+    },
+    {
+      "LGA_CODE_2016": 18050,
+      "LGA": "Waverley (A)"
+    },
+    {
+      "LGA_CODE_2016": 18100,
+      "LGA": "Weddin (A)"
+    },
+    {
+      "LGA_CODE_2016": 18200,
+      "LGA": "Wentworth (A)"
+    },
+    {
+      "LGA_CODE_2016": 18230,
+      "LGA": "Western Plains Regional (A)"
+    },
+    {
+      "LGA_CODE_2016": 18250,
+      "LGA": "Willoughby (C)"
+    },
+    {
+      "LGA_CODE_2016": 18350,
+      "LGA": "Wingecarribee (A)"
+    },
+    {
+      "LGA_CODE_2016": 18400,
+      "LGA": "Wollondilly (A)"
+    },
+    {
+      "LGA_CODE_2016": 18450,
+      "LGA": "Wollongong (C)"
+    },
+    {
+      "LGA_CODE_2016": 18500,
+      "LGA": "Woollahra (A)"
+    },
+    {
+      "LGA_CODE_2016": 18710,
+      "LGA": "Yass Valley (A)"
+    },
+    {
+      "LGA_CODE_2016": 19399,
+      "LGA": "Unincorporated NSW"
+    },
+    {
+      "LGA_CODE_2016": 19499,
+      "LGA": "No usual address (NSW)"
+    },
+    {
+      "LGA_CODE_2016": 19799,
+      "LGA": "Migratory - Offshore - Shipping (NSW)"
+    },
+    {
+      "LGA_CODE_2016": 20110,
+      "LGA": "Alpine (S)"
+    },
+    {
+      "LGA_CODE_2016": 20260,
+      "LGA": "Ararat (RC)"
+    },
+    {
+      "LGA_CODE_2016": 20570,
+      "LGA": "Ballarat (C)"
+    },
+    {
+      "LGA_CODE_2016": 20660,
+      "LGA": "Banyule (C)"
+    },
+    {
+      "LGA_CODE_2016": 20740,
+      "LGA": "Bass Coast (S)"
+    },
+    {
+      "LGA_CODE_2016": 20830,
+      "LGA": "Baw Baw (S)"
+    },
+    {
+      "LGA_CODE_2016": 20910,
+      "LGA": "Bayside (C)"
+    },
+    {
+      "LGA_CODE_2016": 21010,
+      "LGA": "Benalla (RC)"
+    },
+    {
+      "LGA_CODE_2016": 21110,
+      "LGA": "Boroondara (C)"
+    },
+    {
+      "LGA_CODE_2016": 21180,
+      "LGA": "Brimbank (C)"
+    },
+    {
+      "LGA_CODE_2016": 21270,
+      "LGA": "Buloke (S)"
+    },
+    {
+      "LGA_CODE_2016": 21370,
+      "LGA": "Campaspe (S)"
+    },
+    {
+      "LGA_CODE_2016": 21450,
+      "LGA": "Cardinia (S)"
+    },
+    {
+      "LGA_CODE_2016": 21610,
+      "LGA": "Casey (C)"
+    },
+    {
+      "LGA_CODE_2016": 21670,
+      "LGA": "Central Goldfields (S)"
+    },
+    {
+      "LGA_CODE_2016": 21750,
+      "LGA": "Colac-Otway (S)"
+    },
+    {
+      "LGA_CODE_2016": 21830,
+      "LGA": "Corangamite (S)"
+    },
+    {
+      "LGA_CODE_2016": 21890,
+      "LGA": "Darebin (C)"
+    },
+    {
+      "LGA_CODE_2016": 22110,
+      "LGA": "East Gippsland (S)"
+    },
+    {
+      "LGA_CODE_2016": 22170,
+      "LGA": "Frankston (C)"
+    },
+    {
+      "LGA_CODE_2016": 22250,
+      "LGA": "Gannawarra (S)"
+    },
+    {
+      "LGA_CODE_2016": 22310,
+      "LGA": "Glen Eira (C)"
+    },
+    {
+      "LGA_CODE_2016": 22410,
+      "LGA": "Glenelg (S)"
+    },
+    {
+      "LGA_CODE_2016": 22490,
+      "LGA": "Golden Plains (S)"
+    },
+    {
+      "LGA_CODE_2016": 22620,
+      "LGA": "Greater Bendigo (C)"
+    },
+    {
+      "LGA_CODE_2016": 22670,
+      "LGA": "Greater Dandenong (C)"
+    },
+    {
+      "LGA_CODE_2016": 22750,
+      "LGA": "Greater Geelong (C)"
+    },
+    {
+      "LGA_CODE_2016": 22830,
+      "LGA": "Greater Shepparton (C)"
+    },
+    {
+      "LGA_CODE_2016": 22910,
+      "LGA": "Hepburn (S)"
+    },
+    {
+      "LGA_CODE_2016": 22980,
+      "LGA": "Hindmarsh (S)"
+    },
+    {
+      "LGA_CODE_2016": 23110,
+      "LGA": "Hobsons Bay (C)"
+    },
+    {
+      "LGA_CODE_2016": 23190,
+      "LGA": "Horsham (RC)"
+    },
+    {
+      "LGA_CODE_2016": 23270,
+      "LGA": "Hume (C)"
+    },
+    {
+      "LGA_CODE_2016": 23350,
+      "LGA": "Indigo (S)"
+    },
+    {
+      "LGA_CODE_2016": 23430,
+      "LGA": "Kingston (C)"
+    },
+    {
+      "LGA_CODE_2016": 23670,
+      "LGA": "Knox (C)"
+    },
+    {
+      "LGA_CODE_2016": 23810,
+      "LGA": "Latrobe (C)"
+    },
+    {
+      "LGA_CODE_2016": 23940,
+      "LGA": "Loddon (S)"
+    },
+    {
+      "LGA_CODE_2016": 24130,
+      "LGA": "Macedon Ranges (S)"
+    },
+    {
+      "LGA_CODE_2016": 24210,
+      "LGA": "Manningham (C)"
+    },
+    {
+      "LGA_CODE_2016": 24250,
+      "LGA": "Mansfield (S)"
+    },
+    {
+      "LGA_CODE_2016": 24330,
+      "LGA": "Maribyrnong (C)"
+    },
+    {
+      "LGA_CODE_2016": 24410,
+      "LGA": "Maroondah (C)"
+    },
+    {
+      "LGA_CODE_2016": 24600,
+      "LGA": "Melbourne (C)"
+    },
+    {
+      "LGA_CODE_2016": 24650,
+      "LGA": "Melton (C)"
+    },
+    {
+      "LGA_CODE_2016": 24780,
+      "LGA": "Mildura (RC)"
+    },
+    {
+      "LGA_CODE_2016": 24850,
+      "LGA": "Mitchell (S)"
+    },
+    {
+      "LGA_CODE_2016": 24900,
+      "LGA": "Moira (S)"
+    },
+    {
+      "LGA_CODE_2016": 24970,
+      "LGA": "Monash (C)"
+    },
+    {
+      "LGA_CODE_2016": 25060,
+      "LGA": "Moonee Valley (C)"
+    },
+    {
+      "LGA_CODE_2016": 25150,
+      "LGA": "Moorabool (S)"
+    },
+    {
+      "LGA_CODE_2016": 25250,
+      "LGA": "Moreland (C)"
+    },
+    {
+      "LGA_CODE_2016": 25340,
+      "LGA": "Mornington Peninsula (S)"
+    },
+    {
+      "LGA_CODE_2016": 25430,
+      "LGA": "Mount Alexander (S)"
+    },
+    {
+      "LGA_CODE_2016": 25490,
+      "LGA": "Moyne (S)"
+    },
+    {
+      "LGA_CODE_2016": 25620,
+      "LGA": "Murrindindi (S)"
+    },
+    {
+      "LGA_CODE_2016": 25710,
+      "LGA": "Nillumbik (S)"
+    },
+    {
+      "LGA_CODE_2016": 25810,
+      "LGA": "Northern Grampians (S)"
+    },
+    {
+      "LGA_CODE_2016": 25900,
+      "LGA": "Port Phillip (C)"
+    },
+    {
+      "LGA_CODE_2016": 25990,
+      "LGA": "Pyrenees (S)"
+    },
+    {
+      "LGA_CODE_2016": 26080,
+      "LGA": "Queenscliffe (B)"
+    },
+    {
+      "LGA_CODE_2016": 26170,
+      "LGA": "South Gippsland (S)"
+    },
+    {
+      "LGA_CODE_2016": 26260,
+      "LGA": "Southern Grampians (S)"
+    },
+    {
+      "LGA_CODE_2016": 26350,
+      "LGA": "Stonnington (C)"
+    },
+    {
+      "LGA_CODE_2016": 26430,
+      "LGA": "Strathbogie (S)"
+    },
+    {
+      "LGA_CODE_2016": 26490,
+      "LGA": "Surf Coast (S)"
+    },
+    {
+      "LGA_CODE_2016": 26610,
+      "LGA": "Swan Hill (RC)"
+    },
+    {
+      "LGA_CODE_2016": 26670,
+      "LGA": "Towong (S)"
+    },
+    {
+      "LGA_CODE_2016": 26700,
+      "LGA": "Wangaratta (RC)"
+    },
+    {
+      "LGA_CODE_2016": 26730,
+      "LGA": "Warrnambool (C)"
+    },
+    {
+      "LGA_CODE_2016": 26810,
+      "LGA": "Wellington (S)"
+    },
+    {
+      "LGA_CODE_2016": 26890,
+      "LGA": "West Wimmera (S)"
+    },
+    {
+      "LGA_CODE_2016": 26980,
+      "LGA": "Whitehorse (C)"
+    },
+    {
+      "LGA_CODE_2016": 27070,
+      "LGA": "Whittlesea (C)"
+    },
+    {
+      "LGA_CODE_2016": 27170,
+      "LGA": "Wodonga (C)"
+    },
+    {
+      "LGA_CODE_2016": 27260,
+      "LGA": "Wyndham (C)"
+    },
+    {
+      "LGA_CODE_2016": 27350,
+      "LGA": "Yarra (C)"
+    },
+    {
+      "LGA_CODE_2016": 27450,
+      "LGA": "Yarra Ranges (S)"
+    },
+    {
+      "LGA_CODE_2016": 27630,
+      "LGA": "Yarriambiack (S)"
+    },
+    {
+      "LGA_CODE_2016": 29399,
+      "LGA": "Unincorporated Vic"
+    },
+    {
+      "LGA_CODE_2016": 29499,
+      "LGA": "No usual address (Vic.)"
+    },
+    {
+      "LGA_CODE_2016": 29799,
+      "LGA": "Migratory - Offshore - Shipping (Vic.)"
+    },
+    {
+      "LGA_CODE_2016": 30250,
+      "LGA": "Aurukun (S)"
+    },
+    {
+      "LGA_CODE_2016": 30300,
+      "LGA": "Balonne (S)"
+    },
+    {
+      "LGA_CODE_2016": 30370,
+      "LGA": "Banana (S)"
+    },
+    {
+      "LGA_CODE_2016": 30410,
+      "LGA": "Barcaldine (R)"
+    },
+    {
+      "LGA_CODE_2016": 30450,
+      "LGA": "Barcoo (S)"
+    },
+    {
+      "LGA_CODE_2016": 30760,
+      "LGA": "Blackall-Tambo (R)"
+    },
+    {
+      "LGA_CODE_2016": 30900,
+      "LGA": "Boulia (S)"
+    },
+    {
+      "LGA_CODE_2016": 31000,
+      "LGA": "Brisbane (C)"
+    },
+    {
+      "LGA_CODE_2016": 31750,
+      "LGA": "Bulloo (S)"
+    },
+    {
+      "LGA_CODE_2016": 31820,
+      "LGA": "Bundaberg (R)"
+    },
+    {
+      "LGA_CODE_2016": 31900,
+      "LGA": "Burdekin (S)"
+    },
+    {
+      "LGA_CODE_2016": 31950,
+      "LGA": "Burke (S)"
+    },
+    {
+      "LGA_CODE_2016": 32080,
+      "LGA": "Cairns (R)"
+    },
+    {
+      "LGA_CODE_2016": 32250,
+      "LGA": "Carpentaria (S)"
+    },
+    {
+      "LGA_CODE_2016": 32260,
+      "LGA": "Cassowary Coast (R)"
+    },
+    {
+      "LGA_CODE_2016": 32270,
+      "LGA": "Central Highlands (R)"
+    },
+    {
+      "LGA_CODE_2016": 32310,
+      "LGA": "Charters Towers (R)"
+    },
+    {
+      "LGA_CODE_2016": 32330,
+      "LGA": "Cherbourg (S)"
+    },
+    {
+      "LGA_CODE_2016": 32450,
+      "LGA": "Cloncurry (S)"
+    },
+    {
+      "LGA_CODE_2016": 32500,
+      "LGA": "Cook (S)"
+    },
+    {
+      "LGA_CODE_2016": 32600,
+      "LGA": "Croydon (S)"
+    },
+    {
+      "LGA_CODE_2016": 32750,
+      "LGA": "Diamantina (S)"
+    },
+    {
+      "LGA_CODE_2016": 32770,
+      "LGA": "Doomadgee (S)"
+    },
+    {
+      "LGA_CODE_2016": 32810,
+      "LGA": "Douglas (S)"
+    },
+    {
+      "LGA_CODE_2016": 33100,
+      "LGA": "Etheridge (S)"
+    },
+    {
+      "LGA_CODE_2016": 33200,
+      "LGA": "Flinders (S)"
+    },
+    {
+      "LGA_CODE_2016": 33220,
+      "LGA": "Fraser Coast (R)"
+    },
+    {
+      "LGA_CODE_2016": 33360,
+      "LGA": "Gladstone (R)"
+    },
+    {
+      "LGA_CODE_2016": 33430,
+      "LGA": "Gold Coast (C)"
+    },
+    {
+      "LGA_CODE_2016": 33610,
+      "LGA": "Goondiwindi (R)"
+    },
+    {
+      "LGA_CODE_2016": 33620,
+      "LGA": "Gympie (R)"
+    },
+    {
+      "LGA_CODE_2016": 33800,
+      "LGA": "Hinchinbrook (S)"
+    },
+    {
+      "LGA_CODE_2016": 33830,
+      "LGA": "Hope Vale (S)"
+    },
+    {
+      "LGA_CODE_2016": 33960,
+      "LGA": "Ipswich (C)"
+    },
+    {
+      "LGA_CODE_2016": 33980,
+      "LGA": "Isaac (R)"
+    },
+    {
+      "LGA_CODE_2016": 34420,
+      "LGA": "Kowanyama (S)"
+    },
+    {
+      "LGA_CODE_2016": 34530,
+      "LGA": "Livingstone (S)"
+    },
+    {
+      "LGA_CODE_2016": 34570,
+      "LGA": "Lockhart River (S)"
+    },
+    {
+      "LGA_CODE_2016": 34580,
+      "LGA": "Lockyer Valley (R)"
+    },
+    {
+      "LGA_CODE_2016": 34590,
+      "LGA": "Logan (C)"
+    },
+    {
+      "LGA_CODE_2016": 34710,
+      "LGA": "Longreach (R)"
+    },
+    {
+      "LGA_CODE_2016": 34770,
+      "LGA": "Mackay (R)"
+    },
+    {
+      "LGA_CODE_2016": 34800,
+      "LGA": "McKinlay (S)"
+    },
+    {
+      "LGA_CODE_2016": 34830,
+      "LGA": "Mapoon (S)"
+    },
+    {
+      "LGA_CODE_2016": 34860,
+      "LGA": "Maranoa (R)"
+    },
+    {
+      "LGA_CODE_2016": 34880,
+      "LGA": "Mareeba (S)"
+    },
+    {
+      "LGA_CODE_2016": 35010,
+      "LGA": "Moreton Bay (R)"
+    },
+    {
+      "LGA_CODE_2016": 35250,
+      "LGA": "Mornington (S)"
+    },
+    {
+      "LGA_CODE_2016": 35300,
+      "LGA": "Mount Isa (C)"
+    },
+    {
+      "LGA_CODE_2016": 35600,
+      "LGA": "Murweh (S)"
+    },
+    {
+      "LGA_CODE_2016": 35670,
+      "LGA": "Napranum (S)"
+    },
+    {
+      "LGA_CODE_2016": 35740,
+      "LGA": "Noosa (S)"
+    },
+    {
+      "LGA_CODE_2016": 35760,
+      "LGA": "North Burnett (R)"
+    },
+    {
+      "LGA_CODE_2016": 35780,
+      "LGA": "Northern Peninsula Area (R)"
+    },
+    {
+      "LGA_CODE_2016": 35790,
+      "LGA": "Palm Island (S)"
+    },
+    {
+      "LGA_CODE_2016": 35800,
+      "LGA": "Paroo (S)"
+    },
+    {
+      "LGA_CODE_2016": 36070,
+      "LGA": "Pormpuraaw (S)"
+    },
+    {
+      "LGA_CODE_2016": 36150,
+      "LGA": "Quilpie (S)"
+    },
+    {
+      "LGA_CODE_2016": 36250,
+      "LGA": "Redland (C)"
+    },
+    {
+      "LGA_CODE_2016": 36300,
+      "LGA": "Richmond (S)"
+    },
+    {
+      "LGA_CODE_2016": 36370,
+      "LGA": "Rockhampton (R)"
+    },
+    {
+      "LGA_CODE_2016": 36510,
+      "LGA": "Scenic Rim (R)"
+    },
+    {
+      "LGA_CODE_2016": 36580,
+      "LGA": "Somerset (R)"
+    },
+    {
+      "LGA_CODE_2016": 36630,
+      "LGA": "South Burnett (R)"
+    },
+    {
+      "LGA_CODE_2016": 36660,
+      "LGA": "Southern Downs (R)"
+    },
+    {
+      "LGA_CODE_2016": 36720,
+      "LGA": "Sunshine Coast (R)"
+    },
+    {
+      "LGA_CODE_2016": 36820,
+      "LGA": "Tablelands (R)"
+    },
+    {
+      "LGA_CODE_2016": 36910,
+      "LGA": "Toowoomba (R)"
+    },
+    {
+      "LGA_CODE_2016": 36950,
+      "LGA": "Torres (S)"
+    },
+    {
+      "LGA_CODE_2016": 36960,
+      "LGA": "Torres Strait Island (R)"
+    },
+    {
+      "LGA_CODE_2016": 37010,
+      "LGA": "Townsville (C)"
+    },
+    {
+      "LGA_CODE_2016": 37300,
+      "LGA": "Weipa (T)"
+    },
+    {
+      "LGA_CODE_2016": 37310,
+      "LGA": "Western Downs (R)"
+    },
+    {
+      "LGA_CODE_2016": 37340,
+      "LGA": "Whitsunday (R)"
+    },
+    {
+      "LGA_CODE_2016": 37400,
+      "LGA": "Winton (S)"
+    },
+    {
+      "LGA_CODE_2016": 37550,
+      "LGA": "Woorabinda (S)"
+    },
+    {
+      "LGA_CODE_2016": 37570,
+      "LGA": "Wujal Wujal (S)"
+    },
+    {
+      "LGA_CODE_2016": 37600,
+      "LGA": "Yarrabah (S)"
+    },
+    {
+      "LGA_CODE_2016": 39499,
+      "LGA": "No usual address (Qld)"
+    },
+    {
+      "LGA_CODE_2016": 39799,
+      "LGA": "Migratory - Offshore - Shipping (Qld)"
+    },
+    {
+      "LGA_CODE_2016": 40070,
+      "LGA": "Adelaide (C)"
+    },
+    {
+      "LGA_CODE_2016": 40120,
+      "LGA": "Adelaide Hills (DC)"
+    },
+    {
+      "LGA_CODE_2016": 40220,
+      "LGA": "Alexandrina (DC)"
+    },
+    {
+      "LGA_CODE_2016": 40250,
+      "LGA": "Anangu Pitjantjatjara (AC)"
+    },
+    {
+      "LGA_CODE_2016": 40310,
+      "LGA": "Barossa (DC)"
+    },
+    {
+      "LGA_CODE_2016": 40430,
+      "LGA": "Barunga West (DC)"
+    },
+    {
+      "LGA_CODE_2016": 40520,
+      "LGA": "Berri and Barmera (DC)"
+    },
+    {
+      "LGA_CODE_2016": 40700,
+      "LGA": "Burnside (C)"
+    },
+    {
+      "LGA_CODE_2016": 40910,
+      "LGA": "Campbelltown (C)"
+    },
+    {
+      "LGA_CODE_2016": 41010,
+      "LGA": "Ceduna (DC)"
+    },
+    {
+      "LGA_CODE_2016": 41060,
+      "LGA": "Charles Sturt (C)"
+    },
+    {
+      "LGA_CODE_2016": 41140,
+      "LGA": "Clare and Gilbert Valleys (DC)"
+    },
+    {
+      "LGA_CODE_2016": 41190,
+      "LGA": "Cleve (DC)"
+    },
+    {
+      "LGA_CODE_2016": 41330,
+      "LGA": "Coober Pedy (DC)"
+    },
+    {
+      "LGA_CODE_2016": 41560,
+      "LGA": "Copper Coast (DC)"
+    },
+    {
+      "LGA_CODE_2016": 41750,
+      "LGA": "Elliston (DC)"
+    },
+    {
+      "LGA_CODE_2016": 41830,
+      "LGA": "Flinders Ranges (DC)"
+    },
+    {
+      "LGA_CODE_2016": 41960,
+      "LGA": "Franklin Harbour (DC)"
+    },
+    {
+      "LGA_CODE_2016": 42030,
+      "LGA": "Gawler (T)"
+    },
+    {
+      "LGA_CODE_2016": 42110,
+      "LGA": "Goyder (DC)"
+    },
+    {
+      "LGA_CODE_2016": 42250,
+      "LGA": "Grant (DC)"
+    },
+    {
+      "LGA_CODE_2016": 42600,
+      "LGA": "Holdfast Bay (C)"
+    },
+    {
+      "LGA_CODE_2016": 42750,
+      "LGA": "Kangaroo Island (DC)"
+    },
+    {
+      "LGA_CODE_2016": 43080,
+      "LGA": "Karoonda East Murray (DC)"
+    },
+    {
+      "LGA_CODE_2016": 43220,
+      "LGA": "Kimba (DC)"
+    },
+    {
+      "LGA_CODE_2016": 43360,
+      "LGA": "Kingston (DC)"
+    },
+    {
+      "LGA_CODE_2016": 43650,
+      "LGA": "Light (RegC)"
+    },
+    {
+      "LGA_CODE_2016": 43710,
+      "LGA": "Lower Eyre Peninsula (DC)"
+    },
+    {
+      "LGA_CODE_2016": 43790,
+      "LGA": "Loxton Waikerie (DC)"
+    },
+    {
+      "LGA_CODE_2016": 43920,
+      "LGA": "Mallala (DC)"
+    },
+    {
+      "LGA_CODE_2016": 44000,
+      "LGA": "Maralinga Tjarutja (AC)"
+    },
+    {
+      "LGA_CODE_2016": 44060,
+      "LGA": "Marion (C)"
+    },
+    {
+      "LGA_CODE_2016": 44210,
+      "LGA": "Mid Murray (DC)"
+    },
+    {
+      "LGA_CODE_2016": 44340,
+      "LGA": "Mitcham (C)"
+    },
+    {
+      "LGA_CODE_2016": 44550,
+      "LGA": "Mount Barker (DC)"
+    },
+    {
+      "LGA_CODE_2016": 44620,
+      "LGA": "Mount Gambier (C)"
+    },
+    {
+      "LGA_CODE_2016": 44830,
+      "LGA": "Mount Remarkable (DC)"
+    },
+    {
+      "LGA_CODE_2016": 45040,
+      "LGA": "Murray Bridge (RC)"
+    },
+    {
+      "LGA_CODE_2016": 45090,
+      "LGA": "Naracoorte and Lucindale (DC)"
+    },
+    {
+      "LGA_CODE_2016": 45120,
+      "LGA": "Northern Areas (DC)"
+    },
+    {
+      "LGA_CODE_2016": 45290,
+      "LGA": "Norwood Payneham St Peters (C)"
+    },
+    {
+      "LGA_CODE_2016": 45340,
+      "LGA": "Onkaparinga (C)"
+    },
+    {
+      "LGA_CODE_2016": 45400,
+      "LGA": "Orroroo/Carrieton (DC)"
+    },
+    {
+      "LGA_CODE_2016": 45540,
+      "LGA": "Peterborough (DC)"
+    },
+    {
+      "LGA_CODE_2016": 45680,
+      "LGA": "Playford (C)"
+    },
+    {
+      "LGA_CODE_2016": 45890,
+      "LGA": "Port Adelaide Enfield (C)"
+    },
+    {
+      "LGA_CODE_2016": 46090,
+      "LGA": "Port Augusta (C)"
+    },
+    {
+      "LGA_CODE_2016": 46300,
+      "LGA": "Port Lincoln (C)"
+    },
+    {
+      "LGA_CODE_2016": 46450,
+      "LGA": "Port Pirie City and Dists (M)"
+    },
+    {
+      "LGA_CODE_2016": 46510,
+      "LGA": "Prospect (C)"
+    },
+    {
+      "LGA_CODE_2016": 46670,
+      "LGA": "Renmark Paringa (DC)"
+    },
+    {
+      "LGA_CODE_2016": 46860,
+      "LGA": "Robe (DC)"
+    },
+    {
+      "LGA_CODE_2016": 46970,
+      "LGA": "Roxby Downs (M)"
+    },
+    {
+      "LGA_CODE_2016": 47140,
+      "LGA": "Salisbury (C)"
+    },
+    {
+      "LGA_CODE_2016": 47290,
+      "LGA": "Southern Mallee (DC)"
+    },
+    {
+      "LGA_CODE_2016": 47490,
+      "LGA": "Streaky Bay (DC)"
+    },
+    {
+      "LGA_CODE_2016": 47630,
+      "LGA": "Tatiara (DC)"
+    },
+    {
+      "LGA_CODE_2016": 47700,
+      "LGA": "Tea Tree Gully (C)"
+    },
+    {
+      "LGA_CODE_2016": 47800,
+      "LGA": "The Coorong (DC)"
+    },
+    {
+      "LGA_CODE_2016": 47910,
+      "LGA": "Tumby Bay (DC)"
+    },
+    {
+      "LGA_CODE_2016": 47980,
+      "LGA": "Unley (C)"
+    },
+    {
+      "LGA_CODE_2016": 48050,
+      "LGA": "Victor Harbor (C)"
+    },
+    {
+      "LGA_CODE_2016": 48130,
+      "LGA": "Wakefield (DC)"
+    },
+    {
+      "LGA_CODE_2016": 48260,
+      "LGA": "Walkerville (M)"
+    },
+    {
+      "LGA_CODE_2016": 48340,
+      "LGA": "Wattle Range (DC)"
+    },
+    {
+      "LGA_CODE_2016": 48410,
+      "LGA": "West Torrens (C)"
+    },
+    {
+      "LGA_CODE_2016": 48540,
+      "LGA": "Whyalla (C)"
+    },
+    {
+      "LGA_CODE_2016": 48640,
+      "LGA": "Wudinna (DC)"
+    },
+    {
+      "LGA_CODE_2016": 48750,
+      "LGA": "Yankalilla (DC)"
+    },
+    {
+      "LGA_CODE_2016": 48830,
+      "LGA": "Yorke Peninsula (DC)"
+    },
+    {
+      "LGA_CODE_2016": 49399,
+      "LGA": "Unincorporated SA"
+    },
+    {
+      "LGA_CODE_2016": 49499,
+      "LGA": "No usual address (SA)"
+    },
+    {
+      "LGA_CODE_2016": 49799,
+      "LGA": "Migratory - Offshore - Shipping (SA)"
+    },
+    {
+      "LGA_CODE_2016": 50080,
+      "LGA": "Albany (C)"
+    },
+    {
+      "LGA_CODE_2016": 50210,
+      "LGA": "Armadale (C)"
+    },
+    {
+      "LGA_CODE_2016": 50250,
+      "LGA": "Ashburton (S)"
+    },
+    {
+      "LGA_CODE_2016": 50280,
+      "LGA": "Augusta-Margaret River (S)"
+    },
+    {
+      "LGA_CODE_2016": 50350,
+      "LGA": "Bassendean (T)"
+    },
+    {
+      "LGA_CODE_2016": 50420,
+      "LGA": "Bayswater (C)"
+    },
+    {
+      "LGA_CODE_2016": 50490,
+      "LGA": "Belmont (C)"
+    },
+    {
+      "LGA_CODE_2016": 50560,
+      "LGA": "Beverley (S)"
+    },
+    {
+      "LGA_CODE_2016": 50630,
+      "LGA": "Boddington (S)"
+    },
+    {
+      "LGA_CODE_2016": 50770,
+      "LGA": "Boyup Brook (S)"
+    },
+    {
+      "LGA_CODE_2016": 50840,
+      "LGA": "Bridgetown-Greenbushes (S)"
+    },
+    {
+      "LGA_CODE_2016": 50910,
+      "LGA": "Brookton (S)"
+    },
+    {
+      "LGA_CODE_2016": 50980,
+      "LGA": "Broome (S)"
+    },
+    {
+      "LGA_CODE_2016": 51080,
+      "LGA": "Broomehill-Tambellup (S)"
+    },
+    {
+      "LGA_CODE_2016": 51120,
+      "LGA": "Bruce Rock (S)"
+    },
+    {
+      "LGA_CODE_2016": 51190,
+      "LGA": "Bunbury (C)"
+    },
+    {
+      "LGA_CODE_2016": 51260,
+      "LGA": "Busselton (C)"
+    },
+    {
+      "LGA_CODE_2016": 51310,
+      "LGA": "Cambridge (T)"
+    },
+    {
+      "LGA_CODE_2016": 51330,
+      "LGA": "Canning (C)"
+    },
+    {
+      "LGA_CODE_2016": 51400,
+      "LGA": "Capel (S)"
+    },
+    {
+      "LGA_CODE_2016": 51470,
+      "LGA": "Carnamah (S)"
+    },
+    {
+      "LGA_CODE_2016": 51540,
+      "LGA": "Carnarvon (S)"
+    },
+    {
+      "LGA_CODE_2016": 51610,
+      "LGA": "Chapman Valley (S)"
+    },
+    {
+      "LGA_CODE_2016": 51680,
+      "LGA": "Chittering (S)"
+    },
+    {
+      "LGA_CODE_2016": 51750,
+      "LGA": "Claremont (T)"
+    },
+    {
+      "LGA_CODE_2016": 51820,
+      "LGA": "Cockburn (C)"
+    },
+    {
+      "LGA_CODE_2016": 51890,
+      "LGA": "Collie (S)"
+    },
+    {
+      "LGA_CODE_2016": 51960,
+      "LGA": "Coolgardie (S)"
+    },
+    {
+      "LGA_CODE_2016": 52030,
+      "LGA": "Coorow (S)"
+    },
+    {
+      "LGA_CODE_2016": 52100,
+      "LGA": "Corrigin (S)"
+    },
+    {
+      "LGA_CODE_2016": 52170,
+      "LGA": "Cottesloe (T)"
+    },
+    {
+      "LGA_CODE_2016": 52240,
+      "LGA": "Cranbrook (S)"
+    },
+    {
+      "LGA_CODE_2016": 52310,
+      "LGA": "Cuballing (S)"
+    },
+    {
+      "LGA_CODE_2016": 52380,
+      "LGA": "Cue (S)"
+    },
+    {
+      "LGA_CODE_2016": 52450,
+      "LGA": "Cunderdin (S)"
+    },
+    {
+      "LGA_CODE_2016": 52520,
+      "LGA": "Dalwallinu (S)"
+    },
+    {
+      "LGA_CODE_2016": 52590,
+      "LGA": "Dandaragan (S)"
+    },
+    {
+      "LGA_CODE_2016": 52660,
+      "LGA": "Dardanup (S)"
+    },
+    {
+      "LGA_CODE_2016": 52730,
+      "LGA": "Denmark (S)"
+    },
+    {
+      "LGA_CODE_2016": 52800,
+      "LGA": "Derby-West Kimberley (S)"
+    },
+    {
+      "LGA_CODE_2016": 52870,
+      "LGA": "Donnybrook-Balingup (S)"
+    },
+    {
+      "LGA_CODE_2016": 52940,
+      "LGA": "Dowerin (S)"
+    },
+    {
+      "LGA_CODE_2016": 53010,
+      "LGA": "Dumbleyung (S)"
+    },
+    {
+      "LGA_CODE_2016": 53080,
+      "LGA": "Dundas (S)"
+    },
+    {
+      "LGA_CODE_2016": 53150,
+      "LGA": "East Fremantle (T)"
+    },
+    {
+      "LGA_CODE_2016": 53220,
+      "LGA": "East Pilbara (S)"
+    },
+    {
+      "LGA_CODE_2016": 53290,
+      "LGA": "Esperance (S)"
+    },
+    {
+      "LGA_CODE_2016": 53360,
+      "LGA": "Exmouth (S)"
+    },
+    {
+      "LGA_CODE_2016": 53430,
+      "LGA": "Fremantle (C)"
+    },
+    {
+      "LGA_CODE_2016": 53570,
+      "LGA": "Gingin (S)"
+    },
+    {
+      "LGA_CODE_2016": 53640,
+      "LGA": "Gnowangerup (S)"
+    },
+    {
+      "LGA_CODE_2016": 53710,
+      "LGA": "Goomalling (S)"
+    },
+    {
+      "LGA_CODE_2016": 53780,
+      "LGA": "Gosnells (C)"
+    },
+    {
+      "LGA_CODE_2016": 53800,
+      "LGA": "Greater Geraldton (C)"
+    },
+    {
+      "LGA_CODE_2016": 53920,
+      "LGA": "Halls Creek (S)"
+    },
+    {
+      "LGA_CODE_2016": 53990,
+      "LGA": "Harvey (S)"
+    },
+    {
+      "LGA_CODE_2016": 54060,
+      "LGA": "Irwin (S)"
+    },
+    {
+      "LGA_CODE_2016": 54130,
+      "LGA": "Jerramungup (S)"
+    },
+    {
+      "LGA_CODE_2016": 54170,
+      "LGA": "Joondalup (C)"
+    },
+    {
+      "LGA_CODE_2016": 54200,
+      "LGA": "Kalamunda (S)"
+    },
+    {
+      "LGA_CODE_2016": 54280,
+      "LGA": "Kalgoorlie/Boulder (C)"
+    },
+    {
+      "LGA_CODE_2016": 54310,
+      "LGA": "Karratha (C)"
+    },
+    {
+      "LGA_CODE_2016": 54340,
+      "LGA": "Katanning (S)"
+    },
+    {
+      "LGA_CODE_2016": 54410,
+      "LGA": "Kellerberrin (S)"
+    },
+    {
+      "LGA_CODE_2016": 54480,
+      "LGA": "Kent (S)"
+    },
+    {
+      "LGA_CODE_2016": 54550,
+      "LGA": "Kojonup (S)"
+    },
+    {
+      "LGA_CODE_2016": 54620,
+      "LGA": "Kondinin (S)"
+    },
+    {
+      "LGA_CODE_2016": 54690,
+      "LGA": "Koorda (S)"
+    },
+    {
+      "LGA_CODE_2016": 54760,
+      "LGA": "Kulin (S)"
+    },
+    {
+      "LGA_CODE_2016": 54830,
+      "LGA": "Kwinana (C)"
+    },
+    {
+      "LGA_CODE_2016": 54900,
+      "LGA": "Lake Grace (S)"
+    },
+    {
+      "LGA_CODE_2016": 54970,
+      "LGA": "Laverton (S)"
+    },
+    {
+      "LGA_CODE_2016": 55040,
+      "LGA": "Leonora (S)"
+    },
+    {
+      "LGA_CODE_2016": 55110,
+      "LGA": "Mandurah (C)"
+    },
+    {
+      "LGA_CODE_2016": 55180,
+      "LGA": "Manjimup (S)"
+    },
+    {
+      "LGA_CODE_2016": 55250,
+      "LGA": "Meekatharra (S)"
+    },
+    {
+      "LGA_CODE_2016": 55320,
+      "LGA": "Melville (C)"
+    },
+    {
+      "LGA_CODE_2016": 55390,
+      "LGA": "Menzies (S)"
+    },
+    {
+      "LGA_CODE_2016": 55460,
+      "LGA": "Merredin (S)"
+    },
+    {
+      "LGA_CODE_2016": 55530,
+      "LGA": "Mingenew (S)"
+    },
+    {
+      "LGA_CODE_2016": 55600,
+      "LGA": "Moora (S)"
+    },
+    {
+      "LGA_CODE_2016": 55670,
+      "LGA": "Morawa (S)"
+    },
+    {
+      "LGA_CODE_2016": 55740,
+      "LGA": "Mosman Park (T)"
+    },
+    {
+      "LGA_CODE_2016": 55810,
+      "LGA": "Mount Magnet (S)"
+    },
+    {
+      "LGA_CODE_2016": 55880,
+      "LGA": "Mount Marshall (S)"
+    },
+    {
+      "LGA_CODE_2016": 55950,
+      "LGA": "Mukinbudin (S)"
+    },
+    {
+      "LGA_CODE_2016": 56090,
+      "LGA": "Mundaring (S)"
+    },
+    {
+      "LGA_CODE_2016": 56160,
+      "LGA": "Murchison (S)"
+    },
+    {
+      "LGA_CODE_2016": 56230,
+      "LGA": "Murray (S)"
+    },
+    {
+      "LGA_CODE_2016": 56300,
+      "LGA": "Nannup (S)"
+    },
+    {
+      "LGA_CODE_2016": 56370,
+      "LGA": "Narembeen (S)"
+    },
+    {
+      "LGA_CODE_2016": 56460,
+      "LGA": "Narrogin (S)"
+    },
+    {
+      "LGA_CODE_2016": 56580,
+      "LGA": "Nedlands (C)"
+    },
+    {
+      "LGA_CODE_2016": 56620,
+      "LGA": "Ngaanyatjarraku (S)"
+    },
+    {
+      "LGA_CODE_2016": 56730,
+      "LGA": "Northam (S)"
+    },
+    {
+      "LGA_CODE_2016": 56790,
+      "LGA": "Northampton (S)"
+    },
+    {
+      "LGA_CODE_2016": 56860,
+      "LGA": "Nungarin (S)"
+    },
+    {
+      "LGA_CODE_2016": 56930,
+      "LGA": "Peppermint Grove (S)"
+    },
+    {
+      "LGA_CODE_2016": 57000,
+      "LGA": "Perenjori (S)"
+    },
+    {
+      "LGA_CODE_2016": 57080,
+      "LGA": "Perth (C)"
+    },
+    {
+      "LGA_CODE_2016": 57140,
+      "LGA": "Pingelly (S)"
+    },
+    {
+      "LGA_CODE_2016": 57210,
+      "LGA": "Plantagenet (S)"
+    },
+    {
+      "LGA_CODE_2016": 57280,
+      "LGA": "Port Hedland (T)"
+    },
+    {
+      "LGA_CODE_2016": 57350,
+      "LGA": "Quairading (S)"
+    },
+    {
+      "LGA_CODE_2016": 57420,
+      "LGA": "Ravensthorpe (S)"
+    },
+    {
+      "LGA_CODE_2016": 57490,
+      "LGA": "Rockingham (C)"
+    },
+    {
+      "LGA_CODE_2016": 57630,
+      "LGA": "Sandstone (S)"
+    },
+    {
+      "LGA_CODE_2016": 57700,
+      "LGA": "Serpentine-Jarrahdale (S)"
+    },
+    {
+      "LGA_CODE_2016": 57770,
+      "LGA": "Shark Bay (S)"
+    },
+    {
+      "LGA_CODE_2016": 57840,
+      "LGA": "South Perth (C)"
+    },
+    {
+      "LGA_CODE_2016": 57910,
+      "LGA": "Stirling (C)"
+    },
+    {
+      "LGA_CODE_2016": 57980,
+      "LGA": "Subiaco (C)"
+    },
+    {
+      "LGA_CODE_2016": 58050,
+      "LGA": "Swan (C)"
+    },
+    {
+      "LGA_CODE_2016": 58190,
+      "LGA": "Tammin (S)"
+    },
+    {
+      "LGA_CODE_2016": 58260,
+      "LGA": "Three Springs (S)"
+    },
+    {
+      "LGA_CODE_2016": 58330,
+      "LGA": "Toodyay (S)"
+    },
+    {
+      "LGA_CODE_2016": 58400,
+      "LGA": "Trayning (S)"
+    },
+    {
+      "LGA_CODE_2016": 58470,
+      "LGA": "Upper Gascoyne (S)"
+    },
+    {
+      "LGA_CODE_2016": 58510,
+      "LGA": "Victoria Park (T)"
+    },
+    {
+      "LGA_CODE_2016": 58540,
+      "LGA": "Victoria Plains (S)"
+    },
+    {
+      "LGA_CODE_2016": 58570,
+      "LGA": "Vincent (C)"
+    },
+    {
+      "LGA_CODE_2016": 58610,
+      "LGA": "Wagin (S)"
+    },
+    {
+      "LGA_CODE_2016": 58680,
+      "LGA": "Wandering (S)"
+    },
+    {
+      "LGA_CODE_2016": 58760,
+      "LGA": "Wanneroo (C)"
+    },
+    {
+      "LGA_CODE_2016": 58820,
+      "LGA": "Waroona (S)"
+    },
+    {
+      "LGA_CODE_2016": 58890,
+      "LGA": "West Arthur (S)"
+    },
+    {
+      "LGA_CODE_2016": 59030,
+      "LGA": "Westonia (S)"
+    },
+    {
+      "LGA_CODE_2016": 59100,
+      "LGA": "Wickepin (S)"
+    },
+    {
+      "LGA_CODE_2016": 59170,
+      "LGA": "Williams (S)"
+    },
+    {
+      "LGA_CODE_2016": 59250,
+      "LGA": "Wiluna (S)"
+    },
+    {
+      "LGA_CODE_2016": 59310,
+      "LGA": "Wongan-Ballidu (S)"
+    },
+    {
+      "LGA_CODE_2016": 59320,
+      "LGA": "Woodanilling (S)"
+    },
+    {
+      "LGA_CODE_2016": 59330,
+      "LGA": "Wyalkatchem (S)"
+    },
+    {
+      "LGA_CODE_2016": 59340,
+      "LGA": "Wyndham-East Kimberley (S)"
+    },
+    {
+      "LGA_CODE_2016": 59350,
+      "LGA": "Yalgoo (S)"
+    },
+    {
+      "LGA_CODE_2016": 59360,
+      "LGA": "Yilgarn (S)"
+    },
+    {
+      "LGA_CODE_2016": 59370,
+      "LGA": "York (S)"
+    },
+    {
+      "LGA_CODE_2016": 59499,
+      "LGA": "No usual address (WA)"
+    },
+    {
+      "LGA_CODE_2016": 59799,
+      "LGA": "Migratory - Offshore - Shipping (WA)"
+    },
+    {
+      "LGA_CODE_2016": 60210,
+      "LGA": "Break ODay (M)"
+    },
+    {
+      "LGA_CODE_2016": 60410,
+      "LGA": "Brighton (M)"
+    },
+    {
+      "LGA_CODE_2016": 60610,
+      "LGA": "Burnie (C)"
+    },
+    {
+      "LGA_CODE_2016": 60810,
+      "LGA": "Central Coast (M)"
+    },
+    {
+      "LGA_CODE_2016": 61010,
+      "LGA": "Central Highlands (M)"
+    },
+    {
+      "LGA_CODE_2016": 61210,
+      "LGA": "Circular Head (M)"
+    },
+    {
+      "LGA_CODE_2016": 61410,
+      "LGA": "Clarence (C)"
+    },
+    {
+      "LGA_CODE_2016": 61510,
+      "LGA": "Derwent Valley (M)"
+    },
+    {
+      "LGA_CODE_2016": 61610,
+      "LGA": "Devonport (C)"
+    },
+    {
+      "LGA_CODE_2016": 61810,
+      "LGA": "Dorset (M)"
+    },
+    {
+      "LGA_CODE_2016": 62010,
+      "LGA": "Flinders (M)"
+    },
+    {
+      "LGA_CODE_2016": 62210,
+      "LGA": "George Town (M)"
+    },
+    {
+      "LGA_CODE_2016": 62410,
+      "LGA": "Glamorgan/Spring Bay (M)"
+    },
+    {
+      "LGA_CODE_2016": 62610,
+      "LGA": "Glenorchy (C)"
+    },
+    {
+      "LGA_CODE_2016": 62810,
+      "LGA": "Hobart (C)"
+    },
+    {
+      "LGA_CODE_2016": 63010,
+      "LGA": "Huon Valley (M)"
+    },
+    {
+      "LGA_CODE_2016": 63210,
+      "LGA": "Kentish (M)"
+    },
+    {
+      "LGA_CODE_2016": 63410,
+      "LGA": "King Island (M)"
+    },
+    {
+      "LGA_CODE_2016": 63610,
+      "LGA": "Kingborough (M)"
+    },
+    {
+      "LGA_CODE_2016": 63810,
+      "LGA": "Latrobe (M)"
+    },
+    {
+      "LGA_CODE_2016": 64010,
+      "LGA": "Launceston (C)"
+    },
+    {
+      "LGA_CODE_2016": 64210,
+      "LGA": "Meander Valley (M)"
+    },
+    {
+      "LGA_CODE_2016": 64610,
+      "LGA": "Northern Midlands (M)"
+    },
+    {
+      "LGA_CODE_2016": 64810,
+      "LGA": "Sorell (M)"
+    },
+    {
+      "LGA_CODE_2016": 65010,
+      "LGA": "Southern Midlands (M)"
+    },
+    {
+      "LGA_CODE_2016": 65210,
+      "LGA": "Tasman (M)"
+    },
+    {
+      "LGA_CODE_2016": 65410,
+      "LGA": "Waratah/Wynyard (M)"
+    },
+    {
+      "LGA_CODE_2016": 65610,
+      "LGA": "West Coast (M)"
+    },
+    {
+      "LGA_CODE_2016": 65810,
+      "LGA": "West Tamar (M)"
+    },
+    {
+      "LGA_CODE_2016": 69499,
+      "LGA": "No usual address (Tas.)"
+    },
+    {
+      "LGA_CODE_2016": 69799,
+      "LGA": "Migratory - Offshore - Shipping (Tas.)"
+    },
+    {
+      "LGA_CODE_2016": 70200,
+      "LGA": "Alice Springs (T)"
+    },
+    {
+      "LGA_CODE_2016": 70420,
+      "LGA": "Barkly (R)"
+    },
+    {
+      "LGA_CODE_2016": 70540,
+      "LGA": "Belyuen (S)"
+    },
+    {
+      "LGA_CODE_2016": 70620,
+      "LGA": "Central Desert (R)"
+    },
+    {
+      "LGA_CODE_2016": 70700,
+      "LGA": "Coomalie (S)"
+    },
+    {
+      "LGA_CODE_2016": 71000,
+      "LGA": "Darwin (C)"
+    },
+    {
+      "LGA_CODE_2016": 71300,
+      "LGA": "East Arnhem (R)"
+    },
+    {
+      "LGA_CODE_2016": 72200,
+      "LGA": "Katherine (T)"
+    },
+    {
+      "LGA_CODE_2016": 72300,
+      "LGA": "Litchfield (M)"
+    },
+    {
+      "LGA_CODE_2016": 72330,
+      "LGA": "MacDonnell (R)"
+    },
+    {
+      "LGA_CODE_2016": 72800,
+      "LGA": "Palmerston (C)"
+    },
+    {
+      "LGA_CODE_2016": 73600,
+      "LGA": "Roper Gulf (R)"
+    },
+    {
+      "LGA_CODE_2016": 74050,
+      "LGA": "Tiwi Islands (R)"
+    },
+    {
+      "LGA_CODE_2016": 74550,
+      "LGA": "Victoria Daly (R)"
+    },
+    {
+      "LGA_CODE_2016": 74560,
+      "LGA": "Wagait (S)"
+    },
+    {
+      "LGA_CODE_2016": 74660,
+      "LGA": "West Arnhem (R)"
+    },
+    {
+      "LGA_CODE_2016": 74680,
+      "LGA": "West Daly (R)"
+    },
+    {
+      "LGA_CODE_2016": 79399,
+      "LGA": "Unincorporated NT"
+    },
+    {
+      "LGA_CODE_2016": 79499,
+      "LGA": "No usual address (NT)"
+    },
+    {
+      "LGA_CODE_2016": 79799,
+      "LGA": "Migratory - Offshore - Shipping (NT)"
+    },
+    {
+      "LGA_CODE_2016": 89399,
+      "LGA": "Unincorporated ACT"
+    },
+    {
+      "LGA_CODE_2016": 89499,
+      "LGA": "No usual address (ACT)"
+    },
+    {
+      "LGA_CODE_2016": 89799,
+      "LGA": "Migratory - Offshore - Shipping (ACT)"
+    },
+    {
+      "LGA_CODE_2016": 99399,
+      "LGA": "Unincorp. Other Territories"
+    },
+    {
+      "LGA_CODE_2016": 99499,
+      "LGA": "No usual address (OT)"
+    },
+    {
+      "LGA_CODE_2016": 99799,
+      "LGA": "Migratory - Offshore - Shipping (OT)"
+    }
+  ]
+}

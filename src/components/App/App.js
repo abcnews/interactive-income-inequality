@@ -44,7 +44,7 @@ class App extends React.Component {
     super(props);
 
     this.state = {
-      localGovernmentArea: "Search Local Governments by address",
+      localGovernmentArea: "",
       mapData: null,
       mapDataScroller: null
     };
