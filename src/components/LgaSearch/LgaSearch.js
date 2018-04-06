@@ -19,11 +19,6 @@ const MAPBOX_TOKEN = atob(config.mapbox_token);
 // Initialise Mapbox
 const client = new MapboxClient(MAPBOX_TOKEN);
 
-// import Select from 'react-select';
-// require('react-select/dist/react-select.css');
-
-// import 'react-select/dist/react-select.css';
-
 // Load up all the LGAs
 const lgaData = require("./lgas.json").lgas;
 
@@ -31,70 +26,32 @@ const lgas = lgaData.map(lga => {
   return { value: lga.LGA_CODE_2016, label: lga.LGA };
 });
 
-// console.log(lgas);
-
 class LgaSearch extends React.Component {
   constructor(props) {
     super(props);
 
     // Set up component state
     this.state = { searchText: "", selectedOption: "", lgaCode: 0 };
-
-    // Bind component functions
-    // this.handleSubmit = this.handleSubmit.bind(this);
-    // this.handleChange = this.handleChange.bind(this);
-    // this.handleSelect = this.handleSelect.bind(this);
-  }
-
-  handleSubmit(event) {
-    if (event) {
-      event.preventDefault();
-      // console.log(event.target["0"].value);
-      this.props.onLocaleIntent(event.target["0"].value);
-    }
   }
 
   // Fires on each keypress
-  handleChange(event) {
-    if (!event) return;
+  // handleChange(event) {
+  //   if (!event) return;
 
-    let searchText = event.target.value;
+  //   let searchText = event.target.value;
 
-    this.setState({ searchText: searchText }); // probably async
+  //   this.setState({ searchText: searchText }); // probably async
 
-    // Check if string is a postcode
-    if (/^[0-9]{4}$/.test(searchText)) {
-      console.log("It's probably a postcode!!!!!!");
-      this.props.onLocaleIntent(searchText + " australia");
-    }
-  }
+  //   // Check if string is a postcode
+  //   if (/^[0-9]{4}$/.test(searchText)) {
+  //     console.log("It's probably a postcode!!!!!!");
+  //     this.props.onLocaleIntent(searchText + " australia");
+  //   }
+  // }
 
   handleSelect(selectedOption) {
     this.setState({ selectedOption });
-    if (!selectedOption) return;
-
-    // console.log(selectedOption.value);
-    // this.props.geoCodeAddress(selectedOption);
   }
-
-  handleInputChange(value) {
-    // console.log(value);
-    // Check if string is a postcode
-    // if (/^[0-9]{4}$/.test(value)) {
-    //   console.log("It's probably a postcode!!!!!!");
-    //   // this.props.geoCodeAddress(value + " australia");
-    //   console.log(
-    //     await this.addressToLGA(value + " australia", this.props.mapData)
-    //   );
-    // }
-  }
-
-  // Called by filterOption prop on Select component
-  // filterResults(option, filter) {
-  //   if (option.label.toLowerCase().indexOf(filter.toLowerCase()) > -1)
-  //     return true;
-  //   else return false;
-  // }
 
   async addressToLGA(address, localAreas) {
     if (!address) return;
@@ -164,7 +121,7 @@ class LgaSearch extends React.Component {
 
       // Check if string is a postcode
       if (/^[0-9]{4}$/.test(input)) {
-        console.log("It's probably a postcode!!!!!!");
+        console.log("Postcode detected...");
         // this.props.geoCodeAddress(value + " australia");
         // console.log(await this.addressToLGA(value + " australia", this.props.mapData));
         let lgaFromPostcode = await this.addressToLGA(
@@ -172,31 +129,26 @@ class LgaSearch extends React.Component {
           this.props.mapData
         );
 
-        const lgaCode = Number(lgaFromPostcode.properties.LGA_CODE16);
+        const lgaCode =
+          lgaFromPostcode && Number(lgaFromPostcode.properties.LGA_CODE16);
 
-         filteredLgas = lgas.filter(lga => {
+        filteredLgas = lgas.filter(lga => {
           return lga.value === lgaCode;
         });
 
         callback(null, {
-          options: filteredLgas,
-          // CAREFUL! Only set this to true when there are no more options,
-          // or more specific queries will not be sent to the server.
-          complete: false
+          options: filteredLgas
         });
       } else {
         filteredLgas = lgas.filter(lga => {
           return lga.label.toLowerCase().indexOf(input.toLowerCase()) > -1;
-        })
+        });
 
         callback(null, {
-          options: filteredLgas,
-          // CAREFUL! Only set this to true when there are no more options,
-          // or more specific queries will not be sent to the server.
-          complete: false
+          options: filteredLgas
         });
       }
-    }, 200);
+    }, 500); // Async component expects async to we fake it
   }
 
   render() {
@@ -207,40 +159,19 @@ class LgaSearch extends React.Component {
 
     return ReactDOM.createPortal(
       <div className={styles.wrapper}>
-        {/* <form onSubmit={this.handleSubmit}>
-          <input
-            placeholder="Enter LGA, postcode or address"
-            onChange={this.handleChange}
-          />
-        </form> */}
-        {/* <ul className={styles.dropDown}>{lgas}</ul> */}
-
-        {/* <Select
-          name="lga-search"
-          value={value}
-          onChange={this.handleSelect}
-          onInputChange={this.handleInputChange.bind(this)}
-          options={lgas}
-          placeholder="Enter LGA, postcode or address"
-          openOnClick={false}
-          filterOption={this.filterResults.bind(this)}
-          onBlurResetsInput={false}
-          onCloseResetsInput={false}
-        /> */}
-
         <Async
           name="lga-async-search"
           value={value}
           onChange={this.handleSelect.bind(this)}
-          // onInputChange={this.handleInputChange.bind(this)}
           loadOptions={this.getOptions.bind(this)}
-          // autoload={false}
+          autoload={false}
           filterOptions={(options, filter, currentValues) => {
-            // Do no filtering, just return all options
+            // Do filtering in loadOptions instead
             return options;
           }}
-          // onBlurResetsInput={false}
-          // onCloseResetsInput={false}
+          onBlurResetsInput={false}
+          onCloseResetsInput={false}
+          placeholder="Enter LGA, postcode or address"
         />
       </div>,
       document.querySelector(".addressinput")
