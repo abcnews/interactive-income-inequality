@@ -44,7 +44,7 @@ class App extends React.Component {
     super(props);
 
     this.state = {
-      localGovernmentArea: "",
+      localGovernmentArea: {},
       mapData: null,
       mapDataScroller: null,
       lgaCode: {}
@@ -98,11 +98,11 @@ class App extends React.Component {
       }
     });
 
-    this.setState({
-      localGovernmentArea: foundLGA
-    });
+    // this.setState({
+    //   localGovernmentArea: foundLGA
+    // });
 
-    
+    return foundLGA;
   }
 
   componentWillMount() {
@@ -123,7 +123,7 @@ class App extends React.Component {
 
         LGAs = topology.features;
 
-        this.setState({ mapData: LGAMap, mapDataScroller: LGAMapScroller });
+        this.setState({ mapData: LGAs, mapDataScroller: LGAMapScroller });
 
         console.log("External data loaded...");
       });
@@ -131,8 +131,8 @@ class App extends React.Component {
 
   componentDidMount() {}
 
-  geoCodeAddress(addressString) {
-    this.addressToLGA(addressString, LGAs);
+  async geoCodeAddress(addressString) {
+    console.log(await this.addressToLGA(addressString, LGAs));
   }
 
   render() {
