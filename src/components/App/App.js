@@ -76,7 +76,7 @@ class App extends React.Component {
     // Get center of searched address
     searchLongLat = returnedData.entity.features[0].center;
 
-    let showLGA;
+    let foundLGA;
 
     // Loop through all Local Government Areas
     // TODO: maybe make this a separate function
@@ -86,21 +86,23 @@ class App extends React.Component {
       if (currentLGA && currentLGA.type === "Polygon") {
         // Handle Polygon geometry types
         if (inside(searchLongLat, currentLGA.coordinates[0])) {
-          showLGA = LGA.properties.LGA_NAME16;
+          foundLGA = LGA; //.properties.LGA_NAME16;
         }
       } else if (currentLGA && currentLGA.type === "MultiPolygon") {
         // Handle MultiPolygon geometry type
         currentLGA.coordinates.forEach(polygon => {
           if (inside(searchLongLat, polygon[0])) {
-            showLGA = LGA.properties.LGA_NAME16;
+            foundLGA = LGA; //.properties.LGA_NAME16;
           }
         });
       }
     });
 
-    this.setState((prevState, props) => ({
-      localGovernmentArea: showLGA
-    }));
+    this.setState({
+      localGovernmentArea: foundLGA
+    });
+
+    
   }
 
   componentWillMount() {
@@ -129,7 +131,7 @@ class App extends React.Component {
 
   componentDidMount() {}
 
-  handleLocaleIntent(addressString) {
+  geoCodeAddress(addressString) {
     this.addressToLGA(addressString, LGAs);
   }
 
@@ -140,9 +142,9 @@ class App extends React.Component {
       <div className={styles.root}>
         <IncomeInput />
         <LgaSearch
-          onLocaleIntent={this.handleLocaleIntent.bind(this)}
+          geoCodeAddress={this.geoCodeAddress.bind(this)}
           onLgaCodeSelect={this.setLgaCode.bind(this)}
-          localGovernmentArea={this.state.lgaCode.label} //{this.state.localGovernmentArea}
+          localGovernmentArea={this.state.localGovernmentArea}
           mapData={this.state.mapData}
         />
         <div>{this.state.lgaCode.label}</div>
