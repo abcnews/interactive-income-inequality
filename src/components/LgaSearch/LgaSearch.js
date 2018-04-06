@@ -4,8 +4,7 @@ const styles = require("./LgaSearch.scss");
 const MapboxClient = require("mapbox");
 const inside = require("point-in-polygon");
 
-// const Select = require("react-select/dist/react-select.js")
-const Select = require("react-select").default;
+// const Select = require("react-select").default;
 const Async = require("react-select").Async;
 
 // Configuration
@@ -161,24 +160,21 @@ class LgaSearch extends React.Component {
       //   // or more specific queries will not be sent to the server.
       //   complete: true
       // });
-
-      console.log("hello");
-
-      let lgaFromPostcode;
+      let filteredLgas;
 
       // Check if string is a postcode
       if (/^[0-9]{4}$/.test(input)) {
         console.log("It's probably a postcode!!!!!!");
         // this.props.geoCodeAddress(value + " australia");
         // console.log(await this.addressToLGA(value + " australia", this.props.mapData));
-        lgaFromPostcode = await this.addressToLGA(
+        let lgaFromPostcode = await this.addressToLGA(
           input + " australia",
           this.props.mapData
         );
 
         const lgaCode = Number(lgaFromPostcode.properties.LGA_CODE16);
 
-        const filteredLgas = lgas.filter(lga => {
+         filteredLgas = lgas.filter(lga => {
           return lga.value === lgaCode;
         });
 
@@ -189,8 +185,12 @@ class LgaSearch extends React.Component {
           complete: false
         });
       } else {
+        filteredLgas = lgas.filter(lga => {
+          return lga.label.toLowerCase().indexOf(input.toLowerCase()) > -1;
+        })
+
         callback(null, {
-          options: lgas,
+          options: filteredLgas,
           // CAREFUL! Only set this to true when there are no more options,
           // or more specific queries will not be sent to the server.
           complete: false
