@@ -3,6 +3,7 @@ const ReactDOM = require("react-dom");
 const styles = require("./LgaSearch.scss");
 const MapboxClient = require("mapbox");
 const inside = require("point-in-polygon");
+const debounce = require("debounce");
 
 // const Select = require("react-select").default;
 const Async = require("react-select").Async;
@@ -32,6 +33,9 @@ class LgaSearch extends React.Component {
 
     // Set up component state
     this.state = { searchText: "", selectedOption: "", lgaCode: 0 };
+
+    // Debouncing means no multiple MapBox calls
+    this.getOptions = debounce(this.getOptions.bind(this), 500);
   }
 
   // Fires on each keypress
@@ -111,6 +115,7 @@ class LgaSearch extends React.Component {
 
   getOptions(input, callback) {
     setTimeout(async () => {
+      console.log("bounce");
       // callback(null, {
       //   options: lgas,
       //   // CAREFUL! Only set this to true when there are no more options,
@@ -148,7 +153,8 @@ class LgaSearch extends React.Component {
           options: filteredLgas
         });
       }
-    }, 500); // Async component expects async to we fake it
+    }, 1); // Async component expects async to we fake it
+    // even though debouncing might not need it
   }
 
   render() {
@@ -163,8 +169,8 @@ class LgaSearch extends React.Component {
           name="lga-async-search"
           value={value}
           onChange={this.handleSelect.bind(this)}
-          loadOptions={this.getOptions.bind(this)}
-          autoload={false}
+          loadOptions={this.getOptions}
+          // autoload={false}
           filterOptions={(options, filter, currentValues) => {
             // Do filtering in loadOptions instead
             return options;
