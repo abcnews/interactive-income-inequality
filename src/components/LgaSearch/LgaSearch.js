@@ -59,7 +59,21 @@ class LgaSearch extends React.Component {
 
   handleSelect(selectedOption) {
     this.setState({ selectedOption });
-    console.log(`Selected: ${selectedOption.label}`);
+    if (!selectedOption) return;
+
+    console.log(selectedOption.value);
+    this.props.onLgaCodeSelect(selectedOption);
+  }
+
+  handleInputChange(value) {
+    console.log(value);
+    
+  }
+
+  // Called by filterOption prop on Select component
+  filterResults(option, filter) {
+   if (option.label.toLowerCase().indexOf(filter.toLowerCase()) > -1) return true;
+   else return false;
   }
 
   render() {
@@ -82,7 +96,11 @@ class LgaSearch extends React.Component {
           name="lga-search"
           value={value}
           onChange={this.handleSelect}
+          onInputChange={this.handleInputChange}
           options={lgas}
+          placeholder="Enter LGA, postcode or address"
+          openOnClick={false}
+          filterOption={this.filterResults.bind(this)}
         />
       </div>,
       document.querySelector(".addressinput")

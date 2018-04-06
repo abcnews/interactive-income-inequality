@@ -46,8 +46,13 @@ class App extends React.Component {
     this.state = {
       localGovernmentArea: "",
       mapData: null,
-      mapDataScroller: null
+      mapDataScroller: null,
+      lgaCode: {}
     };
+  }
+
+  setLgaCode(code) {
+    this.setState({ lgaCode: code });
   }
 
   async addressToLGA(address, localAreas) {
@@ -136,16 +141,18 @@ class App extends React.Component {
         <IncomeInput />
         <LgaSearch
           onLocaleIntent={this.handleLocaleIntent.bind(this)}
-          localGovernmentArea={this.state.localGovernmentArea}
+          onLgaCodeSelect={this.setLgaCode.bind(this)}
+          localGovernmentArea={this.state.lgaCode.label} //{this.state.localGovernmentArea}
           mapData={this.state.mapData}
         />
+        <div>{this.state.lgaCode.label}</div>
         {/* Conditionally render MapScroller if data loaded */}
         {this.state.mapData && (
           <MapScroller
             scrollyteller={scrollyteller}
             mapData={this.state.mapDataScroller}
           />
-        ) }
+        )}
       </div>
     );
   }
