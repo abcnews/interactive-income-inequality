@@ -23,9 +23,12 @@ const client = new MapboxClient(MAPBOX_TOKEN);
 // Load up all the LGAs
 const lgaData = require("./lgas.json").lgas;
 
-const lgas = lgaData.map(lga => {
+let lgas = lgaData.map(lga => {
   return { value: lga.LGA_CODE_2016, label: lga.LGA };
 });
+
+// Sort alphabetical
+lgas = lgas.sort((a, b) => a.label.localeCompare(b.label));
 
 class LgaSearch extends React.Component {
   constructor(props) {
@@ -34,7 +37,7 @@ class LgaSearch extends React.Component {
     // Set up component state
     this.state = { searchText: "", selectedOption: "", lgaCode: 0 };
 
-    // Debouncing means no multiple MapBox calls
+    // Debouncing means fewer multiple MapBox calls
     this.getOptions = debounce(this.getOptions.bind(this), 500);
   }
 
