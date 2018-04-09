@@ -22,21 +22,11 @@ const SCROLLER_GEO_JSON_URL =
   // "http://WS204914.aus.aunty.abc.net.au:8000/LGA_2016_AUST_MAP.topo.json";
   "http://www.abc.net.au/res/sites/news-projects/income-comparisons-react/master/LGA_2016_AUST_MAP.topo.json";
 
-// Configuration
-// const config = {
-//   mapbox_token:
-//     "cGsuZXlKMUlqb2libVYzY3kxdmJqRnBibVVpTENKaElqb2lZMnBqYXpFM09UbDNNRFV5ZVRKM2NHbDJOV1J4Y0RocE55SjkuS3c0bGhBYkxVazlJUGF6dXRCZTI4dw=="
-// };
-
-// Constants
-// const MAPBOX_TOKEN = atob(config.mapbox_token);
 
 // File scope variables
 let searchLongLat = [0, 0];
 let LGAs = [];
 
-// Initialise Mapbox
-// const client = new MapboxClient(MAPBOX_TOKEN);
 
 // React app starts here
 class App extends React.Component {
@@ -56,56 +46,6 @@ class App extends React.Component {
   setLgaCode(code) {
     this.setState({ lgaCode: code });
   }
-
-  // async addressToLGA(address, localAreas) {
-  //   if (!address) return;
-
-  //   // GET data from the MapBox API to get LongLat of an address string
-  //   const returnedData = await client
-  //     .geocodeForward(address, { test: "test" })
-  //     .catch(error => console.log("An error occurred with MapBox... ", error));
-
-  //   console.log(returnedData);
-
-  //   // Handle some errors
-  //   if (returnedData.entity.message === "Not Found") return;
-
-  //   if (returnedData && returnedData.entity.features.length === 0) {
-  //     console.log("Address not found...");
-  //     return;
-  //   }
-
-  //   // Get center of searched address
-  //   searchLongLat = returnedData.entity.features[0].center;
-
-  //   let foundLGA;
-
-  //   // Loop through all Local Government Areas
-  //   // TODO: maybe make this a separate function
-  //   localAreas.forEach(LGA => {
-  //     let currentLGA = LGA.geometry;
-
-  //     if (currentLGA && currentLGA.type === "Polygon") {
-  //       // Handle Polygon geometry types
-  //       if (inside(searchLongLat, currentLGA.coordinates[0])) {
-  //         foundLGA = LGA; //.properties.LGA_NAME16;
-  //       }
-  //     } else if (currentLGA && currentLGA.type === "MultiPolygon") {
-  //       // Handle MultiPolygon geometry type
-  //       currentLGA.coordinates.forEach(polygon => {
-  //         if (inside(searchLongLat, polygon[0])) {
-  //           foundLGA = LGA; //.properties.LGA_NAME16;
-  //         }
-  //       });
-  //     }
-  //   });
-
-  //   // this.setState({
-  //   //   localGovernmentArea: foundLGA
-  //   // });
-
-  //   return foundLGA;
-  // }
 
   componentWillMount() {
     // Queue up some files to be loaded
@@ -130,10 +70,6 @@ class App extends React.Component {
         console.log("External data loaded...");
       });
   }
-
-  // async geoCodeAddress(addressString) {
-  //   console.log(await this.addressToLGA(addressString, LGAs));
-  // }
 
   render() {
     const { scrollyteller } = this.props;

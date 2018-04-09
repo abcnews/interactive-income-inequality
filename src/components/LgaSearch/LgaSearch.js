@@ -41,21 +41,6 @@ class LgaSearch extends React.Component {
     this.getOptions = debounce(this.getOptions.bind(this), 500);
   }
 
-  // Fires on each keypress
-  // handleChange(event) {
-  //   if (!event) return;
-
-  //   let searchText = event.target.value;
-
-  //   this.setState({ searchText: searchText }); // probably async
-
-  //   // Check if string is a postcode
-  //   if (/^[0-9]{4}$/.test(searchText)) {
-  //     console.log("It's probably a postcode!!!!!!");
-  //     this.props.onLocaleIntent(searchText + " australia");
-  //   }
-  // }
-
   handleSelect(selectedOption) {
     this.setState({ selectedOption });
   }
@@ -67,8 +52,6 @@ class LgaSearch extends React.Component {
     const returnedData = await client
       .geocodeForward(address, { test: "test" })
       .catch(error => console.log("An error occurred with MapBox... ", error));
-
-    // console.log(returnedData);
 
     // Handle some errors
     if (returnedData.entity.message === "Not Found") return;
@@ -103,35 +86,19 @@ class LgaSearch extends React.Component {
       }
     });
 
-    // this.setState({
-    //   localGovernmentArea: foundLGA
-    // });
-
     return foundLGA;
   }
-
-  // componentWillReceiveProps(nextProps) {
-  //   // console.log(nextProps);
-
-  //   this.setState({ lgaCode: nextProps.localGovernmentArea.LGA_CODE_2016 });
-  // }
 
   getOptions(input, callback) {
     setTimeout(async () => {
       console.log("bounce");
-      // callback(null, {
-      //   options: lgas,
-      //   // CAREFUL! Only set this to true when there are no more options,
-      //   // or more specific queries will not be sent to the server.
-      //   complete: true
-      // });
+
       let filteredLgas;
 
       // Check if string is a postcode
       if (/^[0-9]{4}$/.test(input)) {
         console.log("Postcode detected...");
-        // this.props.geoCodeAddress(value + " australia");
-        // console.log(await this.addressToLGA(value + " australia", this.props.mapData));
+
         let lgaFromPostcode = await this.addressToLGA(
           input + " australia",
           this.props.mapData
