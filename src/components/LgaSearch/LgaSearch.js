@@ -24,11 +24,43 @@ const client = new MapboxClient(MAPBOX_TOKEN);
 const lgaData = require("./lgas.json").lgas;
 
 let lgas = lgaData.map(lga => {
-  return { value: lga.LGA_CODE_2016, label: lga.LGA };
+  return {
+    value: lga.LGA_CODE_2016,
+    label: lga.LGA.replace(/ *\([^)]*\) */g, "")
+  };
+});
+
+// Separate states
+lgas = lgas.map(lga => {
+  let stateCode = Math.floor(lga.value / 10000);
+
+  if (stateCode === 1) {
+    return { value: lga.value, label: lga.label + " - NSW" };
+  } else if (stateCode === 2) {
+    return { value: lga.value, label: lga.label + " - VIC" };
+  } else if (stateCode === 3) {
+    return { value: lga.value, label: lga.label + " - QLD" };
+  } else if (stateCode === 4) {
+    return { value: lga.value, label: lga.label + " - SA" };
+  } else if (stateCode === 5) {
+    return { value: lga.value, label: lga.label + " - WA" };
+  } else if (stateCode === 6) {
+    return { value: lga.value, label: lga.label + " - TAS" };
+  } else if (stateCode === 7) {
+    return { value: lga.value, label: lga.label + " - NT" };
+  } else if (stateCode === 8) {
+    return { value: lga.value, label: lga.label + " - ACT" };
+  } else if (stateCode === 9) {
+    return { value: lga.value, label: lga.label + " - OTHER" };
+  } else {
+    return { value: lga.value, label: lga.label };
+  }
 });
 
 // Sort alphabetical
 lgas = lgas.sort((a, b) => a.label.localeCompare(b.label));
+
+const ADDRESS_RELEVANCE_THRESHOLD = 0.4;
 
 class LgaSearch extends React.Component {
   constructor(props) {
@@ -62,51 +94,12 @@ class LgaSearch extends React.Component {
     }
 
     let relevanceFiltered = returnedData.entity.features.filter(feature => {
-      return feature.relevance > 0.55;
+      return feature.relevance > ADDRESS_RELEVANCE_THRESHOLD;
     });
 
     console.log(relevanceFiltered);
     return relevanceFiltered;
   }
-
-  // async addressToLGA(address, localAreas) {
-  //   if (!address) return [];
-
-  //   // Get center of searched address
-  //   let possibleLatLongs = await this.geocodeString(address);
-
-  //   let foundLGAs = [];
-
-  //   possibleLatLongs.forEach(lga => {
-  //     let searchLongLat = lga.center;
-
-  //     let foundLGA;
-
-  //     // Loop through all Local Government Areas
-  //     // TODO: maybe make this a separate function
-  //     localAreas.forEach(LGA => {
-  //       let currentLGA = LGA.geometry;
-
-  //       if (currentLGA && currentLGA.type === "Polygon") {
-  //         // Handle Polygon geometry types
-  //         if (inside(searchLongLat, currentLGA.coordinates[0])) {
-  //           foundLGA = LGA; //.properties.LGA_NAME16;
-  //         }
-  //       } else if (currentLGA && currentLGA.type === "MultiPolygon") {
-  //         // Handle MultiPolygon geometry type
-  //         currentLGA.coordinates.forEach(polygon => {
-  //           if (inside(searchLongLat, polygon[0])) {
-  //             foundLGA = LGA; //.properties.LGA_NAME16;
-  //           }
-  //         });
-  //       }
-  //     });
-
-  //     foundLGAs.push(foundLGA);
-  //   });
-
-  //   return foundLGAs[0];
-  // }
 
   async addressToLGAs(address, localAreas) {
     if (!address) return [];
@@ -192,8 +185,8 @@ class LgaSearch extends React.Component {
           // const lgaCode =
           //   lgaFromAddress && Number(lgaFromAddress.properties.LGA_CODE16);
 
-          const lgaCodes = lgasFromAddress.map(lga =>
-            Number(lga.properties.LGA_CODE16)
+          const lgaCodes = lgasFromAddress.map(
+            lga => lga && Number(lga.properties.LGA_CODE16)
           );
 
           // filteredLgas = lgas.filter(lga => {
