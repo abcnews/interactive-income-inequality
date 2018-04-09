@@ -91,8 +91,6 @@ class LgaSearch extends React.Component {
 
   getOptions(input, callback) {
     setTimeout(async () => {
-      console.log("bounce");
-
       let filteredLgas;
 
       // Check if string is a postcode
@@ -119,9 +117,29 @@ class LgaSearch extends React.Component {
           return lga.label.toLowerCase().indexOf(input.toLowerCase()) > -1;
         });
 
-        callback(null, {
-          options: filteredLgas
-        });
+        // Show matching local LGAs otherwise assume address search
+        if (filteredLgas.length == 0) {
+          console.log("searching by address");
+          let lgaFromAddress = await this.addressToLGA(
+            input + " australia",
+            this.props.mapData
+          );
+
+          const lgaCode =
+            lgaFromAddress && Number(lgaFromAddress.properties.LGA_CODE16);
+
+          filteredLgas = lgas.filter(lga => {
+            return lga.value === lgaCode;
+          });
+          callback(null, {
+            options: filteredLgas
+          });
+        } else {
+          console.log(filteredLgas);
+          callback(null, {
+            options: filteredLgas
+          });
+        }
       }
     }, 1); // Async component expects async to we fake it
     // even though debouncing might not need it
