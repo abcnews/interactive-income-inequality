@@ -61,47 +61,52 @@ class LgaSearch extends React.Component {
       return [];
     }
 
-    return returnedData.entity.features;
-  }
-
-  async addressToLGA(address, localAreas) {
-    if (!address) return [];
-
-    // Get center of searched address
-    let possibleLatLongs = await this.geocodeString(address);
-
-    let foundLGAs = [];
-
-    possibleLatLongs.forEach(lga => {
-      let searchLongLat = lga.center;
-
-      let foundLGA;
-
-      // Loop through all Local Government Areas
-      // TODO: maybe make this a separate function
-      localAreas.forEach(LGA => {
-        let currentLGA = LGA.geometry;
-
-        if (currentLGA && currentLGA.type === "Polygon") {
-          // Handle Polygon geometry types
-          if (inside(searchLongLat, currentLGA.coordinates[0])) {
-            foundLGA = LGA; //.properties.LGA_NAME16;
-          }
-        } else if (currentLGA && currentLGA.type === "MultiPolygon") {
-          // Handle MultiPolygon geometry type
-          currentLGA.coordinates.forEach(polygon => {
-            if (inside(searchLongLat, polygon[0])) {
-              foundLGA = LGA; //.properties.LGA_NAME16;
-            }
-          });
-        }
-      });
-
-      foundLGAs.push(foundLGA);
+    let relevanceFiltered = returnedData.entity.features.filter(feature => {
+      return feature.relevance > 0.55;
     });
 
-    return foundLGAs[0];
+    console.log(relevanceFiltered);
+    return relevanceFiltered;
   }
+
+  // async addressToLGA(address, localAreas) {
+  //   if (!address) return [];
+
+  //   // Get center of searched address
+  //   let possibleLatLongs = await this.geocodeString(address);
+
+  //   let foundLGAs = [];
+
+  //   possibleLatLongs.forEach(lga => {
+  //     let searchLongLat = lga.center;
+
+  //     let foundLGA;
+
+  //     // Loop through all Local Government Areas
+  //     // TODO: maybe make this a separate function
+  //     localAreas.forEach(LGA => {
+  //       let currentLGA = LGA.geometry;
+
+  //       if (currentLGA && currentLGA.type === "Polygon") {
+  //         // Handle Polygon geometry types
+  //         if (inside(searchLongLat, currentLGA.coordinates[0])) {
+  //           foundLGA = LGA; //.properties.LGA_NAME16;
+  //         }
+  //       } else if (currentLGA && currentLGA.type === "MultiPolygon") {
+  //         // Handle MultiPolygon geometry type
+  //         currentLGA.coordinates.forEach(polygon => {
+  //           if (inside(searchLongLat, polygon[0])) {
+  //             foundLGA = LGA; //.properties.LGA_NAME16;
+  //           }
+  //         });
+  //       }
+  //     });
+
+  //     foundLGAs.push(foundLGA);
+  //   });
+
+  //   return foundLGAs[0];
+  // }
 
   async addressToLGAs(address, localAreas) {
     if (!address) return [];
@@ -172,24 +177,20 @@ class LgaSearch extends React.Component {
 
         // Show matching local LGAs otherwise assume address search
         if (filteredLgas.length == 0) {
-          this.geocodeString(input);
-
           console.log("searching by address");
 
-          let lgaFromAddress = await this.addressToLGA(
-            input,
-            this.props.mapData
-          );
+          // let lgaFromAddress = await this.addressToLGA(
+          //   input,
+          //   this.props.mapData
+          // );
 
           let lgasFromAddress = await this.addressToLGAs(
             input,
             this.props.mapData
           );
 
-          console.log(lgasFromAddress);
-
-          const lgaCode =
-            lgaFromAddress && Number(lgaFromAddress.properties.LGA_CODE16);
+          // const lgaCode =
+          //   lgaFromAddress && Number(lgaFromAddress.properties.LGA_CODE16);
 
           const lgaCodes = lgasFromAddress.map(lga =>
             Number(lga.properties.LGA_CODE16)
@@ -198,11 +199,29 @@ class LgaSearch extends React.Component {
           // filteredLgas = lgas.filter(lga => {
           //   return lga.value === lgaCode;
           // });
-          filteredLgas = lgas.filter(lga => {
-            return lgaCodes.indexOf(lga.value) > -1;
+          // filteredLgas = lgas.filter(lga => {
+          //   return lgaCodes.indexOf(lga.value) > -1;
+          // });
+
+          filteredLgas = [];
+
+          // Try alphabetising
+          lgaCodes.forEach(code => {
+            lgas.forEach(lga => {
+              if (lga.value === code) {
+                filteredLgas.push(lga);
+                return;
+              }
+            });
           });
+
+          // Remove duplicates
+          let uniqueFilteredLgas = filteredLgas.filter(function(item, pos) {
+            return filteredLgas.indexOf(item) == pos;
+          });
+
           callback(null, {
-            options: filteredLgas
+            options: uniqueFilteredLgas
           });
         } else {
           callback(null, {
