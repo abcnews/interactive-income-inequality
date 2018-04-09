@@ -16,6 +16,7 @@ const config = {
 
 // Constants
 const MAPBOX_TOKEN = atob(config.mapbox_token);
+const ADDRESS_RELEVANCE_THRESHOLD = 0.5;
 
 // Initialise Mapbox
 const client = new MapboxClient(MAPBOX_TOKEN);
@@ -60,7 +61,7 @@ lgas = lgas.map(lga => {
 // Sort alphabetical
 lgas = lgas.sort((a, b) => a.label.localeCompare(b.label));
 
-const ADDRESS_RELEVANCE_THRESHOLD = 0.4;
+
 
 class LgaSearch extends React.Component {
   constructor(props) {
