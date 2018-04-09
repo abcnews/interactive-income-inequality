@@ -60,7 +60,7 @@ class IncomeInput extends React.Component {
 
     // Fade in the spaces
     for (var i = 0; i < this.spaces.length; i++) {
-      this.spaces[i].style = "opacity: 1";
+      this.spaces[i].style.opacity = "1";
     }
 
     // Grow the slider
@@ -103,7 +103,7 @@ class IncomeInput extends React.Component {
     this.slider.style.height = "350px";
 
     for (var i = 0; i < this.spaces.length; i++) {
-      this.spaces[i].style = "opacity: 0";
+      this.spaces[i].style.opacity = "0";
     }
   }
 
@@ -152,11 +152,11 @@ class IncomeInput extends React.Component {
     const handleEl = document.querySelector(".noUi-handle");
 
     if (this.state.narrativeState === "result") {
-      tooltipEl.style = "visibility: hidden";
-      handleEl.style = "visibility: hidden";
+      tooltipEl.style.visibility = "hidden";
+      handleEl.style.visibility = "hidden";
     } else {
-      tooltipEl.style = "visibility: visible";
-      handleEl.style = "visibility: visible";
+      tooltipEl.style.visibility = "visible";
+      handleEl.style.visibility = "visible";
     }
 
     // Set up the fade-ins
