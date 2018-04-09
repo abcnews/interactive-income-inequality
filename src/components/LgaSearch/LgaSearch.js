@@ -73,17 +73,15 @@ class LgaSearch extends React.Component {
     let foundLGAs = [];
 
     possibleLatLongs.forEach(lga => {
-      console.log(lga);
-
       let searchLongLat = lga.center;
 
       let foundLGA;
-  
+
       // Loop through all Local Government Areas
       // TODO: maybe make this a separate function
       localAreas.forEach(LGA => {
         let currentLGA = LGA.geometry;
-  
+
         if (currentLGA && currentLGA.type === "Polygon") {
           // Handle Polygon geometry types
           if (inside(searchLongLat, currentLGA.coordinates[0])) {
@@ -103,6 +101,45 @@ class LgaSearch extends React.Component {
     });
 
     return foundLGAs[0];
+  }
+
+  async addressToLGAs(address, localAreas) {
+    if (!address) return [];
+
+    // Get center of searched address
+    let possibleLatLongs = await this.geocodeString(address);
+
+    let foundLGAs = [];
+
+    possibleLatLongs.forEach(lga => {
+      let searchLongLat = lga.center;
+
+      let foundLGA;
+
+      // Loop through all Local Government Areas
+      // TODO: maybe make this a separate function
+      localAreas.forEach(LGA => {
+        let currentLGA = LGA.geometry;
+
+        if (currentLGA && currentLGA.type === "Polygon") {
+          // Handle Polygon geometry types
+          if (inside(searchLongLat, currentLGA.coordinates[0])) {
+            foundLGA = LGA; //.properties.LGA_NAME16;
+          }
+        } else if (currentLGA && currentLGA.type === "MultiPolygon") {
+          // Handle MultiPolygon geometry type
+          currentLGA.coordinates.forEach(polygon => {
+            if (inside(searchLongLat, polygon[0])) {
+              foundLGA = LGA; //.properties.LGA_NAME16;
+            }
+          });
+        }
+      });
+
+      foundLGAs.push(foundLGA);
+    });
+
+    return foundLGAs;
   }
 
   getOptions(input, callback) {
@@ -138,16 +175,31 @@ class LgaSearch extends React.Component {
           this.geocodeString(input);
 
           console.log("searching by address");
+
           let lgaFromAddress = await this.addressToLGA(
             input,
             this.props.mapData
           );
 
+          let lgasFromAddress = await this.addressToLGAs(
+            input,
+            this.props.mapData
+          );
+
+          console.log(lgasFromAddress);
+
           const lgaCode =
             lgaFromAddress && Number(lgaFromAddress.properties.LGA_CODE16);
 
+          const lgaCodes = lgasFromAddress.map(lga =>
+            Number(lga.properties.LGA_CODE16)
+          );
+
+          // filteredLgas = lgas.filter(lga => {
+          //   return lga.value === lgaCode;
+          // });
           filteredLgas = lgas.filter(lga => {
-            return lga.value === lgaCode;
+            return lgaCodes.indexOf(lga.value) > -1;
           });
           callback(null, {
             options: filteredLgas

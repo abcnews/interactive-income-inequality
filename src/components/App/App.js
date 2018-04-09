@@ -41,7 +41,7 @@ class App extends React.Component {
   }
 
   // Pass some data up from another component
-  // Supposedly bad practice but ¯\_(ツ)_/¯
+  // Supposedly bad practice maybe but ¯\_(ツ)_/¯
   setLgaCode(code) {
     this.setState({ lgaCode: code });
   }
