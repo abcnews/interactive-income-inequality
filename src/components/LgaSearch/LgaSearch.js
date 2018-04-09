@@ -58,7 +58,7 @@ class LgaSearch extends React.Component {
 
     if (returnedData && returnedData.entity.features.length === 0) {
       console.log("Address not found...");
-      return;
+      return [];
     }
 
     return returnedData.entity.features;
@@ -68,33 +68,41 @@ class LgaSearch extends React.Component {
     if (!address) return [];
 
     // Get center of searched address
-    let searchLongLat = await this.geocodeString(address);
+    let possibleLatLongs = await this.geocodeString(address);
 
-    searchLongLat = searchLongLat[0].center;
+    let foundLGAs = [];
 
-    let foundLGA;
+    possibleLatLongs.forEach(lga => {
+      console.log(lga);
 
-    // Loop through all Local Government Areas
-    // TODO: maybe make this a separate function
-    localAreas.forEach(LGA => {
-      let currentLGA = LGA.geometry;
+      let searchLongLat = lga.center;
 
-      if (currentLGA && currentLGA.type === "Polygon") {
-        // Handle Polygon geometry types
-        if (inside(searchLongLat, currentLGA.coordinates[0])) {
-          foundLGA = LGA; //.properties.LGA_NAME16;
-        }
-      } else if (currentLGA && currentLGA.type === "MultiPolygon") {
-        // Handle MultiPolygon geometry type
-        currentLGA.coordinates.forEach(polygon => {
-          if (inside(searchLongLat, polygon[0])) {
+      let foundLGA;
+  
+      // Loop through all Local Government Areas
+      // TODO: maybe make this a separate function
+      localAreas.forEach(LGA => {
+        let currentLGA = LGA.geometry;
+  
+        if (currentLGA && currentLGA.type === "Polygon") {
+          // Handle Polygon geometry types
+          if (inside(searchLongLat, currentLGA.coordinates[0])) {
             foundLGA = LGA; //.properties.LGA_NAME16;
           }
-        });
-      }
+        } else if (currentLGA && currentLGA.type === "MultiPolygon") {
+          // Handle MultiPolygon geometry type
+          currentLGA.coordinates.forEach(polygon => {
+            if (inside(searchLongLat, polygon[0])) {
+              foundLGA = LGA; //.properties.LGA_NAME16;
+            }
+          });
+        }
+      });
+
+      foundLGAs.push(foundLGA);
     });
 
-    return foundLGA;
+    return foundLGAs[0];
   }
 
   getOptions(input, callback) {
