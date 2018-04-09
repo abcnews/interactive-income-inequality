@@ -36,23 +36,23 @@ lgas = lgas.map(lga => {
   let stateCode = Math.floor(lga.value / 10000);
 
   if (stateCode === 1) {
-    return { value: lga.value, label: lga.label + " - NSW" };
+    return { value: lga.value, label: lga.label + " (NSW)" };
   } else if (stateCode === 2) {
-    return { value: lga.value, label: lga.label + " - VIC" };
+    return { value: lga.value, label: lga.label + " (VIC)" };
   } else if (stateCode === 3) {
-    return { value: lga.value, label: lga.label + " - QLD" };
+    return { value: lga.value, label: lga.label + " (QLD)" };
   } else if (stateCode === 4) {
-    return { value: lga.value, label: lga.label + " - SA" };
+    return { value: lga.value, label: lga.label + " (SA)" };
   } else if (stateCode === 5) {
-    return { value: lga.value, label: lga.label + " - WA" };
+    return { value: lga.value, label: lga.label + " (WA)" };
   } else if (stateCode === 6) {
-    return { value: lga.value, label: lga.label + " - TAS" };
+    return { value: lga.value, label: lga.label + " (TAS)" };
   } else if (stateCode === 7) {
-    return { value: lga.value, label: lga.label + " - NT" };
+    return { value: lga.value, label: lga.label + " (NT)" };
   } else if (stateCode === 8) {
-    return { value: lga.value, label: lga.label + " - ACT" };
+    return { value: lga.value, label: lga.label + " (ACT)" };
   } else if (stateCode === 9) {
-    return { value: lga.value, label: lga.label + " - OTHER" };
+    return { value: lga.value, label: lga.label + " (OTHER)" };
   } else {
     return { value: lga.value, label: lga.label };
   }
