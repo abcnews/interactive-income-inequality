@@ -24,7 +24,6 @@ const SCROLLER_GEO_JSON_URL =
 
 
 // File scope variables
-let searchLongLat = [0, 0];
 let LGAs = [];
 
 

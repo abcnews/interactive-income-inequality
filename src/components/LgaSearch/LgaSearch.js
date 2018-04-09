@@ -45,12 +45,16 @@ class LgaSearch extends React.Component {
     this.setState({ selectedOption });
   }
 
+  async addressSearch(searchString) {
+    if (!searchString) return [];
+  }
+
   async addressToLGA(address, localAreas) {
-    if (!address) return;
+    if (!address) return [];
 
     // GET data from the MapBox API to get LongLat of an address string
     const returnedData = await client
-      .geocodeForward(address, { test: "test" })
+      .geocodeForward(address, { country: "au" })
       .catch(error => console.log("An error occurred with MapBox... ", error));
 
     // Handle some errors
@@ -62,7 +66,7 @@ class LgaSearch extends React.Component {
     }
 
     // Get center of searched address
-    searchLongLat = returnedData.entity.features[0].center;
+    let searchLongLat = returnedData.entity.features[0].center;
 
     let foundLGA;
 
@@ -98,7 +102,7 @@ class LgaSearch extends React.Component {
         console.log("Postcode detected...");
 
         let lgaFromPostcode = await this.addressToLGA(
-          input + " australia",
+          input,
           this.props.mapData
         );
 
@@ -121,7 +125,7 @@ class LgaSearch extends React.Component {
         if (filteredLgas.length == 0) {
           console.log("searching by address");
           let lgaFromAddress = await this.addressToLGA(
-            input + " australia",
+            input,
             this.props.mapData
           );
 
