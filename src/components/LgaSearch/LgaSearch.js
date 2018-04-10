@@ -24,6 +24,7 @@ const client = new MapboxClient(MAPBOX_TOKEN);
 // Load up all the LGAs
 const lgaData = require("./lgas.json").lgas;
 
+// Remove the extra LGA codes
 let lgas = lgaData.map(lga => {
   return {
     value: lga.LGA_CODE_2016,
@@ -61,14 +62,12 @@ lgas = lgas.map(lga => {
 // Sort alphabetical
 lgas = lgas.sort((a, b) => a.label.localeCompare(b.label));
 
-
-
 class LgaSearch extends React.Component {
   constructor(props) {
     super(props);
 
     // Set up component state
-    this.state = { searchText: "", selectedOption: "", lgaCode: 0 };
+    this.state = { selectedOption: null };
 
     // Debouncing means fewer multiple MapBox calls
     this.getOptions = debounce(this.getOptions.bind(this), 500);
@@ -76,6 +75,7 @@ class LgaSearch extends React.Component {
 
   handleSelect(selectedOption) {
     this.setState({ selectedOption });
+    this.props.setCurrentLga(selectedOption);
   }
 
   async geocodeString(searchString) {
@@ -149,13 +149,14 @@ class LgaSearch extends React.Component {
       if (/^[0-9]{4}$/.test(input)) {
         console.log("Postcode detected...");
 
-        let lgaFromPostcode = await this.addressToLGA(
+        let lgaFromPostcode = await this.addressToLGAs(
           input,
           this.props.mapData
         );
 
         const lgaCode =
-          lgaFromPostcode && Number(lgaFromPostcode.properties.LGA_CODE16);
+          lgaFromPostcode[0] &&
+          Number(lgaFromPostcode[0].properties.LGA_CODE16);
 
         filteredLgas = lgas.filter(lga => {
           return lga.value === lgaCode;
@@ -173,29 +174,14 @@ class LgaSearch extends React.Component {
         if (filteredLgas.length == 0) {
           console.log("searching by address");
 
-          // let lgaFromAddress = await this.addressToLGA(
-          //   input,
-          //   this.props.mapData
-          // );
-
           let lgasFromAddress = await this.addressToLGAs(
             input,
             this.props.mapData
           );
 
-          // const lgaCode =
-          //   lgaFromAddress && Number(lgaFromAddress.properties.LGA_CODE16);
-
           const lgaCodes = lgasFromAddress.map(
             lga => lga && Number(lga.properties.LGA_CODE16)
           );
-
-          // filteredLgas = lgas.filter(lga => {
-          //   return lga.value === lgaCode;
-          // });
-          // filteredLgas = lgas.filter(lga => {
-          //   return lgaCodes.indexOf(lga.value) > -1;
-          // });
 
           filteredLgas = [];
 
@@ -230,8 +216,6 @@ class LgaSearch extends React.Component {
   render() {
     const { selectedOption } = this.state;
     const value = selectedOption && selectedOption.value;
-
-    console.log(value);
 
     return ReactDOM.createPortal(
       <div className={styles.wrapper}>

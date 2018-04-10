@@ -4,9 +4,7 @@ const styles = require("./App.scss");
 // External modules
 const d3Q = require("d3-queue");
 const d3Request = require("d3-request");
-// const inside = require("point-in-polygon");
 const topojson = require("topojson");
-// const MapboxClient = require("mapbox");
 
 // Other React components
 const LgaSearch = require("../LgaSearch/LgaSearch");
@@ -33,17 +31,16 @@ class App extends React.Component {
     super(props);
 
     this.state = {
-      localGovernmentArea: {},
       mapData: null,
       mapDataScroller: null,
-      lgaCode: {}
+      currentLga: {}
     };
   }
 
   // Pass some data up from another component
   // Supposedly bad practice maybe but ¯\_(ツ)_/¯
-  setLgaCode(code) {
-    this.setState({ lgaCode: code });
+  setCurrentLga(lgaObject) {
+    this.setState({ currentLga: lgaObject }, () => console.log(this.state));
   }
 
   componentWillMount() {
@@ -77,12 +74,9 @@ class App extends React.Component {
       <div className={styles.root}>
         <IncomeInput />
         <LgaSearch
-          // geoCodeAddress={this.geoCodeAddress.bind(this)}
-          onLgaCodeSelect={this.setLgaCode.bind(this)}
-          // localGovernmentArea={this.state.localGovernmentArea}
+          setCurrentLga={this.setCurrentLga.bind(this)}
           mapData={this.state.mapData}
         />
-        <div>{this.state.lgaCode.label}</div>
         {/* Conditionally render MapScroller if data loaded */}
         {this.state.mapData && (
           <MapScroller
