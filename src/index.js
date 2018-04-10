@@ -21,6 +21,7 @@ function init() {
   spanify.hashify({ hashList: ["addressinput", "incomeinput"] }); // Turn anchor hash tags into divs
 
   const App = require("./components/App/App");
+
   render(
     <App projectName={PROJECT_NAME} scrollyteller={scrollyteller} />,
     root

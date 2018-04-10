@@ -1,6 +1,6 @@
 const React = require("react");
 const ReactDOM = require("react-dom");
-const Scrollyteller = require("@abcnews/scrollyteller"); //require("@abcnews/scrollyteller");
+const Scrollyteller = require("@abcnews/scrollyteller");
 const topojson = require("topojson");
 const canvasDpiScaler = require("canvas-dpi-scaler");
 
@@ -227,7 +227,7 @@ class MapScroller extends React.Component {
 } // End of MapScroller component
 
 function stickifyStage() {
-  // Detect whether position: sticky is supported (and not Edge browser) and apply styles
+  // Detect whether position: sticky is supported (and not IE or Edge browser) and apply styles
   if (Modernizr.csspositionsticky && utils.detectIE() === false) {
     document.body.style.overflowX = "visible";
     document.body.style.overflowY = "visible";
@@ -239,10 +239,6 @@ function stickifyStage() {
 }
 
 // Heloper for indexing an array of objects
-// function getItem(id) {
-//   return storyData.locations.find(item => item.id === id);
-// }
-
 function getLGA(lgaCode) {
   return australiaGeoLga.features.find(
     lga => lga.properties.LGA_CODE16 === lgaCode

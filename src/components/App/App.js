@@ -20,10 +20,8 @@ const SCROLLER_GEO_JSON_URL =
   // "http://WS204914.aus.aunty.abc.net.au:8000/LGA_2016_AUST_MAP.topo.json";
   "http://www.abc.net.au/res/sites/news-projects/income-comparisons-react/master/LGA_2016_AUST_MAP.topo.json";
 
-
 // File scope variables
 let LGAs = [];
-
 
 // React app starts here
 class App extends React.Component {
@@ -82,6 +80,7 @@ class App extends React.Component {
           <MapScroller
             scrollyteller={scrollyteller}
             mapData={this.state.mapDataScroller}
+            currentLga={this.state.currentLga}
           />
         )}
       </div>
