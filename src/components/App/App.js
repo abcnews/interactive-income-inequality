@@ -24,7 +24,8 @@ const LGA_GEO_JSON_URL =
 
 const SCROLLER_GEO_JSON_URL =
   // "http://WS204914.aus.aunty.abc.net.au:8000/LGA_2016_AUST_MAP.topo.json";
-  "http://www.abc.net.au/res/sites/news-projects/income-comparisons-react/master/LGA_2016_AUST_MAP.topo.json";
+  // "http://www.abc.net.au/res/sites/news-projects/income-comparisons-react/master/LGA_2016_AUST_MAP.topo.json";
+  "http://www.abc.net.au/res/sites/news-projects/income-comparisons-react/master/LGA_2016_AUST_SEARCH.topo.json";
 
 // File scope variables
 let LGAs = [];
@@ -49,13 +50,14 @@ class App extends React.Component {
   setCurrentLga(lgaObject) {
     this.setState({ currentLga: lgaObject });
     if (!lgaObject) return;
-    
+
     this.setState((prevState, props) => {
       console.log(prevState.scrollytellerObject);
       prevState.scrollytellerObject.panels[0].nodes[0].innerHTML =
         prevState.currentLga.value;
       prevState.scrollytellerObject.panels[1].config.zoom = 500;
-      prevState.scrollytellerObject.panels[1].config.lga = prevState.currentLga.value;
+      prevState.scrollytellerObject.panels[1].config.lga =
+        prevState.currentLga.value;
       // prevState.scrollytellerObject.panels.shift();
       // console.log(prevState);
       return {

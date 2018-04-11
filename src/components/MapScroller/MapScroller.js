@@ -4,9 +4,6 @@ const Scrollyteller = require("@abcnews/scrollyteller");
 const topojson = require("topojson");
 const canvasDpiScaler = require("canvas-dpi-scaler");
 
-
-
-
 // Load up some helper functions etc
 const utils = require("../../lib/utils");
 
@@ -36,7 +33,7 @@ let projection;
 // Set defaults
 let currentFocus = "72330"; // Middle of Australia (pretty much)
 let previousFocus = "72330";
-let currentLongLat = [133.7751, -25.2744] //getItem("australia").longlat;
+let currentLongLat = [133.7751, -25.2744]; //getItem("australia").longlat;
 
 // documentElement is for Firefox support apparently
 let screenWidth =
@@ -48,6 +45,11 @@ var colorScale = d3Scale
   .scaleLinear()
   .domain([10000, 100000])
   .range(["#7ACFD4", "#00114B"]);
+
+const zoomScale = d3Scale
+  .scaleLinear()
+  .domain([1, 16])
+  .range([1, 2000]);
 
 class MapScroller extends React.Component {
   constructor(props) {
@@ -64,9 +66,15 @@ class MapScroller extends React.Component {
     // and then apply sticky styles
     stickifyStage();
 
-    topojson.presimplify(mapData);
+    let preSimplifiedMapData = topojson.presimplify(mapData);
 
-    australiaGeoLga = topojson.feature(mapData, mapData.objects.LGA_2016_AUST);
+    simplifiedMapData = topojson.simplify(preSimplifiedMapData, 0.9);
+
+    australiaGeoLga = topojson.feature(
+      simplifiedMapData,
+      mapData.objects.LGA_2016_AUST
+    );
+
     const globe = { type: "Sphere" };
 
     // Set up a D3 projection here
@@ -102,9 +110,15 @@ class MapScroller extends React.Component {
     // Auto-convert canvas to Retina display and High DPI monitor scaling
     canvasDpiScaler(canvasEl, context);
 
-    let clip = d3Geo
+    const clip = d3Geo
       .geoIdentity()
       .clipExtent([[0, 0], [screenWidth, screenHeight]]);
+
+    // const simplify = d3Geo.geoTransform({
+    //   point: function(x, y, z) {
+    //     if (z >= minZ) this.stream.point(x, y);
+    //   }
+    // });
 
     // Build a path generator for our orthographic projection
     path = d3Geo
@@ -127,11 +141,24 @@ class MapScroller extends React.Component {
     // Function for clearing and render a frame of each part of the globe
   }
 
+  setNewSimplification(mapData, zoomLevel) {
+    let preSimplifiedMapData = topojson.presimplify(mapData);
+
+    simplifiedMapData = topojson.simplify(
+      preSimplifiedMapData,
+      zoomLevel
+    );
+
+    australiaGeoLga = topojson.feature(
+      simplifiedMapData,
+      mapData.objects.LGA_2016_AUST
+    );
+  }
+
   doMarker(data) {
-    console.log("marker fired")
+    console.log("marker fired");
     previousFocus = currentFocus;
     currentFocus = data.lga + ""; // Turn into string
-
 
     // Make sure we are mounted
     if (projection) {
@@ -144,6 +171,8 @@ class MapScroller extends React.Component {
       globeScale = data.zoom || 100;
       let previousGlobeScale = projection.scale();
 
+      // this.setNewSimplification(this.props.mapData, 1 / globeScale);
+
       // Zoom in so that percentage set in marker relative to initial 100%
       let newGlobeScale = initialGlobeScale * (globeScale / 100);
 
@@ -153,7 +182,7 @@ class MapScroller extends React.Component {
         .select(dummyTransition)
         .transition("transition")
         .delay(0)
-        .duration(1000)
+        .duration(2000)
         .tween("spinner", () => {
           let rotationInterpolate = d3Interpolate.interpolate(
             previousRotation,
@@ -167,8 +196,9 @@ class MapScroller extends React.Component {
 
           // Return the tween function
           return time => {
+            console.log(1 / zoomScale(scaleInterpolate(time) / initialGlobeScale))
+            this.setNewSimplification(this.props.mapData, 1 / zoomScale(scaleInterpolate(time) / initialGlobeScale));
             projection.rotate(rotationInterpolate(time));
-            // rangeCircle.radius(radiusInterpolate(time));
             projection.scale(scaleInterpolate(time));
             this.drawWorld();
           };
@@ -208,19 +238,13 @@ class MapScroller extends React.Component {
     context.stroke();
   }
 
-  componentWillUpdate() {
-    
-   
-  
-  }
+  componentWillUpdate() {}
 
   render() {
     // Create props vars passed to this component
     const { scrollyteller, mapData } = this.props;
 
     // scrollyteller.panels.pop();
-
-    
 
     // panels[1].config.zoom = 500;
     // console.log(panels[6].nodes["0"].parentNode)
