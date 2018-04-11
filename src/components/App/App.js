@@ -11,6 +11,12 @@ const LgaSearch = require("../LgaSearch/LgaSearch");
 const IncomeInput = require("../IncomeInput/IncomeInput");
 const MapScroller = require("../MapScroller/MapScroller");
 
+const scrollyteller = require("@abcnews/scrollyteller").loadOdysseyScrollyteller(
+  "",
+  "u-full",
+  "mark"
+);
+
 // One map for LGA search (complex) and one for Scrolly map (simplified)
 const LGA_GEO_JSON_URL =
   // "http://WS204914.aus.aunty.abc.net.au:8000/LGA_2016_AUST_SEARCH.topo.json";
@@ -28,17 +34,34 @@ class App extends React.Component {
   constructor(props) {
     super(props);
 
+    console.log(scrollyteller);
+
     this.state = {
       mapData: null,
       mapDataScroller: null,
-      currentLga: {}
+      currentLga: null,
+      scrollytellerObject: scrollyteller
     };
   }
 
   // Pass some data up from another component
   // Supposedly bad practice maybe but ¯\_(ツ)_/¯
   setCurrentLga(lgaObject) {
-    this.setState({ currentLga: lgaObject }, () => console.log(this.state));
+    this.setState({ currentLga: lgaObject });
+    if (!lgaObject) return;
+    
+    this.setState((prevState, props) => {
+      console.log(prevState.scrollytellerObject);
+      prevState.scrollytellerObject.panels[0].nodes[0].innerHTML =
+        prevState.currentLga.value;
+      prevState.scrollytellerObject.panels[1].config.zoom = 500;
+      prevState.scrollytellerObject.panels[1].config.lga = prevState.currentLga.value;
+      // prevState.scrollytellerObject.panels.shift();
+      // console.log(prevState);
+      return {
+        scrollytellerObject: prevState.scrollytellerObject
+      };
+    });
   }
 
   componentWillMount() {
@@ -66,7 +89,9 @@ class App extends React.Component {
   }
 
   render() {
-    const { scrollyteller } = this.props;
+    // const { scrollyteller } = this.props;
+
+    //
 
     return (
       <div className={styles.root}>
@@ -76,13 +101,14 @@ class App extends React.Component {
           mapData={this.state.mapData}
         />
         {/* Conditionally render MapScroller if data loaded */}
-        {this.state.mapData && (
-          <MapScroller
-            scrollyteller={scrollyteller}
-            mapData={this.state.mapDataScroller}
-            currentLga={this.state.currentLga}
-          />
-        )}
+        {this.state.mapData &&
+          this.state.scrollytellerObject && (
+            <MapScroller
+              scrollyteller={this.state.scrollytellerObject}
+              mapData={this.state.mapDataScroller}
+              currentLga={this.state.currentLga}
+            />
+          )}
       </div>
     );
   }

@@ -4,6 +4,9 @@ const Scrollyteller = require("@abcnews/scrollyteller");
 const topojson = require("topojson");
 const canvasDpiScaler = require("canvas-dpi-scaler");
 
+
+
+
 // Load up some helper functions etc
 const utils = require("../../lib/utils");
 
@@ -125,6 +128,7 @@ class MapScroller extends React.Component {
   }
 
   doMarker(data) {
+    console.log("marker fired")
     previousFocus = currentFocus;
     currentFocus = data.lga + ""; // Turn into string
 
@@ -204,9 +208,24 @@ class MapScroller extends React.Component {
     context.stroke();
   }
 
+  componentWillUpdate() {
+    
+   
+  
+  }
+
   render() {
     // Create props vars passed to this component
     const { scrollyteller, mapData } = this.props;
+
+    // scrollyteller.panels.pop();
+
+    
+
+    // panels[1].config.zoom = 500;
+    // console.log(panels[6].nodes["0"].parentNode)
+    // panels.pop();
+    // panels[1].nodes[0].innerHTML = "Hello";
 
     return ReactDOM.createPortal(
       <div className={styles.wrapper}>
