@@ -22,10 +22,11 @@ const LGA_GEO_JSON_URL =
   // "http://WS204914.aus.aunty.abc.net.au:8000/LGA_2016_AUST_SEARCH.topo.json";
   "http://www.abc.net.au/res/sites/news-projects/income-comparisons-react/master/LGA_2016_AUST_SEARCH.topo.json";
 
-const SCROLLER_GEO_JSON_URL =
-  // "http://WS204914.aus.aunty.abc.net.au:8000/LGA_2016_AUST_MAP.topo.json";
-  // "http://www.abc.net.au/res/sites/news-projects/income-comparisons-react/master/LGA_2016_AUST_MAP.topo.json";
-  "http://www.abc.net.au/res/sites/news-projects/income-comparisons-react/master/LGA_2016_AUST_SEARCH.topo.json";
+// const SCROLLER_GEO_JSON_URL =
+//   "http://www.abc.net.au/res/sites/news-projects/income-comparisons-react/master/LGA_2016_AUST_MAP.topo.json";
+
+const PROJECTED_GEO_JSON_URL =
+  "http://www.abc.net.au/res/sites/news-projects/income-comparisons-react/master/LGA_2016_AUST_MAP_PROJECTED.topo.json";
 
 // File scope variables
 let LGAs = [];
@@ -71,20 +72,24 @@ class App extends React.Component {
     d3Q
       .queue(2) // Concurrent requests
       .defer(d3Request.json, LGA_GEO_JSON_URL)
-      .defer(d3Request.json, SCROLLER_GEO_JSON_URL)
+      // .defer(d3Request.json, SCROLLER_GEO_JSON_URL)
+      .defer(d3Request.json, PROJECTED_GEO_JSON_URL)
       .awaitAll((error, files) => {
         // Once all is loaded do this
         if (error) console.error(error);
 
         const LGAMap = files[0]; // Load the first file
-        const LGAMapScroller = files[1];
+        // const LGAMapScroller = files[1];
+        const LGAMapProjected = files[1];
+
+        console.log(LGAMapProjected)
 
         // Convert TopoJSON into GeoJSON
         const topology = topojson.feature(LGAMap, LGAMap.objects.LGA_2016_AUST); //aus_lga);
 
         LGAs = topology.features;
 
-        this.setState({ mapData: LGAs, mapDataScroller: LGAMapScroller });
+        this.setState({ mapData: LGAs, mapDataScroller: LGAMap });
 
         console.log("External data loaded...");
       });

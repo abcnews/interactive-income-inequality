@@ -22,7 +22,9 @@ const styles = require("./MapScroller.scss");
 // Import story data
 // const storyData = require("./storyData.json");
 
-// File scope vars - not really needed but yeah good to track
+const MAP_SIMPLIFICATION_LEVEL = 0.01;
+
+// File scope vars - not really needed maybe but yeah good to track
 let initialGlobeScale;
 let globeScale = 100;
 let australiaGeoLga;
@@ -68,7 +70,7 @@ class MapScroller extends React.Component {
 
     let preSimplifiedMapData = topojson.presimplify(mapData);
 
-    simplifiedMapData = topojson.simplify(preSimplifiedMapData, 0.9);
+    simplifiedMapData = topojson.simplify(preSimplifiedMapData, MAP_SIMPLIFICATION_LEVEL);
 
     australiaGeoLga = topojson.feature(
       simplifiedMapData,
@@ -196,8 +198,8 @@ class MapScroller extends React.Component {
 
           // Return the tween function
           return time => {
-            console.log(1 / zoomScale(scaleInterpolate(time) / initialGlobeScale))
-            this.setNewSimplification(this.props.mapData, 1 / zoomScale(scaleInterpolate(time) / initialGlobeScale));
+            // console.log(1 / zoomScale(scaleInterpolate(time) / initialGlobeScale))
+            // this.setNewSimplification(this.props.mapData, 1 / zoomScale(scaleInterpolate(time) / initialGlobeScale));
             projection.rotate(rotationInterpolate(time));
             projection.scale(scaleInterpolate(time));
             this.drawWorld();
