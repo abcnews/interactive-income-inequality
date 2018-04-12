@@ -10,6 +10,7 @@ const topojson = require("topojson");
 const LgaSearch = require("../LgaSearch/LgaSearch");
 const IncomeInput = require("../IncomeInput/IncomeInput");
 const MapScroller = require("../MapScroller/MapScroller");
+const MapZoom = require("../MapZoom/MapZoom");
 
 const scrollyteller = require("@abcnews/scrollyteller").loadOdysseyScrollyteller(
   "",
@@ -36,7 +37,7 @@ class App extends React.Component {
   constructor(props) {
     super(props);
 
-    console.log(scrollyteller);
+    // console.log(scrollyteller);
 
     this.state = {
       mapData: null,
@@ -53,7 +54,7 @@ class App extends React.Component {
     if (!lgaObject) return;
 
     this.setState((prevState, props) => {
-      console.log(prevState.scrollytellerObject);
+      // console.log(prevState.scrollytellerObject);
       prevState.scrollytellerObject.panels[0].nodes[0].innerHTML =
         prevState.currentLga.value;
       prevState.scrollytellerObject.panels[1].config.zoom = 500;
@@ -82,7 +83,7 @@ class App extends React.Component {
         // const LGAMapScroller = files[1];
         const LGAMapProjected = files[1];
 
-        console.log(LGAMapProjected)
+        // console.log(LGAMapProjected)
 
         // Convert TopoJSON into GeoJSON
         const topology = topojson.feature(LGAMap, LGAMap.objects.LGA_2016_AUST); //aus_lga);
@@ -115,7 +116,9 @@ class App extends React.Component {
               mapData={this.state.mapDataScroller}
               currentLga={this.state.currentLga}
             />
+            // <MapZoom />
           )}
+          {/* <MapZoom /> */}
       </div>
     );
   }

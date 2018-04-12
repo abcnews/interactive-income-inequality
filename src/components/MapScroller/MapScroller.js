@@ -22,7 +22,7 @@ const styles = require("./MapScroller.scss");
 // Import story data
 // const storyData = require("./storyData.json");
 
-const MAP_SIMPLIFICATION_LEVEL = 0.01;
+const MAP_SIMPLIFICATION_LEVEL = 0.02;
 
 // File scope vars - not really needed maybe but yeah good to track
 let initialGlobeScale;
@@ -184,7 +184,7 @@ class MapScroller extends React.Component {
         .select(dummyTransition)
         .transition("transition")
         .delay(0)
-        .duration(2000)
+        .duration(1000)
         .tween("spinner", () => {
           let rotationInterpolate = d3Interpolate.interpolate(
             previousRotation,
