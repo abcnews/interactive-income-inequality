@@ -47,7 +47,7 @@ let margins = screenWidth * 0.1;
 var colorScale = d3Scale
   .scaleLinear()
   .domain([0, 27])
-  .range(["#7ACFD4", "#00114B"]);
+  .range(["#eee", "#00114B"]);
 
 const zoomScale = d3Scale
   .scaleLinear()
@@ -83,8 +83,6 @@ class MapScroller extends React.Component {
 
     const lgaTopData = require("./lga-top.json");
 
-    console.log(lgaTopData);
-
     // Loop through all LGAs and set top percentage
     australiaGeoLga.features.forEach(element => {
       lgaTopData.some(lga => {
@@ -92,12 +90,10 @@ class MapScroller extends React.Component {
           element.properties.TOP = lga.TOP;
         }
         // Break the some loop by returning true
-        
+
         return Number(element.properties.LGA_CODE16) === lga.LGA_CODE_2016;
       });
     });
-
-    console.log(australiaGeoLga);
 
     const globe = { type: "Sphere" };
 
@@ -180,7 +176,6 @@ class MapScroller extends React.Component {
   }
 
   doMarker(data) {
-    console.log("marker fired");
     previousFocus = currentFocus;
     currentFocus = data.lga + ""; // Turn into string
 
