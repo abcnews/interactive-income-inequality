@@ -23,6 +23,7 @@ const styles = require("./MapScroller.scss");
 // const storyData = require("./storyData.json");
 
 const MAP_SIMPLIFICATION_LEVEL = 0.02;
+const MAP_SIMPLIFICATION_MAX = 0.0;
 
 // File scope vars - not really needed maybe but yeah good to track
 let initialGlobeScale;
@@ -45,7 +46,7 @@ let margins = screenWidth * 0.1;
 
 var colorScale = d3Scale
   .scaleLinear()
-  .domain([10000, 100000])
+  .domain([0, 27])
   .range(["#7ACFD4", "#00114B"]);
 
 const zoomScale = d3Scale
@@ -70,12 +71,33 @@ class MapScroller extends React.Component {
 
     let preSimplifiedMapData = topojson.presimplify(mapData);
 
-    simplifiedMapData = topojson.simplify(preSimplifiedMapData, MAP_SIMPLIFICATION_LEVEL);
+    simplifiedMapData = topojson.simplify(
+      preSimplifiedMapData,
+      MAP_SIMPLIFICATION_LEVEL
+    );
 
     australiaGeoLga = topojson.feature(
       simplifiedMapData,
       mapData.objects.LGA_2016_AUST
     );
+
+    const lgaTopData = require("./lga-top.json");
+
+    console.log(lgaTopData);
+
+    // Loop through all LGAs and set top percentage
+    australiaGeoLga.features.forEach(element => {
+      lgaTopData.some(lga => {
+        if (Number(element.properties.LGA_CODE16) === lga.LGA_CODE_2016) {
+          element.properties.TOP = lga.TOP;
+        }
+        // Break the some loop by returning true
+        
+        return Number(element.properties.LGA_CODE16) === lga.LGA_CODE_2016;
+      });
+    });
+
+    console.log(australiaGeoLga);
 
     const globe = { type: "Sphere" };
 
@@ -96,6 +118,7 @@ class MapScroller extends React.Component {
 
     // Set initial global scale to handle zoom ins and outs
     initialGlobeScale = projection.scale();
+    console.log(initialGlobeScale);
 
     const canvas = d3Selection
       .select("." + styles.stage)
@@ -137,6 +160,8 @@ class MapScroller extends React.Component {
 
     // projection.translate([100, 100]);
 
+    // this.setNewSimplification(this.props.mapData, MAP_SIMPLIFICATION_MAX);
+
     // Draw the inital state of the world
     this.drawWorld();
 
@@ -146,10 +171,7 @@ class MapScroller extends React.Component {
   setNewSimplification(mapData, zoomLevel) {
     let preSimplifiedMapData = topojson.presimplify(mapData);
 
-    simplifiedMapData = topojson.simplify(
-      preSimplifiedMapData,
-      zoomLevel
-    );
+    simplifiedMapData = topojson.simplify(preSimplifiedMapData, zoomLevel);
 
     australiaGeoLga = topojson.feature(
       simplifiedMapData,
@@ -173,7 +195,7 @@ class MapScroller extends React.Component {
       globeScale = data.zoom || 100;
       let previousGlobeScale = projection.scale();
 
-      // this.setNewSimplification(this.props.mapData, 1 / globeScale);
+      this.setNewSimplification(this.props.mapData, MAP_SIMPLIFICATION_LEVEL);
 
       // Zoom in so that percentage set in marker relative to initial 100%
       let newGlobeScale = initialGlobeScale * (globeScale / 100);
@@ -202,6 +224,7 @@ class MapScroller extends React.Component {
             // this.setNewSimplification(this.props.mapData, 1 / zoomScale(scaleInterpolate(time) / initialGlobeScale));
             projection.rotate(rotationInterpolate(time));
             projection.scale(scaleInterpolate(time));
+            // if (time === 1) this.setNewSimplification(this.props.mapData, MAP_SIMPLIFICATION_MAX);
             this.drawWorld();
           };
         });
@@ -225,7 +248,7 @@ class MapScroller extends React.Component {
     australiaGeoLga.features.forEach(element => {
       // console.log(element);
       context.beginPath();
-      context.fillStyle = colorScale(element.properties.LGA_CODE16);
+      context.fillStyle = colorScale(element.properties.TOP);
       path(element);
       context.fill();
     });

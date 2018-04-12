@@ -10,7 +10,7 @@ const topojson = require("topojson");
 const LgaSearch = require("../LgaSearch/LgaSearch");
 const IncomeInput = require("../IncomeInput/IncomeInput");
 const MapScroller = require("../MapScroller/MapScroller");
-const MapZoom = require("../MapZoom/MapZoom");
+// const MapZoom = require("../MapZoom/MapZoom");
 
 const scrollyteller = require("@abcnews/scrollyteller").loadOdysseyScrollyteller(
   "",
@@ -26,8 +26,8 @@ const LGA_GEO_JSON_URL =
 // const SCROLLER_GEO_JSON_URL =
 //   "http://www.abc.net.au/res/sites/news-projects/income-comparisons-react/master/LGA_2016_AUST_MAP.topo.json";
 
-const PROJECTED_GEO_JSON_URL =
-  "http://www.abc.net.au/res/sites/news-projects/income-comparisons-react/master/LGA_2016_AUST_MAP_PROJECTED.topo.json";
+// const PROJECTED_GEO_JSON_URL =
+//   "http://www.abc.net.au/res/sites/news-projects/income-comparisons-react/master/LGA_2016_AUST_MAP_PROJECTED.topo.json";
 
 // File scope variables
 let LGAs = [];
@@ -74,14 +74,14 @@ class App extends React.Component {
       .queue(2) // Concurrent requests
       .defer(d3Request.json, LGA_GEO_JSON_URL)
       // .defer(d3Request.json, SCROLLER_GEO_JSON_URL)
-      .defer(d3Request.json, PROJECTED_GEO_JSON_URL)
+      // .defer(d3Request.json, PROJECTED_GEO_JSON_URL)
       .awaitAll((error, files) => {
         // Once all is loaded do this
         if (error) console.error(error);
 
-        const LGAMap = files[0]; // Load the first file
+        let LGAMap = files[0]; // Load the first file
         // const LGAMapScroller = files[1];
-        const LGAMapProjected = files[1];
+        // const LGAMapProjected = files[1];
 
         // console.log(LGAMapProjected)
 
@@ -116,9 +116,7 @@ class App extends React.Component {
               mapData={this.state.mapDataScroller}
               currentLga={this.state.currentLga}
             />
-            // <MapZoom />
           )}
-          {/* <MapZoom /> */}
       </div>
     );
   }
