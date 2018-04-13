@@ -9,8 +9,8 @@ const topojson = require("topojson");
 // Other React components
 const LgaSearch = require("../LgaSearch/LgaSearch");
 const IncomeInput = require("../IncomeInput/IncomeInput");
-const MapScroller = require("../MapScroller/MapScroller");
-// const MapZoom = require("../MapZoom/MapZoom");
+// const MapScroller = require("../MapScroller/MapScroller");
+const MapZoom = require("../MapZoom/MapZoom");
 
 const scrollyteller = require("@abcnews/scrollyteller").loadOdysseyScrollyteller(
   "",
@@ -111,7 +111,12 @@ class App extends React.Component {
         {/* Conditionally render MapScroller if data loaded */}
         {this.state.mapData &&
           this.state.scrollytellerObject && (
-            <MapScroller
+            // <MapScroller
+            //   scrollyteller={this.state.scrollytellerObject}
+            //   mapData={this.state.mapDataScroller}
+            //   currentLga={this.state.currentLga}
+            // />
+            <MapZoom
               scrollyteller={this.state.scrollytellerObject}
               mapData={this.state.mapDataScroller}
               currentLga={this.state.currentLga}

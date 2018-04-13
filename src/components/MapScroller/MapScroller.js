@@ -32,6 +32,7 @@ let australiaGeoLga;
 let context;
 let path;
 let projection;
+let canvas;
 
 // Set defaults
 let currentFocus = "72330"; // Middle of Australia (pretty much)
@@ -58,8 +59,13 @@ class MapScroller extends React.Component {
   constructor(props) {
     super(props);
 
+   
+
     this.state = {};
   }
+
+ 
+
   componentDidMount() {
     this.canvasInit(this.props.mapData);
   }
@@ -89,7 +95,7 @@ class MapScroller extends React.Component {
         if (Number(element.properties.LGA_CODE16) === lga.LGA_CODE_2016) {
           element.properties.TOP = lga.TOP;
         }
-        // Break the some loop by returning true
+        // Break the "some" loop by returning true
 
         return Number(element.properties.LGA_CODE16) === lga.LGA_CODE_2016;
       });
@@ -116,7 +122,7 @@ class MapScroller extends React.Component {
     initialGlobeScale = projection.scale();
     console.log(initialGlobeScale);
 
-    const canvas = d3Selection
+    canvas = d3Selection
       .select("." + styles.stage)
       .style("background-color", "#f9f9f9")
       .attr("width", screenWidth)
@@ -179,7 +185,7 @@ class MapScroller extends React.Component {
     previousFocus = currentFocus;
     currentFocus = data.lga + ""; // Turn into string
 
-    // Make sure we are mounted
+    Make sure we are mounted
     if (projection) {
       let previousRotation = projection.rotate();
       let currentRotation = d3Geo.geoCentroid(getLGA(currentFocus).geometry); //getItem(currentFocus).longlat;
@@ -244,18 +250,20 @@ class MapScroller extends React.Component {
       // console.log(element);
       context.beginPath();
       context.fillStyle = colorScale(element.properties.TOP);
+      context.strokeStyle = "rgba(255, 255, 255, 0.4)";
       path(element);
       context.fill();
+      context.stroke();
     });
 
     // Draw white outline
-    context.beginPath();
-    context.strokeStyle = "rgba(255, 255, 255, 0.4)";
-    context.fillStyle = "#1A90AF";
-    context.lineWidth = 1.1;
-    path(australiaGeoLga);
-    // context.fill();
-    context.stroke();
+    // context.beginPath();
+    // context.strokeStyle = "rgba(255, 255, 255, 0.4)";
+    // context.fillStyle = "#1A90AF";
+    // context.lineWidth = 1.1;
+    // path(australiaGeoLga);
+    // // context.fill();
+    // context.stroke();
   }
 
   componentWillUpdate() {}
