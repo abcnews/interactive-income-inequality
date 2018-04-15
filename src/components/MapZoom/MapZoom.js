@@ -164,6 +164,7 @@ class MapScroller extends React.Component {
 
     canvas.call(zoom.transform, transform).call(transition);
 
+    // Gets called on Zoom Event
     function zoomed() {
       context.save();
       context.clearRect(0, 0, screenWidth, screenHeight);
@@ -194,7 +195,7 @@ class MapScroller extends React.Component {
     function transform() {
       return d3.zoomIdentity
         .translate(screenWidth / 2, screenWidth / 2)
-        .scale(8)
+        .scale(4)
         .translate(-point[0], -point[1]);
     }
 
