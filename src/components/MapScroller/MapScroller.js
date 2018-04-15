@@ -19,13 +19,11 @@ const d3Scale = require("d3-scale");
 // Import styles
 const styles = require("./MapScroller.scss");
 
-// Import story data
-// const storyData = require("./storyData.json");
-
+// Constants
 const MAP_SIMPLIFICATION_LEVEL = 0.02;
 const MAP_SIMPLIFICATION_MAX = 0.001;
 
-// File scope vars - not really needed maybe but yeah good to track
+// File scope vars
 let initialGlobeScale;
 let globeScale = 100;
 let context;
@@ -33,7 +31,7 @@ let path;
 let projection;
 let canvas;
 
-// Different levels of
+// Different levels of zoom pre-compilied
 let australiaGeoLga;
 let australiaGeoLgaDetail;
 
@@ -80,6 +78,7 @@ class MapScroller extends React.Component {
   }
 
   componentDidMount() {
+    // Wait until mounted and then initialise the canvas
     this.canvasInit(this.props.mapData);
   }
 
