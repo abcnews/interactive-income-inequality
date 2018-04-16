@@ -76,6 +76,7 @@ class App extends React.Component {
       // .defer(d3Request.json, SCROLLER_GEO_JSON_URL)
       // .defer(d3Request.json, PROJECTED_GEO_JSON_URL)
       .awaitAll((error, files) => {
+        console.log("External data loaded...");
         // Once all is loaded do this
         if (error) console.error(error);
 
@@ -92,7 +93,7 @@ class App extends React.Component {
 
         this.setState({ mapData: LGAs, mapDataScroller: LGAMap });
 
-        console.log("External data loaded...");
+        
       });
   }
 

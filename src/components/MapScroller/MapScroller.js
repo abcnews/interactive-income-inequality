@@ -20,6 +20,9 @@ const d3Scale = require("d3-scale");
 // Import styles
 const styles = require("./MapScroller.scss");
 
+const SIMPLIFICATION_LEVELS = 20;
+const SIMPLIFICATION_FACTOR = 1.4;
+
 // File scope vars
 let initialGlobeScale;
 let globeScale = 100;
@@ -29,10 +32,12 @@ let projection;
 let canvas;
 
 // Different levels of zoom pre-compilied
-let australiaLow;
-let australiaMid;
-let australiaHigh;
-let australiaMax;
+let australia = [];
+// let australiaLow;
+// let australiaMid;
+// let australiaHigh;
+// let australiaUltra;
+// let australiaMax;
 
 // Set defaults
 let currentFocus = "72330"; // Middle of Australia (pretty much)
@@ -88,10 +93,26 @@ class MapScroller extends React.Component {
 
     // Create maps of differing detail
     // (We may only use one though for now)
-    australiaLow = getGeo(mapData, 0.01);
-    australiaMid = getGeo(mapData, 0.001);
-    australiaHigh = getGeo(mapData, 0.0001);
-    australiaMax = getGeo(mapData, 0.0);
+    // australiaLow = getGeo(mapData, 0.01);
+    // australiaMid = getGeo(mapData, 0.001);
+    // australiaHigh = getGeo(mapData, 0.0001);
+    // australiaUltra = getGeo(mapData, 0.00008);
+    // australiaMax = getGeo(mapData, 0.0);
+
+    // australia[0] = getGeo(mapData, 0.01);
+    // australia[1] = getGeo(mapData, 0.001);
+    // australia[2] = getGeo(mapData, 0.0001);
+    // australia[3] = getGeo(mapData, 0.00008);
+    // australia[4] = getGeo(mapData, 0.0);
+
+
+    // Set up pre-compiled simplification levels
+    let baseSimplification = 0.01;
+
+    for (let i = 0; i < SIMPLIFICATION_LEVELS; i++) {
+      australia[i] = getGeo(mapData, baseSimplification);
+      baseSimplification = baseSimplification / SIMPLIFICATION_FACTOR;
+    }
 
     // console.log(australiaGeoLga);
     // console.log(australiaGeoLgaDetail);
@@ -135,7 +156,7 @@ class MapScroller extends React.Component {
           [margins /* - screenWidth * 0.06 */, margins],
           [screenWidth - margins, screenHeight - margins]
         ],
-        australiaLow
+        australia[0]
       );
 
     // Set initial global scale to handle zoom ins and outs
@@ -181,7 +202,7 @@ class MapScroller extends React.Component {
     // this.setNewSimplification(this.props.mapData, MAP_SIMPLIFICATION_MAX);
 
     // Draw the inital state of the world
-    this.drawWorld(australiaLow);
+    this.drawWorld(australia[0]);
   }
 
   // Depreciated, probably don't use any more
@@ -256,7 +277,7 @@ class MapScroller extends React.Component {
           return time => {
             // console.log(projection.scale() / initialGlobeScale * 100)
             // let detailLevel;
-            // let currentZoom = projection.scale() / initialGlobeScale * 100;
+
             // if (currentZoom > 500)
             //   detailLevel = 0; // Just keep it default for now...
             // else detailLevel = 0;
@@ -264,14 +285,34 @@ class MapScroller extends React.Component {
             // this.setNewSimplification(this.props.mapData, 1 / zoomScale(scaleInterpolate(time) / initialGlobeScale));
             projection.rotate(rotationInterpolate(time));
             projection.scale(scaleInterpolate(time));
-            this.drawWorld(australiaLow, currentFocus);
-            if (time === 1) this.drawWorld(australiaLow, currentFocus);
+
+            let currentZoom = projection.scale() / initialGlobeScale * 100;
+            console.log(currentZoom);
+
+            simplificationScale = d3Scale
+              .scaleQuantize()
+              .domain([100, 2000])
+              .range(Array.from(Array(SIMPLIFICATION_LEVELS).keys()));
+
+            console.log(simplificationScale(currentZoom));
+
+            // if (currentZoom < 401) {
+            //   this.drawWorld(australia[0]);
+            // } else if (currentZoom < 801) {
+            //   this.drawWorld(australia[1]);
+            // } else if (currentZoom < 1001) {
+            //   this.drawWorld(australia[2]);
+            // } else {
+            //   this.drawWorld(australia[3]);
+            // }
+
+            this.drawWorld(australia[simplificationScale(currentZoom)]);
           };
         });
     }
   }
 
-  drawWorld(australiaGeoJson, targetLgaCode) {
+  drawWorld(australiaGeoJson) {
     // Clear the canvas ready for redraw
     context.clearRect(0, 0, screenWidth, screenHeight);
 
@@ -280,9 +321,6 @@ class MapScroller extends React.Component {
     //   australiaGeoLga.features.forEach(element => {
     //     // if (element.properties.LGA_CODE16 !== targetLgaCode) return;
 
-        
-
-
     //     context.beginPath();
     //     context.fillStyle = colorScale(element.properties.TOP);
     //     context.strokeStyle = "rgba(255, 255, 255, 0.4)";
@@ -290,25 +328,25 @@ class MapScroller extends React.Component {
     //     context.fill();
     //     context.stroke();
     //   });
-    // } else if (detailLevel === 1) {  
-      australiaGeoJson.features.forEach(element => {
-        // if (element.properties.LGA_CODE16 !== targetLgaCode) return;
+    // } else if (detailLevel === 1) {
+    australiaGeoJson.features.forEach(element => {
+      // if (element.properties.LGA_CODE16 !== targetLgaCode) return;
 
-        // Don't render if not on screen
-        const bounds = path.bounds(element);
+      // Don't render if not on screen
+      const bounds = path.bounds(element);
 
-        if (bounds[0][0] > screenWidth - 100) return;
-        if (bounds[0][1] > screenHeight - 100) return;
-        if (bounds[1][0] < 100) return;
-        if (bounds[1][1] < 100) return;
+      if (bounds[0][0] > screenWidth) return;
+      if (bounds[0][1] > screenHeight) return;
+      if (bounds[1][0] < 0) return;
+      if (bounds[1][1] < 0) return;
 
-        context.beginPath();
-        context.fillStyle = colorScale(element.properties.TOP);
-        context.strokeStyle = "rgba(255, 255, 255, 0.4)";
-        path(element);
-        context.fill();
-        context.stroke();
-      });
+      context.beginPath();
+      context.fillStyle = colorScale(element.properties.TOP);
+      context.strokeStyle = "rgba(255, 255, 255, 0.4)";
+      path(element);
+      context.fill();
+      context.stroke();
+    });
     // }
 
     // Draw all landmasses
@@ -375,7 +413,7 @@ function stickifyStage() {
 
 // Heloper for indexing an array of objects
 function getLGA(lgaCode) {
-  return australiaMax.features.find(
+  return australia[australia.length - 1].features.find(
     lga => lga.properties.LGA_CODE16 === lgaCode
   );
 }
