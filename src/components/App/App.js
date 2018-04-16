@@ -57,7 +57,7 @@ class App extends React.Component {
       // console.log(prevState.scrollytellerObject);
       prevState.scrollytellerObject.panels[0].nodes[0].innerHTML =
         prevState.currentLga.value;
-      prevState.scrollytellerObject.panels[1].config.zoom = 500;
+      prevState.scrollytellerObject.panels[1].config.zoom = 2000;
       prevState.scrollytellerObject.panels[1].config.lga =
         prevState.currentLga.value;
       // prevState.scrollytellerObject.panels.shift();
