@@ -3,6 +3,7 @@ const ReactDOM = require("react-dom");
 const Scrollyteller = require("@abcnews/scrollyteller");
 const topojson = require("topojson");
 const canvasDpiScaler = require("canvas-dpi-scaler");
+const geoJsonBounds = require("geojson-bounds");
 
 // Load up some helper functions etc
 const utils = require("../../lib/utils");
@@ -19,10 +20,6 @@ const d3Scale = require("d3-scale");
 // Import styles
 const styles = require("./MapScroller.scss");
 
-// Constants
-const MAP_SIMPLIFICATION_LEVEL = 0.02;
-const MAP_SIMPLIFICATION_MAX = 0.001;
-
 // File scope vars
 let initialGlobeScale;
 let globeScale = 100;
@@ -32,8 +29,10 @@ let projection;
 let canvas;
 
 // Different levels of zoom pre-compilied
-let australiaGeoLga;
-let australiaGeoLgaDetail;
+let australiaLow;
+let australiaMid;
+let australiaHigh;
+let australiaMax;
 
 // Set defaults
 let currentFocus = "72330"; // Middle of Australia (pretty much)
@@ -87,8 +86,15 @@ class MapScroller extends React.Component {
     // and then apply sticky styles
     stickifyStage();
 
-    australiaGeoLga = getGeo(mapData, 0.01);
-    australiaGeoLgaDetail = getGeo(mapData, 0.0001);
+    // Create maps of differing detail
+    // (We may only use one though for now)
+    australiaLow = getGeo(mapData, 0.01);
+    australiaMid = getGeo(mapData, 0.001);
+    australiaHigh = getGeo(mapData, 0.0001);
+    australiaMax = getGeo(mapData, 0.0);
+
+    // console.log(australiaGeoLga);
+    // console.log(australiaGeoLgaDetail);
 
     function getGeo(mapData, level) {
       const preSimplifiedMapData = topojson.presimplify(mapData);
@@ -117,8 +123,6 @@ class MapScroller extends React.Component {
       return geoJSON;
     }
 
-    // const globe = { type: "Sphere" };
-
     // Set up a D3 projection here
     projection = d3Geo
       // .geoConicConformal() // North top
@@ -131,7 +135,7 @@ class MapScroller extends React.Component {
           [margins /* - screenWidth * 0.06 */, margins],
           [screenWidth - margins, screenHeight - margins]
         ],
-        australiaGeoLga
+        australiaLow
       );
 
     // Set initial global scale to handle zoom ins and outs
@@ -152,27 +156,22 @@ class MapScroller extends React.Component {
     // Auto-convert canvas to Retina display and High DPI monitor scaling
     canvasDpiScaler(canvasEl, context);
 
-    const clip = d3Geo
-      .geoIdentity()
-      .clipExtent([[0, 0], [screenWidth, screenHeight]]);
-
-    const simplify = d3Geo.geoTransform({
-      point: function(x, y, z) {
-        // console.log("stream")
-        this.stream.point(x, y);
-      }
-    });
+    // Clip the projection. Unfortunately doesn't seem to speed up much
+    // because full projection still needs to be calculated
+    // const clip = d3Geo
+    //   .geoIdentity()
+    //   .clipExtent([[0, 0], [screenWidth, screenHeight]]);
 
     // Build a path generator for our orthographic projection
     path = d3Geo
       .geoPath()
-      .projection({
-        // Here we return a clipped stream of the projection
-        stream: function(s) {
-          return projection.stream(clip.stream(s));
-        }
-      })
-      // .projection(projection)
+      // .projection({
+      //   // Here we return a clipped stream of the projection
+      //   stream: function(s) {
+      //     return projection.stream(clip.stream(s));
+      //   }
+      // })
+      .projection(projection)
       .context(context);
 
     // let translation = projection([153.0251, -27.4698]);
@@ -182,22 +181,20 @@ class MapScroller extends React.Component {
     // this.setNewSimplification(this.props.mapData, MAP_SIMPLIFICATION_MAX);
 
     // Draw the inital state of the world
-    this.drawWorld(0);
-
-    // Function for clearing and render a frame of each part of the globe
+    this.drawWorld(australiaLow);
   }
 
   // Depreciated, probably don't use any more
-  setNewSimplification(mapData, zoomLevel) {
-    let preSimplifiedMapData = topojson.presimplify(mapData);
+  // setNewSimplification(mapData, zoomLevel) {
+  //   let preSimplifiedMapData = topojson.presimplify(mapData);
 
-    let simplifiedMapData = topojson.simplify(preSimplifiedMapData, zoomLevel);
+  //   let simplifiedMapData = topojson.simplify(preSimplifiedMapData, zoomLevel);
 
-    australiaGeoLga = topojson.feature(
-      simplifiedMapData,
-      mapData.objects.LGA_2016_AUST
-    );
-  }
+  //   australiaGeoLga = topojson.feature(
+  //     simplifiedMapData,
+  //     mapData.objects.LGA_2016_AUST
+  //   );
+  // }
 
   doMarker(data) {
     previousFocus = currentFocus;
@@ -205,10 +202,24 @@ class MapScroller extends React.Component {
 
     //Make sure we are mounted
     if (projection) {
-      // context.translate(100, 100);
+      let currentLgaGeometry = getLGA(currentFocus).geometry;
 
       let previousRotation = projection.rotate();
-      let currentRotation = d3Geo.geoCentroid(getLGA(currentFocus).geometry); //getItem(currentFocus).longlat;
+      let currentRotation = d3Geo.geoCentroid(currentLgaGeometry); //getItem(currentFocus).longlat;
+
+      // console.log(currentLgaGeometry);
+      // console.log(polygonArea(currentLgaGeometry.coordinates[0]));
+
+      // console.log(geoJsonBounds.extent(currentLgaGeometry));
+
+      // projection.fitExtent(
+      //   [
+      //     [margins /* - screenWidth * 0.06 */, margins],
+      //     [screenWidth - margins, screenHeight - margins]
+      //   ],
+      //   currentLgaGeometry
+      // );
+      // this.drawWorld(1);
 
       // currentLongLat = getItem(currentFocus).longlat;
       // projection.rotate(invertLongLat(currentLongLat));
@@ -221,7 +232,7 @@ class MapScroller extends React.Component {
       // Zoom in so that percentage set in marker relative to initial 100%
       let newGlobeScale = initialGlobeScale * (globeScale / 100);
 
-      console.log(newGlobeScale / initialGlobeScale * 100);
+      // console.log(newGlobeScale / initialGlobeScale * 100);
 
       const dummyTransition = {};
 
@@ -244,28 +255,53 @@ class MapScroller extends React.Component {
           // Return the tween function
           return time => {
             // console.log(projection.scale() / initialGlobeScale * 100)
-            let detailLevel;
-            let currentZoom = projection.scale() / initialGlobeScale * 100;
-            if (currentZoom > 500) detailLevel = 0; // Just keep it default for now...
-            else detailLevel = 0;
+            // let detailLevel;
+            // let currentZoom = projection.scale() / initialGlobeScale * 100;
+            // if (currentZoom > 500)
+            //   detailLevel = 0; // Just keep it default for now...
+            // else detailLevel = 0;
             // console.log(1 / zoomScale(scaleInterpolate(time) / initialGlobeScale))
             // this.setNewSimplification(this.props.mapData, 1 / zoomScale(scaleInterpolate(time) / initialGlobeScale));
             projection.rotate(rotationInterpolate(time));
             projection.scale(scaleInterpolate(time));
-            // if (time === 1) this.setNewSimplification(this.props.mapData, MAP_SIMPLIFICATION_MAX);
-            this.drawWorld(detailLevel);
+            this.drawWorld(australiaLow, currentFocus);
+            if (time === 1) this.drawWorld(australiaLow, currentFocus);
           };
         });
     }
   }
 
-  drawWorld(detailLevel) {
+  drawWorld(australiaGeoJson, targetLgaCode) {
     // Clear the canvas ready for redraw
     context.clearRect(0, 0, screenWidth, screenHeight);
 
-    if (detailLevel === 0) {
-      // Loop through all LGAs and aplly colours
-      australiaGeoLga.features.forEach(element => {
+    // if (detailLevel === 0) {
+    //   // Loop through all LGAs and aplly colours
+    //   australiaGeoLga.features.forEach(element => {
+    //     // if (element.properties.LGA_CODE16 !== targetLgaCode) return;
+
+        
+
+
+    //     context.beginPath();
+    //     context.fillStyle = colorScale(element.properties.TOP);
+    //     context.strokeStyle = "rgba(255, 255, 255, 0.4)";
+    //     path(element);
+    //     context.fill();
+    //     context.stroke();
+    //   });
+    // } else if (detailLevel === 1) {  
+      australiaGeoJson.features.forEach(element => {
+        // if (element.properties.LGA_CODE16 !== targetLgaCode) return;
+
+        // Don't render if not on screen
+        const bounds = path.bounds(element);
+
+        if (bounds[0][0] > screenWidth - 100) return;
+        if (bounds[0][1] > screenHeight - 100) return;
+        if (bounds[1][0] < 100) return;
+        if (bounds[1][1] < 100) return;
+
         context.beginPath();
         context.fillStyle = colorScale(element.properties.TOP);
         context.strokeStyle = "rgba(255, 255, 255, 0.4)";
@@ -273,16 +309,7 @@ class MapScroller extends React.Component {
         context.fill();
         context.stroke();
       });
-    } else if (detailLevel === 1) {
-      australiaGeoLgaDetail.features.forEach(element => {
-        context.beginPath();
-        context.fillStyle = colorScale(element.properties.TOP);
-        context.strokeStyle = "rgba(255, 255, 255, 0.4)";
-        path(element);
-        context.fill();
-        context.stroke();
-      });
-    }
+    // }
 
     // Draw all landmasses
     // context.beginPath();
@@ -348,13 +375,28 @@ function stickifyStage() {
 
 // Heloper for indexing an array of objects
 function getLGA(lgaCode) {
-  return australiaGeoLga.features.find(
+  return australiaMax.features.find(
     lga => lga.properties.LGA_CODE16 === lgaCode
   );
 }
 
 function invertLongLat(longlat) {
   return [-longlat[0], -longlat[1]];
+}
+
+// Calculate the area of a polygon
+function polygonArea(points) {
+  var sum = 0.0;
+  var length = points.length;
+  if (length < 3) {
+    return sum;
+  }
+  points.forEach(function(d1, i1) {
+    i2 = (i1 + 1) % length;
+    d2 = points[i2];
+    sum += d2[1] * d1[0] - d1[1] * d2[0];
+  });
+  return sum / 2;
 }
 
 // Polyfill for .find()
