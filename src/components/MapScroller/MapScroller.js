@@ -21,7 +21,7 @@ const d3Scale = require("d3-scale");
 const styles = require("./MapScroller.scss");
 
 const SIMPLIFICATION_LEVELS = 20;
-const SIMPLIFICATION_FACTOR = 1.35;
+const SIMPLIFICATION_FACTOR = 1.25;
 
 // File scope vars
 let initialGlobeScale;
@@ -274,7 +274,7 @@ class MapScroller extends React.Component {
   render() {
     // Create props vars passed to this component
     const { scrollyteller, mapData } = this.props;
-    
+
     return ReactDOM.createPortal(
       <div className={styles.wrapper}>
         <Scrollyteller
