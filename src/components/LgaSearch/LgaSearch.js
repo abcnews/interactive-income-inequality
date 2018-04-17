@@ -98,7 +98,6 @@ class LgaSearch extends React.Component {
       return feature.relevance > ADDRESS_RELEVANCE_THRESHOLD;
     });
 
-    console.log(relevanceFiltered);
     return relevanceFiltered;
   }
 

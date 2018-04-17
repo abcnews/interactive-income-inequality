@@ -32,8 +32,6 @@ let path;
 let projection;
 let canvas;
 
-let tweening; // Still using the tweening hack
-
 // Different levels of zoom pre-compilied
 let australia = [];
 
@@ -226,14 +224,14 @@ class MapScroller extends React.Component {
       ]);
 
       let scaleInterpolate = d3Interpolate.interpolate(
-        previousGlobeScale,
+        projection.scale(),
         newGlobeScale
       );
 
       let rotationDelay = 0;
       let zoomDelay = 0;
 
-      let maxTransitionTime = 1300;
+      let maxTransitionTime = 1400;
       let transitionTime;
 
       transitionTime = Math.abs(timeZoomInterpolate.duration);
@@ -251,8 +249,6 @@ class MapScroller extends React.Component {
         zoomDelay = 0;
       }
 
-      let rotating = 1;
-
       d3Selection
         .select(dummyTransition)
         .transition("rotation")
@@ -262,9 +258,6 @@ class MapScroller extends React.Component {
           // Return the tween function
           return time => {
             projection.rotate(rotationInterpolate(time));
-            // projection.scale(getScale());
-
-            tweening = time;
           };
         });
 
@@ -274,12 +267,7 @@ class MapScroller extends React.Component {
         .delay(zoomDelay)
         .duration(transitionTime)
         .tween("zoom", () => {
-          // Return the tween function
           return time => {
-            let scaleInterpolate = d3Interpolate.interpolate(
-              previousGlobeScale,
-              newGlobeScale
-            );
             projection.scale(scaleInterpolate(time));
           };
         });
@@ -302,9 +290,18 @@ class MapScroller extends React.Component {
               .range(Array.from(Array(SIMPLIFICATION_LEVELS).keys()));
 
             // Draw a version of map based on zoom level
-            this.drawWorld(australia[simplificationScale(currentZoom)]);
+            this.drawWorld(
+              australia[simplificationScale(currentZoom)],
+              currentFocus
+            );
           };
         });
+
+      /*
+       * The following will be helpful if we want to zoom out first
+       * and then zoom back in again. In case we are traveling 
+       * looooooong distances with limited zoom.
+       */
 
       // d3Selection
       //   .select(dummyTransition)
@@ -350,18 +347,30 @@ class MapScroller extends React.Component {
     }
   }
 
-  drawWorld(australiaGeoJson) {
+  drawWorld(australiaGeoJson, currentFocus) {
     // Clear the canvas ready for redraw
     context.clearRect(0, 0, screenWidth, screenHeight);
 
     australiaGeoJson.features.forEach(element => {
-      // Don't render if not on screen
+      // Get bounds of current LGA
       const bounds = path.bounds(element);
 
+      // Don't render if not on screen
       if (bounds[0][0] > screenWidth) return;
       if (bounds[0][1] > screenHeight) return;
       if (bounds[1][0] < 0) return;
       if (bounds[1][1] < 0) return;
+
+      // console.log(element);
+      if (element.properties.LGA_CODE16 === currentFocus) {
+        context.beginPath();
+        context.fillStyle = "#FF5733"
+        context.strokeStyle = "rgba(255, 255, 255, 0.4)";
+        path(element);
+        context.fill();
+        context.stroke();
+        return;
+      }
 
       context.beginPath();
       context.fillStyle = colorScale(element.properties.TOP);

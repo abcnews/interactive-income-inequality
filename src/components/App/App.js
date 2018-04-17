@@ -22,7 +22,7 @@ const scrollyteller = require("@abcnews/scrollyteller").loadOdysseyScrollyteller
 const LGA_GEO_JSON_URL =
   // "http://WS204914.aus.aunty.abc.net.au:8000/LGA_2016_AUST_SEARCH.topo.json";
   "http://www.abc.net.au/res/sites/news-projects/income-comparisons-react/master/LGA_2016_AUST_SEARCH.topo.json";
-  // "/LGA_2016_AUST_SEARCH.topo.json"
+// "/LGA_2016_AUST_SEARCH.topo.json"
 
 // const SCROLLER_GEO_JSON_URL =
 //   "http://www.abc.net.au/res/sites/news-projects/income-comparisons-react/master/LGA_2016_AUST_MAP.topo.json";
@@ -38,8 +38,6 @@ class App extends React.Component {
   constructor(props) {
     super(props);
 
-    // console.log(scrollyteller);
-
     this.state = {
       mapData: null,
       mapDataScroller: null,
@@ -49,20 +47,17 @@ class App extends React.Component {
   }
 
   // Pass some data up from another component
-  // Supposedly bad practice maybe but ¯\_(ツ)_/¯
   setCurrentLga(lgaObject) {
     this.setState({ currentLga: lgaObject });
     if (!lgaObject) return;
 
     this.setState((prevState, props) => {
-      // console.log(prevState.scrollytellerObject);
       prevState.scrollytellerObject.panels[0].nodes[0].innerHTML =
         prevState.currentLga.value;
       prevState.scrollytellerObject.panels[1].config.zoom = 2000;
       prevState.scrollytellerObject.panels[1].config.lga =
         prevState.currentLga.value;
       // prevState.scrollytellerObject.panels.shift();
-      // console.log(prevState);
       return {
         scrollytellerObject: prevState.scrollytellerObject
       };
@@ -82,10 +77,6 @@ class App extends React.Component {
         if (error) console.error(error);
 
         let LGAMap = files[0]; // Load the first file
-        // const LGAMapScroller = files[1];
-        // const LGAMapProjected = files[1];
-
-        // console.log(LGAMapProjected)
 
         // Convert TopoJSON into GeoJSON
         const topology = topojson.feature(LGAMap, LGAMap.objects.LGA_2016_AUST); //aus_lga);
@@ -93,16 +84,10 @@ class App extends React.Component {
         LGAs = topology.features;
 
         this.setState({ mapData: LGAs, mapDataScroller: LGAMap });
-
-        
       });
   }
 
   render() {
-    // const { scrollyteller } = this.props;
-
-    //
-
     return (
       <div className={styles.root}>
         <IncomeInput />
