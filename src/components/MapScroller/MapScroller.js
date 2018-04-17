@@ -22,6 +22,7 @@ const styles = require("./MapScroller.scss");
 
 const SIMPLIFICATION_LEVELS = 20;
 const SIMPLIFICATION_FACTOR = 1.25;
+const MAX_ZOOM = 1600;
 
 // File scope vars
 let initialGlobeScale;
@@ -30,6 +31,8 @@ let context;
 let path;
 let projection;
 let canvas;
+
+let tweening; // Still using the tweening hack
 
 // Different levels of zoom pre-compilied
 let australia = [];
@@ -86,7 +89,6 @@ class MapScroller extends React.Component {
     // and then apply sticky styles
     stickifyStage();
 
-
     // Set up pre-compiled simplification levels
     let baseSimplification = 0.01;
 
@@ -94,9 +96,6 @@ class MapScroller extends React.Component {
       australia[i] = getGeo(mapData, baseSimplification);
       baseSimplification = baseSimplification / SIMPLIFICATION_FACTOR;
     }
-
-    // console.log(australiaGeoLga);
-    // console.log(australiaGeoLgaDetail);
 
     function getGeo(mapData, level) {
       const preSimplifiedMapData = topojson.presimplify(mapData);
@@ -203,8 +202,6 @@ class MapScroller extends React.Component {
       globeScale = data.zoom || 100;
       let previousGlobeScale = projection.scale();
 
-      // this.setNewSimplification(this.props.mapData, MAP_SIMPLIFICATION_LEVEL);
-
       // Zoom in so that percentage set in marker relative to initial 100%
       let newGlobeScale = initialGlobeScale * (globeScale / 100);
 
@@ -212,38 +209,144 @@ class MapScroller extends React.Component {
 
       const dummyTransition = {};
 
+      let timeZoomInterpolate = d3Interpolate.interpolateZoom(
+        [previousRotation[0], previousRotation[1], previousGlobeScale],
+        [-currentRotation[0], -currentRotation[1], newGlobeScale]
+      );
+
+      // let bounceZoomInterpolate = d3Interpolate.interpolateZoom(
+      //   [previousRotation[0], previousRotation[1], 10],
+      //   [-currentRotation[0], -currentRotation[1], 10]
+      // );
+
+      let rotationInterpolate = d3Interpolate.interpolate(previousRotation, [
+        -currentRotation[0],
+        -currentRotation[1],
+        0
+      ]);
+
+      let scaleInterpolate = d3Interpolate.interpolate(
+        previousGlobeScale,
+        newGlobeScale
+      );
+
+      let rotationDelay = 0;
+      let zoomDelay = 0;
+
+      let maxTransitionTime = 1300;
+      let transitionTime;
+
+      transitionTime = Math.abs(timeZoomInterpolate.duration);
+
+      // Don't take too long
+      if (transitionTime > maxTransitionTime)
+        transitionTime = maxTransitionTime;
+
+      // Determine if zooming in or out
+      if (newGlobeScale > previousGlobeScale) {
+        rotationDelay = 0;
+        zoomDelay = transitionTime / 3;
+      } else {
+        rotationDelay = transitionTime / 3;
+        zoomDelay = 0;
+      }
+
+      let rotating = 1;
+
       d3Selection
         .select(dummyTransition)
-        .transition("transition")
-        .delay(0)
-        .duration(1000)
-        .tween("spinner", () => {
-          let rotationInterpolate = d3Interpolate.interpolate(
-            previousRotation,
-            [-currentRotation[0], -currentRotation[1], 0]
-          );
-
-          let scaleInterpolate = d3Interpolate.interpolate(
-            previousGlobeScale,
-            newGlobeScale
-          );
-
+        .transition("rotation")
+        .delay(rotationDelay)
+        .duration(transitionTime)
+        .tween("rotation", () => {
           // Return the tween function
           return time => {
             projection.rotate(rotationInterpolate(time));
-            projection.scale(scaleInterpolate(time));
+            // projection.scale(getScale());
 
+            tweening = time;
+          };
+        });
+
+      d3Selection
+        .select(dummyTransition)
+        .transition("zoom")
+        .delay(zoomDelay)
+        .duration(transitionTime)
+        .tween("zoom", () => {
+          // Return the tween function
+          return time => {
+            let scaleInterpolate = d3Interpolate.interpolate(
+              previousGlobeScale,
+              newGlobeScale
+            );
+            projection.scale(scaleInterpolate(time));
+          };
+        });
+
+      // Separate render tween to handle different delays
+      d3Selection
+        .select(dummyTransition)
+        .transition("render")
+        .delay(0)
+        .duration(transitionTime + Math.max(zoomDelay, rotationDelay)) // transition + delay
+        .tween("render", () => {
+          // Return the tween function
+          return time => {
+            // Calculate current zoom and set up simplification scale
             let currentZoom = projection.scale() / initialGlobeScale * 100;
 
-            simplificationScale = d3Scale
+            const simplificationScale = d3Scale
               .scaleQuantize()
-              .domain([100, 2000])
+              .domain([100, MAX_ZOOM])
               .range(Array.from(Array(SIMPLIFICATION_LEVELS).keys()));
 
             // Draw a version of map based on zoom level
             this.drawWorld(australia[simplificationScale(currentZoom)]);
           };
         });
+
+      // d3Selection
+      //   .select(dummyTransition)
+      //   .transition("zoom")
+      //   .delay(0)
+      //   .duration(transitionTime / 2 + 500) //Math.abs(zoomInterpolate.duration))
+      //   .tween("zoom", () => {
+      //     // Return the tween function
+      //     return time => {
+      //       let scaleInterpolate = d3Interpolate.interpolate(
+      //         previousGlobeScale,
+      //         initialGlobeScale
+      //       );
+
+      //       projection.scale(scaleInterpolate(time));
+      //     };
+      //   })
+      //   // Second half of transition
+      //   .transition()
+      //   .tween("zoom", () => {
+      //     // Return the tween function
+      //     return time => {
+      //       let scaleInterpolate = d3Interpolate.interpolate(
+      //         projection.scale(),
+      //         newGlobeScale
+      //       );
+
+      //       projection.scale(scaleInterpolate(time));
+      //       if (tweening === 1) {
+      //         // Calculate current zoom and set up simplification scale
+      //         let currentZoom = projection.scale() / initialGlobeScale * 100;
+
+      //         const simplificationScale = d3Scale
+      //           .scaleQuantize()
+      //           .domain([100, MAX_ZOOM])
+      //           .range(Array.from(Array(SIMPLIFICATION_LEVELS).keys()));
+
+      //         // Draw a version of map based on zoom level
+      //         this.drawWorld(australia[simplificationScale(currentZoom)]);
+      //       }
+      //     };
+      //   });
     }
   }
 
