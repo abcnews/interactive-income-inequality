@@ -200,8 +200,8 @@ class MapScroller extends React.Component {
       // Calculate zoom to bounding box
       let marginMultiplier = 0.46;
 
-      const tempScale = projection.scale()
-      const tempTranslate = projection.translate()
+      const tempScale = projection.scale();
+      const tempTranslate = projection.translate();
 
       projection.fitExtent(
         [
@@ -210,18 +210,20 @@ class MapScroller extends React.Component {
             Math.min(screenWidth, screenHeight) * marginMultiplier
           ],
           [
-            screenWidth - Math.min(screenWidth, screenHeight) * marginMultiplier,
-            screenHeight - Math.min(screenWidth, screenHeight) * marginMultiplier
+            screenWidth -
+              Math.min(screenWidth, screenHeight) * marginMultiplier,
+            screenHeight -
+              Math.min(screenWidth, screenHeight) * marginMultiplier
           ]
         ],
         currentLgaGeometry
       );
 
-      const boundingZoom = projection.scale()
+      const boundingZoom = projection.scale();
 
       // Reset the projection
-      projection.scale(tempScale)
-      projection.translate(tempTranslate)
+      projection.scale(tempScale);
+      projection.translate(tempTranslate);
       // this.drawWorld(1);
 
       // currentLongLat = getItem(currentFocus).longlat;
@@ -233,15 +235,17 @@ class MapScroller extends React.Component {
       // Zoom in so that percentage set in marker relative to initial 100%
       let newGlobeScale = initialGlobeScale * (globeScale / 100);
 
-      newGlobeScale = boundingZoom
+      newGlobeScale = boundingZoom;
+      if (newGlobeScale < initialGlobeScale) newGlobeScale = initialGlobeScale;
 
       // console.log(newGlobeScale / initialGlobeScale * 100);
 
       const dummyTransition = {};
 
+      // This calculates the duration of the transitions based on location and soom
       let timeZoomInterpolate = d3Interpolate.interpolateZoom(
-        [previousRotation[0], previousRotation[1], previousGlobeScale],
-        [-currentRotation[0], -currentRotation[1], newGlobeScale]
+        [previousRotation[0], previousRotation[1], previousGlobeScale * 0.015],
+        [-currentRotation[0], -currentRotation[1], newGlobeScale * 0.015]
       );
 
       // let bounceZoomInterpolate = d3Interpolate.interpolateZoom(
