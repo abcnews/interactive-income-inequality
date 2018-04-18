@@ -47,7 +47,7 @@ let currentLongLat = [133.7751, -25.2744]; //getItem("australia").longlat;
 let screenWidth =
   document.documentElement.clientWidth || document.body.clientWidth; // minus scroll bars
 let screenHeight = window.innerHeight;
-let margins = screenWidth * 0.1;
+let margins = Math.min(screenWidth, screenHeight) * 0.1;
 
 var colorScale = d3Scale
   .scaleLinear()
@@ -171,7 +171,7 @@ class MapScroller extends React.Component {
     if (tweening !== 1) return;
 
     console.log(data);
-    
+
     previousFocus = currentFocus;
     currentFocus = data.lga + ""; // Turn into string
 
