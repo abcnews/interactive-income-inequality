@@ -21,12 +21,12 @@ const d3Scale = require("d3-scale");
 const styles = require("./MapScroller.scss");
 
 const SIMPLIFICATION_LEVELS = 20;
-const SIMPLIFICATION_FACTOR = 1.25;
-const MAX_ZOOM = 1600;
+const SIMPLIFICATION_FACTOR = 1.3;
+const MAX_ZOOM = 3000;
 
 // File scope vars
 let initialGlobeScale;
-let globeScale = 100;
+let dataZoom = 100;
 let context;
 let path;
 let projection;
@@ -170,8 +170,6 @@ class MapScroller extends React.Component {
     // If already tweening then do nothing
     if (tweening !== 1) return;
 
-    console.log(data);
-
     previousFocus = currentFocus;
     currentFocus = data.lga + ""; // Turn into string
 
@@ -197,48 +195,50 @@ class MapScroller extends React.Component {
 
       // console.log(geoJsonBounds.extent(currentLgaGeometry));
 
-      // Calculate zoom to bounding box
-      let marginMultiplier = 0.46;
-
-      const tempScale = projection.scale();
-      const tempTranslate = projection.translate();
-
-      projection.fitExtent(
-        [
-          [
-            Math.min(screenWidth, screenHeight) * marginMultiplier,
-            Math.min(screenWidth, screenHeight) * marginMultiplier
-          ],
-          [
-            screenWidth -
-              Math.min(screenWidth, screenHeight) * marginMultiplier,
-            screenHeight -
-              Math.min(screenWidth, screenHeight) * marginMultiplier
-          ]
-        ],
-        currentLgaGeometry
-      );
-
-      const boundingZoom = projection.scale();
-
-      // Reset the projection
-      projection.scale(tempScale);
-      projection.translate(tempTranslate);
-      // this.drawWorld(1);
-
-      // currentLongLat = getItem(currentFocus).longlat;
-      // projection.rotate(invertLongLat(currentLongLat));
-
-      globeScale = data.zoom || 100;
+      dataZoom = data.zoom;
       let previousGlobeScale = projection.scale();
 
       // Zoom in so that percentage set in marker relative to initial 100%
-      let newGlobeScale = initialGlobeScale * (globeScale / 100);
+      let newGlobeScale = initialGlobeScale * (dataZoom / 100);
 
-      newGlobeScale = boundingZoom;
-      if (newGlobeScale < initialGlobeScale) newGlobeScale = initialGlobeScale;
+      if (!dataZoom || dataZoom === 0) {
+        calculateZoom();
+      }
 
-      // console.log(newGlobeScale / initialGlobeScale * 100);
+      function calculateZoom() {
+        // Calculate zoom to bounding box
+        let marginMultiplier = 0.47; // Margin % of screen
+
+        // Save current projection state for later
+        const tempScale = projection.scale();
+        const tempTranslate = projection.translate();
+
+        projection.fitExtent(
+          [
+            [
+              Math.min(screenWidth, screenHeight) * marginMultiplier,
+              Math.min(screenWidth, screenHeight) * marginMultiplier
+            ],
+            [
+              screenWidth -
+                Math.min(screenWidth, screenHeight) * marginMultiplier,
+              screenHeight -
+                Math.min(screenWidth, screenHeight) * marginMultiplier
+            ]
+          ],
+          currentLgaGeometry
+        );
+
+        const boundingZoom = projection.scale();
+
+        // Reset the projection
+        projection.scale(tempScale);
+        projection.translate(tempTranslate);
+
+        newGlobeScale = boundingZoom;
+        if (newGlobeScale < initialGlobeScale)
+          newGlobeScale = initialGlobeScale;
+      }
 
       const dummyTransition = {};
 
@@ -264,10 +264,13 @@ class MapScroller extends React.Component {
         newGlobeScale
       );
 
+      console.log(newGlobeScale /initialGlobeScale)
+
       let rotationDelay = 0;
       let zoomDelay = 0;
 
-      let maxTransitionTime = 1400;
+      let maxTransitionTime = 1300;
+      let minTransitionTime = 700;
       let transitionTime;
 
       transitionTime = Math.abs(timeZoomInterpolate.duration);
@@ -275,13 +278,17 @@ class MapScroller extends React.Component {
       // Don't take too long
       if (transitionTime > maxTransitionTime)
         transitionTime = maxTransitionTime;
+      // Don't go too fast
+      if (transitionTime < minTransitionTime)
+        transitionTime = minTransitionTime;
+
 
       // Determine if zooming in or out
       if (newGlobeScale > previousGlobeScale) {
         rotationDelay = 0;
-        zoomDelay = transitionTime / 3;
+        zoomDelay = transitionTime * 0.4;
       } else {
-        rotationDelay = transitionTime / 3;
+        rotationDelay = transitionTime * 0.4;
         zoomDelay = 0;
       }
 

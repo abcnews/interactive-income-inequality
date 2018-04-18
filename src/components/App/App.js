@@ -52,9 +52,10 @@ class App extends React.Component {
     if (!lgaObject) return;
 
     this.setState((prevState, props) => {
-      prevState.scrollytellerObject.panels[0].nodes[0].innerHTML =
-        prevState.currentLga.value;
-      prevState.scrollytellerObject.panels[1].config.zoom = 2000;
+      console.log(prevState)
+      prevState.scrollytellerObject.panels[1].nodes[1].innerHTML =
+        prevState.currentLga.label;
+      prevState.scrollytellerObject.panels[1].config.zoom = 0;
       prevState.scrollytellerObject.panels[1].config.lga =
         prevState.currentLga.value;
       // prevState.scrollytellerObject.panels.shift();
