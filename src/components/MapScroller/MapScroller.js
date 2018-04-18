@@ -184,16 +184,10 @@ class MapScroller extends React.Component {
       let previousRotation = projection.rotate();
       let currentRotation = d3Geo.geoCentroid(currentLgaGeometry);
 
-      /*
-       *
-       * TODO: Implement zoom to bounding box
-       * 
-       */
-
-      // console.log(currentLgaGeometry);
-      // console.log(polygonArea(currentLgaGeometry.coordinates[0]));
-
-      // console.log(geoJsonBounds.extent(currentLgaGeometry));
+     // Zoom to states
+     // TODO: fit projection to bounding box depending on STATE number
+     console.log(this.props.ausStatesGeo.features[0]);
+     const ausStatesGeo = this.props.ausStatesGeo.features[0]
 
       dataZoom = data.zoom;
       let previousGlobeScale = projection.scale();
@@ -264,12 +258,10 @@ class MapScroller extends React.Component {
         newGlobeScale
       );
 
-      console.log(newGlobeScale /initialGlobeScale)
-
       let rotationDelay = 0;
       let zoomDelay = 0;
 
-      let maxTransitionTime = 1300;
+      let maxTransitionTime = 1400;
       let minTransitionTime = 700;
       let transitionTime;
 
@@ -432,7 +424,7 @@ class MapScroller extends React.Component {
 
   render() {
     // Create props vars passed to this component
-    const { scrollyteller, mapData } = this.props;
+    const { scrollyteller } = this.props;
 
     return ReactDOM.createPortal(
       <div className={styles.wrapper}>

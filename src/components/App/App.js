@@ -24,6 +24,9 @@ const LGA_GEO_JSON_URL =
   "http://www.abc.net.au/res/sites/news-projects/income-comparisons-react/master/LGA_2016_AUST_SEARCH.topo.json";
 // "/LGA_2016_AUST_SEARCH.topo.json"
 
+const AUS_STATES_URL =
+  "http://www.abc.net.au/res/sites/news-projects/income-comparisons-react/master/australia-states.topo.json";
+
 // const SCROLLER_GEO_JSON_URL =
 //   "http://www.abc.net.au/res/sites/news-projects/income-comparisons-react/master/LGA_2016_AUST_MAP.topo.json";
 
@@ -31,7 +34,7 @@ const LGA_GEO_JSON_URL =
 //   "http://www.abc.net.au/res/sites/news-projects/income-comparisons-react/master/LGA_2016_AUST_MAP_PROJECTED.topo.json";
 
 // File scope variables
-let LGAs = [];
+// let LGAs = [];
 
 // React app starts here
 class App extends React.Component {
@@ -52,13 +55,11 @@ class App extends React.Component {
     if (!lgaObject) return;
 
     this.setState((prevState, props) => {
-      console.log(prevState)
       prevState.scrollytellerObject.panels[1].nodes[1].innerHTML =
         prevState.currentLga.label;
       prevState.scrollytellerObject.panels[1].config.zoom = 0;
       prevState.scrollytellerObject.panels[1].config.lga =
         prevState.currentLga.value;
-      // prevState.scrollytellerObject.panels.shift();
       return {
         scrollytellerObject: prevState.scrollytellerObject
       };
@@ -68,8 +69,9 @@ class App extends React.Component {
   componentWillMount() {
     // Queue up some files to be loaded
     d3Q
-      .queue(2) // Concurrent requests
+      .queue(1) // Concurrent requests
       .defer(d3Request.json, LGA_GEO_JSON_URL)
+      .defer(d3Request.json, AUS_STATES_URL)
       // .defer(d3Request.json, SCROLLER_GEO_JSON_URL)
       // .defer(d3Request.json, PROJECTED_GEO_JSON_URL)
       .awaitAll((error, files) => {
@@ -78,13 +80,18 @@ class App extends React.Component {
         if (error) console.error(error);
 
         let LGAMap = files[0]; // Load the first file
+        let ausStates = files[1]; // Load the second file
 
         // Convert TopoJSON into GeoJSON
-        const topology = topojson.feature(LGAMap, LGAMap.objects.LGA_2016_AUST); //aus_lga);
+        const LGAs = topojson.feature(LGAMap, LGAMap.objects.LGA_2016_AUST).features;
 
-        LGAs = topology.features;
+        // const LGAs = topology;
 
-        this.setState({ mapData: LGAs, mapDataScroller: LGAMap });
+        const ausStatesGeo = topojson.feature(ausStates, ausStates.objects.states);
+
+        // console.log(ausStatesGeo)
+
+        this.setState({ mapData: LGAs, mapDataScroller: LGAMap, ausStatesGeo: ausStatesGeo});
       });
   }
 
@@ -103,6 +110,7 @@ class App extends React.Component {
               scrollyteller={this.state.scrollytellerObject}
               mapData={this.state.mapDataScroller}
               currentLga={this.state.currentLga}
+              ausStatesGeo={this.state.ausStatesGeo}
             />
             // <MapZoom
             //   scrollyteller={this.state.scrollytellerObject}
