@@ -197,13 +197,31 @@ class MapScroller extends React.Component {
 
       // console.log(geoJsonBounds.extent(currentLgaGeometry));
 
-      // projection.fitExtent(
-      //   [
-      //     [margins /* - screenWidth * 0.06 */, margins],
-      //     [screenWidth - margins, screenHeight - margins]
-      //   ],
-      //   currentLgaGeometry
-      // );
+      // Calculate zoom to bounding box
+      let marginMultiplier = 0.46;
+
+      const tempScale = projection.scale()
+      const tempTranslate = projection.translate()
+
+      projection.fitExtent(
+        [
+          [
+            Math.min(screenWidth, screenHeight) * marginMultiplier,
+            Math.min(screenWidth, screenHeight) * marginMultiplier
+          ],
+          [
+            screenWidth - Math.min(screenWidth, screenHeight) * marginMultiplier,
+            screenHeight - Math.min(screenWidth, screenHeight) * marginMultiplier
+          ]
+        ],
+        currentLgaGeometry
+      );
+
+      const boundingZoom = projection.scale()
+
+      // Reset the projection
+      projection.scale(tempScale)
+      projection.translate(tempTranslate)
       // this.drawWorld(1);
 
       // currentLongLat = getItem(currentFocus).longlat;
@@ -214,6 +232,8 @@ class MapScroller extends React.Component {
 
       // Zoom in so that percentage set in marker relative to initial 100%
       let newGlobeScale = initialGlobeScale * (globeScale / 100);
+
+      newGlobeScale = boundingZoom
 
       // console.log(newGlobeScale / initialGlobeScale * 100);
 
@@ -375,8 +395,10 @@ class MapScroller extends React.Component {
       if (bounds[1][0] < 0) return;
       if (bounds[1][1] < 0) return;
 
-
-      if (this.state.highlight && element.properties.LGA_CODE16 === currentFocus) {
+      if (
+        this.state.highlight &&
+        element.properties.LGA_CODE16 === currentFocus
+      ) {
         context.beginPath();
         context.fillStyle = "#FF5733";
         context.strokeStyle = "rgba(255, 255, 255, 0.4)";
