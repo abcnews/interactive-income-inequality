@@ -35,6 +35,9 @@ let canvas;
 // Different levels of zoom pre-compilied
 let australia = [];
 
+// Try to prevent multiple transitions
+let tweening = 1;
+
 // Set defaults
 let currentFocus = "72330"; // Middle of Australia (pretty much)
 let previousFocus = "72330";
@@ -74,7 +77,7 @@ class MapScroller extends React.Component {
   constructor(props) {
     super(props);
 
-    this.state = {};
+    this.state = { highlight: true };
   }
 
   componentDidMount() {
@@ -164,8 +167,17 @@ class MapScroller extends React.Component {
   }
 
   doMarker(data) {
+    // If already tweening then do nothing
+    if (tweening !== 1) return;
+
+    console.log(data);
+    
     previousFocus = currentFocus;
     currentFocus = data.lga + ""; // Turn into string
+
+    // Should we highlight current focus?
+    if (data.highlight !== false) this.setState({ highlight: true });
+    else this.setState({ highlight: false });
 
     //Make sure we are mounted
     if (projection) {
@@ -281,6 +293,8 @@ class MapScroller extends React.Component {
         .tween("render", () => {
           // Return the tween function
           return time => {
+            // If tweening > 1 then it means it's tweening;
+            tweening = time;
             // Calculate current zoom and set up simplification scale
             let currentZoom = projection.scale() / initialGlobeScale * 100;
 
@@ -361,10 +375,10 @@ class MapScroller extends React.Component {
       if (bounds[1][0] < 0) return;
       if (bounds[1][1] < 0) return;
 
-      // console.log(element);
-      if (element.properties.LGA_CODE16 === currentFocus) {
+
+      if (this.state.highlight && element.properties.LGA_CODE16 === currentFocus) {
         context.beginPath();
-        context.fillStyle = "#FF5733"
+        context.fillStyle = "#FF5733";
         context.strokeStyle = "rgba(255, 255, 255, 0.4)";
         path(element);
         context.fill();
