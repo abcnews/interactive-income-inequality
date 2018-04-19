@@ -51,17 +51,29 @@ class App extends React.Component {
 
   // Fires when the user chooses their LGA
   setCurrentLga(lgaObject) {
-    this.setState({ currentLga: lgaObject });
     if (!lgaObject) return;
+    // this.setState({ currentLga: lgaObject });
 
+    // Calculate Australian state from LGA
+    let stateCode = Math.floor(lgaObject.value / 10000);
+    console.log(stateCode)
+
+    // Modify panels according to LGA choice
     this.setState((prevState, props) => {
-      console.log(prevState.scrollytellerObject);
-      prevState.scrollytellerObject.panels[1].nodes[1].innerHTML =
-        prevState.currentLga.label;
-      prevState.scrollytellerObject.panels[1].config.zoom = 0;
-      prevState.scrollytellerObject.panels[1].config.lga = lgaObject.value;
+      let panels = prevState.scrollytellerObject.panels;
+
+      // User's LGA
+      panels[1].nodes[1].innerHTML = lgaObject.label;
+      panels[1].config.zoom = 0;
+      panels[1].config.lga = lgaObject.value;
+
+      // User's Australian State
+      panels[2].config.lga = stateCode;
+
+
       return {
-        scrollytellerObject: prevState.scrollytellerObject
+        scrollytellerObject: prevState.scrollytellerObject,
+        currentLga: lgaObject
       };
     });
   }

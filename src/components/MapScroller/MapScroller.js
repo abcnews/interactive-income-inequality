@@ -203,7 +203,7 @@ class MapScroller extends React.Component {
 
       if (!dataZoom || dataZoom === 0) {
         if (markerData.lga <= 8) {
-          calculateLgaZoom(0.2);
+          calculateLgaZoom(0.19);
         } else {
           calculateLgaZoom(0.47);
         }
