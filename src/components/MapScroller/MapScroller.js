@@ -23,7 +23,10 @@ const styles = require("./MapScroller.scss");
 
 const SIMPLIFICATION_LEVELS = 20;
 const SIMPLIFICATION_FACTOR = 1.3;
-const MAX_ZOOM = 3000;
+const MAX_ZOOM = 2500;
+
+const STATE_ZOOM_MARGINS = 0.19;
+const LGA_ZOOM_MARGINS = 0.46;
 
 // File scope vars
 let initialGlobeScale;
@@ -80,6 +83,7 @@ class MapScroller extends React.Component {
     super(props);
 
     this.state = { highlight: true };
+    this.canvasInit = this.canvasInit.bind(this);
   }
 
   componentDidMount() {
@@ -88,6 +92,8 @@ class MapScroller extends React.Component {
   }
 
   canvasInit(mapData, ausStatesGeo) {
+
+    console.log(this)
     // Check to see if position.sticky is supported
     // and then apply sticky styles
     stickifyStage();
@@ -110,7 +116,7 @@ class MapScroller extends React.Component {
         mapData.objects.LGA_2016_AUST
       );
 
-      const lgaTopData = require("./lga-top.json");
+      const lgaTopData = require("../App/lga-data.json");
 
       // Loop through all LGAs and set top percentage
       geoJSON.features.forEach(element => {
@@ -203,11 +209,10 @@ class MapScroller extends React.Component {
 
       if (!dataZoom || dataZoom === 0) {
         if (markerData.lga <= 8) {
-          calculateLgaZoom(0.19);
+          calculateLgaZoom(STATE_ZOOM_MARGINS);
         } else {
-          calculateLgaZoom(0.47);
+          calculateLgaZoom(LGA_ZOOM_MARGINS);
         }
-        
       }
 
       function calculateLgaZoom(marginFactor) {

@@ -41,6 +41,8 @@ class App extends React.Component {
   constructor(props) {
     super(props);
 
+    this.lgaData = require("./lga-data.json");
+
     this.state = {
       mapData: null,
       mapDataScroller: null,
@@ -56,20 +58,23 @@ class App extends React.Component {
 
     // Calculate Australian state from LGA
     let stateCode = Math.floor(lgaObject.value / 10000);
-    console.log(stateCode)
+    console.log(stateCode);
 
     // Modify panels according to LGA choice
+    const userLgaText = `In <strong>${
+      lgaObject.label
+    }</strong>, <9.02> per cent of income earners are in the top bracket, which is <5.18> per cent higher than the average.`;
+
     this.setState((prevState, props) => {
       let panels = prevState.scrollytellerObject.panels;
 
       // User's LGA
-      panels[1].nodes[1].innerHTML = lgaObject.label;
+      panels[1].nodes[0].innerHTML = userLgaText;
       panels[1].config.zoom = 0;
       panels[1].config.lga = lgaObject.value;
 
       // User's Australian State
       panels[2].config.lga = stateCode;
-
 
       return {
         scrollytellerObject: prevState.scrollytellerObject,
@@ -131,6 +136,7 @@ class App extends React.Component {
               mapData={this.state.mapDataScroller}
               currentLga={this.state.currentLga}
               ausStatesGeo={this.state.ausStatesGeo}
+              lgaData={this.lgaData}
             />
             // <MapZoom
             //   scrollyteller={this.state.scrollytellerObject}
