@@ -16,7 +16,7 @@ const d3GeoProjection = require("d3-geo-projection");
 const d3Interpolate = require("d3-interpolate");
 const d3Zoom = require("d3-zoom");
 const d3Scale = require("d3-scale");
-const d3Ease = require("d3-ease")
+const d3Ease = require("d3-ease");
 
 // Import styles
 const styles = require("./MapScroller.scss");
@@ -35,6 +35,7 @@ let canvas;
 
 // Different levels of zoom pre-compilied
 let australia = [];
+let ausStates = [];
 
 // Try to prevent multiple transitions
 let tweening = 1;
@@ -83,10 +84,10 @@ class MapScroller extends React.Component {
 
   componentDidMount() {
     // Wait until mounted and then initialise the canvas
-    this.canvasInit(this.props.mapData);
+    this.canvasInit(this.props.mapData, this.props.ausStatesGeo);
   }
 
-  canvasInit(mapData) {
+  canvasInit(mapData, ausStatesGeo) {
     // Check to see if position.sticky is supported
     // and then apply sticky styles
     stickifyStage();
@@ -124,6 +125,11 @@ class MapScroller extends React.Component {
 
       return geoJSON;
     }
+
+    // Set up the global geoometry for Australian States
+    ausStates = ausStatesGeo.features;
+
+    console.log(ausStates);
 
     // Set up a D3 projection here
     projection = d3Geo
@@ -167,15 +173,15 @@ class MapScroller extends React.Component {
     this.drawWorld(australia[0]);
   }
 
-  doMarker(data) {
+  doMarker(markerData) {
     // If already tweening then do nothing
     if (tweening !== 1) return;
 
     previousFocus = currentFocus;
-    currentFocus = data.lga + ""; // Turn into string
+    currentFocus = markerData.lga + ""; // Turn into string
 
     // Should we highlight current focus?
-    if (data.highlight !== false) this.setState({ highlight: true });
+    if (markerData.highlight !== false) this.setState({ highlight: true });
     else this.setState({ highlight: false });
 
     //Make sure we are mounted
@@ -185,24 +191,28 @@ class MapScroller extends React.Component {
       let previousRotation = projection.rotate();
       let currentRotation = d3Geo.geoCentroid(currentLgaGeometry);
 
-     // Zoom to states
-     // TODO: fit projection to bounding box depending on STATE number
-     console.log(this.props.ausStatesGeo.features[0]);
-     const ausStatesGeo = this.props.ausStatesGeo.features[0]
+      // Zoom to states
+      // TODO: fit projection to bounding box depending on STATE number
+      const ausStatesGeo = this.props.ausStatesGeo.features[0];
 
-      dataZoom = data.zoom;
+      dataZoom = markerData.zoom;
       let previousGlobeScale = projection.scale();
 
       // Zoom in so that percentage set in marker relative to initial 100%
       let newGlobeScale = initialGlobeScale * (dataZoom / 100);
 
       if (!dataZoom || dataZoom === 0) {
-        calculateLgaZoom();
+        if (markerData.lga <= 8) {
+          calculateLgaZoom(0.2);
+        } else {
+          calculateLgaZoom(0.47);
+        }
+        
       }
 
-      function calculateLgaZoom() {
+      function calculateLgaZoom(marginFactor) {
         // Calculate zoom to bounding box
-        let marginMultiplier = 0.47; // Margin % of screen
+        let marginMultiplier = marginFactor; // Margin % of screen
 
         // Save current projection state for later
         const tempScale = projection.scale();
@@ -274,7 +284,6 @@ class MapScroller extends React.Component {
       // Don't go too fast
       if (transitionTime < minTransitionTime)
         transitionTime = minTransitionTime;
-
 
       // Determine if zooming in or out
       if (newGlobeScale > previousGlobeScale) {
@@ -460,8 +469,12 @@ function stickifyStage() {
   }
 }
 
-// Heloper for indexing an array of objects
+// Helper for indexing an array of objects
 function getLGA(lgaCode) {
+  // 1=NSW 2=VIC 3=QLD 4=SA 5=WA 6=TAS 7=NT 8=ACT
+  if (Number(lgaCode) <= 8) return ausStates[Number(lgaCode) - 1];
+
+  // Otherwise return LGA geography as per normal
   return australia[australia.length - 1].features.find(
     lga => lga.properties.LGA_CODE16 === lgaCode
   );

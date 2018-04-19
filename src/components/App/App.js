@@ -49,17 +49,17 @@ class App extends React.Component {
     };
   }
 
-  // Pass some data up from another component
+  // Fires when the user chooses their LGA
   setCurrentLga(lgaObject) {
     this.setState({ currentLga: lgaObject });
     if (!lgaObject) return;
 
     this.setState((prevState, props) => {
+      console.log(prevState.scrollytellerObject);
       prevState.scrollytellerObject.panels[1].nodes[1].innerHTML =
         prevState.currentLga.label;
       prevState.scrollytellerObject.panels[1].config.zoom = 0;
-      prevState.scrollytellerObject.panels[1].config.lga =
-        prevState.currentLga.value;
+      prevState.scrollytellerObject.panels[1].config.lga = lgaObject.value;
       return {
         scrollytellerObject: prevState.scrollytellerObject
       };
@@ -83,15 +83,23 @@ class App extends React.Component {
         let ausStates = files[1]; // Load the second file
 
         // Convert TopoJSON into GeoJSON
-        const LGAs = topojson.feature(LGAMap, LGAMap.objects.LGA_2016_AUST).features;
+        const LGAs = topojson.feature(LGAMap, LGAMap.objects.LGA_2016_AUST)
+          .features;
 
         // const LGAs = topology;
 
-        const ausStatesGeo = topojson.feature(ausStates, ausStates.objects.states);
+        const ausStatesGeo = topojson.feature(
+          ausStates,
+          ausStates.objects.states
+        );
 
         // console.log(ausStatesGeo)
 
-        this.setState({ mapData: LGAs, mapDataScroller: LGAMap, ausStatesGeo: ausStatesGeo});
+        this.setState({
+          mapData: LGAs,
+          mapDataScroller: LGAMap,
+          ausStatesGeo: ausStatesGeo
+        });
       });
   }
 
