@@ -92,8 +92,7 @@ class MapScroller extends React.Component {
   }
 
   canvasInit(mapData, ausStatesGeo) {
-
-    console.log(this)
+    console.log(this);
     // Check to see if position.sticky is supported
     // and then apply sticky styles
     stickifyStage();
@@ -290,39 +289,53 @@ class MapScroller extends React.Component {
       if (transitionTime < minTransitionTime)
         transitionTime = minTransitionTime;
 
+      let transitionDelayMultiplyer = 0.6;
+      let isZoomingIn = true;
+
       // Determine if zooming in or out
       if (newGlobeScale > previousGlobeScale) {
         rotationDelay = 0;
-        zoomDelay = transitionTime * 0.5;
+        zoomDelay = transitionTime * transitionDelayMultiplyer;
+        isZoomingIn = true;
       } else {
-        rotationDelay = transitionTime * 0.5;
+        rotationDelay = transitionTime * transitionDelayMultiplyer;
         zoomDelay = 0;
+        isZoomingIn = false;
       }
 
-      d3Selection
+      const rotationTween = d3Selection
         .select(dummyTransition)
         .transition("rotation")
         .delay(rotationDelay)
-        .duration(transitionTime)
-        .ease(d3Ease.easeExp)
-        .tween("rotation", () => {
-          // Return the tween function
-          return time => {
-            projection.rotate(rotationInterpolate(time));
-          };
-        });
+        .duration(transitionTime);
 
-      d3Selection
+      // Playing with easing. Apply different easing if zooming in or out
+      // (We are currently not bothering for now)
+      if (isZoomingIn) rotationTween.ease(d3Ease.easeExp);
+      else rotationTween.ease(d3Ease.easeExp);
+
+      const zoomTween = d3Selection
         .select(dummyTransition)
         .transition("zoom")
         .delay(zoomDelay)
         .duration(transitionTime)
-        .ease(d3Ease.easeExp)
-        .tween("zoom", () => {
-          return time => {
-            projection.scale(scaleInterpolate(time));
-          };
-        });
+        .ease(d3Ease.easeExpOut);
+
+      if (isZoomingIn) zoomTween.ease(d3Ease.easeExp);
+      else zoomTween.ease(d3Ease.easeExp);
+
+      rotationTween.tween("rotation", () => {
+        // Return the tween function
+        return time => {
+          projection.rotate(rotationInterpolate(time));
+        };
+      });
+
+      zoomTween.tween("zoom", () => {
+        return time => {
+          projection.scale(scaleInterpolate(time));
+        };
+      });
 
       // Separate render tween to handle different delays
       d3Selection
