@@ -16,6 +16,7 @@ const d3GeoProjection = require("d3-geo-projection");
 const d3Interpolate = require("d3-interpolate");
 const d3Zoom = require("d3-zoom");
 const d3Scale = require("d3-scale");
+const d3Ease = require("d3-ease")
 
 // Import styles
 const styles = require("./MapScroller.scss");
@@ -196,10 +197,10 @@ class MapScroller extends React.Component {
       let newGlobeScale = initialGlobeScale * (dataZoom / 100);
 
       if (!dataZoom || dataZoom === 0) {
-        calculateZoom();
+        calculateLgaZoom();
       }
 
-      function calculateZoom() {
+      function calculateLgaZoom() {
         // Calculate zoom to bounding box
         let marginMultiplier = 0.47; // Margin % of screen
 
@@ -238,8 +239,8 @@ class MapScroller extends React.Component {
 
       // This calculates the duration of the transitions based on location and soom
       let timeZoomInterpolate = d3Interpolate.interpolateZoom(
-        [previousRotation[0], previousRotation[1], previousGlobeScale * 0.015],
-        [-currentRotation[0], -currentRotation[1], newGlobeScale * 0.015]
+        [previousRotation[0], previousRotation[1], previousGlobeScale * 0.005],
+        [-currentRotation[0], -currentRotation[1], newGlobeScale * 0.005]
       );
 
       // let bounceZoomInterpolate = d3Interpolate.interpolateZoom(
@@ -278,9 +279,9 @@ class MapScroller extends React.Component {
       // Determine if zooming in or out
       if (newGlobeScale > previousGlobeScale) {
         rotationDelay = 0;
-        zoomDelay = transitionTime * 0.4;
+        zoomDelay = transitionTime * 0.5;
       } else {
-        rotationDelay = transitionTime * 0.4;
+        rotationDelay = transitionTime * 0.5;
         zoomDelay = 0;
       }
 
@@ -289,6 +290,7 @@ class MapScroller extends React.Component {
         .transition("rotation")
         .delay(rotationDelay)
         .duration(transitionTime)
+        .ease(d3Ease.easeExp)
         .tween("rotation", () => {
           // Return the tween function
           return time => {
@@ -301,6 +303,7 @@ class MapScroller extends React.Component {
         .transition("zoom")
         .delay(zoomDelay)
         .duration(transitionTime)
+        .ease(d3Ease.easeExp)
         .tween("zoom", () => {
           return time => {
             projection.scale(scaleInterpolate(time));
@@ -313,6 +316,7 @@ class MapScroller extends React.Component {
         .transition("render")
         .delay(0)
         .duration(transitionTime + Math.max(zoomDelay, rotationDelay)) // transition + delay
+        // .ease(d3Ease.easeLinear)
         .tween("render", () => {
           // Return the tween function
           return time => {

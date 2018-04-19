@@ -28,6 +28,7 @@
     "@abcnews/scrollyteller": "^1.0.3",
     "canvas-dpi-scaler": "0.0.3",
     "d3": "^4.13.0",
+    "d3-ease": "^1.0.3",
     "d3-geo": "^1.9.1",
     "d3-geo-projection": "^2.3.2",
     "d3-interpolate": "^1.1.6",
