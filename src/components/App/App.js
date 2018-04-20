@@ -46,8 +46,6 @@ class App extends React.Component {
 
     this.lgaData = []; //require("./lga-data.json");
 
-    console.log(this.lgaData);
-
     this.state = {
       mapData: null,
       mapDataScroller: null,
@@ -65,7 +63,9 @@ class App extends React.Component {
     let percentageDifference = currentTopPercentValue - 3.84; // Aust-wide percent in top bracket
     let currentRank = getLgaTop(this.lgaData, lgaObject.value).RANK;
 
-    console.log(currentRank)
+    /*
+     * First set up user panel
+     */
 
     // Determine higher or lower
     function higherOrLower(difference) {
@@ -73,29 +73,71 @@ class App extends React.Component {
       else return "higher";
     }
 
+    // Modify panels according to LGA choice
+    const userLgaText = `In <strong>${
+      lgaObject.label.replace(/ *\([^)]*\) */g, "") // Strip (NSW) etc.
+    }</strong> LGA, <strong>${currentTopPercentValue}</strong> per cent of income earners are in the top bracket, which is <strong>${Math.abs(
+      percentageDifference.toFixed(2)
+    )}</strong> per cent ${higherOrLower(
+      percentageDifference
+    )} than the average.`;
+
+    const userRankText = `It is ranked <strong>${currentRank}</strong> out of all LGAs in Australia on this measure.`;
+
+    /*
+     * Then set up Australian state panel
+     */
+
     // Calculate Australian state from LGA
     let stateCode = Math.floor(lgaObject.value / 10000);
 
-    // Modify panels according to LGA choice
-    const userLgaText = `In <strong>${
-      lgaObject.label
-    }</strong>, ${currentTopPercentValue} per cent of income earners are in the top bracket, which is ${Math.abs(
-      percentageDifference.toFixed(2)
-    )} per cent ${higherOrLower(percentageDifference)} than the average.`;
+    let getStateInfo = stateCode => {
+      if (stateCode === 1) {
+        return { text: "New South Wales", top: "4.35" };
+      } else if (stateCode === 2) {
+        return { text: "Victoria", top: "3.66" };
+      } else if (stateCode === 3) {
+        return { text: "Queensland", top: "3.14" };
+      } else if (stateCode === 4) {
+        return { text: "South Australia", top: "2.32" };
+      } else if (stateCode === 5) {
+        return { text: "Western Australia", top: "5.27" };
+      } else if (stateCode === 6) {
+        return { text: "Tasmania", top: "1.78" };
+      } else if (stateCode === 7) {
+        return { text: "Northern Territory", top: "4.73" };
+      } else if (stateCode === 8) {
+        return { text: "Australian Capital Territory", top: "5.47" };
+      } else if (stateCode === 9) {
+        return { text: "Unclassified Areas", top: "2.12" };
+      } else {
+        return { text: "NOT FOUND", top: "0.00" };
+      }
+    };
 
-    const userRankText = `It is ranked ${currentRank} out of all LGAs in Australia on this measure.`
+    console.log(getStateInfo(stateCode).text);
 
+    const stateText = `In <strong>${
+      getStateInfo(stateCode).text
+    }</strong>, <strong>${
+      getStateInfo(stateCode).top
+    }</strong> per cent of income earners are in the top bracket, which is xx per cent higher than the average.`;
+    // Then update the component state which will change the panel info
     this.setState((prevState, props) => {
       let panels = prevState.scrollytellerObject.panels;
 
       // User's LGA
       panels[1].nodes[0].innerHTML = userLgaText;
-      panels[1].nodes[1].innerHTML =userRankText;
+      panels[1].nodes[1].innerHTML = userRankText;
       panels[1].config.zoom = 0;
       panels[1].config.lga = lgaObject.value;
 
+     
+
+
       // User's Australian State
       panels[2].config.lga = stateCode;
+      panels[2].nodes[0].innerHTML = stateText;
 
       return {
         scrollytellerObject: prevState.scrollytellerObject,
@@ -121,8 +163,6 @@ class App extends React.Component {
         let LGAMap = files[0]; // Load the first file
         let ausStates = files[1]; // Load the second file
         this.lgaData = files[2];
-
-        console.log(this.lgaData);
 
         // Convert TopoJSON into GeoJSON
         const LGAs = topojson.feature(LGAMap, LGAMap.objects.LGA_2016_AUST)
