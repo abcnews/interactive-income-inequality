@@ -92,7 +92,7 @@ class MapScroller extends React.Component {
   }
 
   canvasInit(mapData, ausStatesGeo) {
-    console.log(this);
+    console.log(this.props);
     // Check to see if position.sticky is supported
     // and then apply sticky styles
     stickifyStage();
@@ -100,12 +100,7 @@ class MapScroller extends React.Component {
     // Set up pre-compiled simplification levels
     let baseSimplification = 0.01;
 
-    for (let i = 0; i < SIMPLIFICATION_LEVELS; i++) {
-      australia[i] = getGeo(mapData, baseSimplification);
-      baseSimplification = baseSimplification / SIMPLIFICATION_FACTOR;
-    }
-
-    function getGeo(mapData, level) {
+    const getGeo = (mapData, level) => {
       const preSimplifiedMapData = topojson.presimplify(mapData);
 
       const simplifiedMapData = topojson.simplify(preSimplifiedMapData, level);
@@ -115,20 +110,25 @@ class MapScroller extends React.Component {
         mapData.objects.LGA_2016_AUST
       );
 
-      const lgaTopData = require("../App/lga-data.json");
+      const lgaTopData = this.props.lgaData; //require("../App/lga-data.json");
 
       // Loop through all LGAs and set top percentage
       geoJSON.features.forEach(element => {
         lgaTopData.some(lga => {
-          if (Number(element.properties.LGA_CODE16) === lga.LGA_CODE_2016) {
-            element.properties.TOP = lga.TOP;
+          if (Number(element.properties.LGA_CODE16) === +lga.LGA_CODE_2016) {
+            element.properties.TOP = +lga.TOP;
           }
           // Break the "some" loop by returning true
-          return Number(element.properties.LGA_CODE16) === lga.LGA_CODE_2016;
+          return Number(element.properties.LGA_CODE16) === +lga.LGA_CODE_2016;
         });
       });
 
       return geoJSON;
+    }
+
+    for (let i = 0; i < SIMPLIFICATION_LEVELS; i++) {
+      australia[i] = getGeo(mapData, baseSimplification);
+      baseSimplification = baseSimplification / SIMPLIFICATION_FACTOR;
     }
 
     // Set up the global geoometry for Australian States
