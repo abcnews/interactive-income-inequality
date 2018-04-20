@@ -115,13 +115,15 @@ class App extends React.Component {
       }
     };
 
-    console.log(getStateInfo(stateCode).text);
+    let statePercentDifferent = getStateInfo(stateCode).top - 3.84;
 
     const stateText = `In <strong>${
       getStateInfo(stateCode).text
     }</strong>, <strong>${
       getStateInfo(stateCode).top
-    }</strong> per cent of income earners are in the top bracket, which is xx per cent higher than the average.`;
+    }</strong> per cent of income earners are in the top bracket, which is <strong>${Math.abs(
+      statePercentDifferent
+    )}</strong> per cent ${higherOrLower(statePercentDifferent)} than the average.`;
     // Then update the component state which will change the panel info
     this.setState((prevState, props) => {
       let panels = prevState.scrollytellerObject.panels;
@@ -131,9 +133,6 @@ class App extends React.Component {
       panels[1].nodes[1].innerHTML = userRankText;
       panels[1].config.zoom = 0;
       panels[1].config.lga = lgaObject.value;
-
-     
-
 
       // User's Australian State
       panels[2].config.lga = stateCode;
