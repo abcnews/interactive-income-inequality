@@ -56,7 +56,7 @@ let margins = Math.min(screenWidth, screenHeight) * 0.1;
 
 var colorScale = d3Scale
   .scaleLinear()
-  .domain([0, 2, 4, 6, 8, 10, 12, 14, 16, 18, 20, 22, 24])
+  .domain([0, 1.1, 1.3, 2, 3, 4, 5, 6, 7, 8, 9, 10, 23])
   .range([
     "#E1E6DA",
     "#BFE3CD",

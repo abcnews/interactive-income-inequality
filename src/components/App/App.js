@@ -122,8 +122,10 @@ class App extends React.Component {
     }</strong>, <strong>${
       getStateInfo(stateCode).top
     }</strong> per cent of income earners are in the top bracket, which is <strong>${Math.abs(
+      statePercentDifferent.toFixed(2)
+    )}</strong> per cent ${higherOrLower(
       statePercentDifferent
-    )}</strong> per cent ${higherOrLower(statePercentDifferent)} than the average.`;
+    )} than the average.`;
     // Then update the component state which will change the panel info
     this.setState((prevState, props) => {
       let panels = prevState.scrollytellerObject.panels;
