@@ -112,7 +112,6 @@ class App extends React.Component {
         return {
           text: "Queensland",
           percent: "3.14",
-          percent: "3.66",
           leadLga: "Isaac",
           leadLgaCode: 33980,
           leadLgaPercent: 10.18
@@ -121,7 +120,6 @@ class App extends React.Component {
         return {
           text: "South Australia",
           percent: "2.32",
-          percent: "3.66",
           leadLga: "Walkerville",
           leadLgaCode: 48260,
           leadLgaPercent: 10.48
@@ -130,16 +128,14 @@ class App extends React.Component {
         return {
           text: "Western Australia",
           percent: "5.27",
-          percent: "3.66",
           leadLga: "Ashburton",
           leadLgaCode: 50250,
-          leadLgaPercent: 34.70
+          leadLgaPercent: 34.7
         };
       } else if (stateCode === 6) {
         return {
           text: "Tasmania",
           percent: "1.78",
-          percent: "3.66",
           leadLga: "Hobart",
           leadLgaCode: 62810,
           leadLgaPercent: 4.67
@@ -148,7 +144,6 @@ class App extends React.Component {
         return {
           text: "Northern Territory",
           percent: "4.73",
-          percent: "3.66",
           leadLga: "Unincorporated NT",
           leadLgaCode: 79399,
           leadLgaPercent: 7.29
@@ -157,7 +152,6 @@ class App extends React.Component {
         return {
           text: "Australian Capital Territory",
           percent: "5.47",
-          percent: "3.66",
           leadLga: "Unicorporated ACT",
           leadLgaCode: 89399,
           leadLgaPercent: 5.47
@@ -168,10 +162,9 @@ class App extends React.Component {
         return {
           text: "NOT FOUND",
           percent: "0.00",
-          percent: "0.00",
           leadLga: "NOT FOUND",
           leadLgaCode: 0,
-          leadLgaPercent: 0.00
+          leadLgaPercent: 0.0
         };
       }
     };
@@ -181,7 +174,7 @@ class App extends React.Component {
     const stateText = `In <strong>${
       getStateInfo(stateCode).text
     }</strong>, <strong>${
-      getStateInfo(stateCode).top
+      getStateInfo(stateCode).percent
     }</strong> per cent of income earners are in the top bracket, which is <strong>${Math.abs(
       statePercentDifferent.toFixed(2)
     )}</strong> per cent ${higherOrLower(
@@ -192,26 +185,39 @@ class App extends React.Component {
     // * Lastly set up the top LGA in State
     // *
 
-    let topLgaInState =
-      // Then update the component state which will change text on all panels
-      this.setState((prevState, props) => {
-        let panels = prevState.scrollytellerObject.panels;
+    let leadLga = getStateInfo(stateCode).leadLga;
+    let leadLgaCode = getStateInfo(stateCode).leadLgaCode;
+    let leadLgaPercent = getStateInfo(stateCode).leadLgaPercent;
+    let leadLgaRank = getLgaTop(this.lgaData, leadLgaCode).RANK;
 
-        // User's LGA
-        panels[1].nodes[0].innerHTML = userLgaText;
-        panels[1].nodes[1].innerHTML = userRankText;
-        panels[1].config.zoom = 0;
-        panels[1].config.lga = lgaObject.value;
+    let leadPanelText = `Leading the pack in your state is <strong>${leadLga}</strong>, where <strong>${leadLgaPercent}</strong> per cent of income earners are in the top bracket.`
 
-        // User's Australian State
-        panels[2].config.lga = stateCode;
-        panels[2].nodes[0].innerHTML = stateText;
+    let leadPanelRankText = `It is ranked number <strong>${leadLgaRank}</strong> out of all LGAs in Australia on this measure.`;
 
-        return {
-          scrollytellerObject: prevState.scrollytellerObject,
-          currentLga: lgaObject
-        };
-      });
+    // Then update the component state which will change text on all panels
+    this.setState((prevState, props) => {
+      let panels = prevState.scrollytellerObject.panels;
+
+      // User's LGA
+      panels[1].nodes[0].innerHTML = userLgaText;
+      panels[1].nodes[1].innerHTML = userRankText;
+      panels[1].config.zoom = 0;
+      panels[1].config.lga = lgaObject.value;
+
+      // User's Australian State
+      panels[2].config.lga = stateCode;
+      panels[2].nodes[0].innerHTML = stateText;
+
+      // Lead LGA in User's Australian State
+      panels[3].config.lga = leadLgaCode;
+      panels[3].nodes[0].innerHTML = leadPanelText;
+      panels[3].nodes[1].innerHTML = leadPanelRankText
+
+      return {
+        scrollytellerObject: prevState.scrollytellerObject,
+        currentLga: lgaObject
+      };
+    });
   }
 
   componentWillMount() {
