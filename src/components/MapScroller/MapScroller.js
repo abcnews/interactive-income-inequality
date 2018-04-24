@@ -54,23 +54,42 @@ let screenWidth =
 let screenHeight = window.innerHeight;
 let margins = Math.min(screenWidth, screenHeight) * 0.1;
 
-var colorScale = d3Scale
-  .scaleLinear()
-  .domain([0, 1.1, 1.3, 2, 3, 4, 5, 6, 7, 8, 9, 10, 23])
+// const colorScale = d3Scale
+//   .scaleLinear()
+//   .domain([0, 1.1, 1.3, 2, 3, 4, 5, 6, 7, 8, 9, 10, 23])
+//   .range([
+//     "#E1E6DA",
+//     "#BFE3CD",
+//     "#9CD9CE",
+//     "#7ACFD4",
+//     "#5EC0CD",
+//     "#3FB2C6",
+//     "#24A3BC",
+//     "#188CAD",
+//     "#0F75A0",
+//     "#085B96",
+//     "#03418D",
+//     "#002875",
+//     "#00114B"
+//   ]);
+
+const colorScale = d3Scale
+  .scaleQuantize()
+  .domain([0, 35])
   .range([
-    "#E1E6DA",
-    "#BFE3CD",
-    "#9CD9CE",
-    "#7ACFD4",
-    "#5EC0CD",
-    "#3FB2C6",
-    "#24A3BC",
-    "#188CAD",
-    "#0F75A0",
-    "#085B96",
-    "#03418D",
-    "#002875",
-    "#00114B"
+    "#E9F1DE",
+    "#B7E9D2",
+    "#8CDED3",
+    "#60D0D3",
+    "#32C2CB",
+    "#00B4C3",
+    "#00A5B8",
+    "#008FA9",
+    "#00799B",
+    "#006091",
+    "#004987",
+    "#00326F",
+    "#001947"
   ]);
 
 const zoomScale = d3Scale

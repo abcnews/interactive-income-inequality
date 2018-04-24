@@ -75,7 +75,7 @@ class IncomeInput extends React.Component {
     this.setState({ narrativeState: "calculate" });
 
     // Wait a while then show result
-    setTimeout(this.showResult.bind(this), 750);
+    setTimeout(this.showResult.bind(this), 500);
   }
 
   showResult() {
@@ -94,7 +94,7 @@ class IncomeInput extends React.Component {
 
     this.setState({ narrativeState: "result" });
 
-    setTimeout(this.splitUpBar.bind(this), 1300);
+    setTimeout(this.splitUpBar.bind(this), 200);
   }
 
   tryAgain(event) {

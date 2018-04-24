@@ -59,6 +59,9 @@ lgas = lgas.map(lga => {
   }
 });
 
+// Filter unwanted
+// TODO: filter no usual address etc.
+
 // Sort alphabetical
 lgas = lgas.sort((a, b) => a.label.localeCompare(b.label));
 
@@ -76,6 +79,13 @@ class LgaSearch extends React.Component {
   handleSelect(selectedOption) {
     this.setState({ selectedOption });
     this.props.setCurrentLga(selectedOption);
+
+    console.log(selectedOption);
+    // window.scrollBy({
+    //   top: 500, // could be negative value
+    //   left: 0,
+    //   behavior: 'smooth'
+    // });
   }
 
   async geocodeString(searchString) {
