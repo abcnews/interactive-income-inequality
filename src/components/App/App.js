@@ -44,12 +44,13 @@ class App extends React.Component {
   constructor(props) {
     super(props);
 
-    this.lgaData = []; //require("./lga-data.json");
+    this.lgaData = []; 
 
     this.state = {
       mapData: null,
       mapDataScroller: null,
       currentLga: null,
+      currentAusState: 1,
       scrollytellerObject: scrollyteller
     };
   }
@@ -215,7 +216,8 @@ class App extends React.Component {
 
       return {
         scrollytellerObject: prevState.scrollytellerObject,
-        currentLga: lgaObject
+        currentLga: lgaObject,
+        currentAusState: stateCode
       };
     });
   }
@@ -276,6 +278,7 @@ class App extends React.Component {
               currentLga={this.state.currentLga}
               ausStatesGeo={this.state.ausStatesGeo}
               lgaData={this.lgaData}
+              currentAusState={this.state.currentAusState}
             />
             // <MapZoom
             //   scrollyteller={this.state.scrollytellerObject}

@@ -82,7 +82,7 @@ class MapScroller extends React.Component {
   constructor(props) {
     super(props);
 
-    this.state = { highlight: true };
+    this.state = { highlight: true, focusState: false };
     this.canvasInit = this.canvasInit.bind(this);
   }
 
@@ -92,7 +92,6 @@ class MapScroller extends React.Component {
   }
 
   canvasInit(mapData, ausStatesGeo) {
-    console.log(this.props);
     // Check to see if position.sticky is supported
     // and then apply sticky styles
     stickifyStage();
@@ -124,7 +123,7 @@ class MapScroller extends React.Component {
       });
 
       return geoJSON;
-    }
+    };
 
     for (let i = 0; i < SIMPLIFICATION_LEVELS; i++) {
       australia[i] = getGeo(mapData, baseSimplification);
@@ -133,8 +132,6 @@ class MapScroller extends React.Component {
 
     // Set up the global geoometry for Australian States
     ausStates = ausStatesGeo.features;
-
-    console.log(ausStates);
 
     // Set up a D3 projection here
     projection = d3Geo
@@ -188,6 +185,10 @@ class MapScroller extends React.Component {
     // Should we highlight current focus?
     if (markerData.highlight !== false) this.setState({ highlight: true });
     else this.setState({ highlight: false });
+
+    // Should we highlight current Australian State
+    if (markerData.state === true) this.setState({ focusState: true });
+    else this.setState({ focusState: false });
 
     //Make sure we are mounted
     if (projection) {
@@ -360,7 +361,8 @@ class MapScroller extends React.Component {
             // Draw a version of map based on zoom level
             this.drawWorld(
               australia[simplificationScale(currentZoom)],
-              currentFocus
+              currentFocus,
+              tweening
             );
           };
         });
@@ -415,7 +417,7 @@ class MapScroller extends React.Component {
     }
   }
 
-  drawWorld(australiaGeoJson, currentFocus) {
+  drawWorld(australiaGeoJson, currentFocus, tweening) {
     // Clear the canvas ready for redraw
     context.clearRect(0, 0, screenWidth, screenHeight);
 
@@ -423,12 +425,25 @@ class MapScroller extends React.Component {
       // Get bounds of current LGA
       const bounds = path.bounds(element);
 
-      // Don't render if not on screen
+      // console.log(element);
+
+      // Don't render LGA if not on screen
       if (bounds[0][0] > screenWidth) return;
       if (bounds[0][1] > screenHeight) return;
       if (bounds[1][0] < 0) return;
       if (bounds[1][1] < 0) return;
 
+      // Highlight Australian state if specified in Scrollyteller
+      if (
+        tweening > 0.99 &&
+        this.state.focusState &&
+        this.props.currentAusState &&
+        element.properties.STE_CODE16 !== this.props.currentAusState + ""
+      )
+        context.globalAlpha = 0.4;
+      else context.globalAlpha = 1;
+
+      // Render current LGA a different colour/style
       if (
         this.state.highlight &&
         element.properties.LGA_CODE16 === currentFocus
