@@ -335,7 +335,7 @@
 
 .bar-spacer {
   background-color: #f9f9f9;
-  height: 2px;
+  height: 0px;
   width: 15px;
   position: absolute;
   left: 0;
@@ -343,55 +343,55 @@
   margin: 0 auto;
   z-index: 1;
   opacity: 0;
-  transition: opacity 0.5s ease-out;
+  transition: opacity 0.5s ease-out, height 0.5s ease-out;
 }
 
 .space1 {
-  top: calc(3.84% - 1px);
+  top: calc(3.84% - 2px);
 }
 
 .space2 {
-  top: calc(10.04% - 1px);
+  top: calc(10.04% - 2px);
 }
 
 .space3 {
-  top: calc(14.16% - 1px);
+  top: calc(14.16% - 2px);
 }
 
 .space4 {
-  top: calc(20.1% - 1px);
+  top: calc(20.1% - 2px);
 }
 
 .space5 {
-  top: calc(27.12% - 1px);
+  top: calc(27.12% - 2px);
 }
 
 .space6 {
-  top: calc(37.35% - 1px);
+  top: calc(37.35% - 2px);
 }
 
 .space7 {
-  top: calc(47.37% - 1px);
+  top: calc(47.37% - 2px);
 }
 
 .space8 {
-  top: calc(56.56% - 1px);
+  top: calc(56.56% - 2px);
 }
 
 .space9 {
-  top: calc(65.74% - 1px);
+  top: calc(65.74% - 2px);
 }
 
 .space10 {
-  top: calc(75.75% - 1px);
+  top: calc(75.75% - 2px);
 }
 
 .space11 {
-  top: calc(86.18% - 1px);
+  top: calc(86.18% - 2px);
 }
 
 .space12 {
-  top: calc(94.84% - 1px);
+  top: calc(94.84% - 2px);
 }
 
 .result-bracket {

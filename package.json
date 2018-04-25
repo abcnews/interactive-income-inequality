@@ -39,7 +39,6 @@
     "d3-transition": "^1.1.1",
     "d3-zoom": "^1.7.1",
     "debounce": "^1.1.0",
-    "geojson-bounds": "^1.0.1",
     "mapbox": "^1.0.0-beta9",
     "nouislider": "^11.0.3",
     "point-in-polygon": "^1.0.1",

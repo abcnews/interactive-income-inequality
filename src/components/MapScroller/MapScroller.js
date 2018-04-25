@@ -3,7 +3,7 @@ const ReactDOM = require("react-dom");
 const Scrollyteller = require("@abcnews/scrollyteller");
 const topojson = require("topojson");
 const canvasDpiScaler = require("canvas-dpi-scaler");
-const geoJsonBounds = require("geojson-bounds");
+// const geoJsonBounds = require("geojson-bounds");
 
 // Load up some helper functions etc
 const utils = require("../../lib/utils");
@@ -25,8 +25,10 @@ const SIMPLIFICATION_LEVELS = 20;
 const SIMPLIFICATION_FACTOR = 1.3;
 const MAX_ZOOM = 2500;
 
-const STATE_ZOOM_MARGINS = 0.19;
+const STATE_ZOOM_MARGINS = 0.21;
 const LGA_ZOOM_MARGINS = 0.46;
+const MAX_ZOOM_LEVEL = 110000;
+const MIN_ZOOM_LEVEL = 3000;
 
 // File scope vars
 let initialGlobeScale;
@@ -45,7 +47,7 @@ let tweening = 1;
 
 // Set defaults
 let currentFocus = "72330"; // Middle of Australia (pretty much)
-let previousFocus = "72330";
+// let previousFocus = "72330";
 let currentLongLat = [133.7751, -25.2744]; //getItem("australia").longlat;
 
 // documentElement is for Firefox support apparently
@@ -116,7 +118,7 @@ class MapScroller extends React.Component {
   constructor(props) {
     super(props);
 
-    this.state = { highlight: true, focusState: false, hasFocused: false };
+    this.state = { highlight: true, hasFocused: false };
     this.canvasInit = this.canvasInit.bind(this);
   }
 
@@ -212,9 +214,9 @@ class MapScroller extends React.Component {
   doMarker(markerData) {
     // console.log(markerData);
     // If already tweening then do nothing
-    if (tweening !== 1) return;
+    // if (tweening !== 1) return;
 
-    previousFocus = currentFocus;
+    // previousFocus = currentFocus;
     currentFocus = markerData.lga + ""; // Turn into string
 
     // Should we highlight current focus?
@@ -222,8 +224,8 @@ class MapScroller extends React.Component {
     else this.setState({ highlight: false });
 
     // Should we highlight current Australian State
-    if (markerData.state === true) this.setState({ focusState: true });
-    else this.setState({ focusState: false });
+    // if (markerData.state === true) this.setState({ focusState: true });
+    // else this.setState({ focusState: false });
 
     //Make sure we are mounted
     if (projection) {
@@ -281,8 +283,18 @@ class MapScroller extends React.Component {
         projection.translate(tempTranslate);
 
         newGlobeScale = boundingZoom;
-        if (newGlobeScale < initialGlobeScale)
-          newGlobeScale = initialGlobeScale;
+
+        console.log(newGlobeScale);
+
+        // Set limits on zoom
+        if (markerData.lga <= 8) {
+          if (newGlobeScale < initialGlobeScale)
+            newGlobeScale = initialGlobeScale;
+        } else {
+          if (newGlobeScale < MIN_ZOOM_LEVEL) newGlobeScale = MIN_ZOOM_LEVEL;
+        }
+        // Control max zooms compress extent of levels
+        if (newGlobeScale > MAX_ZOOM_LEVEL) newGlobeScale = MAX_ZOOM_LEVEL;
       }
 
       const dummyTransition = {};
@@ -404,11 +416,11 @@ class MapScroller extends React.Component {
               this.setState({ previousMarkerData: markerData });
           };
         });
-      console.log("Previous: ");
-      console.log(this.state.previousMarkerData);
-      console.log(" ");
-      console.log("Current: ");
-      console.log(markerData);
+      // console.log("Previous: ");
+      // console.log(this.state.previousMarkerData);
+      // console.log(" ");
+      // console.log("Current: ");
+      // console.log(markerData);
 
       /*
        * The following will be helpful if we want to zoom out first
@@ -516,8 +528,6 @@ class MapScroller extends React.Component {
       }
 
       context.beginPath();
-
-
 
       context.fillStyle = colorScale(element.properties.TOP);
       context.strokeStyle = "rgba(255, 255, 255, 0.4)";

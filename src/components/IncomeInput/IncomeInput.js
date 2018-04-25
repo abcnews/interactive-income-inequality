@@ -61,6 +61,7 @@ class IncomeInput extends React.Component {
     // Fade in the spaces
     for (var i = 0; i < this.spaces.length; i++) {
       this.spaces[i].style.opacity = "1";
+      this.spaces[i].style.height = "4px";
     }
 
     // Grow the slider
@@ -100,17 +101,18 @@ class IncomeInput extends React.Component {
   tryAgain(event) {
     this.setState({ infoIsSet: false });
     this.setState({ narrativeState: "initial" });
-    this.slider.style.height = "350px";
+    this.slider.style.height = "326px";
 
     for (var i = 0; i < this.spaces.length; i++) {
       this.spaces[i].style.opacity = "0";
+      this.spaces[i].style.height = "0px";
     }
   }
 
   attachSlider() {
     this.slider = document.getElementById("range");
 
-    this.slider.style.height = "350px";
+    this.slider.style.height = "326px";
     this.slider.style.margin = "0 auto";
     this.slider.style.transition = "height 0.5s";
 
