@@ -325,7 +325,7 @@ class MapScroller extends React.Component {
       if (transitionTime < minTransitionTime)
         transitionTime = minTransitionTime;
 
-      let transitionDelayMultiplyer = 0.6;
+      let transitionDelayMultiplyer = 0.5;
       let isZoomingIn = true;
 
       // Determine if zooming in or out
@@ -476,8 +476,8 @@ class MapScroller extends React.Component {
       if (bounds[1][0] < 0) return;
       if (bounds[1][1] < 0) return;
 
-      fadeOutOpacity = 1 - tweening;
-      fadeInOpacity = tweening;
+      let fadeOutOpacity = 1 - tweening;
+      let fadeInOpacity = tweening;
 
       // Highlight Australian state if specified in Scrollyteller
       // Fade out all the rest
@@ -516,6 +516,9 @@ class MapScroller extends React.Component {
       }
 
       context.beginPath();
+
+
+
       context.fillStyle = colorScale(element.properties.TOP);
       context.strokeStyle = "rgba(255, 255, 255, 0.4)";
       path(element);

@@ -5,6 +5,10 @@ const MapboxClient = require("mapbox");
 const inside = require("point-in-polygon");
 const debounce = require("debounce");
 
+// Smooth scroll into view support for Safari, Edge, IE, etc.
+const smoothscroll = require('smoothscroll-polyfill');
+smoothscroll.polyfill();
+
 // const Select = require("react-select").default;
 const Async = require("react-select").Async;
 
