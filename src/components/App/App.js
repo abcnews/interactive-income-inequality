@@ -280,11 +280,6 @@ class App extends React.Component {
               lgaData={this.lgaData}
               currentAusState={this.state.currentAusState}
             />
-            // <MapZoom
-            //   scrollyteller={this.state.scrollytellerObject}
-            //   mapData={this.state.mapDataScroller}
-            //   currentLga={this.state.currentLga}
-            // />
           )}
       </div>
     );

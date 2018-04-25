@@ -61,14 +61,11 @@ function getScaleDomain(min, max, stops) {
 
   let current = min;
   for (let i = 0; i < stops; i++) {
-    scaleDomain.push(current)
+    scaleDomain.push(current);
     current = current + size;
   }
   return scaleDomain;
 }
-
-console.log(getScaleDomain(0, 35, 13));
-
 
 // Linear scale
 const colorScale = d3Scale
@@ -119,7 +116,7 @@ class MapScroller extends React.Component {
   constructor(props) {
     super(props);
 
-    this.state = { highlight: true, focusState: false };
+    this.state = { highlight: true, focusState: false, hasFocused: false };
     this.canvasInit = this.canvasInit.bind(this);
   }
 
@@ -213,6 +210,7 @@ class MapScroller extends React.Component {
   }
 
   doMarker(markerData) {
+    // console.log(markerData);
     // If already tweening then do nothing
     if (tweening !== 1) return;
 
@@ -398,11 +396,19 @@ class MapScroller extends React.Component {
             // Draw a version of map based on zoom level
             this.drawWorld(
               australia[simplificationScale(currentZoom)],
-              currentFocus,
+              markerData,
               tweening
             );
+
+            if (tweening === 1)
+              this.setState({ previousMarkerData: markerData });
           };
         });
+      console.log("Previous: ");
+      console.log(this.state.previousMarkerData);
+      console.log(" ");
+      console.log("Current: ");
+      console.log(markerData);
 
       /*
        * The following will be helpful if we want to zoom out first
@@ -454,7 +460,7 @@ class MapScroller extends React.Component {
     }
   }
 
-  drawWorld(australiaGeoJson, currentFocus, tweening) {
+  drawWorld(australiaGeoJson, markerData, tweening) {
     // Clear the canvas ready for redraw
     context.clearRect(0, 0, screenWidth, screenHeight);
 
@@ -470,20 +476,35 @@ class MapScroller extends React.Component {
       if (bounds[1][0] < 0) return;
       if (bounds[1][1] < 0) return;
 
+      fadeOutOpacity = 1 - tweening;
+      fadeInOpacity = tweening;
+
       // Highlight Australian state if specified in Scrollyteller
+      // Fade out all the rest
       if (
-        tweening > 0.99 &&
-        this.state.focusState &&
-        this.props.currentAusState &&
+        markerData &&
+        markerData.state &&
         element.properties.STE_CODE16 !== this.props.currentAusState + ""
-      )
-        context.globalAlpha = 0.4;
-      else context.globalAlpha = 1;
+      ) {
+        context.globalAlpha = fadeOutOpacity;
+      } else if (
+        this.state.previousMarkerData &&
+        this.state.previousMarkerData.state &&
+        element.properties.STE_CODE16 !== this.props.currentAusState + ""
+      ) {
+        context.globalAlpha = fadeInOpacity;
+      } else if (
+        element.properties.STE_CODE16 ==
+        this.props.currentAusState + ""
+      ) {
+        context.globalAlpha = 1;
+      }
 
       // Render current LGA a different colour/style
       if (
+        markerData &&
         this.state.highlight &&
-        element.properties.LGA_CODE16 === currentFocus
+        element.properties.LGA_CODE16 === markerData.lga + ""
       ) {
         context.beginPath();
         context.fillStyle = "#FF5733";
