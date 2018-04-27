@@ -219,6 +219,15 @@ class MapScroller extends React.Component {
 
   markTrigger(markerData) {
     console.log(markerData);
+
+    let stateCode;
+    // TODO: implement this if necessary
+    // if (markerData.lga.value > 9) {
+    //   stateCode = Math.floor(markerData.lga / 10000);
+    // } else stateCode = markerData.lga;
+
+    // this.props.doMarkerEvent(stateCode);
+
     q.defer(this.doMarker, markerData);
   }
 
@@ -238,6 +247,7 @@ class MapScroller extends React.Component {
     //Make sure we are mounted
     if (projection) {
       // Handle bottom brackets dark background
+      if (!markerData.background) canvas.style("background-color", "#f9f9f9");
 
       let currentLgaGeometry = getLGA(currentFocus).geometry;
 
@@ -426,11 +436,11 @@ class MapScroller extends React.Component {
         });
 
       setTimeout(function() {
-        canvas.style("transition", "background-color 0.5s");
+        canvas.style("transition", "background-color 0.3s");
         // Transition background after spin/zoom
         if (markerData.background && markerData.background === "dark")
-          canvas.style("background-color", "#090909");
-        else canvas.style("background-color", "#f9f9f9");
+        canvas.style("background-color", "#333");
+        // else canvas.style("background-color", "#f9f9f9");
 
         // Call back d3-queue to let it know the transition is finished
         callback(null);
@@ -525,8 +535,32 @@ class MapScroller extends React.Component {
         element.properties.STE_CODE16 !== this.props.currentAusState + ""
       ) {
         context.globalAlpha = fadeInOpacity;
+      } else if (
+        // Handle if two HIGHLIGHT marks are in a row
+        // TODO: handle if HIGHLIGHT LGAs are the same if needed
+        markerData &&
+        markerData.focus &&
+        this.state.previousMarkerData &&
+        this.state.previousMarkerData.focus
+      ) {
+        let elementLgaCode = +element.properties.LGA_CODE16;
+
+        if (this.state.previousMarkerData.focus.indexOf(elementLgaCode) > -1) {
+          context.globalAlpha = fadeOutOpacity;
+        } else if (markerData.focus.indexOf(elementLgaCode) > -1) {
+          // if (
+          //   this.state.previousMarkerData.focus.indexOf(elementLgaCode) < 0
+          // ) {
+          //   context.globalAlpha = fadeInOpacity;
+          // } else
+
+          context.globalAlpha = fadeInOpacity;
+        } else if (markerData.focus.indexOf(elementLgaCode) < 0) {
+          context.globalAlpha = 0;
+        }
       } else if (markerData && markerData.focus) {
         let elementLgaCode = +element.properties.LGA_CODE16;
+
         if (markerData.focus.indexOf(elementLgaCode) > -1) {
           context.globalAlpha = 1;
         } else {

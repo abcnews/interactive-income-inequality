@@ -44,7 +44,7 @@ class App extends React.Component {
   constructor(props) {
     super(props);
 
-    this.lgaData = []; 
+    this.lgaData = [];
 
     this.state = {
       mapData: null,
@@ -55,10 +55,12 @@ class App extends React.Component {
     };
 
     this.setCurrentLga = this.setCurrentLga.bind(this);
+    this.doMarkerEvent = this.doMarkerEvent.bind(this);
   }
 
   doMarkerEvent(stateCode) {
-    this.setState({currentAusState: stateCode})
+    // TODO: after implementing per LGA fade outs enable this
+    // this.setState({ currentAusState: stateCode });
   }
 
   // Fires when the user chooses their LGA
@@ -80,14 +82,12 @@ class App extends React.Component {
       else return "higher";
     }
 
-    
-
     // Modify panels according to LGA choice
     const userLgaText = `In <strong>${
       lgaObject.label.replace(/ *\([^)]*\) */g, "") // Strip (NSW) etc.
     }</strong> LGA, <strong>${currentTopPercentValue}</strong> per cent of income earners are in the top bracket, which is <strong>${Math.abs(
       percentageDifference.toFixed(2)
-    )}</strong> per cent ${higherOrLower(
+    )}</strong> percentage points ${higherOrLower(
       percentageDifference
     )} than the average.`;
 
@@ -186,7 +186,7 @@ class App extends React.Component {
       getStateInfo(stateCode).percent
     }</strong> per cent of income earners are in the top bracket, which is <strong>${Math.abs(
       statePercentDifferent.toFixed(2)
-    )}</strong> per cent ${higherOrLower(
+    )}</strong> percentage points ${higherOrLower(
       statePercentDifferent
     )} than the average.`;
 
@@ -199,7 +199,7 @@ class App extends React.Component {
     let leadLgaPercent = getStateInfo(stateCode).leadLgaPercent;
     let leadLgaRank = getLgaTop(this.lgaData, leadLgaCode).RANK;
 
-    let leadPanelText = `Leading the pack in your state is <strong>${leadLga}</strong>, where <strong>${leadLgaPercent}</strong> per cent of income earners are in the top bracket.`
+    let leadPanelText = `Leading the pack in your state is <strong>${leadLga}</strong>, where <strong>${leadLgaPercent}</strong> per cent of income earners are in the top bracket.`;
 
     let leadPanelRankText = `It is ranked number <strong>${leadLgaRank}</strong> out of all LGAs in Australia on this measure.`;
 
@@ -220,7 +220,7 @@ class App extends React.Component {
       // Lead LGA in User's Australian State
       panels[3].config.lga = leadLgaCode;
       panels[3].nodes[0].innerHTML = leadPanelText;
-      panels[3].nodes[1].innerHTML = leadPanelRankText
+      panels[3].nodes[1].innerHTML = leadPanelRankText;
 
       return {
         scrollytellerObject: prevState.scrollytellerObject,
@@ -275,7 +275,6 @@ class App extends React.Component {
         <IncomeInput />
         <LgaSearch
           setCurrentLga={this.setCurrentLga}
-          doMarkerEvent={this.doMarkerEvent}
           mapData={this.state.mapData}
         />
         {/* Conditionally render MapScroller if data loaded */}
@@ -288,6 +287,7 @@ class App extends React.Component {
               ausStatesGeo={this.state.ausStatesGeo}
               lgaData={this.lgaData}
               currentAusState={this.state.currentAusState}
+              doMarkerEvent={this.doMarkerEvent}
             />
           )}
       </div>
