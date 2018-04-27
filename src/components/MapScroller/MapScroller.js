@@ -196,8 +196,7 @@ class MapScroller extends React.Component {
       .select("." + styles.stage)
       .style("background-color", "#f9f9f9")
       .attr("width", screenWidth)
-      .attr("height", screenHeight)
-      .style("transition", "background-color 0.5s");
+      .attr("height", screenHeight);
 
     // Set up our canvas drawing context aka pen
     context = canvas.node().getContext("2d");
@@ -427,6 +426,7 @@ class MapScroller extends React.Component {
         });
 
       setTimeout(function() {
+        canvas.style("transition", "background-color 0.5s");
         // Transition background after spin/zoom
         if (markerData.background && markerData.background === "dark")
           canvas.style("background-color", "#090909");
@@ -532,6 +532,16 @@ class MapScroller extends React.Component {
         } else {
           context.globalAlpha = fadeOutOpacity;
         }
+      } else if (
+        this.state.previousMarkerData &&
+        this.state.previousMarkerData.focus
+      ) {
+        let elementLgaCode = +element.properties.LGA_CODE16;
+        if (this.state.previousMarkerData.focus.indexOf(elementLgaCode) > -1) {
+          context.globalAlpha = 1;
+        } else {
+          context.globalAlpha = fadeInOpacity;
+        }
       } else {
         // else if (markerData && markerData.focus && markerData.focus[0] !== +element.properties.LGA_CODE16 || markerData.focus[1] !== +element.properties.LGA_CODE16) {
         //   // console.log(markerData.focus[1] )
@@ -583,7 +593,7 @@ class MapScroller extends React.Component {
         context.strokeStyle = "rgba(255, 255, 255, 0.4)";
         path(element);
         context.fill();
-        // context.stroke();
+        context.stroke();
         return;
       }
 
@@ -591,9 +601,10 @@ class MapScroller extends React.Component {
 
       context.fillStyle = colorScale(element.properties.TOP);
       context.strokeStyle = "rgba(255, 255, 255, 0.4)";
+      context.lineWidth = 1.1;
       path(element);
       context.fill();
-      // context.stroke();
+      context.stroke();
     });
   }
 
