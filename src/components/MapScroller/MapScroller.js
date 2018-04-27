@@ -17,6 +17,7 @@ const d3Interpolate = require("d3-interpolate");
 const d3Zoom = require("d3-zoom");
 const d3Scale = require("d3-scale");
 const d3Ease = require("d3-ease");
+const d3Queue = require("d3-queue");
 
 // Import styles
 const styles = require("./MapScroller.scss");
@@ -25,7 +26,7 @@ const SIMPLIFICATION_LEVELS = 20;
 const SIMPLIFICATION_FACTOR = 1.3;
 const MAX_ZOOM = 2500;
 
-const STATE_ZOOM_MARGINS = 0.21;
+const STATE_ZOOM_MARGINS = 0.23;
 const LGA_ZOOM_MARGINS = 0.46;
 const MAX_ZOOM_LEVEL = 110000;
 const MIN_ZOOM_LEVEL = 3000;
@@ -68,6 +69,9 @@ function getScaleDomain(min, max, stops) {
   }
   return scaleDomain;
 }
+
+// Set up a queue
+var q = d3Queue.queue(1);
 
 // Linear scale
 const colorScale = d3Scale
@@ -120,6 +124,8 @@ class MapScroller extends React.Component {
 
     this.state = { highlight: true, hasFocused: false };
     this.canvasInit = this.canvasInit.bind(this);
+    this.markTrigger = this.markTrigger.bind(this);
+    this.doMarker = this.doMarker.bind(this);
   }
 
   componentDidMount() {
@@ -190,7 +196,8 @@ class MapScroller extends React.Component {
       .select("." + styles.stage)
       .style("background-color", "#f9f9f9")
       .attr("width", screenWidth)
-      .attr("height", screenHeight);
+      .attr("height", screenHeight)
+      .style("transition", "background-color 0.5s");
 
     // Set up our canvas drawing context aka pen
     context = canvas.node().getContext("2d");
@@ -211,13 +218,15 @@ class MapScroller extends React.Component {
     this.drawWorld(australia[0]);
   }
 
-  doMarker(markerData) {
-    // console.log(markerData);
-    // If already tweening then do nothing
-    // if (tweening !== 1) return;
+  markTrigger(markerData) {
+    console.log(markerData);
+    q.defer(this.doMarker, markerData);
+  }
 
-    // previousFocus = currentFocus;
+  doMarker(markerData, callback) {
     currentFocus = markerData.lga + ""; // Turn into string
+
+    //
 
     // Should we highlight current focus?
     if (markerData.highlight !== false) this.setState({ highlight: true });
@@ -229,6 +238,8 @@ class MapScroller extends React.Component {
 
     //Make sure we are mounted
     if (projection) {
+      // Handle bottom brackets dark background
+
       let currentLgaGeometry = getLGA(currentFocus).geometry;
 
       let previousRotation = projection.rotate();
@@ -284,8 +295,6 @@ class MapScroller extends React.Component {
 
         newGlobeScale = boundingZoom;
 
-        console.log(newGlobeScale);
-
         // Set limits on zoom
         if (markerData.lga <= 8) {
           if (newGlobeScale < initialGlobeScale)
@@ -324,7 +333,7 @@ class MapScroller extends React.Component {
       let rotationDelay = 0;
       let zoomDelay = 0;
 
-      let maxTransitionTime = 1400;
+      let maxTransitionTime = 1100;
       let minTransitionTime = 700;
       let transitionTime;
 
@@ -416,6 +425,17 @@ class MapScroller extends React.Component {
               this.setState({ previousMarkerData: markerData });
           };
         });
+
+      setTimeout(function() {
+        // Transition background after spin/zoom
+        if (markerData.background && markerData.background === "dark")
+          canvas.style("background-color", "#090909");
+        else canvas.style("background-color", "#f9f9f9");
+
+        // Call back d3-queue to let it know the transition is finished
+        callback(null);
+      }, transitionTime + Math.max(zoomDelay, rotationDelay));
+
       // console.log("Previous: ");
       // console.log(this.state.previousMarkerData);
       // console.log(" ");
@@ -469,7 +489,7 @@ class MapScroller extends React.Component {
       //       }
       //     };
       //   });
-    }
+    } else callback(null); // Always call back or else it hangs forever
   }
 
   drawWorld(australiaGeoJson, markerData, tweening) {
@@ -505,12 +525,52 @@ class MapScroller extends React.Component {
         element.properties.STE_CODE16 !== this.props.currentAusState + ""
       ) {
         context.globalAlpha = fadeInOpacity;
-      } else if (
-        element.properties.STE_CODE16 ==
-        this.props.currentAusState + ""
-      ) {
+      } else if (markerData && markerData.focus) {
+        let elementLgaCode = +element.properties.LGA_CODE16;
+        if (markerData.focus.indexOf(elementLgaCode) > -1) {
+          context.globalAlpha = 1;
+        } else {
+          context.globalAlpha = fadeOutOpacity;
+        }
+      } else {
+        // else if (markerData && markerData.focus && markerData.focus[0] !== +element.properties.LGA_CODE16 || markerData.focus[1] !== +element.properties.LGA_CODE16) {
+        //   // console.log(markerData.focus[1] )
+        //   // Fade out those not marked focus
+        //   // TODO: Yes this THE WORST way of doing it but a loop wasn't working for some reason...
+        //   context.globalAlpha = fadeOutOpacity;
+        // }
+        // else if (markerData && markerData.focus && markerData.focus[1]  !== +element.properties.LGA_CODE16) {
+        //   context.globalAlpha = fadeOutOpacity;
+        // }
         context.globalAlpha = 1;
       }
+
+      // FOCUS LGAs and fade out the rest
+
+      // for (let i = 0; i < markerData.focus.length; i++) {
+
+      //  if (markerData.focus[i] === +element.properties.LGA_CODE16) {
+      //   console.log (+element.properties.LGA_CODE16)
+      //  } else {
+      //    context.globalAlpha = 0.5;
+      //  }
+      // if (element.properties.LGA_CODE16 === markerData.focus[i] + "") {
+      //   context.globalAlpha = fadeOutOpacity;
+      // } else {
+      //   context.globalAlpha = 1;
+      // }
+      // }
+
+      // markerData.focus.forEach((focus) => {
+
+      //   // console.log(focus + "")
+      //   // console.log(element.properties.LGA_CODE16)
+      //   if (focus + "" !== element.properties.LGA_CODE16) {
+      //     context.globalAlpha = fadeOutOpacity;
+      //   } else {
+      //     context.globalAlpha = 1;
+      //   }
+      // }
 
       // Render current LGA a different colour/style
       if (
@@ -523,7 +583,7 @@ class MapScroller extends React.Component {
         context.strokeStyle = "rgba(255, 255, 255, 0.4)";
         path(element);
         context.fill();
-        context.stroke();
+        // context.stroke();
         return;
       }
 
@@ -533,7 +593,7 @@ class MapScroller extends React.Component {
       context.strokeStyle = "rgba(255, 255, 255, 0.4)";
       path(element);
       context.fill();
-      context.stroke();
+      // context.stroke();
     });
   }
 
@@ -551,7 +611,7 @@ class MapScroller extends React.Component {
             styles.scrollyteller
           }`}
           panelClassName="Block-content u-layout u-richtext"
-          onMarker={this.doMarker.bind(this)}
+          onMarker={this.markTrigger}
         >
           <canvas className={styles.stage} />
         </Scrollyteller>

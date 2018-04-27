@@ -53,6 +53,12 @@ class App extends React.Component {
       currentAusState: 1,
       scrollytellerObject: scrollyteller
     };
+
+    this.setCurrentLga = this.setCurrentLga.bind(this);
+  }
+
+  doMarkerEvent(stateCode) {
+    this.setState({currentAusState: stateCode})
   }
 
   // Fires when the user chooses their LGA
@@ -73,6 +79,8 @@ class App extends React.Component {
       if (difference < 0) return "lower";
       else return "higher";
     }
+
+    
 
     // Modify panels according to LGA choice
     const userLgaText = `In <strong>${
@@ -266,7 +274,8 @@ class App extends React.Component {
       <div className={styles.root}>
         <IncomeInput />
         <LgaSearch
-          setCurrentLga={this.setCurrentLga.bind(this)}
+          setCurrentLga={this.setCurrentLga}
+          doMarkerEvent={this.doMarkerEvent}
           mapData={this.state.mapData}
         />
         {/* Conditionally render MapScroller if data loaded */}
