@@ -30,6 +30,8 @@ const STATE_ZOOM_MARGINS = 0.23;
 const LGA_ZOOM_MARGINS = 0.46;
 const MAX_ZOOM_LEVEL = 110000;
 const MIN_ZOOM_LEVEL = 3000;
+const MAX_TRANSITION_TIME = 1300;
+const MIN_TRANSITION_TIME = 700;
 
 // File scope vars
 let initialGlobeScale;
@@ -317,7 +319,7 @@ class MapScroller extends React.Component {
 
       const dummyTransition = {};
 
-      // This calculates the duration of the transitions based on location and soom
+      // This calculates the duration of the transitions based on location and zoom
       let timeZoomInterpolate = d3Interpolate.interpolateZoom(
         [previousRotation[0], previousRotation[1], previousGlobeScale * 0.005],
         [-currentRotation[0], -currentRotation[1], newGlobeScale * 0.005]
@@ -342,8 +344,8 @@ class MapScroller extends React.Component {
       let rotationDelay = 0;
       let zoomDelay = 0;
 
-      let maxTransitionTime = 1100;
-      let minTransitionTime = 700;
+      let maxTransitionTime = MAX_TRANSITION_TIME;
+      let minTransitionTime = MIN_TRANSITION_TIME;
       let transitionTime;
 
       transitionTime = Math.abs(timeZoomInterpolate.duration);
@@ -385,6 +387,15 @@ class MapScroller extends React.Component {
         .transition("zoom")
         .delay(zoomDelay)
         .duration(transitionTime)
+        .ease(d3Ease.easeExpOut);
+
+      let zoomOutDuration = 700;
+
+      const zoomOutTween = d3Selection
+        .select(dummyTransition)
+        .transition("zoomout")
+        .delay(0)
+        .duration(zoomOutDuration)
         .ease(d3Ease.easeExpOut);
 
       if (isZoomingIn) zoomTween.ease(d3Ease.easeExp);
@@ -439,12 +450,109 @@ class MapScroller extends React.Component {
         canvas.style("transition", "background-color 0.3s");
         // Transition background after spin/zoom
         if (markerData.background && markerData.background === "dark")
-        canvas.style("background-color", "#333");
+          canvas.style("background-color", "#333");
         // else canvas.style("background-color", "#f9f9f9");
 
         // Call back d3-queue to let it know the transition is finished
         callback(null);
       }, transitionTime + Math.max(zoomDelay, rotationDelay));
+
+      // Determine if camera should zoom out first
+      // if (markerData.zoomout) {
+      //   zoomOutTween.tween("zoomout", () => {
+      //     let scaleOutInterpolate = d3Interpolate.interpolate(
+      //       projection.scale(),
+      //       initialGlobeScale
+      //     );
+      //     return time => {
+      //       projection.scale(scaleOutInterpolate(time));
+      //     };
+      //   });
+
+      //    rotationInterpolate = d3Interpolate.interpolate(previousRotation, [
+      //     -currentRotation[0],
+      //     -currentRotation[1],
+      //     0
+      //   ]);
+
+      //    scaleInterpolate = d3Interpolate.interpolate(
+      //     initialGlobeScale,
+      //     newGlobeScale
+      //   );
+
+      //   if (newGlobeScale > previousGlobeScale) {
+      //     rotationDelay = 0;
+      //     zoomDelay = transitionTime * transitionDelayMultiplyer;
+      //     isZoomingIn = true;
+      //   } else {
+      //     rotationDelay = transitionTime * transitionDelayMultiplyer;
+      //     zoomDelay = 0;
+      //     isZoomingIn = false;
+      //   }
+
+      //   rotationTween.delay(zoomOutDuration + rotationDelay);
+      //   zoomTween.delay(zoomOutDuration + zoomDelay);
+
+      //   rotationTween.tween("rotation", () => {
+      //     // Return the tween function
+      //     return time => {
+      //       projection.rotate(rotationInterpolate(time));
+      //     };
+      //   });
+
+      //   zoomTween.tween("zoom", () => {
+      //     return time => {
+      //       projection.scale(scaleInterpolate(time));
+      //     };
+      //   });
+
+      //   // Separate render tween to handle different delays
+      //   d3Selection
+      //     .select(dummyTransition)
+      //     .transition("render")
+      //     .delay(0)
+      //     .duration(transitionTime + Math.max(zoomDelay, rotationDelay) + zoomOutDuration) // transition + delay
+      //     // .ease(d3Ease.easeLinear)
+      //     .tween("render", () => {
+      //       // Return the tween function
+      //       return time => {
+      //         // If tweening > 1 then it means it's tweening;
+      //         tweening = time;
+      //         // Calculate current zoom and set up simplification scale
+      //         let currentZoom = projection.scale() / initialGlobeScale * 100;
+
+      //         const simplificationScale = d3Scale
+      //           .scaleQuantize()
+      //           .domain([100, MAX_ZOOM])
+      //           .range(Array.from(Array(SIMPLIFICATION_LEVELS).keys()));
+
+      //         // Draw a version of map based on zoom level
+      //         this.drawWorld(
+      //           australia[simplificationScale(currentZoom)],
+      //           markerData,
+      //           tweening
+      //         );
+
+      //         if (tweening === 1)
+      //           this.setState({ previousMarkerData: markerData });
+      //       };
+      //     });
+
+      //   setTimeout(function() {
+      //     canvas.style("transition", "background-color 0.3s");
+      //     // Transition background after spin/zoom
+      //     if (markerData.background && markerData.background === "dark")
+      //       canvas.style("background-color", "#333");
+      //     // else canvas.style("background-color", "#f9f9f9");
+
+      //     // Call back d3-queue to let it know the transition is finished
+      //     callback(null);
+      //   }, transitionTime +
+      //     Math.max(zoomDelay, rotationDelay) +
+      //     zoomOutDuration);
+      // } else {
+
+      // }
 
       // console.log("Previous: ");
       // console.log(this.state.previousMarkerData);
@@ -537,7 +645,6 @@ class MapScroller extends React.Component {
         context.globalAlpha = fadeInOpacity;
       } else if (
         // Handle if two HIGHLIGHT marks are in a row
-        // TODO: handle if HIGHLIGHT LGAs are the same if needed
         markerData &&
         markerData.focus &&
         this.state.previousMarkerData &&
@@ -545,15 +652,16 @@ class MapScroller extends React.Component {
       ) {
         let elementLgaCode = +element.properties.LGA_CODE16;
 
-        if (this.state.previousMarkerData.focus.indexOf(elementLgaCode) > -1) {
+        if (
+          this.state.previousMarkerData.focus.indexOf(elementLgaCode) > -1 &&
+          markerData.focus.indexOf(elementLgaCode) > -1
+        ) {
+          context.globalAlpha = 1;
+        } else if (
+          this.state.previousMarkerData.focus.indexOf(elementLgaCode) > -1
+        ) {
           context.globalAlpha = fadeOutOpacity;
         } else if (markerData.focus.indexOf(elementLgaCode) > -1) {
-          // if (
-          //   this.state.previousMarkerData.focus.indexOf(elementLgaCode) < 0
-          // ) {
-          //   context.globalAlpha = fadeInOpacity;
-          // } else
-
           context.globalAlpha = fadeInOpacity;
         } else if (markerData.focus.indexOf(elementLgaCode) < 0) {
           context.globalAlpha = 0;
