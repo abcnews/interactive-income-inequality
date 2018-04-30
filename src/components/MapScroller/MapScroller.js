@@ -649,6 +649,7 @@ class MapScroller extends React.Component {
 
       // Highlight Australian state if specified in Scrollyteller
       // Fade out all the rest
+      // TODO: if already faded out don't draw invisible LGA
       if (
         markerData &&
         markerData.state &&
@@ -792,6 +793,15 @@ class MapScroller extends React.Component {
           onMarker={this.markTrigger}
         >
           <canvas className={styles.stage} />
+          <div className={styles.legend}>
+            <div className={styles.legendInner}>
+              <div>Proportion of people in the top<br /> 
+              income bracket</div>
+              <div className={styles.leftRight}><img src="data:image/svg+xml,%3C%3Fxml version='1.0' encoding='UTF-8'%3F%3E%3Csvg width='12px' height='9px' viewBox='0 0 12 9' version='1.1' xmlns='http://www.w3.org/2000/svg' xmlns:xlink='http://www.w3.org/1999/xlink'%3E%3C!-- Generator: Sketch 49.3 %2851167%29 - http://www.bohemiancoding.com/sketch --%3E%3Ctitle%3EUntitled%3C/title%3E%3Cdesc%3ECreated with Sketch.%3C/desc%3E%3Cdefs%3E%3C/defs%3E%3Cg id='Page-1' stroke='none' stroke-width='1' fill='none' fill-rule='evenodd'%3E%3Cg id='arrow-left' fill='%23000000' fill-rule='nonzero'%3E%3Cpolygon id='arrow-left-copy' points='4.26153964 8.66666667 4.98778912 7.92670828 1.96710226 4.84900202 11.9882418 4.84806368 12 3.79274075 1.93289915 3.79444166 4.95080298 0.719570949 4.24456323 0 0 4.32468491'%3E%3C/polygon%3E%3C/g%3E%3C/g%3E%3C/svg%3E" /> Lowest <span>Highest <img src="data:image/svg+xml,%3C%3Fxml version='1.0' encoding='UTF-8'%3F%3E%3Csvg width='12px' height='9px' viewBox='0 0 12 9' version='1.1' xmlns='http://www.w3.org/2000/svg' xmlns:xlink='http://www.w3.org/1999/xlink'%3E%3C!-- Generator: Sketch 49.3 %2851167%29 - http://www.bohemiancoding.com/sketch --%3E%3Ctitle%3EUntitled%3C/title%3E%3Cdesc%3ECreated with Sketch.%3C/desc%3E%3Cdefs%3E%3C/defs%3E%3Cg id='Page-1' stroke='none' stroke-width='1' fill='none' fill-rule='evenodd'%3E%3Cg id='arrow-right' fill='%23000000' fill-rule='nonzero'%3E%3Cpolygon id='arrow-left-copy' transform='translate%286.000000, 4.333333%29 scale%28-1, 1%29 translate%28-6.000000, -4.333333%29 ' points='4.2615396 8.66666667 4.9877891 7.92670828 1.9671023 4.84900202 11.9882418 4.84806368 12 3.79274075 1.9328991 3.79444166 4.950803 0.719570949 4.2445632 0 0 4.32468491'%3E%3C/polygon%3E%3C/g%3E%3C/g%3E%3C/svg%3E" /></span></div>
+
+              <div className={styles.legendBar}></div>
+            </div>
+          </div>
         </Scrollyteller>
       </div>,
       scrollyteller.mountNode

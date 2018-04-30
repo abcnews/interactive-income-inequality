@@ -6,6 +6,60 @@
   background-color: #111;
 }
 
+.legend {
+  text-align: center;
+  position: relative;
+  bottom: 150px;
+}
+
+.legend-inner {
+  margin: auto;
+  max-width: 305px;
+  background-color: white;
+  font-weight: bold;
+  font-family: ABCSans, Arial, Helvetica, sans-serif;
+  padding: 15px;
+  font-size: 13px;
+}
+
+.legend-bar {
+  height: 15px;
+  background: linear-gradient(
+    to right,
+    #E1E6DA,
+    #BFE3CD,
+    #9CD9CE,
+    #7ACFD4,
+    #5EC0CD,
+    #3FB2C6,
+    #24A3BC,
+    #188CAD,
+    #0F75A0,
+    #085B96,
+    #03418D,
+    #002875,
+    #00114B
+  );
+  border-radius: 2px;
+}
+
+.left-right {
+  text-align: left;
+  padding-left: 5px;
+  padding-right: 5px;
+  padding-top: 5px;
+  padding-bottom: 5px;
+
+}
+
+.left-right span {
+  float: right;
+}
+
+.left-right img {
+  stroke-width: 2px;
+}
+
 :global {
   .Block-content:last-child {
     margin-bottom: 99vh !important; // So content scrolls off before moving on
