@@ -21,8 +21,8 @@ const d3Queue = require("d3-queue");
 // Import styles
 const styles = require("./MapScroller.scss");
 
-const SIMPLIFICATION_LEVELS = 20;
-const SIMPLIFICATION_FACTOR = 1.3;
+const SIMPLIFICATION_LEVELS = 10;
+const SIMPLIFICATION_FACTOR = 1.78;
 const MAX_ZOOM = 2500;
 
 const STATE_ZOOM_MARGINS = 0.23;
@@ -630,14 +630,7 @@ class MapScroller extends React.Component {
     // Clear the canvas ready for redraw
     context.clearRect(0, 0, screenWidth, screenHeight);
 
-    context.beginPath();
-    context.globalAlpha = 1;
-    context.fillStyle = "#FF5733";
-    context.strokeStyle = "rgba(255, 0, 0, 0.9)";
-    context.lineWidth = 1.8;
-    path(australiaOutline);
-    // context.fill();
-    context.stroke();
+    
 
     australiaGeoJson.features.forEach(element => {
       // Get bounds of current LGA
@@ -772,6 +765,14 @@ class MapScroller extends React.Component {
       context.fill();
       context.stroke();
     });
+    context.beginPath();
+    context.globalAlpha = 1;
+    // context.fillStyle = "#FF5733";
+    context.strokeStyle = "rgba(100, 100, 100, 0.6)";
+    context.lineWidth = 1.1;
+    path(australiaOutline);
+    // context.fill();
+    context.stroke();
   }
 
   componentWillUpdate() {}
