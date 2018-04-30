@@ -3,7 +3,6 @@ const ReactDOM = require("react-dom");
 const Scrollyteller = require("@abcnews/scrollyteller");
 const topojson = require("topojson");
 const canvasDpiScaler = require("canvas-dpi-scaler");
-// const geoJsonBounds = require("geojson-bounds");
 
 // Load up some helper functions etc
 const utils = require("../../lib/utils");
@@ -43,6 +42,7 @@ let canvas;
 
 // Different levels of zoom pre-compilied
 let australia = [];
+let australiaOutline = [];
 let ausStates = [];
 
 // Try to prevent multiple transitions
@@ -153,6 +153,12 @@ class MapScroller extends React.Component {
         mapData.objects.LGA_2016_AUST
       );
 
+      // Merge LGAs to get map of Australia
+      const ausOutline = topojson.merge(
+        simplifiedMapData,
+        mapData.objects.LGA_2016_AUST.geometries
+      );
+
       const lgaTopData = this.props.lgaData; //require("../App/lga-data.json");
 
       // Loop through all LGAs and set top percentage
@@ -166,13 +172,22 @@ class MapScroller extends React.Component {
         });
       });
 
-      return geoJSON;
+      const geoDataReturn = {
+        lgas: geoJSON,
+        outline: ausOutline
+      };
+
+      return geoDataReturn;
     };
 
+    // Create an array of Australian LGAs with different simplification levels
     for (let i = 0; i < SIMPLIFICATION_LEVELS; i++) {
-      australia[i] = getGeo(mapData, baseSimplification);
+      australia[i] = getGeo(mapData, baseSimplification).lgas;
+      australiaOutline[i] = getGeo(mapData, baseSimplification).outline;
       baseSimplification = baseSimplification / SIMPLIFICATION_FACTOR;
     }
+
+    console.log(australiaOutline);
 
     // Set up the global geoometry for Australian States
     ausStates = ausStatesGeo.features;
@@ -216,7 +231,7 @@ class MapScroller extends React.Component {
       .context(context);
 
     // Draw the inital state of the world
-    this.drawWorld(australia[0]);
+    this.drawWorld(australia[0], australiaOutline[0]);
   }
 
   markTrigger(markerData) {
@@ -437,6 +452,7 @@ class MapScroller extends React.Component {
             // Draw a version of map based on zoom level
             this.drawWorld(
               australia[simplificationScale(currentZoom)],
+              australiaOutline[simplificationScale(currentZoom)],
               markerData,
               tweening
             );
@@ -610,9 +626,18 @@ class MapScroller extends React.Component {
     } else callback(null); // Always call back or else it hangs forever
   }
 
-  drawWorld(australiaGeoJson, markerData, tweening) {
+  drawWorld(australiaGeoJson, australiaOutline, markerData, tweening) {
     // Clear the canvas ready for redraw
     context.clearRect(0, 0, screenWidth, screenHeight);
+
+    context.beginPath();
+    context.globalAlpha = 1;
+    context.fillStyle = "#FF5733";
+    context.strokeStyle = "rgba(255, 0, 0, 0.9)";
+    context.lineWidth = 1.8;
+    path(australiaOutline);
+    // context.fill();
+    context.stroke();
 
     australiaGeoJson.features.forEach(element => {
       // Get bounds of current LGA
@@ -740,7 +765,6 @@ class MapScroller extends React.Component {
       }
 
       context.beginPath();
-
       context.fillStyle = colorScale(element.properties.TOP);
       context.strokeStyle = "rgba(255, 255, 255, 0.4)";
       context.lineWidth = 1.1;
