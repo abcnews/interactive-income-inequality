@@ -187,8 +187,6 @@ class MapScroller extends React.Component {
       baseSimplification = baseSimplification / SIMPLIFICATION_FACTOR;
     }
 
-    console.log(australiaOutline);
-
     // Set up the global geoometry for Australian States
     ausStates = ausStatesGeo.features;
 
@@ -235,8 +233,6 @@ class MapScroller extends React.Component {
   }
 
   markTrigger(markerData) {
-    console.log(markerData);
-
     let stateCode;
     // TODO: implement this if necessary
     // if (markerData.lga.value > 9) {

@@ -18,7 +18,7 @@ const root = document.querySelector(`[data-${PROJECT_NAME}-root]`);
 // );
 
 function init() {
-  spanify.hashify({ hashList: ["addressinput", "incomeinput"] }); // Turn anchor hash tags into divs
+  spanify.hashify({ hashList: ["addressinput", "incomeinput", "dumbbelltop"] }); // Turn anchor hash tags into divs
 
   const App = require("./components/App/App");
 

@@ -1,9 +1,10 @@
 const React = require("react");
 const ReactDOM = require("react-dom");
-const styles = require("./LgaSearch.scss");
 const MapboxClient = require("mapbox");
 const inside = require("point-in-polygon");
 const debounce = require("debounce");
+
+const styles = require("./LgaSearch.scss");
 
 // Smooth scroll into view support for Safari, Edge, IE, etc.
 const smoothscroll = require('smoothscroll-polyfill');

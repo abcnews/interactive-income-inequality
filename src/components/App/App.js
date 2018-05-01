@@ -10,7 +10,8 @@ const topojson = require("topojson");
 const LgaSearch = require("../LgaSearch/LgaSearch");
 const IncomeInput = require("../IncomeInput/IncomeInput");
 const MapScroller = require("../MapScroller/MapScroller");
-// const MapZoom = require("../MapZoom/MapZoom");
+const Dumbbell = require("../Dumbbell/Dumbbell");
+const DumbbellTop = require("../DumbbellTop/DumbbellTop");
 
 const scrollyteller = require("@abcnews/scrollyteller").loadOdysseyScrollyteller(
   "",
@@ -290,6 +291,9 @@ class App extends React.Component {
               doMarkerEvent={this.doMarkerEvent}
             />
           )}
+        <DumbbellTop>
+          <Dumbbell label="Medical practitioners" />
+        </DumbbellTop>
       </div>
     );
   }
