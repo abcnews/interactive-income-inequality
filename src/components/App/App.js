@@ -302,6 +302,21 @@ class App extends React.Component {
             dot1Percent="10"
             dot2Percent="71.9"
           />
+          <Dumbbell
+            label="Business Administration Managers"
+            dot1Percent="10"
+            dot2Percent="56.8"
+          />
+          <Dumbbell
+            label="Construction, Distribution &amp; Production Managers"
+            dot1Percent="10"
+            dot2Percent="56.8"
+          />
+          <Dumbbell
+            label="Legal Professionals"
+            dot1Percent="10"
+            dot2Percent="36.8"
+          />
         </DumbbellTop>
       </div>
     );
