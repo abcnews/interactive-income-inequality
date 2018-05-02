@@ -1,11 +1,17 @@
-const React = require('react');
-const styles = require('./Dumbbell.scss');
+const React = require("react");
+const styles = require("./Dumbbell.scss");
 
 class Dumbbell extends React.Component {
   render() {
     return (
       <div className={styles.wrapper}>
-        <b>{this.props.label}</b>
+        <div className={styles.label}>
+          {this.props.label}
+        </div>
+        <div className={styles.chart}>
+          <div className={styles.midBar} />
+          <span className={styles.your}>●</span>
+        </div>
       </div>
     );
   }
