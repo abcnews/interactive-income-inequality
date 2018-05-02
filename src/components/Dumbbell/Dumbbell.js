@@ -1,14 +1,6 @@
 const React = require("react");
 const styles = require("./Dumbbell.scss");
 
-let dot1Styles = {
-  left: "40%"
-}
-
-let dot2Styles = {
-  left: "60%"
-}
-
 class Dumbbell extends React.Component {
   render() {
 
@@ -21,6 +13,7 @@ class Dumbbell extends React.Component {
           <div className={styles.midBar} />
           <span className={styles.dot1} style={{left: this.props.dot1Percent + "%"}}></span>
           <span className={styles.dot2} style={{left: this.props.dot2Percent + "%"}}></span>
+          <span className={styles.line1} style={{left: this.props.line1Percent + "%"}}></span>
         </div>
       </div>
     );

@@ -53,3 +53,14 @@
   background-color: #001050;
   border-radius: 50%;
 }
+
+.line1 {
+  position: absolute;
+  font-size: 28px;
+  width: 2px;
+  height: 16px;
+  left: 50%;
+  -webkit-transform: translateX(-50%);
+  transform: translateX(-50%);
+  background-color: #78B8C4;
+}
