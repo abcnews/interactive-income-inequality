@@ -292,7 +292,11 @@ class App extends React.Component {
             />
           )}
         <DumbbellTop>
-          <Dumbbell label="Medical practitioners" />
+          <Dumbbell
+            label="Medical practitioners"
+            dot1Percent="10"
+            dot2Percent="70"
+          />
         </DumbbellTop>
       </div>
     );
