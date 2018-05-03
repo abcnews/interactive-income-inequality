@@ -51,17 +51,24 @@ class App extends React.Component {
       mapData: null,
       mapDataScroller: null,
       currentLga: null,
-      currentAusState: 1,
-      scrollytellerObject: scrollyteller
+      currentAusState: 1, // default NSW
+      scrollytellerObject: scrollyteller,
+      currentBracketNumber: 8 // default bracket
     };
 
     this.setCurrentLga = this.setCurrentLga.bind(this);
     this.doMarkerEvent = this.doMarkerEvent.bind(this);
+    this.setCurrentBracket = this.setCurrentBracket.bind(this);
   }
 
   doMarkerEvent(stateCode) {
     // TODO: after implementing per LGA fade outs enable this
     // this.setState({ currentAusState: stateCode });
+  }
+
+  setCurrentBracket(bracketNumber) {
+    this.setState({ currentBracketNumber: bracketNumber });
+    setTimeout(() => console.log(this.state.currentBracketNumber), 1000)
   }
 
   // Fires when the user chooses their LGA
@@ -273,7 +280,7 @@ class App extends React.Component {
   render() {
     return (
       <div className={styles.root}>
-        <IncomeInput />
+        <IncomeInput setCurrentBracket={this.setCurrentBracket} />
         <LgaSearch
           setCurrentLga={this.setCurrentLga}
           mapData={this.state.mapData}

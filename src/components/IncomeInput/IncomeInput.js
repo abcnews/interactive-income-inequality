@@ -75,6 +75,9 @@ class IncomeInput extends React.Component {
     // Show calculating state
     this.setState({ narrativeState: "calculate" });
 
+    // Update App data in parent component
+    this.props.setCurrentBracket(this.state.incomeBracket);
+
     // Wait a while then show result
     setTimeout(this.showResult.bind(this), 500);
   }
