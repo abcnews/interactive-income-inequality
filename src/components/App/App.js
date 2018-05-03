@@ -40,6 +40,22 @@ const AUS_STATES_URL = baseURL + "australia-states.topo.json";
 // File scope variables
 // let LGAs = [];
 
+const topBracketData = require("./top-bracket-data.json");
+// console.log(topBracketData);
+
+const getUserTopJobsData = (data, bracket) => {
+  let userData = {};
+
+  data.forEach(job => {
+    userData[job.jobCode] = job[bracket];
+  });
+
+  return userData
+};
+
+// console.log(getUserTopJobsData(topBracketData, 13))
+
+
 // React app starts here
 class App extends React.Component {
   constructor(props) {
@@ -68,7 +84,7 @@ class App extends React.Component {
 
   setCurrentBracket(bracketNumber) {
     this.setState({ currentBracketNumber: bracketNumber });
-    setTimeout(() => console.log(this.state.currentBracketNumber), 1000)
+    setTimeout(() => console.log("Bracket number: ", this.state.currentBracketNumber), 1000);
   }
 
   // Fires when the user chooses their LGA
@@ -278,6 +294,12 @@ class App extends React.Component {
   }
 
   render() {
+    let userTop = getUserTopJobsData(
+      topBracketData, this.state.currentBracketNumber
+    );
+
+    console.log(userTop)
+
     return (
       <div className={styles.root}>
         <IncomeInput setCurrentBracket={this.setCurrentBracket} />
@@ -301,31 +323,31 @@ class App extends React.Component {
         <DumbbellTop>
           <Dumbbell
             label="Medical practitioners"
-            dot1Percent="18.8"
+            dot1Percent={userTop[1] * 10}
             dot2Percent="72.2"
             line1Percent="5.6"
           />
           <Dumbbell
             label="CEOs, General Managers and Legislators"
-            dot1Percent="23.2"
+            dot1Percent={userTop[2] * 10}
             dot2Percent="71.9"
             line1Percent="7.2"
           />
           <Dumbbell
             label="Business Administration Managers"
-            dot1Percent="45"
+            dot1Percent={userTop[3] * 10}
             dot2Percent="56.8"
             line1Percent="8.8"
           />
           <Dumbbell
             label="Construction, Distribution &amp; Production Managers"
-            dot1Percent="42.8"
+            dot1Percent={userTop[4] * 10}
             dot2Percent="56.8"
             line1Percent="13.9"
           />
           <Dumbbell
             label="Legal Professionals"
-            dot1Percent="15.1"
+            dot1Percent={userTop[5] * 10}
             dot2Percent="36.8"
             line1Percent="4.5"
           />

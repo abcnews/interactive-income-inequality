@@ -1,10 +1,6 @@
 const React = require("react");
 const styles = require("./Dumbbell.scss");
 
-const topBracketData = require("./top-bracket-data.json");
-
-console.log(topBracketData);
-
 class Dumbbell extends React.Component {
   getActualPercent(percent) {
     let actualPercent = percent / 10;
@@ -17,6 +13,10 @@ class Dumbbell extends React.Component {
         <div className={styles.label}>{this.props.label}</div>
         <div className={styles.chart}>
           <div className={styles.midBar} />
+          <span
+            className={styles.line1}
+            style={{ left: this.props.line1Percent + "%" }}
+          />
           <span
             className={styles.dot1}
             style={{ left: this.props.dot1Percent + "%" }}
@@ -37,10 +37,7 @@ class Dumbbell extends React.Component {
           >
             {this.getActualPercent(dot2Percent)}%
           </span>
-          <span
-            className={styles.line1}
-            style={{ left: this.props.line1Percent + "%" }}
-          />
+          
         </div>
       </div>
     );
