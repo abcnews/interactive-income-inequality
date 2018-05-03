@@ -12,6 +12,7 @@ const IncomeInput = require("../IncomeInput/IncomeInput");
 const MapScroller = require("../MapScroller/MapScroller");
 const Dumbbell = require("../Dumbbell/Dumbbell");
 const DumbbellTop = require("../DumbbellTop/DumbbellTop");
+const DumbbellUser = require("../DumbbellUser/DumbbellUser");
 
 const scrollyteller = require("@abcnews/scrollyteller").loadOdysseyScrollyteller(
   "",
@@ -352,6 +353,9 @@ class App extends React.Component {
             line1Percent="4.5"
           />
         </DumbbellTop>
+        <DumbbellUser>
+          hello
+        </DumbbellUser>
       </div>
     );
   }
