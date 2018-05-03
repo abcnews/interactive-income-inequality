@@ -294,33 +294,33 @@ class App extends React.Component {
         <DumbbellTop>
           <Dumbbell
             label="Medical practitioners"
-            dot1Percent="10"
+            dot1Percent="18.8"
             dot2Percent="72.2"
-            line1Percent="61.8"
+            line1Percent="5.6"
           />
           <Dumbbell
             label="CEOs, General Managers and Legislators"
-            dot1Percent="10"
+            dot1Percent="23.2"
             dot2Percent="71.9"
-            line1Percent="37.0"
+            line1Percent="7.2"
           />
           <Dumbbell
             label="Business Administration Managers"
-            dot1Percent="10"
+            dot1Percent="45"
             dot2Percent="56.8"
-            line1Percent="29.6"
+            line1Percent="8.8"
           />
           <Dumbbell
             label="Construction, Distribution &amp; Production Managers"
-            dot1Percent="10"
+            dot1Percent="42.8"
             dot2Percent="56.8"
-            line1Percent="25.6"
+            line1Percent="13.9"
           />
           <Dumbbell
             label="Legal Professionals"
-            dot1Percent="10"
+            dot1Percent="15.1"
             dot2Percent="36.8"
-            line1Percent="21.0"
+            line1Percent="4.5"
           />
         </DumbbellTop>
       </div>

@@ -13,8 +13,8 @@
   color: black;
   font-size: 12px;
   text-align: right;
-  flex-basis: 15%;
-  padding-right: 10px;
+  flex-basis: 18%;
+  padding-right: 23px;
 }
 
 .chart {
@@ -32,7 +32,6 @@
 
 .dot1 {
   position: absolute;
-  font-size: 28px;
   width: 10px;
   height: 10px;
   left: 50%;
@@ -42,9 +41,20 @@
   border-radius: 50%;
 }
 
+.dot1Percent {
+  color: #ff6100;
+  position: absolute;
+  left: 50%;
+  -webkit-transform: translateX(-100%);
+  transform: translateX(-100%);
+  font-weight: 900;
+  text-shadow: -1px -1px 0 rgb(255, 255, 255), 1px -1px 0 rgb(255, 255, 255),
+    -1px 1px 0 rgb(255, 255, 255), 1px 1px 0 rgb(255, 255, 255);
+  letter-spacing: 1px;
+}
+
 .dot2 {
   position: absolute;
-  font-size: 28px;
   width: 10px;
   height: 10px;
   left: 50%;
@@ -54,13 +64,24 @@
   border-radius: 50%;
 }
 
+.dot2Percent {
+  color: #001050;
+  position: absolute;
+  left: 50%;
+  -webkit-transform: translateX(0%);
+  transform: translateX(0%);
+  font-weight: 900;
+  text-shadow: -1px -1px 0 rgb(255, 255, 255), 1px -1px 0 rgb(255, 255, 255),
+    -1px 1px 0 rgb(255, 255, 255), 1px 1px 0 rgb(255, 255, 255);
+  letter-spacing: 1px;
+}
+
 .line1 {
   position: absolute;
-  font-size: 28px;
   width: 2px;
   height: 16px;
   left: 50%;
   -webkit-transform: translateX(-50%);
   transform: translateX(-50%);
-  background-color: #78B8C4;
+  background-color: #78b8c4;
 }
