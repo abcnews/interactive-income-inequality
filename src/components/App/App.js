@@ -41,8 +41,8 @@ const AUS_STATES_URL = baseURL + "australia-states.topo.json";
 // File scope variables
 // let LGAs = [];
 
+// For the top 5 in top brackets
 const topBracketData = require("./top-bracket-data.json");
-// console.log(topBracketData);
 
 const getUserTopJobsData = (data, bracket) => {
   let userData = {};
@@ -54,7 +54,13 @@ const getUserTopJobsData = (data, bracket) => {
   return userData;
 };
 
-// console.log(getUserTopJobsData(topBracketData, 13))
+// For the top 5 in user's bracket
+
+let userBracketData = require("./user-top-brackets.json");
+
+const getUserBracketData = (data, bracket) => {
+  return data.find(br => br.bracket === bracket);
+};
 
 // React app starts here
 class App extends React.Component {
@@ -297,12 +303,14 @@ class App extends React.Component {
   }
 
   render() {
-    let userTop = getUserTopJobsData(
+    let top5 = getUserTopJobsData(
       topBracketData,
       this.state.currentBracketNumber
     );
 
-    let bracketTop5 = [];
+    let user5 = getUserBracketData(userBracketData, this.state.currentBracketNumber);
+
+    console.log(user5);
 
     return (
       <div className={styles.root}>
@@ -327,41 +335,75 @@ class App extends React.Component {
         <DumbbellTop>
           <Dumbbell
             label="Medical practitioners"
-            dot1Percent={userTop[1] * 10}
+            dot1Percent={top5[1] * 10}
             dot2Percent="72.2"
             line1Percent="5.6"
+            upperLimit={10}
           />
           <Dumbbell
             label="CEOs, General Managers and Legislators"
-            dot1Percent={userTop[2] * 10}
+            dot1Percent={top5[2] * 10}
             dot2Percent="71.9"
             line1Percent="7.2"
+            upperLimit={10}
           />
           <Dumbbell
             label="Business Administration Managers"
-            dot1Percent={userTop[3] * 10}
+            dot1Percent={top5[3] * 10}
             dot2Percent="56.8"
             line1Percent="8.8"
+            upperLimit={10}
           />
           <Dumbbell
             label="Construction, Distribution &amp; Production Managers"
-            dot1Percent={userTop[4] * 10}
+            dot1Percent={top5[4] * 10}
             dot2Percent="56.8"
             line1Percent="13.9"
+            upperLimit={10}
           />
           <Dumbbell
             label="Legal Professionals"
-            dot1Percent={userTop[5] * 10}
+            dot1Percent={top5[5] * 10}
             dot2Percent="36.8"
             line1Percent="4.5"
+            upperLimit={10}
           />
         </DumbbellTop>
         <DumbbellUser>
           <Dumbbell
-            label="Legal Professionals"
-            dot1Percent={userTop[5] * 10}
-            dot2Percent="36.8"
-            line1Percent="4.5"
+            label={user5.name1}
+            dot1Percent={user5.value1 * 10}
+            dot2Percent={user5.top1 * 10}
+            line1Percent={user5.average1 * 10}
+            upperLimit={10}
+          />
+          <Dumbbell
+            label={user5.name2}
+            dot1Percent={user5.value2 * 10}
+            dot2Percent={user5.top2 * 10}
+            line1Percent={user5.average2 * 10}
+            upperLimit={10}
+          />
+          <Dumbbell
+            label={user5.name3}
+            dot1Percent={user5.value3 * 10}
+            dot2Percent={user5.top3 * 10}
+            line1Percent={user5.average3 * 10}
+            upperLimit={10}
+          />
+          <Dumbbell
+            label={user5.name4}
+            dot1Percent={user5.value4 * 10}
+            dot2Percent={user5.top4 * 10}
+            line1Percent={user5.average4 * 10}
+            upperLimit={10}
+          />
+          <Dumbbell
+            label={user5.name5}
+            dot1Percent={user5.value5 * 10}
+            dot2Percent={user5.top5 * 10}
+            line1Percent={user5.average5 * 10}
+            upperLimit={10}
           />
         </DumbbellUser>
       </div>

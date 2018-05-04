@@ -2,7 +2,7 @@ const React = require("react");
 const { render } = require("react-dom");
 const spanify = require("spanify");
 
-require('react-select/dist/react-select.css');
+require("react-select/dist/react-select.css");
 
 require("./lib/modernizr.js"); // Detect browser features
 
@@ -18,13 +18,28 @@ const root = document.querySelector(`[data-${PROJECT_NAME}-root]`);
 // );
 
 function init() {
-  spanify.hashify({ hashList: ["addressinput", "incomeinput", "dumbbelltop", "dumbbelluser"] }); // Turn anchor hash tags into divs
+  spanify.hashify({
+    hashList: [
+      "addressinput",
+      "incomeinput",
+      "dumbbelltop",
+      "dumbbelluser",
+      "dumbbelleducation",
+      "dumbbellgender",
+      "dumbbellindigenous",
+      "dumbbellborn",
+      "dumbbellvoluntary",
+      "dumbbellcars",
+      "dumbbellmarriage"
+    ]
+  }); // Turn anchor hash tags into divs
 
   const App = require("./components/App/App");
 
   render(
-    <App projectName={PROJECT_NAME} 
-    // scrollyteller={scrollyteller} 
+    <App
+      projectName={PROJECT_NAME}
+      // scrollyteller={scrollyteller}
     />,
     root
   );
@@ -46,4 +61,3 @@ if (module.hot) {
 if (process.env.NODE_ENV === "development") {
   console.debug(`[${PROJECT_NAME}] public path: ${__webpack_public_path__}`);
 }
-
