@@ -7,12 +7,27 @@ class Dumbbell extends React.Component {
     return parseFloat(actualPercent.toFixed(2));
   }
   render() {
+    // Extract vars
     let { dot1Percent, dot2Percent } = this.props;
 
+    // Align the labels
     let dot1Align = "left";
     let dot2Align = "right";
 
+    if (dot1Percent < dot2Percent) {
+      dot1Align = "left";
+      dot2Align = "right";
+    } else {
+      dot1Align = "right";
+      dot2Align = "left";
+    }
+
+    // If too close to the borders flip them
     if (dot1Percent < 6) dot1Align = "right";
+    if (dot2Percent < 6) dot2Align = "right";
+
+    if (dot1Percent > 94) dot1Align = "left";
+    if (dot2Percent > 94) dot2Align = "left";
 
     return (
       <div className={styles.wrapper}>
