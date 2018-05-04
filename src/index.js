@@ -29,7 +29,7 @@ function init() {
       "dumbbellindigenous",
       "dumbbellborn",
       "dumbbellvoluntary",
-      "dumbbellcars",
+      "dumbbellcar",
       "dumbbellmarriage"
     ]
   }); // Turn anchor hash tags into divs

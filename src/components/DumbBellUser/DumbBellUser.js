@@ -1,9 +1,9 @@
 const React = require('react');
 const ReactDOM = require("react-dom");
 
-const styles = require('./DumbBellUser.scss');
+const styles = require('./DumbbellUser.scss');
 
-class DumbBellUser extends React.Component {
+class DumbbellUser extends React.Component {
   render() {
     return ReactDOM.createPortal(
       <div className={styles.wrapper}>
@@ -13,4 +13,4 @@ class DumbBellUser extends React.Component {
   }
 }
 
-module.exports = DumbBellUser;
+module.exports = DumbbellUser;

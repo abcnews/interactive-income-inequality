@@ -10,9 +10,19 @@ const topojson = require("topojson");
 const LgaSearch = require("../LgaSearch/LgaSearch");
 const IncomeInput = require("../IncomeInput/IncomeInput");
 const MapScroller = require("../MapScroller/MapScroller");
+
+// Dumbbell charts - 
+// Could possibly have only done 1 and fed in the mount point but whatever
 const Dumbbell = require("../Dumbbell/Dumbbell");
 const DumbbellTop = require("../DumbbellTop/DumbbellTop");
 const DumbbellUser = require("../DumbbellUser/DumbbellUser");
+const DumbbellEducation = require("../DumbbellEducation/DumbbellEducation");
+const DumbbellGender = require("../DumbbellGender/DumbbellGender");
+const DumbbellIndigenous = require("../DumbbellIndigenous/DumbbellIndigenous");
+const DumbbellMarriage = require("../DumbbellMarriage/DumbbellMarriage");
+const DumbbellCar = require("../DumbbellCar/DumbbellCar");
+const DumbbellBorn = require("../DumbbellBorn/DumbbellBorn");
+const DumbbellVoluntary = require("../DumbbellVoluntary/DumbbellVoluntary");
 
 const scrollyteller = require("@abcnews/scrollyteller").loadOdysseyScrollyteller(
   "",
@@ -338,35 +348,35 @@ class App extends React.Component {
             dot1Percent={top5[1] * 10}
             dot2Percent="72.2"
             line1Percent="5.6"
-            upperLimit={10}
+            dividePercentBy={10}
           />
           <Dumbbell
             label="CEOs, General Managers and Legislators"
             dot1Percent={top5[2] * 10}
             dot2Percent="71.9"
             line1Percent="7.2"
-            upperLimit={10}
+            dividePercentBy={10}
           />
           <Dumbbell
             label="Business Administration Managers"
             dot1Percent={top5[3] * 10}
             dot2Percent="56.8"
             line1Percent="8.8"
-            upperLimit={10}
+            dividePercentBy={10}
           />
           <Dumbbell
             label="Construction, Distribution &amp; Production Managers"
             dot1Percent={top5[4] * 10}
             dot2Percent="56.8"
             line1Percent="13.9"
-            upperLimit={10}
+            dividePercentBy={10}
           />
           <Dumbbell
             label="Legal Professionals"
             dot1Percent={top5[5] * 10}
             dot2Percent="36.8"
             line1Percent="4.5"
-            upperLimit={10}
+            dividePercentBy={10}
           />
         </DumbbellTop>
         <DumbbellUser>
@@ -375,37 +385,53 @@ class App extends React.Component {
             dot1Percent={user5.value1 * 10}
             dot2Percent={user5.top1 * 10}
             line1Percent={user5.average1 * 10}
-            upperLimit={10}
+            dividePercentBy={10}
           />
           <Dumbbell
             label={user5.name2}
             dot1Percent={user5.value2 * 10}
             dot2Percent={user5.top2 * 10}
             line1Percent={user5.average2 * 10}
-            upperLimit={10}
+            dividePercentBy={10}
           />
           <Dumbbell
             label={user5.name3}
             dot1Percent={user5.value3 * 10}
             dot2Percent={user5.top3 * 10}
             line1Percent={user5.average3 * 10}
-            upperLimit={10}
+            dividePercentBy={10}
           />
           <Dumbbell
             label={user5.name4}
             dot1Percent={user5.value4 * 10}
             dot2Percent={user5.top4 * 10}
             line1Percent={user5.average4 * 10}
-            upperLimit={10}
+            dividePercentBy={10}
           />
           <Dumbbell
             label={user5.name5}
             dot1Percent={user5.value5 * 10}
             dot2Percent={user5.top5 * 10}
             line1Percent={user5.average5 * 10}
-            upperLimit={10}
+            dividePercentBy={10}
           />
         </DumbbellUser>
+
+        <DumbbellEducation >
+        <Dumbbell
+            label="Bachelor degrees"
+            dot1Percent={23.41}
+            dot2Percent={61.79}
+            line1Percent={false}
+            dividePercentBy={1}
+          />
+          </DumbbellEducation>
+        <DumbbellGender />
+        <DumbbellIndigenous />
+        <DumbbellBorn />
+        <DumbbellVoluntary />
+        <DumbbellCar />
+        <DumbbellMarriage />
       </div>
     );
   }

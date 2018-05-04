@@ -3,20 +3,22 @@ const styles = require("./Dumbbell.scss");
 
 class Dumbbell extends React.Component {
   getActualPercent(percent) {
-    let actualPercent = percent / 10;
+    let actualPercent = percent / this.props.dividePercentBy;
     return parseFloat(actualPercent.toFixed(2));
   }
   render() {
-    let {dot1Percent, dot2Percent} = this.props;
+    let { dot1Percent, dot2Percent } = this.props;
     return (
       <div className={styles.wrapper}>
         <div className={styles.label}>{this.props.label}</div>
         <div className={styles.chart}>
           <div className={styles.midBar} />
-          <span
-            className={styles.line1}
-            style={{ left: this.props.line1Percent + "%" }}
-          />
+          {this.props.line1Percent && (
+            <span
+              className={styles.line1}
+              style={{ left: this.props.line1Percent + "%" }}
+            />
+          )}
           <span
             className={styles.dot1}
             style={{ left: this.props.dot1Percent + "%" }}
@@ -37,7 +39,6 @@ class Dumbbell extends React.Component {
           >
             {this.getActualPercent(dot2Percent)}%
           </span>
-          
         </div>
       </div>
     );
