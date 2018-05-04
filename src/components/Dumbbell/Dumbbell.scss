@@ -3,15 +3,13 @@
   display: flex;
   flex-direction: row;
   justify-content: space-between;
-  // width: 500px;
-  // border: 1px black solid;
   margin: 15px auto;
   flex-basis: auto;
+  font-size: 12px;
 }
 
 .label {
   color: black;
-  font-size: 12px;
   text-align: right;
   flex-basis: 18%;
   padding-right: 23px;

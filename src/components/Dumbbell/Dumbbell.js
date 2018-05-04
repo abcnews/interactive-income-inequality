@@ -8,6 +8,12 @@ class Dumbbell extends React.Component {
   }
   render() {
     let { dot1Percent, dot2Percent } = this.props;
+
+    let dot1Align = "left";
+    let dot2Align = "right";
+
+    if (dot1Percent < 6) dot1Align = "right";
+
     return (
       <div className={styles.wrapper}>
         <div className={styles.label}>{this.props.label}</div>
@@ -28,7 +34,7 @@ class Dumbbell extends React.Component {
             style={{ left: dot2Percent + "%" }}
           />
           {/* Check if we want dot1 labels left or right */}
-          {false ? (
+          {dot1Align === "left" ? (
             <span
               className={styles.dot1Percent}
               style={{ left: "calc(" + dot1Percent + "% - 8px)" }}
@@ -44,7 +50,7 @@ class Dumbbell extends React.Component {
             </span>
           )}
           {/* Check if we want dot2 labels left or right */}
-          {true ? (
+          {dot2Align === "left" ? (
             <span
               className={styles.dot2Percent}
               style={{ left: "calc(" + dot2Percent + "% - 8px)" }}
