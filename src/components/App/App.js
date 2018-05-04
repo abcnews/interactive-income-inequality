@@ -51,11 +51,10 @@ const getUserTopJobsData = (data, bracket) => {
     userData[job.jobCode] = job[bracket];
   });
 
-  return userData
+  return userData;
 };
 
 // console.log(getUserTopJobsData(topBracketData, 13))
-
 
 // React app starts here
 class App extends React.Component {
@@ -85,7 +84,10 @@ class App extends React.Component {
 
   setCurrentBracket(bracketNumber) {
     this.setState({ currentBracketNumber: bracketNumber });
-    setTimeout(() => console.log("Bracket number: ", this.state.currentBracketNumber), 1000);
+    setTimeout(
+      () => console.log("Bracket number: ", this.state.currentBracketNumber),
+      1000
+    );
   }
 
   // Fires when the user chooses their LGA
@@ -296,10 +298,11 @@ class App extends React.Component {
 
   render() {
     let userTop = getUserTopJobsData(
-      topBracketData, this.state.currentBracketNumber
+      topBracketData,
+      this.state.currentBracketNumber
     );
 
-    console.log(userTop)
+    let bracketTop5 = [];
 
     return (
       <div className={styles.root}>
@@ -354,7 +357,12 @@ class App extends React.Component {
           />
         </DumbbellTop>
         <DumbbellUser>
-          hello
+          <Dumbbell
+            label="Legal Professionals"
+            dot1Percent={userTop[5] * 10}
+            dot2Percent="36.8"
+            line1Percent="4.5"
+          />
         </DumbbellUser>
       </div>
     );
