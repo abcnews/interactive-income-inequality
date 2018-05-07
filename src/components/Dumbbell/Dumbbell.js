@@ -1,14 +1,31 @@
 const React = require("react");
+const d3Scale = require("d3-scale");
+
 const styles = require("./Dumbbell.scss");
 
+ 
+
 class Dumbbell extends React.Component {
+  constructor(props) {
+    super(props);
+
+    this.scale = d3Scale.scaleLinear()
+      .domain([0, this.props.maxValue || 100])
+      .range([0, 100]);
+
+    this.state = {
+      
+    };
+  }
+
   getActualPercent(percent) {
-    let actualPercent = percent / this.props.dividePercentBy;
+    let actualPercent = percent * this.props.percentMultiplier;
     return parseFloat(actualPercent.toFixed(2));
   }
+
   render() {
     // Extract vars
-    let { dot1Percent, dot2Percent } = this.props;
+    let { dot1Percent, dot2Percent, line1Percent } = this.props;
 
     // Align the labels
     let dot1Align = "left";
@@ -37,29 +54,23 @@ class Dumbbell extends React.Component {
           {this.props.line1Percent && (
             <span
               className={styles.line1}
-              style={{ left: this.props.line1Percent + "%" }}
+              style={{ left: this.scale(line1Percent) + "%" }}
             />
           )}
-          <span
-            className={styles.dot1}
-            style={{ left: dot1Percent + "%" }}
-          />
-          <span
-            className={styles.dot2}
-            style={{ left: dot2Percent + "%" }}
-          />
+          <span className={styles.dot1} style={{ left: this.scale(dot1Percent) + "%" }} />
+          <span className={styles.dot2} style={{ left: this.scale(dot2Percent) + "%" }} />
           {/* Check if we want dot1 labels left or right */}
           {dot1Align === "left" ? (
             <span
               className={styles.dot1Percent}
-              style={{ left: "calc(" + dot1Percent + "% - 8px)" }}
+              style={{ left: "calc(" + this.scale(dot1Percent) + "% - 8px)" }}
             >
               {this.getActualPercent(dot1Percent)}%
             </span>
           ) : (
             <span
               className={styles.dot1PercentRight}
-              style={{ left: "calc(" + dot1Percent + "% + 10px)" }}
+              style={{ left: "calc(" + this.scale(dot1Percent) + "% + 10px)" }}
             >
               {this.getActualPercent(dot1Percent)}%
             </span>
@@ -68,14 +79,14 @@ class Dumbbell extends React.Component {
           {dot2Align === "left" ? (
             <span
               className={styles.dot2Percent}
-              style={{ left: "calc(" + dot2Percent + "% - 8px)" }}
+              style={{ left: "calc(" + this.scale(dot2Percent) + "% - 8px)" }}
             >
               {this.getActualPercent(dot2Percent)}%
             </span>
           ) : (
             <span
               className={styles.dot2PercentRight}
-              style={{ left: "calc(" + dot2Percent + "% + 10px)" }}
+              style={{ left: "calc(" + this.scale(dot2Percent) + "% + 10px)" }}
             >
               {this.getActualPercent(dot2Percent)}%
             </span>

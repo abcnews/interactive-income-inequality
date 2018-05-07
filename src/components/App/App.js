@@ -330,7 +330,7 @@ class App extends React.Component {
           mapData={this.state.mapData}
         />
         {/* Conditionally render MapScroller if data loaded */}
-        {this.state.mapData &&
+        {false && this.state.mapData && // re enable this later
           this.state.scrollytellerObject && (
             <MapScroller
               scrollyteller={this.state.scrollytellerObject}
@@ -345,75 +345,85 @@ class App extends React.Component {
         <DumbbellTop>
           <Dumbbell
             label="Medical practitioners"
-            dot1Percent={top5[1] * 10}
-            dot2Percent="72.2"
-            line1Percent="5.6"
-            dividePercentBy={10}
+            dot1Percent={top5[1]}
+            dot2Percent="7.22"
+            line1Percent="0.56"
+            percentMultiplier={1}
+            maxValue={10}
           />
           <Dumbbell
             label="CEOs, General Managers and Legislators"
-            dot1Percent={top5[2] * 10}
-            dot2Percent="71.9"
-            line1Percent="7.2"
-            dividePercentBy={10}
+            dot1Percent={top5[2]}
+            dot2Percent="7.19"
+            line1Percent="0.72"
+            percentMultiplier={1}
+            maxValue={10}
           />
           <Dumbbell
             label="Business Administration Managers"
-            dot1Percent={top5[3] * 10}
-            dot2Percent="56.8"
-            line1Percent="8.8"
-            dividePercentBy={10}
+            dot1Percent={top5[3]}
+            dot2Percent="5.68"
+            line1Percent="0.88"
+            percentMultiplier={1}
+            maxValue={10}
           />
           <Dumbbell
             label="Construction, Distribution &amp; Production Managers"
-            dot1Percent={top5[4] * 10}
-            dot2Percent="56.8"
-            line1Percent="13.9"
-            dividePercentBy={10}
+            dot1Percent={top5[4]}
+            dot2Percent="5.68"
+            line1Percent="1.39"
+            percentMultiplier={1}
+            maxValue={10}
           />
           <Dumbbell
             label="Legal Professionals"
-            dot1Percent={top5[5] * 10}
-            dot2Percent="36.8"
-            line1Percent="4.5"
-            dividePercentBy={10}
+            dot1Percent={top5[5]}
+            dot2Percent="3.68"
+            line1Percent="0.45"
+            percentMultiplier={1}
+            maxValue={10}
           />
         </DumbbellTop>
         <DumbbellUser>
           <Dumbbell
             label={user5.name1}
-            dot1Percent={user5.value1 * 10}
-            dot2Percent={user5.top1 * 10}
-            line1Percent={user5.average1 * 10}
-            dividePercentBy={10}
+            dot1Percent={user5.value1}
+            dot2Percent={user5.top1}
+            line1Percent={user5.average1}
+            percentMultiplier={1}
+            maxValue={10}
           />
           <Dumbbell
             label={user5.name2}
-            dot1Percent={user5.value2 * 10}
-            dot2Percent={user5.top2 * 10}
-            line1Percent={user5.average2 * 10}
-            dividePercentBy={10}
+            dot1Percent={user5.value2}
+            dot2Percent={user5.top2}
+            line1Percent={user5.average2}
+            percentMultiplier={1}
+            maxValue={10}
           />
           <Dumbbell
             label={user5.name3}
-            dot1Percent={user5.value3 * 10}
-            dot2Percent={user5.top3 * 10}
-            line1Percent={user5.average3 * 10}
-            dividePercentBy={10}
+            dot1Percent={user5.value3}
+            dot2Percent={user5.top3}
+            line1Percent={user5.average3}
+            percentMultiplier={1}
+            maxValue={10}
           />
           <Dumbbell
             label={user5.name4}
-            dot1Percent={user5.value4 * 10}
-            dot2Percent={user5.top4 * 10}
-            line1Percent={user5.average4 * 10}
-            dividePercentBy={10}
+            dot1Percent={user5.value4}
+            dot2Percent={user5.top4}
+            line1Percent={user5.average4}
+            percentMultiplier={1}
+            maxValue={10}
           />
           <Dumbbell
             label={user5.name5}
-            dot1Percent={user5.value5 * 10}
-            dot2Percent={user5.top5 * 10}
-            line1Percent={user5.average5 * 10}
-            dividePercentBy={10}
+            dot1Percent={user5.value5}
+            dot2Percent={user5.top5}
+            line1Percent={user5.average5}
+            percentMultiplier={1}
+            maxValue={10}
           />
         </DumbbellUser>
 
@@ -423,7 +433,8 @@ class App extends React.Component {
             dot1Percent={23.41}
             dot2Percent={61.79}
             line1Percent={false}
-            dividePercentBy={1}
+            percentMultiplier={1}
+            maxValue={100}
           />
           </DumbbellEducation>
         <DumbbellGender />
