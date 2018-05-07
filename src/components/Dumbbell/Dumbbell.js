@@ -19,7 +19,7 @@ class Dumbbell extends React.Component {
   }
 
   getActualPercent(percent) {
-    let actualPercent = percent * this.props.percentMultiplier;
+    let actualPercent = percent * this.props.percentMultiplier || percent * 1;
     return parseFloat(actualPercent.toFixed(2));
   }
 
@@ -40,11 +40,11 @@ class Dumbbell extends React.Component {
     }
 
     // If too close to the borders flip them
-    if (dot1Percent < 6) dot1Align = "right";
-    if (dot2Percent < 6) dot2Align = "right";
+    if (this.scale(dot1Percent) < 6) dot1Align = "right";
+    if (this.scale(dot2Percent) < 6) dot2Align = "right";
 
-    if (dot1Percent > 94) dot1Align = "left";
-    if (dot2Percent > 94) dot2Align = "left";
+    if (this.scale(dot1Percent) > 94) dot1Align = "left";
+    if (this.scale(dot2Percent) > 94) dot2Align = "left";
 
     return (
       <div className={styles.wrapper}>

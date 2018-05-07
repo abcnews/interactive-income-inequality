@@ -391,7 +391,7 @@ class App extends React.Component {
             dot2Percent={user5.top1}
             line1Percent={user5.average1}
             percentMultiplier={1}
-            maxValue={10}
+            maxValue={13}
           />
           <Dumbbell
             label={user5.name2}
