@@ -79,10 +79,10 @@ class Dumbbell extends React.Component {
     };
 
     // Custom dot colors
-    if (this.props.dot1Color) {
+    if (this.props.dot1Color && this.props.dot1TextColor) {
       dot1Style.backgroundColor = this.props.dot1Color;
-      dot1PercentStyle.color = this.props.dot1Color;
-      dot1PercentRightStyle.color = this.props.dot1Color;
+      dot1PercentStyle.color = this.props.dot1TextColor;
+      dot1PercentRightStyle.color = this.props.dot1TextColor;
     }
 
     return (

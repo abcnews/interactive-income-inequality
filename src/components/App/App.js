@@ -447,6 +447,7 @@ class App extends React.Component {
             percentMultiplier={1}
             maxValue={100}
             dot1Color="#78b8c4"
+            dot1TextColor="#1B7C8F"
           />
         </DumbbellEducation>
         <DumbbellGender>
@@ -458,6 +459,7 @@ class App extends React.Component {
             percentMultiplier={1}
             maxValue={100}
             dot1Color="#78b8c4"
+            dot1TextColor="#1B7C8F"
           />
         </DumbbellGender>
         <DumbbellIndigenous>
@@ -469,6 +471,7 @@ class App extends React.Component {
             percentMultiplier={1}
             maxValue={10}
             dot1Color="#78b8c4"
+            dot1TextColor="#1B7C8F"
           />
         </DumbbellIndigenous>
         <DumbbellBorn>
@@ -480,6 +483,7 @@ class App extends React.Component {
             percentMultiplier={1}
             maxValue={100}
             dot1Color="#78b8c4"
+            dot1TextColor="#1B7C8F"
           />
         </DumbbellBorn>
         <DumbbellVoluntary>
@@ -491,6 +495,7 @@ class App extends React.Component {
             percentMultiplier={1}
             maxValue={100}
             dot1Color="#78b8c4"
+            dot1TextColor="#1B7C8F"
           />
         </DumbbellVoluntary>
         <DumbbellCar>
@@ -502,6 +507,7 @@ class App extends React.Component {
             percentMultiplier={1}
             maxValue={100}
             dot1Color="#78b8c4"
+            dot1TextColor="#1B7C8F"
           />
           <Dumbbell
             label="Owns three or more cars"
@@ -511,6 +517,7 @@ class App extends React.Component {
             percentMultiplier={1}
             maxValue={100}
             dot1Color="#78b8c4"
+            dot1TextColor="#1B7C8F"
           />
         </DumbbellCar>
         <DumbbellMarriage>
@@ -522,6 +529,7 @@ class App extends React.Component {
             percentMultiplier={1}
             maxValue={100}
             dot1Color="#78b8c4"
+            dot1TextColor="#1B7C8F"
           />
           <Dumbbell
             label="Never married"
@@ -531,6 +539,7 @@ class App extends React.Component {
             percentMultiplier={1}
             maxValue={100}
             dot1Color="#78b8c4"
+            dot1TextColor="#1B7C8F"
           />
           <Dumbbell
             label="Divorced"
@@ -540,6 +549,7 @@ class App extends React.Component {
             percentMultiplier={1}
             maxValue={100}
             dot1Color="#78b8c4"
+            dot1TextColor="#1B7C8F"
           />
         </DumbbellMarriage>
       </div>
