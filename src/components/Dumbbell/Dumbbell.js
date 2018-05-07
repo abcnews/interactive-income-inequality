@@ -65,6 +65,18 @@ class Dumbbell extends React.Component {
     let dot2PercentRightStyle = {
       left: "calc(" + this.scale(dot2Percent) + "% + 10px)"
     };
+    let dot1LabelStyle = {
+      left: "calc(" + this.scale(dot1Percent) + "% - 8px)"
+    };
+    let dot1LabelRightStyle = {
+      left: "calc(" + this.scale(dot1Percent) + "% + 10px)"
+    };
+    let dot2LabelStyle = {
+      left: "calc(" + this.scale(dot2Percent) + "% - 8px)"
+    };
+    let dot2LabelRightStyle = {
+      left: "calc(" + this.scale(dot2Percent) + "% + 10px)"
+    };
 
     // Custom dot colors
     if (this.props.dot1Color) {
@@ -84,6 +96,7 @@ class Dumbbell extends React.Component {
               style={{ left: this.scale(line1Percent) + "%" }}
             />
           )}
+          
           {dot1Percent && <span className={styles.dot1} style={dot1Style} />}
           <span className={styles.dot2} style={dot2Style} />
           {/* Check if we want dot1 labels left or right */}
@@ -100,7 +113,35 @@ class Dumbbell extends React.Component {
                 {this.getActualPercent(dot1Percent)}%
               </span>
             ))}
-          {/* Check if we want dot2 labels left or right */}
+            {/* Dot 1 labels if applicable */}
+            {this.props.dot1Label &&
+            (dot1Align === "left" ? (
+              <span className={styles.dot1Label} style={dot1LabelStyle}>
+                {this.props.dot1Label}
+              </span>
+            ) : (
+              <span
+                className={styles.dot1LabelRight}
+                style={dot1LabelRightStyle}
+              >
+                 {this.props.dot1Label}
+              </span>
+            ))}
+            {/* Dot 2 labels if applicable */}
+            {this.props.dot2Label &&
+            (dot2Align === "left" ? (
+              <span className={styles.dot2Label} style={dot2LabelStyle}>
+                {this.props.dot2Label}
+              </span>
+            ) : (
+              <span
+                className={styles.dot2LabelRight}
+                style={dot2LabelRightStyle}
+              >
+                 {this.props.dot2Label}
+              </span>
+            ))}
+          {/* Check if we want dot2 percents left or right */}
           {dot2Align === "left" ? (
             <span className={styles.dot2Percent} style={dot2PercentStyle}>
               {this.getActualPercent(dot2Percent)}%

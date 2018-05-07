@@ -40,7 +40,7 @@
 }
 
 .dot1Percent {
-  color: #ff6100;
+  color: #CF4200;
   position: absolute;
   left: 50%;
   -webkit-transform: translateX(-100%);
@@ -52,11 +52,65 @@
 }
 
 .dot1PercentRight {
-  color: #ff6100;
+  color: #CF4200;
   position: absolute;
   left: 50%;
   -webkit-transform: translateX(0%);
   transform: translateX(0%);
+  font-weight: 900;
+  text-shadow: -1px -1px 0 rgb(255, 255, 255), 1px -1px 0 rgb(255, 255, 255),
+    -1px 1px 0 rgb(255, 255, 255), 1px 1px 0 rgb(255, 255, 255);
+  letter-spacing: 1px;
+}
+
+.dot1Label {
+  color: #CF4200;
+  position: absolute;
+  left: 50%;
+  -webkit-transform: translateX(-100%) translateY(-75%);
+  transform: translateX(-100%) translateY(-75%);
+  max-width: 60px;
+  font-weight: 900;
+  text-shadow: -1px -1px 0 rgb(255, 255, 255), 1px -1px 0 rgb(255, 255, 255),
+    -1px 1px 0 rgb(255, 255, 255), 1px 1px 0 rgb(255, 255, 255);
+  letter-spacing: 1px;
+  text-align: right;
+}
+
+.dot1LabelRight {
+  color: #CF4200;
+  position: absolute;
+  left: 50%;
+  -webkit-transform: translateX(0%) translateY(-75%);
+  transform: translateX(0%) translateY(-75%);
+  max-width: 60px;
+  font-weight: 900;
+  text-shadow: -1px -1px 0 rgb(255, 255, 255), 1px -1px 0 rgb(255, 255, 255),
+    -1px 1px 0 rgb(255, 255, 255), 1px 1px 0 rgb(255, 255, 255);
+  letter-spacing: 1px;
+}
+
+.dot2Label {
+  color: #001050;
+  position: absolute;
+  left: 50%;
+  -webkit-transform: translateX(-100%) translateY(-75%);
+  transform: translateX(-100%) translateY(-75%);
+  max-width: 60px;
+  font-weight: 900;
+  text-shadow: -1px -1px 0 rgb(255, 255, 255), 1px -1px 0 rgb(255, 255, 255),
+    -1px 1px 0 rgb(255, 255, 255), 1px 1px 0 rgb(255, 255, 255);
+  letter-spacing: 1px;
+  text-align: right;
+}
+
+.dot2LabelRight {
+  color: #001050;
+  position: absolute;
+  left: 50%;
+  -webkit-transform: translateX(0%) translateY(-75%);
+  transform: translateX(0%) translateY(-75%);
+  max-width: 60px;
   font-weight: 900;
   text-shadow: -1px -1px 0 rgb(255, 255, 255), 1px -1px 0 rgb(255, 255, 255),
     -1px 1px 0 rgb(255, 255, 255), 1px 1px 0 rgb(255, 255, 255);
