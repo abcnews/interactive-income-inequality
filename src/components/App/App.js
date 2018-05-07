@@ -11,7 +11,7 @@ const LgaSearch = require("../LgaSearch/LgaSearch");
 const IncomeInput = require("../IncomeInput/IncomeInput");
 const MapScroller = require("../MapScroller/MapScroller");
 
-// Dumbbell charts - 
+// Dumbbell charts -
 // Could possibly have only done 1 and fed in the mount point but whatever
 const Dumbbell = require("../Dumbbell/Dumbbell");
 const DumbbellTop = require("../DumbbellTop/DumbbellTop");
@@ -318,9 +318,16 @@ class App extends React.Component {
       this.state.currentBracketNumber
     );
 
-    let user5 = getUserBracketData(userBracketData, this.state.currentBracketNumber);
+    let user5 = getUserBracketData(
+      userBracketData,
+      this.state.currentBracketNumber
+    );
 
-    console.log(user5);
+    // For this project only we know 1 value will be 12.29% so stretch the bounds a bit
+    let dumbbellUserMax = 10;
+    if (this.state.currentBracketNumber === 1) dumbbellUserMax = 13;
+
+    console.log(dumbbellUserMax);
 
     return (
       <div className={styles.root}>
@@ -330,7 +337,8 @@ class App extends React.Component {
           mapData={this.state.mapData}
         />
         {/* Conditionally render MapScroller if data loaded */}
-        {false && this.state.mapData && // re enable this later
+        {false &&
+        this.state.mapData && // re enable this later
           this.state.scrollytellerObject && (
             <MapScroller
               scrollyteller={this.state.scrollytellerObject}
@@ -384,6 +392,7 @@ class App extends React.Component {
             maxValue={10}
           />
         </DumbbellTop>
+
         <DumbbellUser>
           <Dumbbell
             label={user5.name1}
@@ -391,7 +400,7 @@ class App extends React.Component {
             dot2Percent={user5.top1}
             line1Percent={user5.average1}
             percentMultiplier={1}
-            maxValue={13}
+            maxValue={dumbbellUserMax}
           />
           <Dumbbell
             label={user5.name2}
@@ -399,7 +408,7 @@ class App extends React.Component {
             dot2Percent={user5.top2}
             line1Percent={user5.average2}
             percentMultiplier={1}
-            maxValue={10}
+            maxValue={dumbbellUserMax}
           />
           <Dumbbell
             label={user5.name3}
@@ -407,7 +416,7 @@ class App extends React.Component {
             dot2Percent={user5.top3}
             line1Percent={user5.average3}
             percentMultiplier={1}
-            maxValue={10}
+            maxValue={dumbbellUserMax}
           />
           <Dumbbell
             label={user5.name4}
@@ -415,7 +424,7 @@ class App extends React.Component {
             dot2Percent={user5.top4}
             line1Percent={user5.average4}
             percentMultiplier={1}
-            maxValue={10}
+            maxValue={dumbbellUserMax}
           />
           <Dumbbell
             label={user5.name5}
@@ -423,20 +432,21 @@ class App extends React.Component {
             dot2Percent={user5.top5}
             line1Percent={user5.average5}
             percentMultiplier={1}
-            maxValue={10}
+            maxValue={dumbbellUserMax}
           />
         </DumbbellUser>
 
-        <DumbbellEducation >
-        <Dumbbell
+        <DumbbellEducation>
+          <Dumbbell
             label="Bachelor degrees"
             dot1Percent={23.41}
             dot2Percent={61.79}
             line1Percent={false}
             percentMultiplier={1}
             maxValue={100}
+            dot1Color="#78b8c4"
           />
-          </DumbbellEducation>
+        </DumbbellEducation>
         <DumbbellGender />
         <DumbbellIndigenous />
         <DumbbellBorn />
