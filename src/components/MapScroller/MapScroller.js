@@ -48,6 +48,9 @@ let ausStates = [];
 // Try to prevent multiple transitions
 let tweening = 1;
 
+// Hack to try and get IE and Edge smoother
+let drawToggle = true;
+
 // Set defaults
 let currentFocus = "72330"; // Middle of Australia (pretty much)
 // let previousFocus = "72330";
@@ -443,13 +446,16 @@ class MapScroller extends React.Component {
               .domain([100, MAX_ZOOM])
               .range(Array.from(Array(SIMPLIFICATION_LEVELS).keys()));
 
-            // Draw a version of map based on zoom level
-            this.drawWorld(
-              australia[simplificationScale(currentZoom)],
-              australiaOutline[simplificationScale(currentZoom)],
-              markerData,
-              tweening
-            );
+            if (drawToggle) {
+              // Draw a version of map based on zoom level
+              this.drawWorld(
+                australia[simplificationScale(currentZoom)],
+                australiaOutline[simplificationScale(currentZoom)],
+                markerData,
+                tweening
+              );
+              drawToggle = false; // hack to try getting it working on Surface Pro 3
+            } else drawToggle = true;
 
             if (tweening === 1)
               this.setState({ previousMarkerData: markerData });
@@ -617,7 +623,7 @@ class MapScroller extends React.Component {
       //       }
       //     };
       //   });
-    } else callback(null); // Always call back or else it hangs forever
+    } else callback(null); // Always call back d3-queue or else it hangs forever
   }
 
   drawWorld(australiaGeoJson, australiaOutline, markerData, tweening) {
@@ -758,14 +764,13 @@ class MapScroller extends React.Component {
       context.fill();
       context.stroke();
     });
-    context.beginPath();
-    context.globalAlpha = 1;
-    // context.fillStyle = "#FF5733";
-    context.strokeStyle = "rgba(100, 100, 100, 0.6)";
-    context.lineWidth = 1.1;
-    path(australiaOutline);
-    // context.fill();
-    context.stroke();
+
+    // context.beginPath();
+    // context.globalAlpha = 1;
+    // context.strokeStyle = "rgba(100, 100, 100, 0.6)";
+    // context.lineWidth = 1.1;
+    // path(australiaOutline);
+    // context.stroke();
   }
 
   componentWillUpdate() {}

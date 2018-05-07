@@ -335,7 +335,7 @@ class App extends React.Component {
           mapData={this.state.mapData}
         />
         {/* Conditionally render MapScroller if data loaded */}
-        {false &&
+        {
         this.state.mapData && // re enable this later
           this.state.scrollytellerObject && (
             <MapScroller
