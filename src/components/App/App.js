@@ -378,7 +378,6 @@ class App extends React.Component {
           <Dumbbell
             label="Construction, Distribution &amp; Production Managers"
             dot1Percent={top5[4]}
-            dot1Label="Your bracket"
             dot2Percent="5.68"
             line1Percent="1.39"
             percentMultiplier={1}
@@ -417,7 +416,6 @@ class App extends React.Component {
             label={user5.name3}
             dot1Percent={user5.value3}
             dot2Percent={user5.top3}
-            dot2Label="Top bracket"
             line1Percent={user5.average3}
             percentMultiplier={1}
             maxValue={dumbbellUserMax}
@@ -426,7 +424,6 @@ class App extends React.Component {
             label={user5.name4}
             dot1Percent={user5.value4}
             dot2Percent={user5.top4}
-            dot2Label="Top bracket"
             line1Percent={user5.average4}
             percentMultiplier={1}
             maxValue={dumbbellUserMax}
