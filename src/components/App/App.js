@@ -327,8 +327,6 @@ class App extends React.Component {
     let dumbbellUserMax = 10;
     if (this.state.currentBracketNumber === 1) dumbbellUserMax = 13;
 
-    console.log(dumbbellUserMax);
-
     return (
       <div className={styles.root}>
         <IncomeInput setCurrentBracket={this.setCurrentBracket} />
@@ -447,12 +445,99 @@ class App extends React.Component {
             dot1Color="#78b8c4"
           />
         </DumbbellEducation>
-        <DumbbellGender />
-        <DumbbellIndigenous />
-        <DumbbellBorn />
-        <DumbbellVoluntary />
-        <DumbbellCar />
-        <DumbbellMarriage />
+        <DumbbellGender>
+          <Dumbbell
+            label="Gender divide"
+            dot1Percent={48.62}
+            dot2Percent={75.17}
+            line1Percent={false}
+            percentMultiplier={1}
+            maxValue={100}
+            dot1Color="#78b8c4"
+          />
+        </DumbbellGender>
+        <DumbbellIndigenous>
+          <Dumbbell
+            label="Indigenous population"
+            dot1Percent={2.05}
+            dot2Percent={0.82}
+            line1Percent={false}
+            percentMultiplier={1}
+            maxValue={10}
+            dot1Color="#78b8c4"
+          />
+        </DumbbellIndigenous>
+        <DumbbellBorn>
+          <Dumbbell
+            label="Born in Australia"
+            dot1Percent={67.05}
+            dot2Percent={65.68}
+            line1Percent={false}
+            percentMultiplier={1}
+            maxValue={100}
+            dot1Color="#78b8c4"
+          />
+        </DumbbellBorn>
+        <DumbbellVoluntary>
+          <Dumbbell
+            label="Voluntary work"
+            dot1Percent={20.43}
+            dot2Percent={29.09}
+            line1Percent={false}
+            percentMultiplier={1}
+            maxValue={100}
+            dot1Color="#78b8c4"
+          />
+        </DumbbellVoluntary>
+        <DumbbellCar>
+          <Dumbbell
+            label="Owns one or two cars"
+            dot1Percent={64.1}
+            dot2Percent={66.21}
+            line1Percent={false}
+            percentMultiplier={1}
+            maxValue={100}
+            dot1Color="#78b8c4"
+          />
+          <Dumbbell
+            label="Owns three or more cars"
+            dot1Percent={25.57}
+            dot2Percent={24.04}
+            line1Percent={false}
+            percentMultiplier={1}
+            maxValue={100}
+            dot1Color="#78b8c4"
+          />
+        </DumbbellCar>
+        <DumbbellMarriage>
+          <Dumbbell
+            label="Married"
+            dot1Percent={false}
+            dot2Percent={55.25}
+            line1Percent={false}
+            percentMultiplier={1}
+            maxValue={100}
+            dot1Color="#78b8c4"
+          />
+          <Dumbbell
+            label="Never married"
+            dot1Percent={false}
+            dot2Percent={33.35}
+            line1Percent={false}
+            percentMultiplier={1}
+            maxValue={100}
+            dot1Color="#78b8c4"
+          />
+          <Dumbbell
+            label="Divorced"
+            dot1Percent={false}
+            dot2Percent={5.62}
+            line1Percent={false}
+            percentMultiplier={1}
+            maxValue={100}
+            dot1Color="#78b8c4"
+          />
+        </DumbbellMarriage>
       </div>
     );
   }
