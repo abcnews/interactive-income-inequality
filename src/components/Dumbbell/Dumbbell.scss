@@ -11,8 +11,14 @@
 .label {
   color: black;
   text-align: right;
-  flex-basis: 110px;
-  padding-right: 15px;
+  flex-basis: 80px;
+  padding-right: 20px;
+}
+
+@media (min-width:415px) {
+  .label {
+    flex-basis: 100px;
+  }
 }
 
 .chart {
