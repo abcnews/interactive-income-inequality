@@ -44,11 +44,11 @@ class Dumbbell extends React.Component {
     }
 
     // If too close to the borders flip them
-    if (this.scale(dot1Percent) < 6) dot1Align = "right";
-    if (this.scale(dot2Percent) < 6) dot2Align = "right";
+    if (this.scale(dot1Percent) < 8) dot1Align = "right";
+    if (this.scale(dot2Percent) < 8) dot2Align = "right";
 
-    if (this.scale(dot1Percent) > 94) dot1Align = "left";
-    if (this.scale(dot2Percent) > 94) dot2Align = "left";
+    if (this.scale(dot1Percent) > 92) dot1Align = "left";
+    if (this.scale(dot2Percent) > 92) dot2Align = "left";
 
     // Modify some styles
     let dot1Style = { left: this.scale(dot1Percent) + "%" };
