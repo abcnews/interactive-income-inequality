@@ -318,7 +318,7 @@ class App extends React.Component {
       this.state.currentBracketNumber
     );
 
-    let user5 = getUserBracketData(
+    let user = getUserBracketData(
       userBracketData,
       this.state.currentBracketNumber
     );
@@ -336,7 +336,7 @@ class App extends React.Component {
         />
 
         {/* Conditionally render MapScroller if data loaded */}
-        {this.state.mapData && 
+        {/* {this.state.mapData && 
           this.state.scrollytellerObject && (
             <MapScroller
               scrollyteller={this.state.scrollytellerObject}
@@ -347,7 +347,7 @@ class App extends React.Component {
               currentAusState={this.state.currentAusState}
               doMarkerEvent={this.doMarkerEvent}
             />
-          )}
+          )} */}
 
         <DumbbellTop>
           <Dumbbell
@@ -396,44 +396,44 @@ class App extends React.Component {
 
         <DumbbellUser>
           <Dumbbell
-            label={user5.name1}
-            dot1Percent={user5.value1}
+            label={user.name1}
+            dot1Percent={user.value1}
             dot1Label="Your bracket"
-            dot2Percent={user5.top1}
+            dot2Percent={user.top1}
             dot2Label="Top bracket"
-            line1Percent={user5.average1}
+            line1Percent={user.average1}
             percentMultiplier={1}
             maxValue={dumbbellUserMax}
           />
           <Dumbbell
-            label={user5.name2}
-            dot1Percent={user5.value2}
-            dot2Percent={user5.top2}
-            line1Percent={user5.average2}
+            label={user.name2}
+            dot1Percent={user.value2}
+            dot2Percent={user.top2}
+            line1Percent={user.average2}
             percentMultiplier={1}
             maxValue={dumbbellUserMax}
           />
           <Dumbbell
-            label={user5.name3}
-            dot1Percent={user5.value3}
-            dot2Percent={user5.top3}
-            line1Percent={user5.average3}
+            label={user.name3}
+            dot1Percent={user.value3}
+            dot2Percent={user.top3}
+            line1Percent={user.average3}
             percentMultiplier={1}
             maxValue={dumbbellUserMax}
           />
           <Dumbbell
-            label={user5.name4}
-            dot1Percent={user5.value4}
-            dot2Percent={user5.top4}
-            line1Percent={user5.average4}
+            label={user.name4}
+            dot1Percent={user.value4}
+            dot2Percent={user.top4}
+            line1Percent={user.average4}
             percentMultiplier={1}
             maxValue={dumbbellUserMax}
           />
           <Dumbbell
-            label={user5.name5}
-            dot1Percent={user5.value5}
-            dot2Percent={user5.top5}
-            line1Percent={user5.average5}
+            label={user.name5}
+            dot1Percent={user.value5}
+            dot2Percent={user.top5}
+            line1Percent={user.average5}
             percentMultiplier={1}
             maxValue={dumbbellUserMax}
           />
@@ -442,25 +442,26 @@ class App extends React.Component {
         <DumbbellEducation>
           <Dumbbell
             label="Bachelor degrees"
-            dot1Percent={23.41}
+            dot1Percent={user.bachelor}
             dot2Percent={61.79}
-            line1Percent={false}
+            line1Percent={24.88}
             percentMultiplier={1}
             maxValue={100}
-            dot1Color="#78b8c4"
-            dot1TextColor="#1B7C8F"
+            // dot1Color="#78b8c4"
+            // dot1TextColor="#1B7C8F"
           />
         </DumbbellEducation>
+
         <DumbbellGender>
           <Dumbbell
             label="Gender divide"
-            dot1Percent={48.62}
+            dot1Percent={user.male}
             dot2Percent={75.17}
-            line1Percent={false}
+            line1Percent={49.64}
             percentMultiplier={1}
             maxValue={100}
-            dot1Color="#78b8c4"
-            dot1TextColor="#1B7C8F"
+            // dot1Color="#78b8c4"
+            // dot1TextColor="#1B7C8F"
           />
         </DumbbellGender>
         <DumbbellIndigenous>
