@@ -22,7 +22,18 @@
     "top4": 0.02,
     "top5": 0.23,
     "bachelor": 11.73,
-    "male": 38.53
+    "male": 38.53,
+    "indigenous": 3.02,
+    "born": 72.24,
+    "voluntary": 26.14,
+    "car1or2": 58,
+    "car3ormore": 33.16,
+    "married": 33.75,
+    "nevermarried": 60.37,
+    "divorced": 3,
+    "contmarried": 59.65,
+    "contnevermarried": 29.7,
+    "contdivorced": 5.21
   },
   {
     "bracket": 2,
@@ -47,7 +58,18 @@
     "top4": 0.04,
     "top5": 0.02,
     "bachelor": 11.84,
-    "male": 41.68
+    "male": 41.68,
+    "indigenous": 4.61,
+    "born": 64.67,
+    "voluntary": 21.47,
+    "car1or2": 61.4,
+    "car3ormore": 24.95,
+    "married": 45.13,
+    "nevermarried": 40.49,
+    "divorced": 7.17,
+    "contmarried": 49.96,
+    "contnevermarried": 34.13,
+    "contdivorced": 8.27
   },
   {
     "bracket": 3,
@@ -72,7 +94,18 @@
     "top4": 0.04,
     "top5": 0.1,
     "bachelor": 10.31,
-    "male": 42.37
+    "male": 42.37,
+    "indigenous": 2.76,
+    "born": 62.13,
+    "voluntary": 17.9,
+    "car1or2": 65.96,
+    "car3ormore": 19.68,
+    "married": 55.4,
+    "nevermarried": 24.85,
+    "divorced": 9,
+    "contmarried": 48.83,
+    "contnevermarried": 34.12,
+    "contdivorced": 9.13
   },
   {
     "bracket": 4,
@@ -97,7 +130,18 @@
     "top4": 0.1,
     "top5": 0.04,
     "bachelor": 11.84,
-    "male": 38.51
+    "male": 38.51,
+    "indigenous": 2.46,
+    "born": 66.22,
+    "voluntary": 18.18,
+    "car1or2": 62.15,
+    "car3ormore": 19.44,
+    "married": 32.81,
+    "nevermarried": 30.06,
+    "divorced": 15.09,
+    "contmarried": 36.02,
+    "contnevermarried": 37.29,
+    "contdivorced": 13.41
   },
   {
     "bracket": 5,
@@ -122,7 +166,18 @@
     "top4": 0.08,
     "top5": 0.06,
     "bachelor": 16.43,
-    "male": 39
+    "male": 39,
+    "indigenous": 2.42,
+    "born": 67.84,
+    "voluntary": 20.15,
+    "car1or2": 63.2,
+    "car3ormore": 25.3,
+    "married": 45.12,
+    "nevermarried": 33.67,
+    "divorced": 9.93,
+    "contmarried": 47.06,
+    "contnevermarried": 32.35,
+    "contdivorced": 10.29
   },
   {
     "bracket": 6,
@@ -147,7 +202,18 @@
     "top4": 0.08,
     "top5": 0.06,
     "bachelor": 18.1,
-    "male": 44.4
+    "male": 44.4,
+    "indigenous": 2.21,
+    "born": 67.18,
+    "voluntary": 18.17,
+    "car1or2": 63.09,
+    "car3ormore": 27.99,
+    "married": 46.89,
+    "nevermarried": 35.9,
+    "divorced": 9.16,
+    "contmarried": 49.61,
+    "contnevermarried": 31.53,
+    "contdivorced": 9.79
   },
   {
     "bracket": 7,
@@ -172,7 +238,18 @@
     "top4": 0.98,
     "top5": 0.52,
     "bachelor": 21.87,
-    "male": 51.32
+    "male": 51.32,
+    "indigenous": 1.87,
+    "born": 67.32,
+    "voluntary": 17.93,
+    "car1or2": 63.21,
+    "car3ormore": 29.11,
+    "married": 47.5,
+    "nevermarried": 36.17,
+    "divorced": 9.32,
+    "contmarried": 49.41,
+    "contnevermarried": 31.39,
+    "contdivorced": 9.97
   },
   {
     "bracket": 8,
@@ -197,7 +274,18 @@
     "top4": 1.34,
     "top5": 0.36,
     "bachelor": 28.27,
-    "male": 55.18
+    "male": 55.18,
+    "indigenous": 1.62,
+    "born": 67.63,
+    "voluntary": 19.26,
+    "car1or2": 64.45,
+    "car3ormore": 28.61,
+    "married": 51.13,
+    "nevermarried": 33.96,
+    "divorced": 9.02,
+    "contmarried": 52.31,
+    "contnevermarried": 30.34,
+    "contdivorced": 9.38
   },
   {
     "bracket": 9,
@@ -222,7 +310,18 @@
     "top4": 0.52,
     "top5": 0.36,
     "bachelor": 35.94,
-    "male": 57.01
+    "male": 57.01,
+    "indigenous": 1.45,
+    "born": 68.85,
+    "voluntary": 21.09,
+    "car1or2": 66.01,
+    "car3ormore": 27.56,
+    "married": 54.17,
+    "nevermarried": 32.23,
+    "divorced": 8.55,
+    "contmarried": 54.12,
+    "contnevermarried": 29.93,
+    "contdivorced": 8.7
   },
   {
     "bracket": 10,
@@ -247,7 +346,18 @@
     "top4": 2.96,
     "top5": 3.18,
     "bachelor": 42.89,
-    "male": 59.22
+    "male": 59.22,
+    "indigenous": 1.27,
+    "born": 69.05,
+    "voluntary": 22.97,
+    "car1or2": 67.1,
+    "car3ormore": 26.47,
+    "married": 59.07,
+    "nevermarried": 27.69,
+    "divorced": 8.47,
+    "contmarried": 55.98,
+    "contnevermarried": 28.84,
+    "contdivorced": 8.23
   },
   {
     "bracket": 11,
@@ -272,7 +382,18 @@
     "top4": 0.25,
     "top5": 2.03,
     "bachelor": 48.45,
-    "male": 62.98
+    "male": 62.98,
+    "indigenous": 1.19,
+    "born": 68.98,
+    "voluntary": 24.4,
+    "car1or2": 68.34,
+    "car3ormore": 24.9,
+    "married": 62,
+    "nevermarried": 24.69,
+    "divorced": 8.57,
+    "contmarried": 56.39,
+    "contnevermarried": 28.79,
+    "contdivorced": 7.95
   },
   {
     "bracket": 12,
@@ -297,7 +418,18 @@
     "top4": 3.05,
     "top5": 0.28,
     "bachelor": 53.22,
-    "male": 69.7
+    "male": 69.7,
+    "indigenous": 1,
+    "born": 67.67,
+    "voluntary": 25.98,
+    "car1or2": 68.78,
+    "car3ormore": 23.31,
+    "married": 66.14,
+    "nevermarried": 21.78,
+    "divorced": 7.79,
+    "contmarried": 59.74,
+    "contnevermarried": 26.56,
+    "contdivorced": 7.21
   },
   {
     "bracket": 13,
@@ -322,6 +454,17 @@
     "top4": 5.68,
     "top5": 3.68,
     "bachelor": 61.79,
-    "male": 75.17
+    "male": 75.17,
+    "indigenous": 0.82,
+    "born": 65.68,
+    "voluntary": 29.09,
+    "car1or2": 66.21,
+    "car3ormore": 24.04,
+    "married": 72.86,
+    "nevermarried": 15.21,
+    "divorced": 7.26,
+    "contmarried": 61.57,
+    "contnevermarried": 26.06,
+    "contdivorced": 6.23
   }
 ]

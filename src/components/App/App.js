@@ -336,7 +336,7 @@ class App extends React.Component {
         />
 
         {/* Conditionally render MapScroller if data loaded */}
-        {/* {this.state.mapData && 
+        {this.state.mapData && 
           this.state.scrollytellerObject && (
             <MapScroller
               scrollyteller={this.state.scrollytellerObject}
@@ -347,7 +347,7 @@ class App extends React.Component {
               currentAusState={this.state.currentAusState}
               doMarkerEvent={this.doMarkerEvent}
             />
-          )} */}
+          )}
 
         <DumbbellTop>
           <Dumbbell
@@ -467,91 +467,109 @@ class App extends React.Component {
         <DumbbellIndigenous>
           <Dumbbell
             label="Indigenous population"
-            dot1Percent={2.05}
+            dot1Percent={user.indigenous}
             dot2Percent={0.82}
-            line1Percent={false}
+            line1Percent={2.05}
             percentMultiplier={1}
             maxValue={10}
-            dot1Color="#78b8c4"
-            dot1TextColor="#1B7C8F"
+            // dot1Color="#78b8c4"
+            // dot1TextColor="#1B7C8F"
           />
         </DumbbellIndigenous>
         <DumbbellBorn>
           <Dumbbell
             label="Born in Australia"
-            dot1Percent={67.05}
+            dot1Percent={user.born}
             dot2Percent={65.68}
-            line1Percent={false}
+            line1Percent={67}
             percentMultiplier={1}
             maxValue={100}
-            dot1Color="#78b8c4"
-            dot1TextColor="#1B7C8F"
+            // dot1Color="#78b8c4"
+            // dot1TextColor="#1B7C8F"
           />
         </DumbbellBorn>
         <DumbbellVoluntary>
           <Dumbbell
             label="Voluntary work"
-            dot1Percent={20.43}
+            dot1Percent={user.voluntary}
             dot2Percent={29.09}
-            line1Percent={false}
+            line1Percent={20.76}
             percentMultiplier={1}
             maxValue={100}
-            dot1Color="#78b8c4"
-            dot1TextColor="#1B7C8F"
+            // dot1Color="#78b8c4"
+            // dot1TextColor="#1B7C8F"
           />
         </DumbbellVoluntary>
         <DumbbellCar>
           <Dumbbell
             label="Owns one or two cars"
-            dot1Percent={64.1}
+            dot1Percent={user.car1or2}
             dot2Percent={66.21}
-            line1Percent={false}
+            line1Percent={64.18}
             percentMultiplier={1}
             maxValue={100}
-            dot1Color="#78b8c4"
-            dot1TextColor="#1B7C8F"
+            // dot1Color="#78b8c4"
+            // dot1TextColor="#1B7C8F"
           />
           <Dumbbell
             label="Owns three or more cars"
-            dot1Percent={25.57}
+            dot1Percent={user.car3ormore}
             dot2Percent={24.04}
-            line1Percent={false}
+            line1Percent={25.51}
             percentMultiplier={1}
             maxValue={100}
-            dot1Color="#78b8c4"
-            dot1TextColor="#1B7C8F"
+            // dot1Color="#78b8c4"
+            // dot1TextColor="#1B7C8F"
           />
         </DumbbellCar>
         <DumbbellMarriage>
           <Dumbbell
             label="Married"
-            dot1Percent={false}
-            dot2Percent={55.25}
-            line1Percent={false}
+            dot1Percent={user.married}
+            dot2Percent={72.86}
+            line1Percent={49.92}
             percentMultiplier={1}
             maxValue={100}
-            dot1Color="#78b8c4"
-            dot1TextColor="#1B7C8F"
           />
           <Dumbbell
             label="Never married"
-            dot1Percent={false}
-            dot2Percent={33.35}
-            line1Percent={false}
+            dot1Percent={user.nevermarried}
+            dot2Percent={15.21}
+            line1Percent={32.57}
             percentMultiplier={1}
             maxValue={100}
-            dot1Color="#78b8c4"
-            dot1TextColor="#1B7C8F"
           />
           <Dumbbell
             label="Divorced"
-            dot1Percent={false}
-            dot2Percent={5.62}
-            line1Percent={false}
+            dot1Percent={user.divorced}
+            dot2Percent={7.26}
+            line1Percent={9.05}
             percentMultiplier={1}
             maxValue={100}
-            dot1Color="#78b8c4"
-            dot1TextColor="#1B7C8F"
+          />
+          <Dumbbell
+            label="Married (control)"
+            dot1Percent={user.contmarried}
+            dot2Percent={61.57}
+            line1Percent={50.84}
+            percentMultiplier={1}
+            maxValue={100}
+          />
+          <Dumbbell
+            label="Never married (control)"
+            dot1Percent={user.contnevermarried}
+            dot2Percent={26.06}
+            line1Percent={31.53}
+            percentMultiplier={1}
+            maxValue={100}
+          />
+          <Dumbbell
+            label="Divorced (control)"
+            dot1Percent={user.contdivorced}
+            dot2Percent={6.23}
+            line1Percent={9.19}
+            percentMultiplier={1}
+            maxValue={100}
           />
         </DumbbellMarriage>
       </div>
