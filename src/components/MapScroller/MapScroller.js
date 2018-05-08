@@ -223,7 +223,7 @@ class MapScroller extends React.Component {
     const canvasEl = document.querySelector("." + styles.stage);
 
     // Auto-convert canvas to Retina display and High DPI monitor scaling
-      canvasDpiScaler(canvasEl, context);
+    canvasDpiScaler(canvasEl, context);
 
     // Build a path generator for our orthographic projection
     path = d3Geo
@@ -232,7 +232,7 @@ class MapScroller extends React.Component {
       .context(context);
 
     // Draw the inital state of the world
-    this.drawWorld(australia[0], australiaOutline[0]);
+    this.drawWorld(australia[0], australiaOutline[0], null, 1);
   }
 
   markTrigger(markerData) {
@@ -766,14 +766,14 @@ class MapScroller extends React.Component {
     });
 
     // TODO: fix Australia stroke outline so it works on IE and Edge
-    if (!detectIE()) {
-    // Render the outline of Australia
-    context.beginPath();
-    context.globalAlpha = 1;
-    context.strokeStyle = "rgba(100, 100, 100, 0.6)";
-    context.lineWidth = 1.1;
-    path(australiaOutline);
-    context.stroke();
+    if (!detectIE() || tweening > 0.99) {
+      // Render the outline of Australia
+      context.beginPath();
+      context.globalAlpha = 1;
+      context.strokeStyle = "rgba(100, 100, 100, 0.6)";
+      context.lineWidth = 1.1;
+      path(australiaOutline);
+      context.stroke();
     }
   }
 
