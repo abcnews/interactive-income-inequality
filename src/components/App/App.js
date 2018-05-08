@@ -335,8 +335,7 @@ class App extends React.Component {
           mapData={this.state.mapData}
         />
         {/* Conditionally render MapScroller if data loaded */}
-        {
-        this.state.mapData && // re enable this later
+        {/* {this.state.mapData && // re enable this later
           this.state.scrollytellerObject && (
             <MapScroller
               scrollyteller={this.state.scrollytellerObject}
@@ -347,7 +346,7 @@ class App extends React.Component {
               currentAusState={this.state.currentAusState}
               doMarkerEvent={this.doMarkerEvent}
             />
-          )}
+          )} */}
         <DumbbellTop>
           <Dumbbell
             label="Medical practitioners"

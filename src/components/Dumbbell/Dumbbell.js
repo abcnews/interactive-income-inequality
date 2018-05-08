@@ -89,7 +89,7 @@ class Dumbbell extends React.Component {
       <div className={styles.wrapper}>
         <div className={styles.label}>{this.props.label}</div>
         <div className={styles.chart}>
-          <div className={styles.midBar} />
+          
           {line1Percent && (
             <span
               className={styles.line1}
@@ -154,6 +154,7 @@ class Dumbbell extends React.Component {
               {this.getActualPercent(dot2Percent)}%
             </span>
           )}
+          <div className={styles.midBar} />
         </div>
       </div>
     );

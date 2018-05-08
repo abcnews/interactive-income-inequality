@@ -765,7 +765,7 @@ class MapScroller extends React.Component {
       context.stroke();
     });
 
-    // TODO: fix Australia stroke outline so it works on IE and Edge retina
+    // TODO: fix Australia stroke outline so it works on IE and Edge
     if (!detectIE()) {
     // Render the outline of Australia
     context.beginPath();
