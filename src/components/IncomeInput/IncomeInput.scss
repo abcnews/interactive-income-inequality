@@ -676,8 +676,8 @@
     user-select: none;
     -moz-box-sizing: border-box;
     box-sizing: border-box;
-    outline-color: transparent; /* remove blue outline in Chrome and */
-    outline-style: none; /* remove dotted outline in Firefox */
+    // outline-color: transparent; /* remove blue outline in Chrome and */
+    // outline-style: none; /* remove dotted outline in Firefox */
   }
   .noUi-target {
     position: relative;

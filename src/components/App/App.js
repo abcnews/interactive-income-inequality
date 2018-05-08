@@ -23,6 +23,7 @@ const DumbbellMarriage = require("../DumbbellMarriage/DumbbellMarriage");
 const DumbbellCar = require("../DumbbellCar/DumbbellCar");
 const DumbbellBorn = require("../DumbbellBorn/DumbbellBorn");
 const DumbbellVoluntary = require("../DumbbellVoluntary/DumbbellVoluntary");
+const DumbbellContMarriage = require("../DumbbellContMarriage/DumbbellContMarriage");
 
 const scrollyteller = require("@abcnews/scrollyteller").loadOdysseyScrollyteller(
   "",
@@ -336,7 +337,7 @@ class App extends React.Component {
         />
 
         {/* Conditionally render MapScroller if data loaded */}
-        {this.state.mapData && 
+        {this.state.mapData &&
           this.state.scrollytellerObject && (
             <MapScroller
               scrollyteller={this.state.scrollytellerObject}
@@ -547,6 +548,9 @@ class App extends React.Component {
             percentMultiplier={1}
             maxValue={100}
           />
+        </DumbbellMarriage>
+        
+        <DumbbellContMarriage>
           <Dumbbell
             label="Married (control)"
             dot1Percent={user.contmarried}
@@ -571,7 +575,7 @@ class App extends React.Component {
             percentMultiplier={1}
             maxValue={100}
           />
-        </DumbbellMarriage>
+        </DumbbellContMarriage>
       </div>
     );
   }

@@ -238,7 +238,7 @@ class IncomeInput extends React.Component {
                   styles.calculatingResult + " " + styles.opacityTransition
                 }
               >
-                <div></div>
+                <div />
               </div>
             </div>
           )}
