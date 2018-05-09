@@ -115,6 +115,9 @@ class IncomeInput extends React.Component {
   attachSlider() {
     this.slider = document.getElementById("range");
 
+    // Try to tab index slider first
+
+    
     this.slider.style.height = "326px";
     this.slider.style.margin = "0 auto";
     this.slider.style.transition = "height 0.5s";
@@ -129,6 +132,25 @@ class IncomeInput extends React.Component {
         max: 100
       }
     });
+
+    // TODO: if we really want this indexed first then reorder page layout and float
+    const handle = document.getElementsByClassName("noUi-handle-lower")[0];
+    // handle.setAttribute("tabIndex", "1");
+
+    // Keyboard changing of slider
+    handle.addEventListener('keydown', ( e ) => {
+
+      var value = Number( this.slider.noUiSlider.get() );
+    
+      if ( e.which === 37 ) {
+        this.slider.noUiSlider.set( value - 10 );
+      }
+    
+      if ( e.which === 39 ) {
+        this.slider.noUiSlider.set( value + 10 );
+      }
+    });
+
 
     // Event fires when slider is set
     this.slider.noUiSlider.on("set", () => {

@@ -146,6 +146,10 @@
     line-height: 1.5rem;
   }
 
+  button:focus {
+    outline: 1px dotted #555;
+  }
+
   @media only screen and (max-width: 768px) {
     button {
       font-size: 11px;
@@ -163,6 +167,10 @@
     max-width: 100px;
     border-radius: 0; // Remove round corners on iOS
     -webkit-appearance: none; // Remove round corners on iOS - legacy
+  }
+
+  input[type="text"]:focus {
+    outline: 1px dotted #555;
   }
 
   // Third column stuff
@@ -575,7 +583,7 @@
   color: black;
   line-height: 11px;
   text-transform: uppercase;
-  // transition: opacity 0.5s; 
+  // transition: opacity 0.5s;
 }
 
 .result-guess-text13 {
@@ -751,7 +759,7 @@
   .noUi-vertical .noUi-handle {
     width: 48px; // a bit bigger than
     height: 48px; // the handle image
-    left: 12px;
+    left: 10px;
     top: -25px; // Make sure it doesn't fly off the handle
   }
   html:not([dir="rtl"]) .noUi-horizontal .noUi-handle {
@@ -800,6 +808,7 @@
     background-repeat: no-repeat;
     background-position: left center;
     cursor: pointer;
+    border: 1px dotted rgba(255, 255, 255, 0);
   }
   .noUi-active {
     // box-shadow: inset 0 0 1px #fff, inset 0 1px 7px #ddd, 0 3px 6px -3px #bbb;
@@ -819,6 +828,9 @@
   }
   .noUi-handle:after {
     left: 17px;
+  }
+  .noUi-handle:focus {
+    border: 1px dotted #555;
   }
   .noUi-vertical .noUi-handle:before,
   .noUi-vertical .noUi-handle:after {
@@ -942,7 +954,7 @@
     border-radius: 3px;
     // background: #fff;
     color: #ff6100;
-    padding: 5px;
+    padding: 5px 1px;
     font-size: 18px;
     text-align: center;
     white-space: nowrap;
