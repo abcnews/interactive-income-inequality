@@ -395,6 +395,7 @@ class App extends React.Component {
         </DumbbellTop>
 
         <DumbbellUser>
+          <p className={styles.paragraphText}>By contrast, the top five professions make up <strong>{user.top1 + user.top2 + user.top3 + user.top4 + user.top5}</strong> per cent in your bracket.</p>
           <Dumbbell
             label={user.name1}
             dot1Percent={user.value1}
