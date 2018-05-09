@@ -87,16 +87,17 @@ class LgaSearch extends React.Component {
     this.setState({ selectedOption });
     this.props.setCurrentLga(selectedOption);
 
-
     // TODO: replace with actual selector that won't break if content changes
-    let firstPanel = document.querySelector("#main_content > div:nth-child(8) > div > div > div:nth-child(2)");
+    let firstPanel = document.querySelector(
+      "#main_content > div:nth-child(8) > div > div > div:nth-child(2)"
+    );
 
-    console.log(firstPanel)
+    console.log(firstPanel);
 
     console.log(selectedOption);
 
     // Scroll the first panel into view
-    firstPanel.scrollIntoView()
+    firstPanel.scrollIntoView({behavior: "smooth", block: "center"});
 
     // window.scrollBy({
     //   top: 1000, // could be negative value
