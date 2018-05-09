@@ -87,12 +87,22 @@ class LgaSearch extends React.Component {
     this.setState({ selectedOption });
     this.props.setCurrentLga(selectedOption);
 
+
+    // TODO: replace with actual selector that won't break if content changes
+    let firstPanel = document.querySelector("#main_content > div:nth-child(8) > div > div > div:nth-child(2)");
+
+    console.log(firstPanel)
+
     console.log(selectedOption);
-    window.scrollBy({
-      top: 1000, // could be negative value
-      left: 0,
-      behavior: 'smooth'
-    });
+
+    // Scroll the first panel into view
+    firstPanel.scrollIntoView()
+
+    // window.scrollBy({
+    //   top: 1000, // could be negative value
+    //   left: 0,
+    //   behavior: 'smooth'
+    // });
   }
 
   async geocodeString(searchString) {
