@@ -139,14 +139,15 @@ class IncomeInput extends React.Component {
 
     // Keyboard changing of slider
     handle.addEventListener('keydown', ( e ) => {
+      e.preventDefault();
 
       var value = Number( this.slider.noUiSlider.get() );
     
-      if ( e.which === 37 ) {
+      if ( e.which === 40 ) {
         this.slider.noUiSlider.set( value - 10 );
       }
     
-      if ( e.which === 39 ) {
+      if ( e.which === 38 ) {
         this.slider.noUiSlider.set( value + 10 );
       }
     });
