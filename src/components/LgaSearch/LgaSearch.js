@@ -7,7 +7,7 @@ const debounce = require("debounce");
 const styles = require("./LgaSearch.scss");
 
 // Smooth scroll into view support for Safari, Edge, IE, etc.
-const smoothscroll = require('smoothscroll-polyfill');
+const smoothscroll = require("smoothscroll-polyfill");
 smoothscroll.polyfill();
 
 // const Select = require("react-select").default;
@@ -65,7 +65,9 @@ lgas = lgas.map(lga => {
 });
 
 // Filter unwanted
-// TODO: filter no usual address etc.
+lgas = lgas.filter(lga => {
+  return lga.label.search(/No usual address/) < 0;
+});
 
 // Sort alphabetical
 lgas = lgas.sort((a, b) => a.label.localeCompare(b.label));
@@ -86,11 +88,11 @@ class LgaSearch extends React.Component {
     this.props.setCurrentLga(selectedOption);
 
     console.log(selectedOption);
-    // window.scrollBy({
-    //   top: 500, // could be negative value
-    //   left: 0,
-    //   behavior: 'smooth'
-    // });
+    window.scrollBy({
+      top: 1000, // could be negative value
+      left: 0,
+      behavior: 'smooth'
+    });
   }
 
   async geocodeString(searchString) {
@@ -241,6 +243,14 @@ class LgaSearch extends React.Component {
           // autoload={false}
           filterOptions={(options, filter, currentValues) => {
             // Do filtering in loadOptions instead
+
+            // let formattedOptions = options.map((option) => {
+            //   return {
+            //     value: option.value,
+            //     label: option.label + " <small>test</small>"
+            //   }
+            // })
+
             return options;
           }}
           onBlurResetsInput={false}

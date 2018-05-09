@@ -525,10 +525,6 @@
       "LGA": "No usual address (NSW)"
     },
     {
-      "LGA_CODE_2016": 19799,
-      "LGA": "Migratory - Offshore - Shipping (NSW)"
-    },
-    {
       "LGA_CODE_2016": 20110,
       "LGA": "Alpine (S)"
     },
@@ -853,10 +849,6 @@
       "LGA": "No usual address (Vic.)"
     },
     {
-      "LGA_CODE_2016": 29799,
-      "LGA": "Migratory - Offshore - Shipping (Vic.)"
-    },
-    {
       "LGA_CODE_2016": 30250,
       "LGA": "Aurukun (S)"
     },
@@ -1173,10 +1165,6 @@
       "LGA": "No usual address (Qld)"
     },
     {
-      "LGA_CODE_2016": 39799,
-      "LGA": "Migratory - Offshore - Shipping (Qld)"
-    },
-    {
       "LGA_CODE_2016": 40070,
       "LGA": "Adelaide (C)"
     },
@@ -1463,10 +1451,6 @@
     {
       "LGA_CODE_2016": 49499,
       "LGA": "No usual address (SA)"
-    },
-    {
-      "LGA_CODE_2016": 49799,
-      "LGA": "Migratory - Offshore - Shipping (SA)"
     },
     {
       "LGA_CODE_2016": 50080,
@@ -2021,10 +2005,6 @@
       "LGA": "No usual address (WA)"
     },
     {
-      "LGA_CODE_2016": 59799,
-      "LGA": "Migratory - Offshore - Shipping (WA)"
-    },
-    {
       "LGA_CODE_2016": 60210,
       "LGA": "Break O'Day (M)"
     },
@@ -2145,10 +2125,6 @@
       "LGA": "No usual address (Tas.)"
     },
     {
-      "LGA_CODE_2016": 69799,
-      "LGA": "Migratory - Offshore - Shipping (Tas.)"
-    },
-    {
       "LGA_CODE_2016": 70200,
       "LGA": "Alice Springs (T)"
     },
@@ -2225,10 +2201,6 @@
       "LGA": "No usual address (NT)"
     },
     {
-      "LGA_CODE_2016": 79799,
-      "LGA": "Migratory - Offshore - Shipping (NT)"
-    },
-    {
       "LGA_CODE_2016": 89399,
       "LGA": "Unincorporated ACT"
     },
@@ -2237,20 +2209,12 @@
       "LGA": "No usual address (ACT)"
     },
     {
-      "LGA_CODE_2016": 89799,
-      "LGA": "Migratory - Offshore - Shipping (ACT)"
-    },
-    {
       "LGA_CODE_2016": 99399,
       "LGA": "Unincorp. Other Territories"
     },
     {
       "LGA_CODE_2016": 99499,
       "LGA": "No usual address (OT)"
-    },
-    {
-      "LGA_CODE_2016": 99799,
-      "LGA": "Migratory - Offshore - Shipping (OT)"
     }
   ]
 }
