@@ -5,6 +5,8 @@
     justify-content: flex-end;
   }
 
+
+
   .push3 {
     // Just a hack styling to nudge some things
     height: 3px;
@@ -51,10 +53,16 @@
     line-height: 28px;
   }
 
+  @media (min-width: 500px) {
+    .column .boldtext {
+      font-size: 24px;
+    }
+  }
+
   .column .smalltext {
     font-family: ABCSans, Arial, Helvetica, sans-serif;
     font-size: 13px;
-    color: #516c72;
+    color: #666;
     margin-bottom: 1rem;
   }
 
@@ -121,13 +129,15 @@
   }
 
   .scale-labels {
-    /* Richest: */
+    /* Richest and poorest */
     font-family: ABCSans, Arial, Helvetica, sans-serif;
     font-size: 13px;
     color: black;
     white-space: nowrap;
     min-width: 115px;
     font-variant-numeric: oldstyle-nums;
+    font-weight: 700;
+    color: #333;
   }
 
   button {
@@ -148,6 +158,7 @@
 
   button:focus {
     outline: 1px dotted #555;
+    outline-offset: 1px;
   }
 
   @media only screen and (max-width: 768px) {
@@ -171,6 +182,7 @@
 
   input[type="text"]:focus {
     outline: 1px dotted #555;
+    outline-offset: 2px;
   }
 
   // Third column stuff
@@ -756,12 +768,14 @@
   .noUi-vertical {
     width: 15px;
   }
+
   .noUi-vertical .noUi-handle {
     width: 48px; // a bit bigger than
     height: 48px; // the handle image
     left: 10px;
     top: -25px; // Make sure it doesn't fly off the handle
   }
+
   html:not([dir="rtl"]) .noUi-horizontal .noUi-handle {
     right: -17px;
     left: auto;
@@ -830,6 +844,7 @@
     left: 17px;
   }
   .noUi-handle:focus {
+    outline: none;
     border: 1px dotted #555;
   }
   .noUi-vertical .noUi-handle:before,
@@ -971,5 +986,25 @@
     transform: translate(0, -40%);
     top: 40%;
     right: 130%;
+  }
+  // On desktop space out a bit more
+  // TODO: need to shift the spaces etc too if needed
+  // @media (min-width: 500px) {
+  //   .noUi-vertical {
+  //     width: 25px;
+  //   }
+  //   .noUi-vertical .noUi-handle {
+  //     left: 18px;
+  //   }
+  //   .noUi-tooltip {
+  //     padding: 5px 10px;
+  //   }
+  // }
+}
+
+
+@media (min-width: 500px) {
+  .wrapper {
+    padding-left: 10px;
   }
 }
