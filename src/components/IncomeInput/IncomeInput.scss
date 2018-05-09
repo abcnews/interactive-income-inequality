@@ -23,6 +23,7 @@
     padding-left: 4px;
     padding-right: 4px;
     flex-grow: 1;
+    transition: opacity 900ms;
   }
 
   .two {
@@ -173,11 +174,19 @@
     border-bottom: 2px solid #143d47;
     outline: none;
     font-size: 20px;
+    font-weight: 700;
     padding: 1px;
     color: #ff6100;
     max-width: 100px;
     border-radius: 0; // Remove round corners on iOS
     -webkit-appearance: none; // Remove round corners on iOS - legacy
+  }
+
+  @media (min-width: 500px) {
+    input[type="text"] {
+      font-size: 24px;
+      
+    }
   }
 
   input[type="text"]:focus {
@@ -970,10 +979,16 @@
     // background: #fff;
     color: #ff6100;
     padding: 5px 1px;
-    font-size: 18px;
+    font-size: 20px;
+    font-weight: 700;
     text-align: center;
     white-space: nowrap;
     font-family: ABCSans, Arial, Helvetica, sans-serif;
+  }
+  @media (min-width: 500px) {
+    .noUi-tooltip {
+      font-size: 24px;
+    }
   }
   .noUi-horizontal .noUi-tooltip {
     -webkit-transform: translate(-50%, 0);

@@ -73,13 +73,18 @@ class IncomeInput extends React.Component {
     if (event) event.preventDefault();
 
     // Show calculating state
-    this.setState({ narrativeState: "calculate" });
+    // this.setState({ narrativeState: "calculate" });
+
+    // Fade out while "calculating" css transition fades
+    const calculateFade = document.querySelector("." + styles.one);
+    calculateFade.style.opacity = 0;
+
 
     // Update App data in parent component
     this.props.setCurrentBracket(this.state.incomeBracket);
 
     // Wait a while then show result
-    setTimeout(this.showResult.bind(this), 500);
+    setTimeout(this.showResult.bind(this), 1000);
   }
 
   showResult() {
