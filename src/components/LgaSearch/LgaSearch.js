@@ -3,7 +3,7 @@ const ReactDOM = require("react-dom");
 const MapboxClient = require("mapbox");
 const inside = require("point-in-polygon");
 const debounce = require("debounce");
-const smoothScroll = require('smoothscroll');
+const smoothScroll = require("smoothscroll");
 
 const styles = require("./LgaSearch.scss");
 
@@ -92,9 +92,7 @@ class LgaSearch extends React.Component {
     if (selectedOption == null) return;
 
     // Select element and scroll to it
-    let firstPanel = document.querySelector(
-      '[name="scrolltothispoint"]'
-    );
+    let firstPanel = document.querySelector('[name="scrolltothispoint"]');
 
     // Scroll the first panel into view
     // firstPanel.scrollIntoView({ behavior: "smooth", block: "center", inline: "center" });
@@ -235,13 +233,9 @@ class LgaSearch extends React.Component {
     // even though debouncing might not need it
   }
 
-  componentDidMount() {
-    
-  }
+  componentDidMount() {}
 
   render() {
-    
-
     const { selectedOption } = this.state;
     const value = selectedOption && selectedOption.value;
 
