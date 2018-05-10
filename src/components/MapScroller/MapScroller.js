@@ -58,26 +58,11 @@ let currentFocus = "72330"; // Middle of Australia (pretty much)
 // let previousFocus = "72330";
 let currentLongLat = [133.15399233370441, -24.656909465155994]; //[133.7751, -25.2744]; //getItem("australia").longlat;
 
-// let resizeCanvas; // Attach event listeners later
-
 // documentElement is for Firefox support apparently
 let screenWidth =
   document.documentElement.clientWidth || document.body.clientWidth; // minus scroll bars
 let screenHeight = window.innerHeight;
 let margins = Math.min(screenWidth, screenHeight) * 0.1;
-
-function getScaleDomain(min, max, stops) {
-  // Produces a d3 linear scale domain evenly spaced
-  const scaleDomain = [];
-  const size = max / (stops - 1);
-
-  let current = min;
-  for (let i = 0; i < stops; i++) {
-    scaleDomain.push(current);
-    current = current + size;
-  }
-  return scaleDomain;
-}
 
 // Set up a queue
 var q = d3Queue.queue(1);
@@ -102,30 +87,18 @@ const colorScale = d3Scale
     "#00114B"
   ]);
 
-// Bucket scale - decided not to use
-// const colorScale = d3Scale
-//   .scaleQuantize()
-//   .domain([0, 35])
-//   .range([
-//     "#E9F1DE",
-//     "#B7E9D2",
-//     "#8CDED3",
-//     "#60D0D3",
-//     "#32C2CB",
-//     "#00B4C3",
-//     "#00A5B8",
-//     "#008FA9",
-//     "#00799B",
-//     "#006091",
-//     "#004987",
-//     "#00326F",
-//     "#001947"
-//   ]);
-
 const zoomScale = d3Scale
   .scaleLinear()
   .domain([1, 16])
   .range([1, 2000]);
+
+// Calculate current zoom and set up simplification scale
+let currentZoom;
+
+const simplificationScale = d3Scale
+  .scaleQuantize()
+  .domain([100, MAX_ZOOM])
+  .range(Array.from(Array(SIMPLIFICATION_LEVELS).keys()));
 
 class MapScroller extends React.Component {
   constructor(props) {
@@ -147,50 +120,6 @@ class MapScroller extends React.Component {
 
   componentWillUnmount() {
     window.removeEventListener("resize", this.resizeCanvas);
-  }
-
-  resizeCanvas() {
-    // Dont resize if height resize is negligable
-    // To counteract mobile phone resize events when scroll direction changes
-    if (
-      window.innerHeight < screenHeight &&
-      window.innerHeight > screenHeight - 80
-    ) {
-      return;
-    }
-
-    screenWidth =
-      document.documentElement.clientWidth || document.body.clientWidth; // minus scroll bars
-    screenHeight = window.innerHeight;
-    margins = Math.min(screenWidth, screenHeight) * 0.1;
-
-    canvas.attr("width", screenWidth).attr("height", screenHeight);
-
-    let preRotateScale = projection.scale();
-    let preRotateRotation = projection.rotate();
-
-    projection
-      .rotate(invertLongLat(currentLongLat)) // Rotate to Australia
-      .fitExtent(
-        // Auto zoom
-        [
-          [margins /* - screenWidth * 0.06 */, margins],
-          [screenWidth - margins, screenHeight - margins]
-        ],
-        australia[0]
-      );
-
-    // Reset the initial scale
-    initialGlobeScale = projection.scale();
-
-    // Then zoom in to new scale if necessary
-    // projection.scale(preRotateScale);
-    // projection.rotate(preRotateRotation);
-
-    // Re-set retina display and High DPI monitor scaling
-    canvasDpiScaler(canvasEl, context);
-
-    this.drawWorld(australia[0], australiaOutline[0], null, 1);
   }
 
   canvasInit(mapData, ausStatesGeo) {
@@ -288,6 +217,58 @@ class MapScroller extends React.Component {
 
     // Draw the inital state of the world
     this.drawWorld(australia[0], australiaOutline[0], null, 1);
+  }
+
+  resizeCanvas() {
+    // Dont resize if height resize is negligable
+    // To counteract mobile phone resize events when scroll direction changes
+    if (
+      window.innerHeight < screenHeight &&
+      window.innerHeight > screenHeight - 80
+    ) {
+      return;
+    }
+
+    screenWidth =
+      document.documentElement.clientWidth || document.body.clientWidth; // minus scroll bars
+    screenHeight = window.innerHeight;
+    margins = Math.min(screenWidth, screenHeight) * 0.1;
+
+    canvas.attr("width", screenWidth).attr("height", screenHeight);
+
+    let preRotateScale = projection.scale();
+    let preRotateRotation = projection.rotate();
+
+    projection
+      .rotate(invertLongLat(currentLongLat)) // Rotate to Australia
+      .fitExtent(
+        // Auto zoom
+        [
+          [margins /* - screenWidth * 0.06 */, margins],
+          [screenWidth - margins, screenHeight - margins]
+        ],
+        australia[0]
+      );
+
+    // Reset the initial scale
+    initialGlobeScale = projection.scale();
+
+    // Then zoom in to new scale if necessary
+    projection.scale(preRotateScale);
+    projection.rotate(preRotateRotation);
+
+    // Re-set retina display and High DPI monitor scaling
+    canvasDpiScaler(canvasEl, context);
+
+    // Keep current zoomed in state
+    currentZoom = projection.scale() / initialGlobeScale * 100;
+    // this.drawWorld(australia[0], australiaOutline[0], null, 1);
+    this.drawWorld(
+      australia[simplificationScale(currentZoom)],
+      australiaOutline[simplificationScale(currentZoom)],
+      null,
+      tweening
+    );
   }
 
   markTrigger(markerData) {
@@ -497,12 +478,12 @@ class MapScroller extends React.Component {
             // If tweening > 1 then it means it's tweening;
             tweening = time;
             // Calculate current zoom and set up simplification scale
-            let currentZoom = projection.scale() / initialGlobeScale * 100;
+            currentZoom = projection.scale() / initialGlobeScale * 100;
 
-            const simplificationScale = d3Scale
-              .scaleQuantize()
-              .domain([100, MAX_ZOOM])
-              .range(Array.from(Array(SIMPLIFICATION_LEVELS).keys()));
+            // const simplificationScale = d3Scale
+            //   .scaleQuantize()
+            //   .domain([100, MAX_ZOOM])
+            //   .range(Array.from(Array(SIMPLIFICATION_LEVELS).keys()));
 
             if (drawToggle) {
               // Draw a version of map based on zoom level
@@ -902,6 +883,20 @@ function getLGA(lgaCode) {
 
 function invertLongLat(longlat) {
   return [-longlat[0], -longlat[1]];
+}
+
+// Helper to get an array you want
+function getScaleDomain(min, max, stops) {
+  // Produces a d3 linear scale domain evenly spaced
+  const scaleDomain = [];
+  const size = max / (stops - 1);
+
+  let current = min;
+  for (let i = 0; i < stops; i++) {
+    scaleDomain.push(current);
+    current = current + size;
+  }
+  return scaleDomain;
 }
 
 // Calculate the area of a polygon
