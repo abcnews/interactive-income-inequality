@@ -306,8 +306,6 @@ class MapScroller extends React.Component {
       let previousRotation = projection.rotate();
       let currentRotation = d3Geo.geoCentroid(currentLgaGeometry);
 
-      console.log(currentRotation);
-
       // Zoom to states
       // TODO: fit projection to bounding box depending on STATE number
       const ausStatesGeo = this.props.ausStatesGeo.features[0];
