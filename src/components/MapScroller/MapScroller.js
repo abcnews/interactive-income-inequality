@@ -40,6 +40,7 @@ let context;
 let path;
 let projection;
 let canvas;
+let canvasEl;
 
 // Different levels of zoom pre-compilied
 let australia = [];
@@ -55,7 +56,7 @@ let drawToggle = true;
 // Set defaults
 let currentFocus = "72330"; // Middle of Australia (pretty much)
 // let previousFocus = "72330";
-let currentLongLat = [133.7751, -25.2744]; //getItem("australia").longlat;
+let currentLongLat = [133.15399233370441, -24.656909465155994]; //[133.7751, -25.2744]; //getItem("australia").longlat;
 
 // let resizeCanvas; // Attach event listeners later
 
@@ -186,6 +187,9 @@ class MapScroller extends React.Component {
     // projection.scale(preRotateScale);
     // projection.rotate(preRotateRotation);
 
+    // Re-set retina display and High DPI monitor scaling
+    canvasDpiScaler(canvasEl, context);
+
     this.drawWorld(australia[0], australiaOutline[0], null, 1);
   }
 
@@ -271,7 +275,7 @@ class MapScroller extends React.Component {
     context = canvas.node().getContext("2d");
 
     // A non-d3 element selection for Retina dn High DPI scaling
-    const canvasEl = document.querySelector("." + styles.stage);
+    canvasEl = document.querySelector("." + styles.stage);
 
     // Auto-convert canvas to Retina display and High DPI monitor scaling
     canvasDpiScaler(canvasEl, context);
@@ -320,6 +324,8 @@ class MapScroller extends React.Component {
 
       let previousRotation = projection.rotate();
       let currentRotation = d3Geo.geoCentroid(currentLgaGeometry);
+
+      console.log(currentRotation);
 
       // Zoom to states
       // TODO: fit projection to bounding box depending on STATE number
@@ -382,6 +388,7 @@ class MapScroller extends React.Component {
         if (newGlobeScale > MAX_ZOOM_LEVEL) newGlobeScale = MAX_ZOOM_LEVEL;
       }
 
+      // D3 requires us to transition on something
       const dummyTransition = {};
 
       // This calculates the duration of the transitions based on location and zoom

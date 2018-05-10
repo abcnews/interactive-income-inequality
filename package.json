@@ -39,6 +39,7 @@
     "d3-transition": "^1.1.1",
     "d3-zoom": "^1.7.1",
     "debounce": "^1.1.0",
+    "hoek": "^5.0.3",
     "mapbox": "^1.0.0-beta9",
     "nouislider": "^11.0.3",
     "point-in-polygon": "^1.0.1",
@@ -48,6 +49,7 @@
     "react-select": "^1.2.1",
     "smoothscroll-polyfill": "^0.4.3",
     "spanify": "^1.2.5",
+    "ssri": "^5.2.2",
     "topojson": "^3.0.2",
     "wnumb": "^1.1.0"
   }
