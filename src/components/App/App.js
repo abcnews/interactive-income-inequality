@@ -31,12 +31,15 @@ const scrollyteller = require("@abcnews/scrollyteller").loadOdysseyScrollyteller
   "mark"
 );
 
-const fragmentData = document.querySelector('[data-income-comparisons-root');
-console.log(fragmentData.dataset.rootUrl)
+// Let devs specify a custom base URL
+const fragmentData = document.querySelector("[data-income-comparisons-root]");
 
 // One map for LGA search (complex) and one for Scrolly map (simplified)
-const baseURL = fragmentData.dataset.rootUrl || "/";
-  // "http://www.abc.net.au/res/sites/news-projects/income-comparisons-react/master/";
+let baseURL = "/";
+// "http://www.abc.net.au/res/sites/news-projects/income-comparisons-react/master/";
+
+if (fragmentData && fragmentData.dataset.rootUrl) baseURL = fragmentData.dataset.rootUrl;
+
 const LGA_GEO_JSON_URL =
   // "http://WS204914.aus.aunty.abc.net.au:8000/LGA_2016_AUST_SEARCH.topo.json";
   baseURL + "LGA_2016_AUST_SEARCH.topo.json";

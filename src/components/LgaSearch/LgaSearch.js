@@ -3,6 +3,7 @@ const ReactDOM = require("react-dom");
 const MapboxClient = require("mapbox");
 const inside = require("point-in-polygon");
 const debounce = require("debounce");
+const smoothScroll = require('smoothscroll');
 
 const styles = require("./LgaSearch.scss");
 
@@ -84,9 +85,11 @@ class LgaSearch extends React.Component {
   }
 
   handleSelect(selectedOption) {
-    if (selectedOption == null) return;
     this.setState({ selectedOption });
     this.props.setCurrentLga(selectedOption);
+
+    // Handle clear the select
+    if (selectedOption == null) return;
 
     // Select element and scroll to it
     let firstPanel = document.querySelector(
@@ -94,7 +97,8 @@ class LgaSearch extends React.Component {
     );
 
     // Scroll the first panel into view
-    firstPanel.scrollIntoView({ behavior: "smooth", block: "center" });
+    // firstPanel.scrollIntoView({ behavior: "smooth", block: "center", inline: "center" });
+    smoothScroll(firstPanel);
   }
 
   async geocodeString(searchString) {

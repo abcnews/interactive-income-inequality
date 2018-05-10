@@ -126,7 +126,9 @@ class MapScroller extends React.Component {
     // Hack to hide the a tag we scroll to with LgaSearch
     const scrollToEl = document.querySelector('[name="scrolltothispoint"]');
     scrollToEl.style.position = "absolute";
-    
+    scrollToEl.style.marginTop = "-50vh";
+    // scrollToEl.style.display = "none";
+
     // Check to see if position.sticky is supported
     // and then apply sticky styles
     stickifyStage();
