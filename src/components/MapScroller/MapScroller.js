@@ -123,6 +123,10 @@ class MapScroller extends React.Component {
   }
 
   canvasInit(mapData, ausStatesGeo) {
+    // Hack to hide the a tag we scroll to with LgaSearch
+    const scrollToEl = document.querySelector('[name="scrolltothispoint"]');
+    scrollToEl.style.position = "absolute";
+    
     // Check to see if position.sticky is supported
     // and then apply sticky styles
     stickifyStage();
@@ -509,157 +513,6 @@ class MapScroller extends React.Component {
         // Call back d3-queue to let it know the transition is finished
         callback(null);
       }, transitionTime + Math.max(zoomDelay, rotationDelay));
-
-      // Determine if camera should zoom out first
-      // if (markerData.zoomout) {
-      //   zoomOutTween.tween("zoomout", () => {
-      //     let scaleOutInterpolate = d3Interpolate.interpolate(
-      //       projection.scale(),
-      //       initialGlobeScale
-      //     );
-      //     return time => {
-      //       projection.scale(scaleOutInterpolate(time));
-      //     };
-      //   });
-
-      //    rotationInterpolate = d3Interpolate.interpolate(previousRotation, [
-      //     -currentRotation[0],
-      //     -currentRotation[1],
-      //     0
-      //   ]);
-
-      //    scaleInterpolate = d3Interpolate.interpolate(
-      //     initialGlobeScale,
-      //     newGlobeScale
-      //   );
-
-      //   if (newGlobeScale > previousGlobeScale) {
-      //     rotationDelay = 0;
-      //     zoomDelay = transitionTime * transitionDelayMultiplyer;
-      //     isZoomingIn = true;
-      //   } else {
-      //     rotationDelay = transitionTime * transitionDelayMultiplyer;
-      //     zoomDelay = 0;
-      //     isZoomingIn = false;
-      //   }
-
-      //   rotationTween.delay(zoomOutDuration + rotationDelay);
-      //   zoomTween.delay(zoomOutDuration + zoomDelay);
-
-      //   rotationTween.tween("rotation", () => {
-      //     // Return the tween function
-      //     return time => {
-      //       projection.rotate(rotationInterpolate(time));
-      //     };
-      //   });
-
-      //   zoomTween.tween("zoom", () => {
-      //     return time => {
-      //       projection.scale(scaleInterpolate(time));
-      //     };
-      //   });
-
-      //   // Separate render tween to handle different delays
-      //   d3Selection
-      //     .select(dummyTransition)
-      //     .transition("render")
-      //     .delay(0)
-      //     .duration(transitionTime + Math.max(zoomDelay, rotationDelay) + zoomOutDuration) // transition + delay
-      //     // .ease(d3Ease.easeLinear)
-      //     .tween("render", () => {
-      //       // Return the tween function
-      //       return time => {
-      //         // If tweening > 1 then it means it's tweening;
-      //         tweening = time;
-      //         // Calculate current zoom and set up simplification scale
-      //         let currentZoom = projection.scale() / initialGlobeScale * 100;
-
-      //         const simplificationScale = d3Scale
-      //           .scaleQuantize()
-      //           .domain([100, MAX_ZOOM])
-      //           .range(Array.from(Array(SIMPLIFICATION_LEVELS).keys()));
-
-      //         // Draw a version of map based on zoom level
-      //         this.drawWorld(
-      //           australia[simplificationScale(currentZoom)],
-      //           markerData,
-      //           tweening
-      //         );
-
-      //         if (tweening === 1)
-      //           this.setState({ previousMarkerData: markerData });
-      //       };
-      //     });
-
-      //   setTimeout(function() {
-      //     canvas.style("transition", "background-color 0.3s");
-      //     // Transition background after spin/zoom
-      //     if (markerData.background && markerData.background === "dark")
-      //       canvas.style("background-color", "#333");
-      //     // else canvas.style("background-color", "#f9f9f9");
-
-      //     // Call back d3-queue to let it know the transition is finished
-      //     callback(null);
-      //   }, transitionTime +
-      //     Math.max(zoomDelay, rotationDelay) +
-      //     zoomOutDuration);
-      // } else {
-
-      // }
-
-      // console.log("Previous: ");
-      // console.log(this.state.previousMarkerData);
-      // console.log(" ");
-      // console.log("Current: ");
-      // console.log(markerData);
-
-      /*
-       * The following will be helpful if we want to zoom out first
-       * and then zoom back in again. In case we are traveling 
-       * looooooong distances with limited zoom.
-       */
-
-      // d3Selection
-      //   .select(dummyTransition)
-      //   .transition("zoom")
-      //   .delay(0)
-      //   .duration(transitionTime / 2 + 500) //Math.abs(zoomInterpolate.duration))
-      //   .tween("zoom", () => {
-      //     // Return the tween function
-      //     return time => {
-      //       let scaleInterpolate = d3Interpolate.interpolate(
-      //         previousGlobeScale,
-      //         initialGlobeScale
-      //       );
-
-      //       projection.scale(scaleInterpolate(time));
-      //     };
-      //   })
-      //   // Second half of transition
-      //   .transition()
-      //   .tween("zoom", () => {
-      //     // Return the tween function
-      //     return time => {
-      //       let scaleInterpolate = d3Interpolate.interpolate(
-      //         projection.scale(),
-      //         newGlobeScale
-      //       );
-
-      //       projection.scale(scaleInterpolate(time));
-      //       if (tweening === 1) {
-      //         // Calculate current zoom and set up simplification scale
-      //         let currentZoom = projection.scale() / initialGlobeScale * 100;
-
-      //         const simplificationScale = d3Scale
-      //           .scaleQuantize()
-      //           .domain([100, MAX_ZOOM])
-      //           .range(Array.from(Array(SIMPLIFICATION_LEVELS).keys()));
-
-      //         // Draw a version of map based on zoom level
-      //         this.drawWorld(australia[simplificationScale(currentZoom)]);
-      //       }
-      //     };
-      //   });
     } else callback(null); // Always call back d3-queue or else it hangs forever
   }
 

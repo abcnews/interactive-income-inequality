@@ -31,9 +31,12 @@ const scrollyteller = require("@abcnews/scrollyteller").loadOdysseyScrollyteller
   "mark"
 );
 
+const fragmentData = document.querySelector('[data-income-comparisons-root');
+console.log(fragmentData.dataset.rootUrl)
+
 // One map for LGA search (complex) and one for Scrolly map (simplified)
-const baseURL =
-  "http://www.abc.net.au/res/sites/news-projects/income-comparisons-react/master/";
+const baseURL = fragmentData.dataset.rootUrl || "/";
+  // "http://www.abc.net.au/res/sites/news-projects/income-comparisons-react/master/";
 const LGA_GEO_JSON_URL =
   // "http://WS204914.aus.aunty.abc.net.au:8000/LGA_2016_AUST_SEARCH.topo.json";
   baseURL + "LGA_2016_AUST_SEARCH.topo.json";
@@ -395,7 +398,11 @@ class App extends React.Component {
         </DumbbellTop>
 
         <DumbbellUser>
-          <p className={styles.paragraphText}>By contrast, the top five professions make up {user.top1 + user.top2 + user.top3 + user.top4 + user.top5} per cent in your bracket.</p>
+          <p className={styles.paragraphText}>
+            By contrast, the top five professions make up{" "}
+            {user.top1 + user.top2 + user.top3 + user.top4 + user.top5} per cent
+            in your bracket.
+          </p>
           <Dumbbell
             label={user.name1}
             dot1Percent={user.value1}
@@ -448,8 +455,6 @@ class App extends React.Component {
             line1Percent={24.88}
             percentMultiplier={1}
             maxValue={100}
-            // dot1Color="#78b8c4"
-            // dot1TextColor="#1B7C8F"
           />
         </DumbbellEducation>
 
@@ -461,8 +466,6 @@ class App extends React.Component {
             line1Percent={49.64}
             percentMultiplier={1}
             maxValue={100}
-            // dot1Color="#78b8c4"
-            // dot1TextColor="#1B7C8F"
           />
         </DumbbellGender>
         <DumbbellIndigenous>
@@ -473,8 +476,6 @@ class App extends React.Component {
             line1Percent={2.05}
             percentMultiplier={1}
             maxValue={10}
-            // dot1Color="#78b8c4"
-            // dot1TextColor="#1B7C8F"
           />
         </DumbbellIndigenous>
         <DumbbellBorn>
@@ -485,8 +486,6 @@ class App extends React.Component {
             line1Percent={67}
             percentMultiplier={1}
             maxValue={100}
-            // dot1Color="#78b8c4"
-            // dot1TextColor="#1B7C8F"
           />
         </DumbbellBorn>
         <DumbbellVoluntary>
@@ -497,8 +496,6 @@ class App extends React.Component {
             line1Percent={20.76}
             percentMultiplier={1}
             maxValue={100}
-            // dot1Color="#78b8c4"
-            // dot1TextColor="#1B7C8F"
           />
         </DumbbellVoluntary>
         <DumbbellCar>
@@ -509,8 +506,6 @@ class App extends React.Component {
             line1Percent={64.18}
             percentMultiplier={1}
             maxValue={100}
-            // dot1Color="#78b8c4"
-            // dot1TextColor="#1B7C8F"
           />
           <Dumbbell
             label="Owns three or more cars"
@@ -519,8 +514,6 @@ class App extends React.Component {
             line1Percent={25.51}
             percentMultiplier={1}
             maxValue={100}
-            // dot1Color="#78b8c4"
-            // dot1TextColor="#1B7C8F"
           />
         </DumbbellCar>
         <DumbbellMarriage>

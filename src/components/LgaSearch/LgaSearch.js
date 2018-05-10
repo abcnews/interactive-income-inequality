@@ -84,26 +84,17 @@ class LgaSearch extends React.Component {
   }
 
   handleSelect(selectedOption) {
+    if (selectedOption == null) return;
     this.setState({ selectedOption });
     this.props.setCurrentLga(selectedOption);
 
-    // TODO: replace with actual selector that won't break if content changes
+    // Select element and scroll to it
     let firstPanel = document.querySelector(
-      "#main_content > div:nth-child(8) > div > div > div:nth-child(2)"
+      '[name="scrolltothispoint"]'
     );
 
-    console.log(firstPanel);
-
-    console.log(selectedOption);
-
     // Scroll the first panel into view
-    firstPanel.scrollIntoView({behavior: "smooth", block: "center"});
-
-    // window.scrollBy({
-    //   top: 1000, // could be negative value
-    //   left: 0,
-    //   behavior: 'smooth'
-    // });
+    firstPanel.scrollIntoView({ behavior: "smooth", block: "center" });
   }
 
   async geocodeString(searchString) {
@@ -240,7 +231,13 @@ class LgaSearch extends React.Component {
     // even though debouncing might not need it
   }
 
+  componentDidMount() {
+    
+  }
+
   render() {
+    
+
     const { selectedOption } = this.state;
     const value = selectedOption && selectedOption.value;
 
@@ -264,6 +261,7 @@ class LgaSearch extends React.Component {
 
             return options;
           }}
+          autoBlur={true}
           onBlurResetsInput={false}
           onCloseResetsInput={false}
           placeholder="Enter LGA, postcode or address"
