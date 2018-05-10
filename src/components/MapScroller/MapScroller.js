@@ -34,6 +34,7 @@ const MIN_TRANSITION_TIME = 700;
 
 // File scope vars
 let initialGlobeScale;
+let newGlobeScale;
 let dataZoom = 100;
 let context;
 let path;
@@ -55,6 +56,8 @@ let drawToggle = true;
 let currentFocus = "72330"; // Middle of Australia (pretty much)
 // let previousFocus = "72330";
 let currentLongLat = [133.7751, -25.2744]; //getItem("australia").longlat;
+
+// let resizeCanvas; // Attach event listeners later
 
 // documentElement is for Firefox support apparently
 let screenWidth =
@@ -128,14 +131,62 @@ class MapScroller extends React.Component {
     super(props);
 
     this.state = { highlight: true, hasFocused: false };
+
     this.canvasInit = this.canvasInit.bind(this);
     this.markTrigger = this.markTrigger.bind(this);
     this.doMarker = this.doMarker.bind(this);
+    this.resizeCanvas = this.resizeCanvas.bind(this);
   }
 
   componentDidMount() {
     // Wait until mounted and then initialise the canvas
     this.canvasInit(this.props.mapData, this.props.ausStatesGeo);
+    window.addEventListener("resize", this.resizeCanvas);
+  }
+
+  componentWillUnmount() {
+    window.removeEventListener("resize", this.resizeCanvas);
+  }
+
+  resizeCanvas() {
+    // Dont resize if height resize is negligable
+    // To counteract mobile phone resize events when scroll direction changes
+    if (
+      window.innerHeight < screenHeight &&
+      window.innerHeight > screenHeight - 80
+    ) {
+      return;
+    }
+
+    screenWidth =
+      document.documentElement.clientWidth || document.body.clientWidth; // minus scroll bars
+    screenHeight = window.innerHeight;
+    margins = Math.min(screenWidth, screenHeight) * 0.1;
+
+    canvas.attr("width", screenWidth).attr("height", screenHeight);
+
+    let preRotateScale = projection.scale();
+    let preRotateRotation = projection.rotate();
+
+    projection
+      .rotate(invertLongLat(currentLongLat)) // Rotate to Australia
+      .fitExtent(
+        // Auto zoom
+        [
+          [margins /* - screenWidth * 0.06 */, margins],
+          [screenWidth - margins, screenHeight - margins]
+        ],
+        australia[0]
+      );
+
+    // Reset the initial scale
+    initialGlobeScale = projection.scale();
+
+    // Then zoom in to new scale if necessary
+    // projection.scale(preRotateScale);
+    // projection.rotate(preRotateRotation);
+
+    this.drawWorld(australia[0], australiaOutline[0], null, 1);
   }
 
   canvasInit(mapData, ausStatesGeo) {
@@ -278,7 +329,7 @@ class MapScroller extends React.Component {
       let previousGlobeScale = projection.scale();
 
       // Zoom in so that percentage set in marker relative to initial 100%
-      let newGlobeScale = initialGlobeScale * (dataZoom / 100);
+      newGlobeScale = initialGlobeScale * (dataZoom / 100);
 
       if (!dataZoom || dataZoom === 0) {
         if (markerData.lga <= 8) {
