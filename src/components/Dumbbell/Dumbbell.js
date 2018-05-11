@@ -77,7 +77,15 @@ class Dumbbell extends React.Component {
     let dot2LabelRightStyle = {
       left: "calc(" + this.scale(dot2Percent) + "% + 10px)"
     };
-    let line1LabelStyle = {left: this.scale(line1Percent) + "%"};
+
+    // Don't push the average too far
+    // TODO: maybe make this more elegant by calculating the width
+    let lineLabelWithinLimits = this.scale(line1Percent);
+    
+    if (lineLabelWithinLimits < 10) lineLabelWithinLimits = 10;
+    else if (lineLabelWithinLimits > 90) lineLabelWithinLimits = 90;
+
+    let line1LabelStyle = { left: lineLabelWithinLimits + "%" };
 
     // Custom dot colors
     if (this.props.dot1Color && this.props.dot1TextColor) {
