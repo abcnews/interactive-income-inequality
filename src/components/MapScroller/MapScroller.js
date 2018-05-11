@@ -522,6 +522,8 @@ class MapScroller extends React.Component {
     // Clear the canvas ready for redraw
     context.clearRect(0, 0, screenWidth, screenHeight);
 
+    let targetElement;
+
     australiaGeoJson.features.forEach(element => {
       // Get bounds of current LGA
       const bounds = path.bounds(element);
@@ -534,8 +536,8 @@ class MapScroller extends React.Component {
       if (bounds[1][0] < 0) return;
       if (bounds[1][1] < 0) return;
 
-      let fadeOutOpacity = 1 - tweening + 0.2;
-      let fadeInOpacity = tweening + 0.2;
+      let fadeOutOpacity = 1 - tweening;
+      let fadeInOpacity = tweening;
 
       // Highlight Australian state if specified in Scrollyteller
       // Fade out all the rest
@@ -639,12 +641,15 @@ class MapScroller extends React.Component {
         this.state.highlight &&
         element.properties.LGA_CODE16 === markerData.lga + ""
       ) {
-        context.beginPath();
-        context.fillStyle = "#FF5733";
-        context.strokeStyle = "rgba(255, 255, 255, 0.4)";
-        path(element);
-        context.fill();
-        context.stroke();
+        targetElement = element;
+        // context.beginPath();
+        // context.fillStyle = colorScale(element.properties.TOP); //"#FF5733";
+
+        // context.strokeStyle = "#FF5733";
+        // context.lineWidth = 4
+        // path(element);
+        // context.fill();
+        // context.stroke();
         return;
       }
 
@@ -665,6 +670,19 @@ class MapScroller extends React.Component {
       context.strokeStyle = "rgba(100, 100, 100, 0.6)";
       context.lineWidth = 1.1;
       path(australiaOutline);
+      context.stroke();
+    }
+
+    if (targetElement) {
+      // Fill the target on top
+      context.beginPath();
+      context.fillStyle = colorScale(targetElement.properties.TOP); //"#FF5733";
+
+      context.strokeStyle = "#FF5733";
+      if (tweening > 0.9) context.lineWidth = 3.3;
+      else context.lineWidth = 1.1;      
+      path(targetElement);
+      context.fill();
       context.stroke();
     }
   }
