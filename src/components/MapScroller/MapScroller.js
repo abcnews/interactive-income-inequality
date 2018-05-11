@@ -534,8 +534,8 @@ class MapScroller extends React.Component {
       if (bounds[1][0] < 0) return;
       if (bounds[1][1] < 0) return;
 
-      let fadeOutOpacity = 1 - tweening;
-      let fadeInOpacity = tweening;
+      let fadeOutOpacity = 1 - tweening + 0.2;
+      let fadeInOpacity = tweening + 0.2;
 
       // Highlight Australian state if specified in Scrollyteller
       // Fade out all the rest
