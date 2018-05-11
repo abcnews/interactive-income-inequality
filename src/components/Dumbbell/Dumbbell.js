@@ -77,6 +77,7 @@ class Dumbbell extends React.Component {
     let dot2LabelRightStyle = {
       left: "calc(" + this.scale(dot2Percent) + "% + 10px)"
     };
+    let line1LabelStyle = {left: this.scale(line1Percent) + "%"};
 
     // Custom dot colors
     if (this.props.dot1Color && this.props.dot1TextColor) {
@@ -89,14 +90,13 @@ class Dumbbell extends React.Component {
       <div className={styles.wrapper}>
         <div className={styles.label}>{this.props.label}</div>
         <div className={styles.chart}>
-          
           {line1Percent && (
             <span
               className={styles.line1}
               style={{ left: this.scale(line1Percent) + "%" }}
             />
           )}
-          
+
           {dot1Percent && <span className={styles.dot1} style={dot1Style} />}
           <span className={styles.dot2} style={dot2Style} />
           {/* Check if we want dot1 labels left or right */}
@@ -113,8 +113,8 @@ class Dumbbell extends React.Component {
                 {this.getActualPercent(dot1Percent)}%
               </span>
             ))}
-            {/* Dot 1 labels if applicable */}
-            {this.props.dot1Label &&
+          {/* Dot 1 labels if applicable */}
+          {this.props.dot1Label &&
             (dot1Align === "left" ? (
               <span className={styles.dot1Label} style={dot1LabelStyle}>
                 {this.props.dot1Label}
@@ -124,11 +124,11 @@ class Dumbbell extends React.Component {
                 className={styles.dot1LabelRight}
                 style={dot1LabelRightStyle}
               >
-                 {this.props.dot1Label}
+                {this.props.dot1Label}
               </span>
             ))}
-            {/* Dot 2 labels if applicable */}
-            {this.props.dot2Label &&
+          {/* Dot 2 labels if applicable */}
+          {this.props.dot2Label &&
             (dot2Align === "left" ? (
               <span className={styles.dot2Label} style={dot2LabelStyle}>
                 {this.props.dot2Label}
@@ -138,7 +138,7 @@ class Dumbbell extends React.Component {
                 className={styles.dot2LabelRight}
                 style={dot2LabelRightStyle}
               >
-                 {this.props.dot2Label}
+                {this.props.dot2Label}
               </span>
             ))}
           {/* Check if we want dot2 percents left or right */}
@@ -154,7 +154,13 @@ class Dumbbell extends React.Component {
               {this.getActualPercent(dot2Percent)}%
             </span>
           )}
+          {/* Mid bar */}
           <div className={styles.midBar} />
+          {this.props.line1Label && (
+            <span className={styles.line1Label} style={line1LabelStyle}>
+              {this.props.line1Label}
+            </span>
+          )}
         </div>
       </div>
     );

@@ -342,7 +342,7 @@ class App extends React.Component {
         />
 
         {/* Conditionally render MapScroller if data loaded */}
-        {this.state.mapData &&
+        {/* {this.state.mapData &&
           this.state.scrollytellerObject && (
             <MapScroller
               scrollyteller={this.state.scrollytellerObject}
@@ -353,7 +353,7 @@ class App extends React.Component {
               currentAusState={this.state.currentAusState}
               doMarkerEvent={this.doMarkerEvent}
             />
-          )}
+          )} */}
 
         <DumbbellTop>
           <Dumbbell
@@ -363,6 +363,7 @@ class App extends React.Component {
             dot2Percent="7.22"
             dot2Label="Top bracket"
             line1Percent="0.56"
+            line1Label="Average"
             percentMultiplier={1}
             maxValue={10}
           />
@@ -413,6 +414,7 @@ class App extends React.Component {
             dot2Percent={user.top1}
             dot2Label="Top bracket"
             line1Percent={user.average1}
+            line1Label="Average"
             percentMultiplier={1}
             maxValue={dumbbellUserMax}
           />

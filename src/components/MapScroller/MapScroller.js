@@ -100,6 +100,13 @@ const simplificationScale = d3Scale
   .domain([100, MAX_ZOOM])
   .range(Array.from(Array(SIMPLIFICATION_LEVELS).keys()));
 
+// Tryign smoother zoom out first (not working)
+// function zoomArc(time) {
+//   let arc = Math.abs(0.5 - time);
+//   let multiplier = 0.5 - arc;
+//   return 200 * multiplier;
+// }
+
 class MapScroller extends React.Component {
   constructor(props) {
     super(props);
@@ -215,14 +222,36 @@ class MapScroller extends React.Component {
     // Auto-convert canvas to Retina display and High DPI monitor scaling
     canvasDpiScaler(canvasEl, context);
 
+    let clip = d3Geo
+      .geoIdentity()
+      .clipExtent([[0, 0], [screenWidth, screenHeight]]);
+
     // Build a path generator for our orthographic projection
     path = d3Geo
       .geoPath()
-      .projection(projection)
+      // .projection(projection)
+      .projection({
+        // Here we return a clipped stream of the projection
+        stream: function(s) {
+          return projection.stream(clip.stream(s));
+        }
+      })
       .context(context);
 
     // Draw the inital state of the world
     this.drawWorld(australia[0], australiaOutline[0], null, 1);
+
+    // Override the viewheight vh margins to prevent jumping on mobile scroll changing directions
+    let blockArray = document.getElementsByClassName("Block-content");
+
+    for (var i = 0; i < blockArray.length; i++) {
+      blockArray[i].style.marginTop = screenHeight / 2 - 16 + "px";
+      blockArray[i].style.marginBottom = screenHeight / 2 - 16 + "px";
+    }
+
+    // Top and bottom have full length margins
+    blockArray[0].style.marginTop = screenHeight + "px";
+    blockArray[blockArray.length - 1].style.marginBottom = screenHeight + "px";
   }
 
   resizeCanvas() {
@@ -460,12 +489,13 @@ class MapScroller extends React.Component {
         // Return the tween function
         return time => {
           projection.rotate(rotationInterpolate(time));
+          // projection.scale(projection.scale() - zoomArc(time));
         };
       });
 
       zoomTween.tween("zoom", () => {
         return time => {
-          projection.scale(scaleInterpolate(time));
+          projection.scale(Math.round(scaleInterpolate(time)));
         };
       });
 
@@ -680,7 +710,7 @@ class MapScroller extends React.Component {
 
       context.strokeStyle = "#FF5733";
       if (tweening > 0.9) context.lineWidth = 3.3;
-      else context.lineWidth = 1.1;      
+      else context.lineWidth = 1.1;
       path(targetElement);
       context.fill();
       context.stroke();

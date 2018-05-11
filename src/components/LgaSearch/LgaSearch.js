@@ -93,6 +93,8 @@ class LgaSearch extends React.Component {
 
     // Select element and scroll to it
     let firstPanel = document.querySelector('[name="scrolltothispoint"]');
+    if (!firstPanel) return;
+
 
     // Scroll the first panel into view
     // firstPanel.scrollIntoView({ behavior: "smooth", block: "center", inline: "center" });
