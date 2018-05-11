@@ -403,7 +403,7 @@ class App extends React.Component {
         <DumbbellUser>
           <p className={styles.paragraphText}>
             By contrast, the top five professions make up{" "}
-            {user.top1 + user.top2 + user.top3 + user.top4 + user.top5} per cent
+            {parseFloat(user.top1 + user.top2 + user.top3 + user.top4 + user.top5).toFixed(2)} per cent
             in your bracket.
           </p>
           <Dumbbell
