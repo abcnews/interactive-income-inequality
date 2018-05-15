@@ -11,7 +11,7 @@ const styles = require("./LgaSearch.scss");
 const smoothscroll = require("smoothscroll-polyfill");
 smoothscroll.polyfill();
 
-// const Select = require("react-select").default;
+const Select = require("react-select").default;
 const Async = require("react-select").Async;
 
 // Configuration
@@ -94,7 +94,6 @@ class LgaSearch extends React.Component {
     // Select element and scroll to it
     let firstPanel = document.querySelector('[name="scrolltothispoint"]');
     if (!firstPanel) return;
-
 
     // Scroll the first panel into view
     // firstPanel.scrollIntoView({ behavior: "smooth", block: "center", inline: "center" });
@@ -265,6 +264,12 @@ class LgaSearch extends React.Component {
           onBlurResetsInput={false}
           onCloseResetsInput={false}
           placeholder="Enter LGA, postcode or address"
+        />
+        <p />
+        {/* Testing possible async filtering */}
+        <Select 
+        name="lga-search"
+        options={lgas}
         />
       </div>,
       document.querySelector(".addressinput")
