@@ -270,6 +270,10 @@ class LgaSearch extends React.Component {
         <Select 
         name="lga-search"
         options={lgas}
+        filterOption={(option, filter) => {
+          console.log(option, filter);
+          return true;
+        }}
         />
       </div>,
       document.querySelector(".addressinput")
