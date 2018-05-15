@@ -235,7 +235,7 @@ class LgaSearch extends React.Component {
   }
 
 renderOption(option) {
-  return <div> option.label + <small>small</small></div>;
+  return <div> {option.label} + <small>small</small></div>;
 }
 
 
@@ -271,7 +271,7 @@ renderOption(option) {
         />
         <p />
         {/* Testing possible async filtering */}
-        <Select 
+        {/* <Select 
         name="lga-search"
         options={lgas}
         filterOption={(option, filter) => {
@@ -280,7 +280,7 @@ renderOption(option) {
         }}
         // isLoading={true}
         optionRenderer={this.renderOption}
-        />
+        /> */}
       </div>,
       document.querySelector(".addressinput")
     );
