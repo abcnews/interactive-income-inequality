@@ -43,23 +43,23 @@ lgas = lgas.map(lga => {
   let stateCode = Math.floor(lga.value / 10000);
 
   if (stateCode === 1) {
-    return { value: lga.value, label: lga.label + " (NSW)" };
+    return { value: lga.value, label: lga.label + ",New South Wales" };
   } else if (stateCode === 2) {
-    return { value: lga.value, label: lga.label + " (VIC)" };
+    return { value: lga.value, label: lga.label + ",Victoria" };
   } else if (stateCode === 3) {
-    return { value: lga.value, label: lga.label + " (QLD)" };
+    return { value: lga.value, label: lga.label + ",Queensland" };
   } else if (stateCode === 4) {
-    return { value: lga.value, label: lga.label + " (SA)" };
+    return { value: lga.value, label: lga.label + ",South Australia" };
   } else if (stateCode === 5) {
-    return { value: lga.value, label: lga.label + " (WA)" };
+    return { value: lga.value, label: lga.label + ",Western Australia" };
   } else if (stateCode === 6) {
-    return { value: lga.value, label: lga.label + " (TAS)" };
+    return { value: lga.value, label: lga.label + ",Tasmania" };
   } else if (stateCode === 7) {
-    return { value: lga.value, label: lga.label + " (NT)" };
+    return { value: lga.value, label: lga.label + ",Northern Territory" };
   } else if (stateCode === 8) {
-    return { value: lga.value, label: lga.label + " (ACT)" };
+    return { value: lga.value, label: lga.label + "Australian Capital Territory" };
   } else if (stateCode === 9) {
-    return { value: lga.value, label: lga.label + " (OTHER)" };
+    return { value: lga.value, label: lga.label + ",Other" };
   } else {
     return { value: lga.value, label: lga.label };
   }
@@ -235,7 +235,8 @@ class LgaSearch extends React.Component {
   }
 
 renderOption(option) {
-  return <div> {option.label} + <small>small</small></div>;
+  let labelSplit = option.label.split(",");
+  return <div>{labelSplit[0]} <small>{labelSplit[1]}</small></div>;
 }
 
 
