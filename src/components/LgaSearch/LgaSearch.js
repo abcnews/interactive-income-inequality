@@ -234,7 +234,10 @@ class LgaSearch extends React.Component {
     // even though debouncing might not need it
   }
 
-  componentDidMount() {}
+renderOption(option) {
+  return <div> option.label + <small>small</small></div>;
+}
+
 
   render() {
     const { selectedOption } = this.state;
@@ -264,6 +267,7 @@ class LgaSearch extends React.Component {
           onBlurResetsInput={false}
           onCloseResetsInput={false}
           placeholder="Enter LGA, postcode or address"
+          optionRenderer={this.renderOption}
         />
         <p />
         {/* Testing possible async filtering */}
@@ -271,9 +275,11 @@ class LgaSearch extends React.Component {
         name="lga-search"
         options={lgas}
         filterOption={(option, filter) => {
-          console.log(option, filter);
+          // console.log(option, filter);
           return true;
         }}
+        // isLoading={true}
+        optionRenderer={this.renderOption}
         />
       </div>,
       document.querySelector(".addressinput")
