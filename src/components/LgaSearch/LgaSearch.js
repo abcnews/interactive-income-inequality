@@ -8,8 +8,8 @@ const smoothScroll = require("smoothscroll");
 const styles = require("./LgaSearch.scss");
 
 // Smooth scroll into view support for Safari, Edge, IE, etc.
-const smoothscroll = require("smoothscroll-polyfill");
-smoothscroll.polyfill();
+const smoothScrollPollyfill = require("smoothscroll-polyfill");
+smoothScrollPollyfill.polyfill();
 
 const Select = require("react-select").default;
 const Async = require("react-select").Async;
@@ -65,12 +65,12 @@ lgas = lgas.map(lga => {
   }
 });
 
-// Filter unwanted
+// Filter unwanted LGAs
 lgas = lgas.filter(lga => {
   return lga.label.search(/No usual address/) < 0;
 });
 
-// Sort alphabetical
+// Sort LGAs alphabetically
 lgas = lgas.sort((a, b) => a.label.localeCompare(b.label));
 
 class LgaSearch extends React.Component {
@@ -97,6 +97,8 @@ class LgaSearch extends React.Component {
 
     // Scroll the first panel into view
     // firstPanel.scrollIntoView({ behavior: "smooth", block: "center", inline: "center" });
+
+    // Use an NPM module to scroll because native scolling is not consistent across browsers
     smoothScroll(firstPanel);
   }
 
@@ -113,6 +115,7 @@ class LgaSearch extends React.Component {
 
     if (returnedData && returnedData.entity.features.length === 0) {
       console.log("Address not found...");
+      // TODO: alert the user
       return [];
     }
 
@@ -137,20 +140,19 @@ class LgaSearch extends React.Component {
       let foundLGA;
 
       // Loop through all Local Government Areas
-      // TODO: maybe make this a separate function
       localAreas.forEach(LGA => {
         let currentLGA = LGA.geometry;
 
         if (currentLGA && currentLGA.type === "Polygon") {
           // Handle Polygon geometry types
           if (inside(searchLongLat, currentLGA.coordinates[0])) {
-            foundLGA = LGA; //.properties.LGA_NAME16;
+            foundLGA = LGA;
           }
         } else if (currentLGA && currentLGA.type === "MultiPolygon") {
           // Handle MultiPolygon geometry type
           currentLGA.coordinates.forEach(polygon => {
             if (inside(searchLongLat, polygon[0])) {
-              foundLGA = LGA; //.properties.LGA_NAME16;
+              foundLGA = LGA;
             }
           });
         }
@@ -168,7 +170,7 @@ class LgaSearch extends React.Component {
 
       // Check if string is a postcode
       if (/^[0-9]{4}$/.test(input)) {
-        console.log("Postcode detected...");
+        // console.log("Postcode detected...");
 
         let lgaFromPostcode = await this.addressToLGAs(
           input,
@@ -193,7 +195,7 @@ class LgaSearch extends React.Component {
 
         // Show matching local LGAs otherwise assume address search
         if (filteredLgas.length == 0) {
-          console.log("searching by address");
+          // console.log("searching by address");
 
           let lgasFromAddress = await this.addressToLGAs(
             input,
@@ -234,30 +236,34 @@ class LgaSearch extends React.Component {
     // even though debouncing might not need it
   }
 
-renderOption(option) {
-  // Add formatting tags to drop down options
-  let labelSplit = option.label.split("(");
- 
-  labelSplit[0] = labelSplit[0].slice(0, -1);
-  labelSplit[1] = labelSplit[1].slice(0, -1);
+  renderOption(option) {
+    // Add formatting tags to drop down options
+    let labelSplit = option.label.split("(");
 
-  let lgaOption = labelSplit[0]
-  let stateAbbreviation = labelSplit[1];
-  let stateFullName = stateAbbreviation;
+    labelSplit[0] = labelSplit[0].slice(0, -1);
+    labelSplit[1] = labelSplit[1].slice(0, -1);
 
-  if (stateAbbreviation === "NSW") stateFullName = "New South Wales";
-  else if (stateAbbreviation === "VIC") stateFullName = "Victoria";
-  else if (stateAbbreviation === "QLD") stateFullName = "Queensland";
-  else if (stateAbbreviation === "SA") stateFullName = "South Australia";
-  else if (stateAbbreviation === "WA") stateFullName = "Western Australia";
-  else if (stateAbbreviation === "TAS") stateFullName = "Tasmania";
-  else if (stateAbbreviation === "NT") stateFullName = "Northern Territory";
-  else if (stateAbbreviation === "ACT") stateFullName = "Australian Capital Territory";
-  else if (stateAbbreviation === "OTHER") stateFullName = "Other";
+    let lgaOption = labelSplit[0];
+    let stateAbbreviation = labelSplit[1];
+    let stateFullName = stateAbbreviation;
 
-  return <div>{lgaOption} <small>{stateFullName}</small></div>;
-}
+    if (stateAbbreviation === "NSW") stateFullName = "New South Wales";
+    else if (stateAbbreviation === "VIC") stateFullName = "Victoria";
+    else if (stateAbbreviation === "QLD") stateFullName = "Queensland";
+    else if (stateAbbreviation === "SA") stateFullName = "South Australia";
+    else if (stateAbbreviation === "WA") stateFullName = "Western Australia";
+    else if (stateAbbreviation === "TAS") stateFullName = "Tasmania";
+    else if (stateAbbreviation === "NT") stateFullName = "Northern Territory";
+    else if (stateAbbreviation === "ACT")
+      stateFullName = "Australian Capital Territory";
+    else if (stateAbbreviation === "OTHER") stateFullName = "Other";
 
+    return (
+      <div>
+        {lgaOption} <small>{stateFullName}</small>
+      </div>
+    );
+  }
 
   render() {
     const { selectedOption } = this.state;
@@ -273,14 +279,7 @@ renderOption(option) {
           // autoload={false}
           filterOptions={(options, filter, currentValues) => {
             // Do filtering in loadOptions instead
-
-            // let formattedOptions = options.map((option) => {
-            //   return {
-            //     value: option.value,
-            //     label: option.label + " <small>test</small>"
-            //   }
-            // })
-
+            // Just return options unchanged
             return options;
           }}
           autoBlur={true}
@@ -289,18 +288,6 @@ renderOption(option) {
           placeholder="Enter LGA, postcode or address"
           optionRenderer={this.renderOption}
         />
-        <p />
-        {/* Testing possible async filtering */}
-        {/* <Select 
-        name="lga-search"
-        options={lgas}
-        filterOption={(option, filter) => {
-          // console.log(option, filter);
-          return true;
-        }}
-        // isLoading={true}
-        optionRenderer={this.renderOption}
-        /> */}
       </div>,
       document.querySelector(".addressinput")
     );
