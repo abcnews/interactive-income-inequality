@@ -43,23 +43,23 @@ lgas = lgas.map(lga => {
   let stateCode = Math.floor(lga.value / 10000);
 
   if (stateCode === 1) {
-    return { value: lga.value, label: lga.label + ",New South Wales" };
+    return { value: lga.value, label: lga.label + " (NSW)" };
   } else if (stateCode === 2) {
-    return { value: lga.value, label: lga.label + ",Victoria" };
+    return { value: lga.value, label: lga.label + " (VIC)" };
   } else if (stateCode === 3) {
-    return { value: lga.value, label: lga.label + ",Queensland" };
+    return { value: lga.value, label: lga.label + " (QLD)" };
   } else if (stateCode === 4) {
-    return { value: lga.value, label: lga.label + ",South Australia" };
+    return { value: lga.value, label: lga.label + " (SA)" };
   } else if (stateCode === 5) {
-    return { value: lga.value, label: lga.label + ",Western Australia" };
+    return { value: lga.value, label: lga.label + " (WA)" };
   } else if (stateCode === 6) {
-    return { value: lga.value, label: lga.label + ",Tasmania" };
+    return { value: lga.value, label: lga.label + " (TAS)" };
   } else if (stateCode === 7) {
-    return { value: lga.value, label: lga.label + ",Northern Territory" };
+    return { value: lga.value, label: lga.label + " (NT)" };
   } else if (stateCode === 8) {
-    return { value: lga.value, label: lga.label + "Australian Capital Territory" };
+    return { value: lga.value, label: lga.label + " (ACT)" };
   } else if (stateCode === 9) {
-    return { value: lga.value, label: lga.label + ",Other" };
+    return { value: lga.value, label: lga.label + " (OTHER)" };
   } else {
     return { value: lga.value, label: lga.label };
   }
@@ -235,8 +235,20 @@ class LgaSearch extends React.Component {
   }
 
 renderOption(option) {
-  let labelSplit = option.label.split(",");
-  return <div>{labelSplit[0]} <small>{labelSplit[1]}</small></div>;
+  // Add formatting tags to drop down options
+  let labelSplit = option.label.split("(");
+ 
+  labelSplit[0] = labelSplit[0].slice(0, -1);
+  labelSplit[1] = labelSplit[1].slice(0, -1);
+
+  let lgaOption = labelSplit[0]
+  let stateAbbreviation = labelSplit[1];
+  let stateFullName = stateAbbreviation;
+
+  if (stateAbbreviation === "NSW") stateFullName = "New South Wales";
+  else if (stateAbbreviation === "VIC") stateFullName = "Victoria";
+
+  return <div>{lgaOption} <small>{stateFullName}</small></div>;
 }
 
 

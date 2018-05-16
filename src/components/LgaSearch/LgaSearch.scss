@@ -26,6 +26,9 @@
   .Select {
     position: relative;
   }
+  .Select small {
+    font-family: ABCSans, Helvetica, Arial, sans-serif;
+  }
   .Select input::-webkit-contacts-auto-fill-button,
   .Select input::-webkit-credentials-auto-fill-button {
     display: none !important;
