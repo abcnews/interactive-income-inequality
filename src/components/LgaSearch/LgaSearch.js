@@ -247,6 +247,13 @@ renderOption(option) {
 
   if (stateAbbreviation === "NSW") stateFullName = "New South Wales";
   else if (stateAbbreviation === "VIC") stateFullName = "Victoria";
+  else if (stateAbbreviation === "QLD") stateFullName = "Queensland";
+  else if (stateAbbreviation === "SA") stateFullName = "South Australia";
+  else if (stateAbbreviation === "WA") stateFullName = "Western Australia";
+  else if (stateAbbreviation === "TAS") stateFullName = "Tasmania";
+  else if (stateAbbreviation === "NT") stateFullName = "Northern Territory";
+  else if (stateAbbreviation === "ACT") stateFullName = "Australian Capital Territory";
+  else if (stateAbbreviation === "OTHER") stateFullName = "Other";
 
   return <div>{lgaOption} <small>{stateFullName}</small></div>;
 }
