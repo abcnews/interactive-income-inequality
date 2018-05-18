@@ -259,7 +259,7 @@ class MapScroller extends React.Component {
     // To counteract mobile phone resize events when scroll direction changes
     if (
       window.innerHeight < screenHeight &&
-      window.innerHeight > screenHeight - 80
+      window.innerHeight > screenHeight - 100
     ) {
       return;
     }
@@ -307,244 +307,241 @@ class MapScroller extends React.Component {
   }
 
   markTrigger(markerData) {
-    let stateCode;
-    // TODO: implement this if necessary
-    // if (markerData.lga.value > 9) {
-    //   stateCode = Math.floor(markerData.lga / 10000);
-    // } else stateCode = markerData.lga;
-
-    // this.props.doMarkerEvent(stateCode);
-
     q.defer(this.doMarker, markerData);
   }
 
   doMarker(markerData, callback) {
-    currentFocus = markerData.lga + ""; // Turn into string
+    // Only animate the last transition in the queue
+    if (q._waiting < 1) {
+      currentFocus = markerData.lga + ""; // Turn into string
 
-    //
+      // Should we highlight current focus?
+      if (markerData.highlight !== false) this.setState({ highlight: true });
+      else this.setState({ highlight: false });
 
-    // Should we highlight current focus?
-    if (markerData.highlight !== false) this.setState({ highlight: true });
-    else this.setState({ highlight: false });
+      // Should we highlight current Australian State
+      // if (markerData.state === true) this.setState({ focusState: true });
+      // else this.setState({ focusState: false });
 
-    // Should we highlight current Australian State
-    // if (markerData.state === true) this.setState({ focusState: true });
-    // else this.setState({ focusState: false });
+      //Make sure we are mounted
+      if (projection) {
+        // Handle bottom brackets dark background
+        if (!markerData.background) canvas.style("background-color", "#f9f9f9");
 
-    //Make sure we are mounted
-    if (projection) {
-      // Handle bottom brackets dark background
-      if (!markerData.background) canvas.style("background-color", "#f9f9f9");
+        let currentLgaGeometry = getLGA(currentFocus).geometry;
 
-      let currentLgaGeometry = getLGA(currentFocus).geometry;
+        let previousRotation = projection.rotate();
+        let currentRotation = d3Geo.geoCentroid(currentLgaGeometry);
 
-      let previousRotation = projection.rotate();
-      let currentRotation = d3Geo.geoCentroid(currentLgaGeometry);
+        // Zoom to states
+        // TODO: fit projection to bounding box depending on STATE number
+        const ausStatesGeo = this.props.ausStatesGeo.features[0];
 
-      // Zoom to states
-      // TODO: fit projection to bounding box depending on STATE number
-      const ausStatesGeo = this.props.ausStatesGeo.features[0];
+        dataZoom = markerData.zoom;
+        let previousGlobeScale = projection.scale();
 
-      dataZoom = markerData.zoom;
-      let previousGlobeScale = projection.scale();
+        // Zoom in so that percentage set in marker relative to initial 100%
+        newGlobeScale = initialGlobeScale * (dataZoom / 100);
 
-      // Zoom in so that percentage set in marker relative to initial 100%
-      newGlobeScale = initialGlobeScale * (dataZoom / 100);
-
-      if (!dataZoom || dataZoom === 0) {
-        if (markerData.lga <= 8) {
-          calculateLgaZoom(STATE_ZOOM_MARGINS);
-        } else {
-          calculateLgaZoom(LGA_ZOOM_MARGINS);
+        if (!dataZoom || dataZoom === 0) {
+          if (markerData.lga <= 8) {
+            calculateLgaZoom(STATE_ZOOM_MARGINS);
+          } else {
+            calculateLgaZoom(LGA_ZOOM_MARGINS);
+          }
         }
-      }
 
-      function calculateLgaZoom(marginFactor) {
-        // Calculate zoom to bounding box
-        let marginMultiplier = marginFactor; // Margin % of screen
+        function calculateLgaZoom(marginFactor) {
+          // Calculate zoom to bounding box
+          let marginMultiplier = marginFactor; // Margin % of screen
 
-        // Save current projection state for later
-        const tempScale = projection.scale();
-        const tempTranslate = projection.translate();
+          // Save current projection state for later
+          const tempScale = projection.scale();
+          const tempTranslate = projection.translate();
 
-        projection.fitExtent(
-          [
+          projection.fitExtent(
             [
-              Math.min(screenWidth, screenHeight) * marginMultiplier,
-              Math.min(screenWidth, screenHeight) * marginMultiplier
-            ],
-            [
-              screenWidth -
+              [
                 Math.min(screenWidth, screenHeight) * marginMultiplier,
-              screenHeight -
                 Math.min(screenWidth, screenHeight) * marginMultiplier
-            ]
+              ],
+              [
+                screenWidth -
+                  Math.min(screenWidth, screenHeight) * marginMultiplier,
+                screenHeight -
+                  Math.min(screenWidth, screenHeight) * marginMultiplier
+              ]
+            ],
+            currentLgaGeometry
+          );
+
+          const boundingZoom = projection.scale();
+
+          // Reset the projection
+          projection.scale(tempScale);
+          projection.translate(tempTranslate);
+
+          newGlobeScale = boundingZoom;
+
+          // Set limits on zoom
+          if (markerData.lga <= 8) {
+            if (newGlobeScale < initialGlobeScale)
+              newGlobeScale = initialGlobeScale;
+          } else {
+            if (newGlobeScale < MIN_ZOOM_LEVEL) newGlobeScale = MIN_ZOOM_LEVEL;
+          }
+          // Control max zooms compress extent of levels
+          if (newGlobeScale > MAX_ZOOM_LEVEL) newGlobeScale = MAX_ZOOM_LEVEL;
+        }
+
+        // D3 requires us to transition on something
+        const dummyTransition = {};
+
+        // This calculates the duration of the transitions based on location and zoom
+        let timeZoomInterpolate = d3Interpolate.interpolateZoom(
+          [
+            previousRotation[0],
+            previousRotation[1],
+            previousGlobeScale * 0.005
           ],
-          currentLgaGeometry
+          [-currentRotation[0], -currentRotation[1], newGlobeScale * 0.005]
         );
 
-        const boundingZoom = projection.scale();
+        // let bounceZoomInterpolate = d3Interpolate.interpolateZoom(
+        //   [previousRotation[0], previousRotation[1], 10],
+        //   [-currentRotation[0], -currentRotation[1], 10]
+        // );
 
-        // Reset the projection
-        projection.scale(tempScale);
-        projection.translate(tempTranslate);
+        let rotationInterpolate = d3Interpolate.interpolate(previousRotation, [
+          -currentRotation[0],
+          -currentRotation[1],
+          0
+        ]);
 
-        newGlobeScale = boundingZoom;
+        let scaleInterpolate = d3Interpolate.interpolate(
+          projection.scale(),
+          newGlobeScale
+        );
 
-        // Set limits on zoom
-        if (markerData.lga <= 8) {
-          if (newGlobeScale < initialGlobeScale)
-            newGlobeScale = initialGlobeScale;
+        let rotationDelay = 0;
+        let zoomDelay = 0;
+
+        let maxTransitionTime = MAX_TRANSITION_TIME;
+        let minTransitionTime = MIN_TRANSITION_TIME;
+        let transitionTime;
+
+        transitionTime = Math.abs(timeZoomInterpolate.duration);
+
+        // Don't take too long
+        if (transitionTime > maxTransitionTime)
+          transitionTime = maxTransitionTime;
+        // Don't go too fast
+        if (transitionTime < minTransitionTime)
+          transitionTime = minTransitionTime;
+
+        let transitionDelayMultiplyer = 0.5;
+        let isZoomingIn = true;
+
+        // Determine if zooming in or out
+        if (newGlobeScale > previousGlobeScale) {
+          rotationDelay = 0;
+          zoomDelay = transitionTime * transitionDelayMultiplyer;
+          isZoomingIn = true;
         } else {
-          if (newGlobeScale < MIN_ZOOM_LEVEL) newGlobeScale = MIN_ZOOM_LEVEL;
+          rotationDelay = transitionTime * transitionDelayMultiplyer;
+          zoomDelay = 0;
+          isZoomingIn = false;
         }
-        // Control max zooms compress extent of levels
-        if (newGlobeScale > MAX_ZOOM_LEVEL) newGlobeScale = MAX_ZOOM_LEVEL;
-      }
 
-      // D3 requires us to transition on something
-      const dummyTransition = {};
+        const rotationTween = d3Selection
+          .select(dummyTransition)
+          .transition("rotation")
+          .delay(rotationDelay)
+          .duration(transitionTime);
 
-      // This calculates the duration of the transitions based on location and zoom
-      let timeZoomInterpolate = d3Interpolate.interpolateZoom(
-        [previousRotation[0], previousRotation[1], previousGlobeScale * 0.005],
-        [-currentRotation[0], -currentRotation[1], newGlobeScale * 0.005]
-      );
+        // Playing with easing. Apply different easing if zooming in or out
+        // (We are currently not bothering for now)
+        if (isZoomingIn) rotationTween.ease(d3Ease.easeExp);
+        else rotationTween.ease(d3Ease.easeExp);
 
-      // let bounceZoomInterpolate = d3Interpolate.interpolateZoom(
-      //   [previousRotation[0], previousRotation[1], 10],
-      //   [-currentRotation[0], -currentRotation[1], 10]
-      // );
+        const zoomTween = d3Selection
+          .select(dummyTransition)
+          .transition("zoom")
+          .delay(zoomDelay)
+          .duration(transitionTime);
 
-      let rotationInterpolate = d3Interpolate.interpolate(previousRotation, [
-        -currentRotation[0],
-        -currentRotation[1],
-        0
-      ]);
+        let zoomOutDuration = 700;
 
-      let scaleInterpolate = d3Interpolate.interpolate(
-        projection.scale(),
-        newGlobeScale
-      );
+        const zoomOutTween = d3Selection
+          .select(dummyTransition)
+          .transition("zoomout")
+          .delay(0)
+          .duration(zoomOutDuration);
 
-      let rotationDelay = 0;
-      let zoomDelay = 0;
+        if (isZoomingIn) zoomTween.ease(d3Ease.easeExp);
+        else zoomTween.ease(d3Ease.easeExp);
 
-      let maxTransitionTime = MAX_TRANSITION_TIME;
-      let minTransitionTime = MIN_TRANSITION_TIME;
-      let transitionTime;
-
-      transitionTime = Math.abs(timeZoomInterpolate.duration);
-
-      // Don't take too long
-      if (transitionTime > maxTransitionTime)
-        transitionTime = maxTransitionTime;
-      // Don't go too fast
-      if (transitionTime < minTransitionTime)
-        transitionTime = minTransitionTime;
-
-      let transitionDelayMultiplyer = 0.5;
-      let isZoomingIn = true;
-
-      // Determine if zooming in or out
-      if (newGlobeScale > previousGlobeScale) {
-        rotationDelay = 0;
-        zoomDelay = transitionTime * transitionDelayMultiplyer;
-        isZoomingIn = true;
-      } else {
-        rotationDelay = transitionTime * transitionDelayMultiplyer;
-        zoomDelay = 0;
-        isZoomingIn = false;
-      }
-
-      const rotationTween = d3Selection
-        .select(dummyTransition)
-        .transition("rotation")
-        .delay(rotationDelay)
-        .duration(transitionTime);
-
-      // Playing with easing. Apply different easing if zooming in or out
-      // (We are currently not bothering for now)
-      if (isZoomingIn) rotationTween.ease(d3Ease.easeExp);
-      else rotationTween.ease(d3Ease.easeExp);
-
-      const zoomTween = d3Selection
-        .select(dummyTransition)
-        .transition("zoom")
-        .delay(zoomDelay)
-        .duration(transitionTime);
-
-      let zoomOutDuration = 700;
-
-      const zoomOutTween = d3Selection
-        .select(dummyTransition)
-        .transition("zoomout")
-        .delay(0)
-        .duration(zoomOutDuration);
-
-      if (isZoomingIn) zoomTween.ease(d3Ease.easeExp);
-      else zoomTween.ease(d3Ease.easeExp);
-
-      rotationTween.tween("rotation", () => {
-        // Return the tween function
-        return time => {
-          projection.rotate(rotationInterpolate(time));
-          // projection.scale(projection.scale() - zoomArc(time));
-        };
-      });
-
-      zoomTween.tween("zoom", () => {
-        return time => {
-          projection.scale(Math.round(scaleInterpolate(time)));
-        };
-      });
-
-      // Separate render tween to handle different delays
-      d3Selection
-        .select(dummyTransition)
-        .transition("render")
-        .delay(0)
-        .duration(transitionTime + Math.max(zoomDelay, rotationDelay)) // transition + delay
-        // .ease(d3Ease.easeLinear)
-        .tween("render", () => {
+        rotationTween.tween("rotation", () => {
           // Return the tween function
           return time => {
-            // If tweening > 1 then it means it's tweening;
-            tweening = time;
-            // Calculate current zoom and set up simplification scale
-            currentZoom = projection.scale() / initialGlobeScale * 100;
-
-            // const simplificationScale = d3Scale
-            //   .scaleQuantize()
-            //   .domain([100, MAX_ZOOM])
-            //   .range(Array.from(Array(SIMPLIFICATION_LEVELS).keys()));
-
-            if (drawToggle) {
-              // Draw a version of map based on zoom level
-              this.drawWorld(
-                australia[simplificationScale(currentZoom)],
-                australiaOutline[simplificationScale(currentZoom)],
-                markerData,
-                tweening
-              );
-              drawToggle = false; // hack to try getting it working on Surface Pro 3
-            } else drawToggle = true;
-
-            if (tweening === 1)
-              this.setState({ previousMarkerData: markerData });
+            projection.rotate(rotationInterpolate(time));
+            // projection.scale(projection.scale() - zoomArc(time));
           };
         });
 
-      setTimeout(function() {
-        canvas.style("transition", "background-color 0.3s");
-        // Transition background after spin/zoom
-        if (markerData.background && markerData.background === "dark")
-          canvas.style("background-color", "#333");
-        // else canvas.style("background-color", "#f9f9f9");
+        zoomTween.tween("zoom", () => {
+          return time => {
+            projection.scale(Math.round(scaleInterpolate(time)));
+          };
+        });
 
-        // Call back d3-queue to let it know the transition is finished
-        callback(null);
-      }, transitionTime + Math.max(zoomDelay, rotationDelay));
+        // Separate render tween to handle different delays
+        d3Selection
+          .select(dummyTransition)
+          .transition("render")
+          .delay(0)
+          .duration(transitionTime + Math.max(zoomDelay, rotationDelay)) // transition + delay
+          // .ease(d3Ease.easeLinear)
+          .tween("render", () => {
+            // Return the tween function
+            return time => {
+              // If tweening > 1 then it means it's tweening;
+              tweening = time;
+              // Calculate current zoom and set up simplification scale
+              currentZoom = projection.scale() / initialGlobeScale * 100;
+
+              // const simplificationScale = d3Scale
+              //   .scaleQuantize()
+              //   .domain([100, MAX_ZOOM])
+              //   .range(Array.from(Array(SIMPLIFICATION_LEVELS).keys()));
+
+              if (drawToggle) {
+                // Draw a version of map based on zoom level
+                this.drawWorld(
+                  australia[simplificationScale(currentZoom)],
+                  australiaOutline[simplificationScale(currentZoom)],
+                  markerData,
+                  tweening
+                );
+                drawToggle = false; // hack to try getting it working on Surface Pro 3
+              } else drawToggle = true;
+
+              if (tweening === 1)
+                this.setState({ previousMarkerData: markerData });
+            };
+          });
+
+        setTimeout(function() {
+          canvas.style("transition", "background-color 0.3s");
+          // Transition background after spin/zoom
+          if (markerData.background && markerData.background === "dark")
+            canvas.style("background-color", "#333");
+          // else canvas.style("background-color", "#f9f9f9");
+
+          // Call back d3-queue to let it know the transition is finished
+          callback(null);
+        }, transitionTime + Math.max(zoomDelay, rotationDelay));
+      } else callback(null); // Always call back d3-queue or else it hangs forever
     } else callback(null); // Always call back d3-queue or else it hangs forever
   }
 
