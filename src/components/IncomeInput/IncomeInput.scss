@@ -5,8 +5,6 @@
     justify-content: flex-end;
   }
 
-
-
   .push3 {
     // Just a hack styling to nudge some things
     height: 3px;
@@ -155,11 +153,20 @@
     letter-spacing: 2px;
     border: 0;
     line-height: 1.5rem;
+
+    -webkit-transition: all 0.3s ease-in-out;
+    -moz-transition: all 0.3s ease-in-out;
+    -ms-transition: all 0.3s ease-in-out;
+    -o-transition: all 0.3s ease-in-out;
+    outline: none;
+    border: 1px solid #dddddd;
   }
 
   button:focus {
-    outline: 1px dotted #555;
-    outline-offset: 1px;
+    // outline: 1px dotted #555;
+    // outline-offset: 1px;
+    box-shadow: 0 0 5px rgba(81, 203, 238, 1);;
+    border: 1px solid rgba(81, 203, 238, 1);
   }
 
   @media only screen and (max-width: 768px) {
@@ -180,19 +187,35 @@
     max-width: 100px;
     border-radius: 0; // Remove round corners on iOS
     -webkit-appearance: none; // Remove round corners on iOS - legacy
+
+    -webkit-transition: all 0.3s ease-in-out;
+    -moz-transition: all 0.3s ease-in-out;
+    -ms-transition: all 0.3s ease-in-out;
+    -o-transition: all 0.3s ease-in-out;
+    outline: none;
+    border: 1px solid transparent;
+    border-bottom: 2px solid #143d47;
   }
 
   @media (min-width: 500px) {
     input[type="text"] {
       font-size: 24px;
-      
     }
   }
 
   input[type="text"]:focus {
-    outline: 1px dotted #555;
-    outline-offset: 2px;
+    // outline: 1px dotted #555;
+    // outline-offset: 2px;
+    box-shadow: 0 0 5px rgba(81, 203, 238, 1);;
+    border: 1px solid rgba(81, 203, 238, 1);
+    border-bottom: 2px solid #143d47;
   }
+
+  // input[type="text"]::after {
+  //   content: "hello";
+  //   width: 100px;
+  //   border-bottom: 2px solid #143d47;
+  // }
 
   // Third column stuff
   // .scale-container {
@@ -831,7 +854,14 @@
     background-repeat: no-repeat;
     background-position: left center;
     cursor: pointer;
-    border: 1px dotted rgba(255, 255, 255, 0);
+    // border: 1px dotted rgba(255, 255, 255, 0);
+
+    -webkit-transition: all 0.3s ease-in-out;
+    -moz-transition: all 0.3s ease-in-out;
+    -ms-transition: all 0.3s ease-in-out;
+    -o-transition: all 0.3s ease-in-out;
+    outline: none;
+    border: 1px solid transparent;
   }
   .noUi-active {
     // box-shadow: inset 0 0 1px #fff, inset 0 1px 7px #ddd, 0 3px 6px -3px #bbb;
@@ -853,8 +883,10 @@
     left: 17px;
   }
   .noUi-handle:focus {
-    outline: none;
-    border: 1px dotted #555;
+    // outline: none;
+    // border: 1px dotted #555;
+    box-shadow: 0 0 5px rgba(81, 203, 238, 1);;
+    border: 1px solid rgba(81, 203, 238, 1);
   }
   .noUi-vertical .noUi-handle:before,
   .noUi-vertical .noUi-handle:after {
@@ -1016,7 +1048,6 @@
   //   }
   // }
 }
-
 
 @media (min-width: 500px) {
   .wrapper {
