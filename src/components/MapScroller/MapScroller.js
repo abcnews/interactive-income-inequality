@@ -51,7 +51,7 @@ let ausStates = [];
 let tweening = 1;
 
 // Hack to try and get IE and Edge smoother
-let drawToggle = true;
+// let drawToggle = true;
 
 // Set defaults
 let currentFocus = "72330"; // Middle of Australia (pretty much)
@@ -515,7 +515,7 @@ class MapScroller extends React.Component {
               //   .domain([100, MAX_ZOOM])
               //   .range(Array.from(Array(SIMPLIFICATION_LEVELS).keys()));
 
-              if (drawToggle) {
+              // if (drawToggle) {
                 // Draw a version of map based on zoom level
                 this.drawWorld(
                   australia[simplificationScale(currentZoom)],
@@ -523,8 +523,8 @@ class MapScroller extends React.Component {
                   markerData,
                   tweening
                 );
-                drawToggle = false; // hack to try getting it working on Surface Pro 3
-              } else drawToggle = true;
+                // drawToggle = false; // hack to try getting it working on Surface Pro 3
+              // } else drawToggle = true;
 
               if (tweening === 1)
                 this.setState({ previousMarkerData: markerData });
