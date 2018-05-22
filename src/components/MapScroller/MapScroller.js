@@ -22,7 +22,7 @@ const d3Queue = require("d3-queue");
 const styles = require("./MapScroller.scss");
 
 const SIMPLIFICATION_LEVELS = 10;
-const SIMPLIFICATION_FACTOR = 1.6; // Higher is more complex per level
+const SIMPLIFICATION_FACTOR = 1.7; // Higher is more complex per level
 const MAX_ZOOM = 2500;
 
 const STATE_ZOOM_MARGINS = 0.23;
@@ -141,7 +141,7 @@ class MapScroller extends React.Component {
     stickifyStage();
 
     // Set up pre-compiled simplification levels
-    let baseSimplification = 0.01;
+    let baseSimplification = 0.03;
 
     const getGeo = (mapData, level) => {
       const preSimplifiedMapData = topojson.presimplify(mapData);
