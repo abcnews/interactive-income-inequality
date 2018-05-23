@@ -17,6 +17,7 @@ const d3Zoom = require("d3-zoom");
 const d3Scale = require("d3-scale");
 const d3Ease = require("d3-ease");
 const d3Queue = require("d3-queue");
+// const d3ClipPoly = require("d3-geo-polygon"); // Doesn't work
 
 // Import styles
 const styles = require("./MapScroller.scss");
@@ -195,6 +196,10 @@ class MapScroller extends React.Component {
       .geoOrthographic() // Global
       .rotate(invertLongLat(currentLongLat)) // Rotate to Australia
       .precision(0)
+      // .preclip(d3ClipPoly.geoClipPolygon({
+      //   type: "Polygon",
+      //   coordinates: [[[-10, -10], [-10, 10], [10, 10], [10, -10], [-10, -10]]]
+      // }))
       .fitExtent(
         // Auto zoom
         [
@@ -222,20 +227,23 @@ class MapScroller extends React.Component {
     // Auto-convert canvas to Retina display and High DPI monitor scaling
     canvasDpiScaler(canvasEl, context);
 
-    let clip = d3Geo
-      .geoIdentity()
-      .clipExtent([[0, 0], [screenWidth, screenHeight]]);
+    // This isn't working properly so find another way maybe
+    // let clip = d3Geo
+    //   .geoIdentity()
+    //   .clipExtent([[0, 0], [screenWidth, screenHeight]]);
 
     // Build a path generator for our orthographic projection
     path = d3Geo
       .geoPath()
       // .projection(projection)
-      .projection({
-        // Here we return a clipped stream of the projection
-        stream: function(s) {
-          return projection.stream(clip.stream(s));
-        }
-      })
+      // .projection({
+      //   // Here we return a clipped stream of the projection
+      //   // I don't think this is working as expected - still seeing slowdown
+      //   stream: function(s) {
+      //     return projection.stream(clip.stream(s));
+      //   }
+      // })
+      .projection(projection)
       .context(context);
 
     // Draw the inital state of the world
@@ -496,6 +504,7 @@ class MapScroller extends React.Component {
         });
 
         // Separate render tween to handle different delays
+        console.log(australiaOutline[simplificationScale(1600)]);
         d3Selection
           .select(dummyTransition)
           .transition("render")
@@ -516,6 +525,7 @@ class MapScroller extends React.Component {
               //   .range(Array.from(Array(SIMPLIFICATION_LEVELS).keys()));
 
               // if (drawToggle) {
+                
                 // Draw a version of map based on zoom level
                 this.drawWorld(
                   australia[simplificationScale(currentZoom)],
