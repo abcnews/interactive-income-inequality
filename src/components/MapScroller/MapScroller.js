@@ -744,14 +744,15 @@ class MapScroller extends React.Component {
 
       // Inner stroke clip
       context.beginPath();
-      if (tweening > 0.9) context.lineWidth = 3.3;
-      else context.lineWidth = 1.1;
+      // if (tweening > 0.9) context.lineWidth = 3.3;
+      // else context.lineWidth = 1.1;
       path(targetElement);
       context.clip();
 
       context.beginPath();
       context.strokeStyle = "#FF5733";
-      context.lineWidth = 7.7;
+      if (tweening > 0.9) context.lineWidth = 7.3;
+      else context.lineWidth = 1.1;
       // context.shadowBlur = 15;
       // context.shadowColor = "black";
       // context.shadowOffsetX = 0;
