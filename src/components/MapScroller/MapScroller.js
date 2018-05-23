@@ -3,6 +3,15 @@ const ReactDOM = require("react-dom");
 const Scrollyteller = require("@abcnews/scrollyteller");
 const topojson = require("topojson");
 const canvasDpiScaler = require("canvas-dpi-scaler");
+const turfPolygon = require("turf-polygon");
+const turfPolyToLine = require("@turf/polygon-to-line");
+
+var poly = turfPolygon([
+  [[125, -30], [145, -30], [145, -20], [125, -20], [125, -30]]
+]);
+var line = turfPolyToLine.polygonToLine(poly);
+console.log(poly);
+console.log(line);
 
 // Load up some helper functions etc
 const utils = require("../../lib/utils");
@@ -155,10 +164,20 @@ class MapScroller extends React.Component {
       );
 
       // Merge LGAs to get map of Australia
-      const ausOutline = topojson.merge(
+      // const ausOutline = topojson.merge(
+      //   simplifiedMapData,
+      //   mapData.objects.LGA_2016_AUST.geometries
+      // );
+
+      const ausOutline = topojson.mesh(
         simplifiedMapData,
-        mapData.objects.LGA_2016_AUST.geometries
+        mapData.objects.LGA_2016_AUST,
+        function(a, b) {
+          return a === b;
+        }
       );
+
+      console.log(ausOutline);
 
       const lgaTopData = this.props.lgaData; //require("../App/lga-data.json");
 
@@ -504,7 +523,14 @@ class MapScroller extends React.Component {
         });
 
         // Separate render tween to handle different delays
-        console.log(australiaOutline[simplificationScale(1600)]);
+        // console.log(australiaOutline[simplificationScale(1600)]);
+
+        // line = turfPolyToLine.polygonToLine(
+        //   australiaOutline[simplificationScale(1600)]
+        // );
+
+        // console.log(line);
+
         d3Selection
           .select(dummyTransition)
           .transition("render")
@@ -525,15 +551,16 @@ class MapScroller extends React.Component {
               //   .range(Array.from(Array(SIMPLIFICATION_LEVELS).keys()));
 
               // if (drawToggle) {
-                
-                // Draw a version of map based on zoom level
-                this.drawWorld(
-                  australia[simplificationScale(currentZoom)],
-                  australiaOutline[simplificationScale(currentZoom)],
-                  markerData,
-                  tweening
-                );
-                // drawToggle = false; // hack to try getting it working on Surface Pro 3
+
+              // Draw a version of map based on zoom level
+              this.drawWorld(
+                australia[simplificationScale(currentZoom)],
+                // turfPolyToLine.polygonToLine(australiaOutline[simplificationScale(currentZoom)]),
+                australiaOutline[simplificationScale(currentZoom)],
+                markerData,
+                tweening
+              );
+              // drawToggle = false; // hack to try getting it working on Surface Pro 3
               // } else drawToggle = true;
 
               if (tweening === 1)

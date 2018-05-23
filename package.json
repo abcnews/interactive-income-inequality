@@ -26,6 +26,7 @@
   },
   "dependencies": {
     "@abcnews/scrollyteller": "^1.0.3",
+    "@turf/polygon-to-line": "^6.0.3",
     "canvas-dpi-scaler": "0.0.3",
     "d3": "^4.13.0",
     "d3-ease": "^1.0.3",
@@ -52,6 +53,7 @@
     "spanify": "^1.2.5",
     "ssri": "^5.2.2",
     "topojson": "^3.0.2",
+    "turf-polygon": "^1.0.3",
     "wnumb": "^1.1.0"
   }
 }
