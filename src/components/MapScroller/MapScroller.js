@@ -3,15 +3,6 @@ const ReactDOM = require("react-dom");
 const Scrollyteller = require("@abcnews/scrollyteller");
 const topojson = require("topojson");
 const canvasDpiScaler = require("canvas-dpi-scaler");
-const turfPolygon = require("turf-polygon");
-const turfPolyToLine = require("@turf/polygon-to-line");
-
-var poly = turfPolygon([
-  [[125, -30], [145, -30], [145, -20], [125, -20], [125, -30]]
-]);
-var line = turfPolyToLine.polygonToLine(poly);
-console.log(poly);
-console.log(line);
 
 // Load up some helper functions etc
 const utils = require("../../lib/utils");
@@ -737,17 +728,37 @@ class MapScroller extends React.Component {
       context.stroke();
     }
 
+    // If an LGA is targeted to clip it to achieve an inner stroke
     if (targetElement) {
+      context.save();
       // Fill the target on top
       context.beginPath();
       context.fillStyle = colorScale(targetElement.properties.TOP); //"#FF5733";
-
       context.strokeStyle = "#FF5733";
-      if (tweening > 0.9) context.lineWidth = 3.3;
-      else context.lineWidth = 1.1;
+      // if (tweening > 0.9) context.lineWidth = 3.3;
+      // else context.lineWidth = 1.1;
+      context.lineWidth = 1.2;
       path(targetElement);
       context.fill();
       context.stroke();
+
+      // Inner stroke clip
+      context.beginPath();
+      if (tweening > 0.9) context.lineWidth = 3.3;
+      else context.lineWidth = 1.1;
+      path(targetElement);
+      context.clip();
+
+      context.beginPath();
+      context.strokeStyle = "#FF5733";
+      context.lineWidth = 7.7;
+      // context.shadowBlur = 15;
+      // context.shadowColor = "black";
+      // context.shadowOffsetX = 0;
+      // context.shadowOffsetY = 0;
+      path(targetElement);
+      context.stroke();
+      context.restore();
     }
   }
 
