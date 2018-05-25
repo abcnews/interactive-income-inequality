@@ -147,6 +147,8 @@ class App extends React.Component {
      * Then set up Australian state panel
      */
 
+     console.log("hello")
+
     // Calculate Australian state from LGA
     let stateCode = Math.floor(lgaObject.value / 10000);
 

@@ -46,6 +46,8 @@ let canvasEl;
 // Different levels of zoom pre-compilied
 let australia = [];
 let australiaOutline = [];
+
+// Differentiate between states
 let ausStates = [];
 
 // Try to prevent multiple transitions
@@ -168,7 +170,7 @@ class MapScroller extends React.Component {
         }
       );
 
-      console.log(ausOutline);
+      // console.log(ausOutline);
 
       const lgaTopData = this.props.lgaData; //require("../App/lga-data.json");
 
