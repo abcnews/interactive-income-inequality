@@ -93,7 +93,7 @@ class App extends React.Component {
       currentLga: null,
       currentAusState: 1, // default NSW
       scrollytellerObject: scrollyteller,
-      currentBracketNumber: 8 // default bracket
+      currentBracketNumber: 13 // default bracket
     };
 
     this.setCurrentLga = this.setCurrentLga.bind(this);
@@ -330,6 +330,8 @@ class App extends React.Component {
       this.state.currentBracketNumber
     );
 
+    console.log(user)
+
     // For this project only we know 1 value will be 12.29% so stretch the bounds a bit
     let dumbbellUserMax = 10;
     if (this.state.currentBracketNumber === 1) dumbbellUserMax = 13;
@@ -402,12 +404,7 @@ class App extends React.Component {
           />
         </DumbbellTop>
 
-        {this.state.currentBracketNumber === 13 && (
-          <DumbbellUser>
-            <div />
-          </DumbbellUser>
-        )}
-
+        {/* Check that the user is not in the top 3.8% bracket */}
         {this.state.currentBracketNumber !== 13 && (
           <DumbbellUser>
             <p className={styles.paragraphText}>
@@ -464,6 +461,58 @@ class App extends React.Component {
               line1Percent={user.average5}
               percentMultiplier={1}
               maxValue={dumbbellUserMax}
+            />
+          </DumbbellUser>
+        )}
+
+        {/* If user is in top beacket we want to show something different */}
+        {this.state.currentBracketNumber === 13 && (
+          <DumbbellUser>
+            <p className={styles.paragraphText}>
+              By contrast, the top five professions in the bottom bracket make up 26.97 per cent of people in their bracket.
+            </p>
+          <Dumbbell
+              label="Sales Assistants and Salespersons"
+              dot1Percent={1.34}
+              dot1Label="Your bracket"
+              dot2Percent={12.29}
+              dot2Label="Bottom bracket"
+              line1Percent={4.19}
+              line1Label="Avg. of all brackets"
+              percentMultiplier={1}
+              maxValue={13}
+            />
+            <Dumbbell
+              label="Food Preparation Assistants"
+              dot1Percent={0.04}
+              dot2Percent={4.9}
+              line1Percent={0.94}
+              percentMultiplier={1}
+              maxValue={13}
+            />
+            <Dumbbell
+              label="Hospitality Workers"
+              dot1Percent={0.08}
+              dot2Percent={4.5}
+              line1Percent={1.56}
+              percentMultiplier={1}
+              maxValue={13}
+            />
+            <Dumbbell
+              label="Checkout Operators and Office Cashiers"
+              dot1Percent={0.02}
+              dot2Percent={3.42}
+              line1Percent={0.64}
+              percentMultiplier={1}
+              maxValue={13}
+            />
+            <Dumbbell
+              label="Sports and Fitness Workers"
+              dot1Percent={0.23}
+              dot2Percent={1.86}
+              line1Percent={0.48}
+              percentMultiplier={1}
+              maxValue={13}
             />
           </DumbbellUser>
         )}
