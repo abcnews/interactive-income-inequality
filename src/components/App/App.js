@@ -38,7 +38,8 @@ const fragmentData = document.querySelector("[data-income-comparisons-root]");
 let baseURL = "/";
 // "http://www.abc.net.au/res/sites/news-projects/income-comparisons-react/master/";
 
-if (fragmentData && fragmentData.dataset.rootUrl) baseURL = fragmentData.dataset.rootUrl;
+if (fragmentData && fragmentData.dataset.rootUrl)
+  baseURL = fragmentData.dataset.rootUrl;
 
 const LGA_GEO_JSON_URL =
   // "http://WS204914.aus.aunty.abc.net.au:8000/LGA_2016_AUST_SEARCH.topo.json";
@@ -135,7 +136,7 @@ class App extends React.Component {
     // Modify panels according to LGA choice
     const userLgaText = `In <strong>${
       lgaObject.label.replace(/ *\([^)]*\) */g, "") // Strip (NSW) etc.
-    }</strong> LGA, <strong>${currentTopPercentValue}</strong> per cent of income earners are in the top bracket, which is <strong>${Math.abs(
+    }</strong>, <strong>${currentTopPercentValue}</strong> per cent of income earners are in the top bracket, which is <strong>${Math.abs(
       percentageDifference.toFixed(2)
     )}</strong> percentage points ${higherOrLower(
       percentageDifference
@@ -146,8 +147,6 @@ class App extends React.Component {
     /*
      * Then set up Australian state panel
      */
-
-     console.log("hello")
 
     // Calculate Australian state from LGA
     let stateCode = Math.floor(lgaObject.value / 10000);
@@ -344,7 +343,7 @@ class App extends React.Component {
         />
 
         {/* Conditionally render MapScroller if data loaded */}
-        {this.state.mapData &&
+        {/* {this.state.mapData &&
           this.state.scrollytellerObject && (
             <MapScroller
               scrollyteller={this.state.scrollytellerObject}
@@ -355,7 +354,7 @@ class App extends React.Component {
               currentAusState={this.state.currentAusState}
               doMarkerEvent={this.doMarkerEvent}
             />
-          )}
+          )} */}
 
         <DumbbellTop>
           <Dumbbell
@@ -403,56 +402,71 @@ class App extends React.Component {
           />
         </DumbbellTop>
 
-        <DumbbellUser>
-          <p className={styles.paragraphText}>
-            By contrast, the top five professions make up{" "}
-            {parseFloat(user.top1 + user.top2 + user.top3 + user.top4 + user.top5).toFixed(2)} per cent
-            in your bracket.
-          </p>
-          <Dumbbell
-            label={user.name1}
-            dot1Percent={user.value1}
-            dot1Label="Your bracket"
-            dot2Percent={user.top1}
-            dot2Label="Top bracket"
-            line1Percent={user.average1}
-            line1Label="Avg. of all brackets"
-            percentMultiplier={1}
-            maxValue={dumbbellUserMax}
-          />
-          <Dumbbell
-            label={user.name2}
-            dot1Percent={user.value2}
-            dot2Percent={user.top2}
-            line1Percent={user.average2}
-            percentMultiplier={1}
-            maxValue={dumbbellUserMax}
-          />
-          <Dumbbell
-            label={user.name3}
-            dot1Percent={user.value3}
-            dot2Percent={user.top3}
-            line1Percent={user.average3}
-            percentMultiplier={1}
-            maxValue={dumbbellUserMax}
-          />
-          <Dumbbell
-            label={user.name4}
-            dot1Percent={user.value4}
-            dot2Percent={user.top4}
-            line1Percent={user.average4}
-            percentMultiplier={1}
-            maxValue={dumbbellUserMax}
-          />
-          <Dumbbell
-            label={user.name5}
-            dot1Percent={user.value5}
-            dot2Percent={user.top5}
-            line1Percent={user.average5}
-            percentMultiplier={1}
-            maxValue={dumbbellUserMax}
-          />
-        </DumbbellUser>
+        {this.state.currentBracketNumber === 13 && (
+          <DumbbellUser>
+            <div />
+          </DumbbellUser>
+        )}
+
+        {this.state.currentBracketNumber !== 13 && (
+          <DumbbellUser>
+            <p className={styles.paragraphText}>
+              By contrast, the top five professions in your bracket make up{" "}
+              {parseFloat(
+                user.value1 +
+                  user.value2 +
+                  user.value3 +
+                  user.value4 +
+                  user.value5
+              ).toFixed(2)}{" "}
+              per cent of people in this bracket.
+            </p>
+
+            <Dumbbell
+              label={user.name1}
+              dot1Percent={user.value1}
+              dot1Label="Your bracket"
+              dot2Percent={user.top1}
+              dot2Label="Top bracket"
+              line1Percent={user.average1}
+              line1Label="Avg. of all brackets"
+              percentMultiplier={1}
+              maxValue={dumbbellUserMax}
+            />
+            <Dumbbell
+              label={user.name2}
+              dot1Percent={user.value2}
+              dot2Percent={user.top2}
+              line1Percent={user.average2}
+              percentMultiplier={1}
+              maxValue={dumbbellUserMax}
+            />
+            <Dumbbell
+              label={user.name3}
+              dot1Percent={user.value3}
+              dot2Percent={user.top3}
+              line1Percent={user.average3}
+              percentMultiplier={1}
+              maxValue={dumbbellUserMax}
+            />
+            <Dumbbell
+              label={user.name4}
+              dot1Percent={user.value4}
+              dot2Percent={user.top4}
+              line1Percent={user.average4}
+              percentMultiplier={1}
+              maxValue={dumbbellUserMax}
+            />
+            <Dumbbell
+              label={user.name5}
+              dot1Percent={user.value5}
+              dot2Percent={user.top5}
+              line1Percent={user.average5}
+              percentMultiplier={1}
+              maxValue={dumbbellUserMax}
+            />
+          </DumbbellUser>
+        )}
 
         <DumbbellEducation>
           <Dumbbell
