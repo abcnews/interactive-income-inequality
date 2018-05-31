@@ -93,7 +93,7 @@ class App extends React.Component {
       currentLga: null,
       currentAusState: 1, // default NSW
       scrollytellerObject: scrollyteller,
-      currentBracketNumber: 13 // default bracket
+      currentBracketNumber: 8 // default bracket
     };
 
     this.setCurrentLga = this.setCurrentLga.bind(this);
@@ -330,8 +330,6 @@ class App extends React.Component {
       this.state.currentBracketNumber
     );
 
-    console.log(user)
-
     // For this project only we know 1 value will be 12.29% so stretch the bounds a bit
     let dumbbellUserMax = 10;
     if (this.state.currentBracketNumber === 1) dumbbellUserMax = 13;
@@ -345,7 +343,7 @@ class App extends React.Component {
         />
 
         {/* Conditionally render MapScroller if data loaded */}
-        {/* {this.state.mapData &&
+        {this.state.mapData &&
           this.state.scrollytellerObject && (
             <MapScroller
               scrollyteller={this.state.scrollytellerObject}
@@ -356,7 +354,7 @@ class App extends React.Component {
               currentAusState={this.state.currentAusState}
               doMarkerEvent={this.doMarkerEvent}
             />
-          )} */}
+          )}
 
         <DumbbellTop>
           <Dumbbell
@@ -469,9 +467,10 @@ class App extends React.Component {
         {this.state.currentBracketNumber === 13 && (
           <DumbbellUser>
             <p className={styles.paragraphText}>
-              By contrast, the top five professions in the bottom bracket make up 26.97 per cent of people in their bracket.
+              By contrast, the top five professions in the bottom bracket make
+              up 26.97 per cent of people in their bracket.
             </p>
-          <Dumbbell
+            <Dumbbell
               label="Sales Assistants and Salespersons"
               dot1Percent={1.34}
               dot1Label="Your bracket"
