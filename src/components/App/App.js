@@ -477,6 +477,9 @@ class App extends React.Component {
               dot1Label="Your bracket"
               dot2Percent={12.29}
               dot2Label="Bottom bracket"
+              dot2Color="#607477"
+              dot2TextColor="#607477"
+              dot2LabelColor="#607477"
               line1Percent={4.19}
               line1Label="Avg. of all brackets"
               percentMultiplier={1}
@@ -486,6 +489,9 @@ class App extends React.Component {
               label="Food Preparation Assistants"
               dot1Percent={0.04}
               dot2Percent={4.9}
+              dot2Color="#607477"
+              dot2TextColor="#607477"
+              dot2LabelColor="#607477"
               line1Percent={0.94}
               percentMultiplier={1}
               maxValue={13}
@@ -494,6 +500,9 @@ class App extends React.Component {
               label="Hospitality Workers"
               dot1Percent={0.08}
               dot2Percent={4.5}
+              dot2Color="#607477"
+              dot2TextColor="#607477"
+              dot2LabelColor="#607477"
               line1Percent={1.56}
               percentMultiplier={1}
               maxValue={13}
@@ -502,6 +511,9 @@ class App extends React.Component {
               label="Checkout Operators and Office Cashiers"
               dot1Percent={0.02}
               dot2Percent={3.42}
+              dot2Color="#607477"
+              dot2TextColor="#607477"
+              dot2LabelColor="#607477"
               line1Percent={0.64}
               percentMultiplier={1}
               maxValue={13}
@@ -510,6 +522,9 @@ class App extends React.Component {
               label="Sports and Fitness Workers"
               dot1Percent={0.23}
               dot2Percent={1.86}
+              dot2Color="#607477"
+              dot2TextColor="#607477"
+              dot2LabelColor="#607477"
               line1Percent={0.48}
               percentMultiplier={1}
               maxValue={13}

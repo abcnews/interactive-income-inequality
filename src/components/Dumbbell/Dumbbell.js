@@ -94,6 +94,20 @@ class Dumbbell extends React.Component {
       dot1PercentRightStyle.color = this.props.dot1TextColor;
     }
 
+    if (this.props.dot2Color && this.props.dot2TextColor) {
+      dot2Style.backgroundColor = this.props.dot2Color;
+      dot2PercentStyle.color = this.props.dot2TextColor;
+      dot2PercentRightStyle.color = this.props.dot2TextColor;
+    }
+
+    if (this.props.dot1LabelColor) {
+      dot1LabelStyle.color = this.props.dot1LabelColor;
+    }
+
+    if (this.props.dot2LabelColor) {
+      dot2LabelStyle.color = this.props.dot2LabelColor;
+    }
+
     return (
       <div className={styles.wrapper}>
         <div className={styles.label}>{this.props.label}</div>
