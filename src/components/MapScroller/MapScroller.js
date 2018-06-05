@@ -162,6 +162,7 @@ class MapScroller extends React.Component {
       //   mapData.objects.LGA_2016_AUST.geometries
       // );
 
+      // topojson.merge gives us MultiLineStrings
       const ausOutline = topojson.mesh(
         simplifiedMapData,
         mapData.objects.LGA_2016_AUST,
@@ -593,7 +594,11 @@ class MapScroller extends React.Component {
       if (bounds[1][0] < 0) return;
       if (bounds[1][1] < 0) return;
 
-      let fadeOutOpacity = 1 - tweening;
+      // Breaks bottom LGA segment for some reason. Use full australia instead maybe
+      // let fadeOutOpacity = 1.2 - tweening;
+      // let fadeInOpacity = tweening + 0.2;
+
+      let fadeOutOpacity = 1.0 - tweening;
       let fadeInOpacity = tweening;
 
       // Highlight Australian state if specified in Scrollyteller
@@ -620,6 +625,8 @@ class MapScroller extends React.Component {
       ) {
         let elementLgaCode = +element.properties.LGA_CODE16;
 
+        // Here we handle fade ins and out
+        // TODO: maybe handle these better
         if (
           this.state.previousMarkerData.focus.indexOf(elementLgaCode) > -1 &&
           markerData.focus.indexOf(elementLgaCode) > -1
@@ -720,15 +727,37 @@ class MapScroller extends React.Component {
     });
 
     // TODO: fix Australia stroke outline so it works on IE and Edge
-    if (!detectIE()) { //|| tweening > 0.99) {
-      // Render the outline of Australia
+    // if (!detectIE()) { //|| tweening > 0.99) {
+    //   // Render the outline of Australia
+    //   context.beginPath();
+    //   context.globalAlpha = 1;
+    //   context.strokeStyle = "rgba(100, 100, 100, 0.6)";
+    //   context.lineWidth = 1.1;
+    //   path(australiaOutline);
+    //   context.stroke();
+    // }
+
+    // If the Australian Outline is a MultiLineString we can chop it up and render only lines on screen
+    australiaOutline.coordinates.forEach(line => {
+      const lineString = {
+        type: "LineString",
+        coordinates: line
+      };
+
+      const bounds = path.bounds(lineString);
+
+      if (bounds[0][0] > screenWidth) return;
+      if (bounds[0][1] > screenHeight) return;
+      if (bounds[1][0] < 0) return;
+      if (bounds[1][1] < 0) return;
+
       context.beginPath();
       context.globalAlpha = 1;
       context.strokeStyle = "rgba(100, 100, 100, 0.6)";
       context.lineWidth = 1.1;
-      path(australiaOutline);
+      path(lineString);
       context.stroke();
-    }
+    });
 
     // If an LGA is targeted to clip it to achieve an inner stroke
     if (targetElement) {
