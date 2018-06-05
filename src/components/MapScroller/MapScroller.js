@@ -163,6 +163,7 @@ class MapScroller extends React.Component {
       // );
 
       // topojson.merge gives us MultiLineStrings
+
       const ausOutline = topojson.mesh(
         simplifiedMapData,
         mapData.objects.LGA_2016_AUST,
@@ -171,7 +172,36 @@ class MapScroller extends React.Component {
         }
       );
 
-      // console.log(ausOutline);
+
+      // ausOutline.coordinates.forEach(line => {
+      //   if (line.length > 100) {
+      //   }
+      // });
+
+      let newCoords = [];
+
+      ausOutline.coordinates.forEach(line => {
+        if (line.length < 900) {
+          newCoords.push(line);
+        }
+      });
+
+      ausOutline.coordinates.forEach(line => {
+        if (line.length >= 900) {
+          let chunkLines = chunkArray(line, 10);
+          chunkLines.forEach(chunkLine => {
+            newCoords.push(chunkLine);
+          })
+          
+        }
+      });
+
+      const ausOutlineDivided = {
+        type: "MultiLineString",
+        coordinates: newCoords
+      };
+
+      console.log(ausOutlineDivided);
 
       const lgaTopData = this.props.lgaData; //require("../App/lga-data.json");
 
@@ -188,7 +218,7 @@ class MapScroller extends React.Component {
 
       const geoDataReturn = {
         lgas: geoJSON,
-        outline: ausOutline
+        outline: ausOutlineDivided
       };
 
       return geoDataReturn;
@@ -739,6 +769,7 @@ class MapScroller extends React.Component {
 
     // If the Australian Outline is a MultiLineString we can chop it up and render only lines on screen
     australiaOutline.coordinates.forEach(line => {
+      // if (line.length < 200) {
       const lineString = {
         type: "LineString",
         coordinates: line
@@ -746,10 +777,12 @@ class MapScroller extends React.Component {
 
       const bounds = path.bounds(lineString);
 
-      if (bounds[0][0] > screenWidth) return;
-      if (bounds[0][1] > screenHeight) return;
-      if (bounds[1][0] < 0) return;
-      if (bounds[1][1] < 0) return;
+      if (bounds[0][0] > screenWidth - 200) return;
+      if (bounds[0][1] > screenHeight - 200) return;
+      if (bounds[1][0] < 200) return;
+      if (bounds[1][1] < 200) return;
+
+      // console.log(lineString);
 
       context.beginPath();
       context.globalAlpha = 1;
@@ -757,7 +790,37 @@ class MapScroller extends React.Component {
       context.lineWidth = 1.1;
       path(lineString);
       context.stroke();
+      // }
     });
+
+    // australiaOutline.coordinates.forEach(line => {
+    //   if (line.length > 200) {
+    //     var ausLines = chunkArray(line, 40);
+
+    //     ausLines.forEach(chunkLine => {
+    //       const chunkLineString = {
+    //         type: "LineString",
+    //         coordinates: chunkLine
+    //       };
+
+    //       const chunkBounds = path.bounds(chunkLineString);
+
+    //       if (chunkBounds[0][0] > screenWidth) return;
+    //       if (chunkBounds[0][1] > screenHeight) return;
+    //       if (chunkBounds[1][0] < 0) return;
+    //       if (chunkBounds[1][1] < 0) return;
+
+    //       console.log(chunkLineString);
+
+    //       context.beginPath();
+    //       context.globalAlpha = 1;
+    //       context.strokeStyle = "rgba(100, 100, 100, 0.6)";
+    //       context.lineWidth = 1.1;
+    //       path(chunkLineString);
+    //       context.stroke();
+    //     });
+    //   }
+    // });
 
     // If an LGA is targeted to clip it to achieve an inner stroke
     if (targetElement) {
@@ -980,6 +1043,22 @@ function detectIE() {
 
   // other browser
   return false;
+}
+
+/**
+ * Returns an array with arrays of the given size.
+ *
+ * @param myArray {Array} Array to split
+ * @param chunkSize {Integer} Size of every group
+ */
+function chunkArray(myArray, chunk_size) {
+  var results = [];
+
+  while (myArray.length) {
+    results.push(myArray.splice(0, chunk_size));
+  }
+
+  return results;
 }
 
 module.exports = MapScroller;
