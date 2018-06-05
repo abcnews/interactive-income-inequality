@@ -172,7 +172,6 @@ class MapScroller extends React.Component {
         }
       );
 
-
       // ausOutline.coordinates.forEach(line => {
       //   if (line.length > 100) {
       //   }
@@ -191,8 +190,7 @@ class MapScroller extends React.Component {
           let chunkLines = chunkArray(line, 10);
           chunkLines.forEach(chunkLine => {
             newCoords.push(chunkLine);
-          })
-          
+          });
         }
       });
 
@@ -777,10 +775,10 @@ class MapScroller extends React.Component {
 
       const bounds = path.bounds(lineString);
 
-      if (bounds[0][0] > screenWidth - 200) return;
-      if (bounds[0][1] > screenHeight - 200) return;
-      if (bounds[1][0] < 200) return;
-      if (bounds[1][1] < 200) return;
+      if (bounds[0][0] > screenWidth) return;
+      if (bounds[0][1] > screenHeight) return;
+      if (bounds[1][0] < 0) return;
+      if (bounds[1][1] < 0) return;
 
       // console.log(lineString);
 
@@ -1055,7 +1053,8 @@ function chunkArray(myArray, chunk_size) {
   var results = [];
 
   while (myArray.length) {
-    results.push(myArray.splice(0, chunk_size));
+    results.push(myArray.slice(0, chunk_size + 1));
+    myArray.splice(0, chunk_size);
   }
 
   return results;
