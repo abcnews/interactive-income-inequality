@@ -17,7 +17,6 @@ const d3Zoom = require("d3-zoom");
 const d3Scale = require("d3-scale");
 const d3Ease = require("d3-ease");
 const d3Queue = require("d3-queue");
-// const d3ClipPoly = require("d3-geo-polygon"); // Doesn't work
 
 // Import styles
 const styles = require("./MapScroller.scss");
@@ -53,13 +52,9 @@ let ausStates = [];
 // Try to prevent multiple transitions
 let tweening = 1;
 
-// Hack to try and get IE and Edge smoother
-// let drawToggle = true;
-
 // Set defaults
 let currentFocus = "72330"; // Middle of Australia (pretty much)
-// let previousFocus = "72330";
-let currentLongLat = [133.15399233370441, -24.656909465155994]; //[133.7751, -25.2744]; //getItem("australia").longlat;
+let currentLongLat = [133.15399233370441, -24.656909465155994];
 
 // documentElement is for Firefox support apparently
 let screenWidth =
@@ -70,7 +65,7 @@ let margins = Math.min(screenWidth, screenHeight) * 0.1;
 // Set up a queue
 var q = d3Queue.queue(1);
 
-// Linear scale
+// Set up linear colour scale
 const colorScale = d3Scale
   .scaleLinear()
   .domain(getScaleDomain(0, 35, 13))
@@ -90,32 +85,24 @@ const colorScale = d3Scale
     "#00114B"
   ]);
 
-const zoomScale = d3Scale
-  .scaleLinear()
-  .domain([1, 16])
-  .range([1, 2000]);
-
 // Calculate current zoom and set up simplification scale
 let currentZoom;
 
+// Zoom scale depending on how many simplification levels there are
 const simplificationScale = d3Scale
   .scaleQuantize()
   .domain([100, MAX_ZOOM])
   .range(Array.from(Array(SIMPLIFICATION_LEVELS).keys()));
 
-// Tryign smoother zoom out first (not working)
-// function zoomArc(time) {
-//   let arc = Math.abs(0.5 - time);
-//   let multiplier = 0.5 - arc;
-//   return 200 * multiplier;
-// }
-
+// React component class starts here
 class MapScroller extends React.Component {
   constructor(props) {
     super(props);
 
+    // Set up the state
     this.state = { highlight: true, hasFocused: false };
 
+    // Bind this to component methods
     this.canvasInit = this.canvasInit.bind(this);
     this.markTrigger = this.markTrigger.bind(this);
     this.doMarker = this.doMarker.bind(this);
@@ -129,6 +116,7 @@ class MapScroller extends React.Component {
   }
 
   componentWillUnmount() {
+    // Unmount listener on hot reload etc
     window.removeEventListener("resize", this.resizeCanvas);
   }
 
@@ -137,10 +125,9 @@ class MapScroller extends React.Component {
     const scrollToEl = document.querySelector('[name="scrolltothispoint"]');
     scrollToEl.style.position = "absolute";
     scrollToEl.style.marginTop = "-50vh";
-    // scrollToEl.style.display = "none";
 
     // Check to see if position.sticky is supported
-    // and then apply sticky styles
+    // and then apply sticky styles. To reduce scrolly jank
     stickifyStage();
 
     // Set up pre-compiled simplification levels
@@ -156,14 +143,7 @@ class MapScroller extends React.Component {
         mapData.objects.LGA_2016_AUST
       );
 
-      // Merge LGAs to get map of Australia
-      // const ausOutline = topojson.merge(
-      //   simplifiedMapData,
-      //   mapData.objects.LGA_2016_AUST.geometries
-      // );
-
-      // topojson.merge gives us MultiLineStrings
-
+      // topojson.mesh gives us MultiLineStrings so we can hide ones we don't need to draw
       const ausOutline = topojson.mesh(
         simplifiedMapData,
         mapData.objects.LGA_2016_AUST,
@@ -172,19 +152,18 @@ class MapScroller extends React.Component {
         }
       );
 
-      // ausOutline.coordinates.forEach(line => {
-      //   if (line.length > 100) {
-      //   }
-      // });
 
+      // Divide large outlines into multiple small lines
       let newCoords = [];
 
+      // Skip smaller lines
       ausOutline.coordinates.forEach(line => {
         if (line.length < 900) {
           newCoords.push(line);
         }
       });
 
+      // Split large Australian outline using chunkArray() function
       ausOutline.coordinates.forEach(line => {
         if (line.length >= 900) {
           let chunkLines = chunkArray(line, 10);
@@ -194,14 +173,13 @@ class MapScroller extends React.Component {
         }
       });
 
+      // Create a new GeoJSON outline
       const ausOutlineDivided = {
         type: "MultiLineString",
         coordinates: newCoords
       };
 
-      console.log(ausOutlineDivided);
-
-      const lgaTopData = this.props.lgaData; //require("../App/lga-data.json");
+      const lgaTopData = this.props.lgaData;
 
       // Loop through all LGAs and set top percentage
       geoJSON.features.forEach(element => {
@@ -223,6 +201,7 @@ class MapScroller extends React.Component {
     };
 
     // Create an array of Australian LGAs with different simplification levels
+    // This takes some time when the page loads
     for (let i = 0; i < SIMPLIFICATION_LEVELS; i++) {
       australia[i] = getGeo(mapData, baseSimplification).lgas;
       australiaOutline[i] = getGeo(mapData, baseSimplification).outline;
@@ -237,10 +216,6 @@ class MapScroller extends React.Component {
       .geoOrthographic() // Global
       .rotate(invertLongLat(currentLongLat)) // Rotate to Australia
       .precision(0)
-      // .preclip(d3ClipPoly.geoClipPolygon({
-      //   type: "Polygon",
-      //   coordinates: [[[-10, -10], [-10, 10], [10, 10], [10, -10], [-10, -10]]]
-      // }))
       .fitExtent(
         // Auto zoom
         [
@@ -253,6 +228,7 @@ class MapScroller extends React.Component {
     // Set initial global scale to handle zoom ins and outs
     initialGlobeScale = projection.scale();
 
+    // Set up the canvas element
     canvas = d3Selection
       .select("." + styles.stage)
       .style("background-color", "#f9f9f9")
@@ -268,22 +244,9 @@ class MapScroller extends React.Component {
     // Auto-convert canvas to Retina display and High DPI monitor scaling
     canvasDpiScaler(canvasEl, context);
 
-    // This isn't working properly so find another way maybe
-    // let clip = d3Geo
-    //   .geoIdentity()
-    //   .clipExtent([[0, 0], [screenWidth, screenHeight]]);
-
     // Build a path generator for our orthographic projection
     path = d3Geo
       .geoPath()
-      // .projection(projection)
-      // .projection({
-      //   // Here we return a clipped stream of the projection
-      //   // I don't think this is working as expected - still seeing slowdown
-      //   stream: function(s) {
-      //     return projection.stream(clip.stream(s));
-      //   }
-      // })
       .projection(projection)
       .context(context);
 
@@ -291,6 +254,7 @@ class MapScroller extends React.Component {
     this.drawWorld(australia[0], australiaOutline[0], null, 1);
 
     // Override the viewheight vh margins to prevent jumping on mobile scroll changing directions
+    // This seems to only happen in Chrome and probably the Facebook browser
     let blockArray = document.getElementsByClassName("Block-content");
 
     for (var i = 0; i < blockArray.length; i++) {
@@ -346,7 +310,6 @@ class MapScroller extends React.Component {
 
     // Keep current zoomed in state
     currentZoom = projection.scale() / initialGlobeScale * 100;
-    // this.drawWorld(australia[0], australiaOutline[0], null, 1);
     this.drawWorld(
       australia[simplificationScale(currentZoom)],
       australiaOutline[simplificationScale(currentZoom)],
@@ -355,24 +318,23 @@ class MapScroller extends React.Component {
     );
   }
 
+  // When a Scrollyteller mark is triggered add a transition to the queue
   markTrigger(markerData) {
     q.defer(this.doMarker, markerData);
   }
 
   doMarker(markerData, callback) {
     // Only animate the last transition in the queue
+    // This prevents consecutive build-up of animations
     if (q._waiting < 1) {
       currentFocus = markerData.lga + ""; // Turn into string
 
       // Should we highlight current focus?
+      // Currently puts in inset orange line
       if (markerData.highlight !== false) this.setState({ highlight: true });
       else this.setState({ highlight: false });
 
-      // Should we highlight current Australian State
-      // if (markerData.state === true) this.setState({ focusState: true });
-      // else this.setState({ focusState: false });
-
-      //Make sure we are mounted
+      // Make sure we are mounted before proceeding or we die 
       if (projection) {
         // Handle bottom brackets dark background
         if (!markerData.background) canvas.style("background-color", "#f9f9f9");
@@ -383,7 +345,6 @@ class MapScroller extends React.Component {
         let currentRotation = d3Geo.geoCentroid(currentLgaGeometry);
 
         // Zoom to states
-        // TODO: fit projection to bounding box depending on STATE number
         const ausStatesGeo = this.props.ausStatesGeo.features[0];
 
         dataZoom = markerData.zoom;
@@ -392,6 +353,7 @@ class MapScroller extends React.Component {
         // Zoom in so that percentage set in marker relative to initial 100%
         newGlobeScale = initialGlobeScale * (dataZoom / 100);
 
+        // If no custom zoom we need to calculate the zoom per LGA or AusState
         if (!dataZoom || dataZoom === 0) {
           if (markerData.lga <= 8) {
             calculateLgaZoom(STATE_ZOOM_MARGINS);
@@ -408,6 +370,7 @@ class MapScroller extends React.Component {
           const tempScale = projection.scale();
           const tempTranslate = projection.translate();
 
+          // Fit the geometry to the screen with margins
           projection.fitExtent(
             [
               [
@@ -424,15 +387,17 @@ class MapScroller extends React.Component {
             currentLgaGeometry
           );
 
+          // Save the resulting scale
           const boundingZoom = projection.scale();
 
           // Reset the projection
           projection.scale(tempScale);
           projection.translate(tempTranslate);
 
+          // Set the next scale level
           newGlobeScale = boundingZoom;
 
-          // Set limits on zoom
+          // Set limits on zoom otherwise things could get crazy
           if (markerData.lga <= 8) {
             if (newGlobeScale < initialGlobeScale)
               newGlobeScale = initialGlobeScale;
@@ -443,10 +408,11 @@ class MapScroller extends React.Component {
           if (newGlobeScale > MAX_ZOOM_LEVEL) newGlobeScale = MAX_ZOOM_LEVEL;
         }
 
-        // D3 requires us to transition on something
+        // D3 requires us to transition on something so here is an empty object
         const dummyTransition = {};
 
-        // This calculates the duration of the transitions based on location and zoom
+        // Calculate the duration of the transitions based on location and zoom
+        // This isn't as useful as I thought it was going to be (so limited use)
         let timeZoomInterpolate = d3Interpolate.interpolateZoom(
           [
             previousRotation[0],
@@ -456,17 +422,14 @@ class MapScroller extends React.Component {
           [-currentRotation[0], -currentRotation[1], newGlobeScale * 0.005]
         );
 
-        // let bounceZoomInterpolate = d3Interpolate.interpolateZoom(
-        //   [previousRotation[0], previousRotation[1], 10],
-        //   [-currentRotation[0], -currentRotation[1], 10]
-        // );
-
+        // Set up a rotation interpolator that returns rotations based on 0.0 to 1.0 float input
         let rotationInterpolate = d3Interpolate.interpolate(previousRotation, [
           -currentRotation[0],
           -currentRotation[1],
           0
         ]);
 
+        // Same with scale interpolator function
         let scaleInterpolate = d3Interpolate.interpolate(
           projection.scale(),
           newGlobeScale
@@ -534,7 +497,6 @@ class MapScroller extends React.Component {
           // Return the tween function
           return time => {
             projection.rotate(rotationInterpolate(time));
-            // projection.scale(projection.scale() - zoomArc(time));
           };
         });
 
@@ -544,15 +506,7 @@ class MapScroller extends React.Component {
           };
         });
 
-        // Separate render tween to handle different delays
-        // console.log(australiaOutline[simplificationScale(1600)]);
-
-        // line = turfPolyToLine.polygonToLine(
-        //   australiaOutline[simplificationScale(1600)]
-        // );
-
-        // console.log(line);
-
+        // The render tween to actually call the drawWorld render function
         d3Selection
           .select(dummyTransition)
           .transition("render")
@@ -567,23 +521,13 @@ class MapScroller extends React.Component {
               // Calculate current zoom and set up simplification scale
               currentZoom = projection.scale() / initialGlobeScale * 100;
 
-              // const simplificationScale = d3Scale
-              //   .scaleQuantize()
-              //   .domain([100, MAX_ZOOM])
-              //   .range(Array.from(Array(SIMPLIFICATION_LEVELS).keys()));
-
-              // if (drawToggle) {
-
               // Draw a version of map based on zoom level
               this.drawWorld(
                 australia[simplificationScale(currentZoom)],
-                // turfPolyToLine.polygonToLine(australiaOutline[simplificationScale(currentZoom)]),
                 australiaOutline[simplificationScale(currentZoom)],
                 markerData,
                 tweening
               );
-              // drawToggle = false; // hack to try getting it working on Surface Pro 3
-              // } else drawToggle = true;
 
               if (tweening === 1)
                 this.setState({ previousMarkerData: markerData });
@@ -595,7 +539,6 @@ class MapScroller extends React.Component {
           // Transition background after spin/zoom
           if (markerData.background && markerData.background === "dark")
             canvas.style("background-color", "#333");
-          // else canvas.style("background-color", "#f9f9f9");
 
           // Call back d3-queue to let it know the transition is finished
           callback(null);
