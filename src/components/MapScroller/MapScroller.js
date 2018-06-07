@@ -152,7 +152,6 @@ class MapScroller extends React.Component {
         }
       );
 
-
       // Divide large outlines into multiple small lines
       let newCoords = [];
 
@@ -334,7 +333,7 @@ class MapScroller extends React.Component {
       if (markerData.highlight !== false) this.setState({ highlight: true });
       else this.setState({ highlight: false });
 
-      // Make sure we are mounted before proceeding or we die 
+      // Make sure we are mounted before proceeding or we die
       if (projection) {
         // Handle bottom brackets dark background
         if (!markerData.background) canvas.style("background-color", "#f9f9f9");
