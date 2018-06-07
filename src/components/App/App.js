@@ -45,6 +45,8 @@ const LGA_GEO_JSON_URL = baseURL + "LGA_2016_AUST_SEARCH.topo.json";
 
 const LGA_TOP_DATA_URL = baseURL + "lga-top-data.csv";
 
+// Used to determine zooming levels for Australian States
+// This could also be achieved using d3Geo.merge or similar on the full map
 const AUS_STATES_URL = baseURL + "australia-states.topo.json";
 
 // For the top 5 in top brackets

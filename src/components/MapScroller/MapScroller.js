@@ -271,7 +271,7 @@ class MapScroller extends React.Component {
     // To counteract mobile phone resize events when scroll direction changes
     if (
       window.innerHeight < screenHeight &&
-      window.innerHeight > screenHeight - 100
+      window.innerHeight > screenHeight - 2
     ) {
       return;
     }
