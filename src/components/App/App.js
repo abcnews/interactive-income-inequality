@@ -564,6 +564,7 @@ class App extends React.Component {
             dot2Percent={65.68}
             dot2Label="Top bracket"
             line1Percent={67}
+            line1Label="Avg. of all brackets"
             percentMultiplier={1}
             maxValue={100}
           />
