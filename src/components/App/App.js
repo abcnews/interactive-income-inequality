@@ -36,28 +36,16 @@ const fragmentData = document.querySelector("[data-income-comparisons-root]");
 
 // One map for LGA search (complex) and one for Scrolly map (simplified)
 let baseURL = "/";
-// "http://www.abc.net.au/res/sites/news-projects/income-comparisons-react/master/";
 
+// Get baseURL from HTML Fragment
 if (fragmentData && fragmentData.dataset.rootUrl)
   baseURL = fragmentData.dataset.rootUrl;
 
-const LGA_GEO_JSON_URL =
-  // "http://WS204914.aus.aunty.abc.net.au:8000/LGA_2016_AUST_SEARCH.topo.json";
-  baseURL + "LGA_2016_AUST_SEARCH.topo.json";
-// "/LGA_2016_AUST_SEARCH.topo.json"
+const LGA_GEO_JSON_URL = baseURL + "LGA_2016_AUST_SEARCH.topo.json";
 
 const LGA_TOP_DATA_URL = baseURL + "lga-top-data.csv";
 
 const AUS_STATES_URL = baseURL + "australia-states.topo.json";
-
-// const SCROLLER_GEO_JSON_URL =
-//   "http://www.abc.net.au/res/sites/news-projects/income-comparisons-react/master/LGA_2016_AUST_MAP.topo.json";
-
-// const PROJECTED_GEO_JSON_URL =
-//   "http://www.abc.net.au/res/sites/news-projects/income-comparisons-react/master/LGA_2016_AUST_MAP_PROJECTED.topo.json";
-
-// File scope variables
-// let LGAs = [];
 
 // For the top 5 in top brackets
 const topBracketData = require("./top-bracket-data.json");
@@ -73,7 +61,6 @@ const getUserTopJobsData = (data, bracket) => {
 };
 
 // For the top 5 in user's bracket
-
 let userBracketData = require("./user-top-brackets.json");
 
 const getUserBracketData = (data, bracket) => {
@@ -97,14 +84,14 @@ class App extends React.Component {
     };
 
     this.setCurrentLga = this.setCurrentLga.bind(this);
-    this.doMarkerEvent = this.doMarkerEvent.bind(this);
+    // this.doMarkerEvent = this.doMarkerEvent.bind(this);
     this.setCurrentBracket = this.setCurrentBracket.bind(this);
   }
 
-  doMarkerEvent(stateCode) {
-    // TODO: after implementing per LGA fade outs enable this
-    // this.setState({ currentAusState: stateCode });
-  }
+  // doMarkerEvent(stateCode) {
+  // TODO: after implementing per LGA fade outs enable this
+  // this.setState({ currentAusState: stateCode });
+  // }
 
   setCurrentBracket(bracketNumber) {
     this.setState({ currentBracketNumber: bracketNumber });
@@ -288,8 +275,6 @@ class App extends React.Component {
       .defer(d3Request.json, LGA_GEO_JSON_URL)
       .defer(d3Request.json, AUS_STATES_URL)
       .defer(d3Request.csv, LGA_TOP_DATA_URL)
-      // .defer(d3Request.json, SCROLLER_GEO_JSON_URL)
-      // .defer(d3Request.json, PROJECTED_GEO_JSON_URL)
       .awaitAll((error, files) => {
         // Once all is loaded do this
         if (error) console.error(error);
@@ -302,14 +287,10 @@ class App extends React.Component {
         const LGAs = topojson.feature(LGAMap, LGAMap.objects.LGA_2016_AUST)
           .features;
 
-        // const LGAs = topology;
-
         const ausStatesGeo = topojson.feature(
           ausStates,
           ausStates.objects.states
         );
-
-        // console.log(ausStatesGeo)
 
         this.setState({
           mapData: LGAs,
@@ -352,7 +333,7 @@ class App extends React.Component {
               ausStatesGeo={this.state.ausStatesGeo}
               lgaData={this.lgaData}
               currentAusState={this.state.currentAusState}
-              doMarkerEvent={this.doMarkerEvent}
+              // doMarkerEvent={this.doMarkerEvent}
             />
           )}
 
