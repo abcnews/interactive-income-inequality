@@ -80,7 +80,7 @@ class App extends React.Component {
       currentLga: null,
       currentAusState: 1, // default NSW
       scrollytellerObject: scrollyteller,
-      currentBracketNumber: 8 // default bracket
+      currentBracketNumber: 13 // default bracket
     };
 
     this.setCurrentLga = this.setCurrentLga.bind(this);
@@ -449,7 +449,7 @@ class App extends React.Component {
           <DumbbellUser>
             <p className={styles.paragraphText}>
               By contrast, the top five professions in the bottom bracket make
-              up 26.97 per cent of people in their bracket.
+              up 26.97 per cent of people in that bracket.
             </p>
             <Dumbbell
               label="Sales Assistants and Salespersons"
@@ -516,8 +516,11 @@ class App extends React.Component {
           <Dumbbell
             label="Bachelor degrees"
             dot1Percent={user.bachelor}
+            dot1Label="Your bracket"
             dot2Percent={61.79}
+            dot2Label="Top bracket"
             line1Percent={24.88}
+            line1Label="Avg. of all brackets"
             percentMultiplier={1}
             maxValue={100}
           />
@@ -527,8 +530,11 @@ class App extends React.Component {
           <Dumbbell
             label="Gender divide"
             dot1Percent={user.male}
+            dot1Label="Your bracket"
             dot2Percent={75.17}
+            dot2Label="Top bracket"
             line1Percent={49.64}
+            line1Label="Avg. of all brackets"
             percentMultiplier={1}
             maxValue={100}
           />
@@ -537,8 +543,11 @@ class App extends React.Component {
           <Dumbbell
             label="Indigenous population"
             dot1Percent={user.indigenous}
+            dot1Label="Your bracket"
             dot2Percent={0.82}
+            dot2Label="Top bracket"
             line1Percent={2.05}
+            line1Label="Avg. of all brackets"
             percentMultiplier={1}
             maxValue={10}
           />
@@ -547,7 +556,9 @@ class App extends React.Component {
           <Dumbbell
             label="Born in Australia"
             dot1Percent={user.born}
+            dot1Label="Your bracket"
             dot2Percent={65.68}
+            dot2Label="Top bracket"
             line1Percent={67}
             percentMultiplier={1}
             maxValue={100}
@@ -557,8 +568,11 @@ class App extends React.Component {
           <Dumbbell
             label="Voluntary work"
             dot1Percent={user.voluntary}
+            dot1Label="Your bracket"
             dot2Percent={29.09}
+            dot2Label="Top bracket"
             line1Percent={20.76}
+            line1Label="Avg. of all brackets"
             percentMultiplier={1}
             maxValue={100}
           />
@@ -567,9 +581,12 @@ class App extends React.Component {
           <Dumbbell
             label="Owns one or two cars"
             dot1Percent={user.car1or2}
+            dot1Label="Your bracket"
             dot2Percent={66.21}
+            dot2Label="Top bracket"
             line1Percent={64.18}
             percentMultiplier={1}
+            line1Label="Avg. of all brackets"
             maxValue={100}
           />
           <Dumbbell
@@ -585,9 +602,12 @@ class App extends React.Component {
           <Dumbbell
             label="Married"
             dot1Percent={user.married}
+            dot1Label="Your bracket"
             dot2Percent={72.86}
+            dot2Label="Top bracket"
             line1Percent={49.92}
             percentMultiplier={1}
+            line1Label="Avg. of all brackets"
             maxValue={100}
           />
           <Dumbbell
@@ -612,8 +632,11 @@ class App extends React.Component {
           <Dumbbell
             label="Married (control)"
             dot1Percent={user.contmarried}
+            dot1Label="Your bracket"
             dot2Percent={61.57}
+            dot2Label="Top bracket"
             line1Percent={50.84}
+            line1Label="Avg. of all brackets"
             percentMultiplier={1}
             maxValue={100}
           />
