@@ -95,10 +95,10 @@ class App extends React.Component {
 
   setCurrentBracket(bracketNumber) {
     this.setState({ currentBracketNumber: bracketNumber });
-    setTimeout(
-      () => console.log("Bracket number: ", this.state.currentBracketNumber),
-      1000
-    );
+    // setTimeout(
+    //   () => console.log("Bracket number: ", this.state.currentBracketNumber),
+    //   1000
+    // );
   }
 
   // Fires when the user chooses their LGA
@@ -231,6 +231,8 @@ class App extends React.Component {
     // *
     // * Lastly set up the top LGA in State
     // *
+
+    // TODO: if lgaObject.value === leadLgaCode then change text
 
     let leadLga = getStateInfo(stateCode).leadLga;
     let leadLgaCode = getStateInfo(stateCode).leadLgaCode;
@@ -663,7 +665,7 @@ class App extends React.Component {
 }
 
 function getLgaTop(lgaData, lgaCode) {
-  return lgaData.find(lga => +lga.LGA_CODE_2016 === lgaCode);
+  return lgaData.find(lga => +lga.LGA_CODE_2016 === lgaCode); // Pollyfilled in MapScroller.js
 }
 
 module.exports = App;
