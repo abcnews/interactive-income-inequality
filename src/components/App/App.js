@@ -237,16 +237,18 @@ class App extends React.Component {
     // * Lastly set up the top LGA in State
     // *
 
-    // TODO: if lgaObject.value === leadLgaCode then change text
-
     let leadLga = getStateInfo(stateCode).leadLga;
     let leadLgaCode = getStateInfo(stateCode).leadLgaCode;
     let leadLgaPercent = getStateInfo(stateCode).leadLgaPercent;
     let leadLgaRank = getLgaTop(this.lgaData, leadLgaCode).RANK;
 
-    console.log(userLgaCode, leadLgaCode);
-
-    let leadPanelText = `Leading the pack in your state is <strong>${leadLga}</strong>, where <strong>${leadLgaPercent}</strong> per cent of income earners are in the top bracket.`;
+    // Find out if user is in the top LGA for that State
+    let leadPanelText;
+    if (userLgaCode === leadLgaCode) {
+      leadPanelText = `Congratulations! Your LGA is leading the pack in your state is <strong>${leadLga}</strong>, where <strong>${leadLgaPercent}</strong> per cent of income earners are in the top bracket.`;
+    } else {
+      leadPanelText = `Leading the pack in your state is <strong>${leadLga}</strong>, where <strong>${leadLgaPercent}</strong> per cent of income earners are in the top bracket.`;
+    }
 
     let leadPanelRankText = `It is ranked number <strong>${leadLgaRank}</strong> out of all LGAs in Australia on this measure.`;
 
