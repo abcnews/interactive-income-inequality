@@ -112,6 +112,9 @@ class App extends React.Component {
     let percentageDifference = currentTopPercentValue - 3.84; // Aust-wide percent in top bracket
     let currentRank = getLgaTop(this.lgaData, lgaObject.value).RANK;
 
+    // To compare with highest in state
+    let userLgaCode = lgaObject.value;
+
     /*
      * First set up user panel
      */
@@ -240,6 +243,8 @@ class App extends React.Component {
     let leadLgaCode = getStateInfo(stateCode).leadLgaCode;
     let leadLgaPercent = getStateInfo(stateCode).leadLgaPercent;
     let leadLgaRank = getLgaTop(this.lgaData, leadLgaCode).RANK;
+
+    console.log(userLgaCode, leadLgaCode);
 
     let leadPanelText = `Leading the pack in your state is <strong>${leadLga}</strong>, where <strong>${leadLgaPercent}</strong> per cent of income earners are in the top bracket.`;
 
