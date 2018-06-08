@@ -86,21 +86,11 @@ class App extends React.Component {
     };
 
     this.setCurrentLga = this.setCurrentLga.bind(this);
-    // this.doMarkerEvent = this.doMarkerEvent.bind(this);
     this.setCurrentBracket = this.setCurrentBracket.bind(this);
   }
 
-  // doMarkerEvent(stateCode) {
-  // TODO: after implementing per LGA fade outs enable this
-  // this.setState({ currentAusState: stateCode });
-  // }
-
   setCurrentBracket(bracketNumber) {
     this.setState({ currentBracketNumber: bracketNumber });
-    // setTimeout(
-    //   () => console.log("Bracket number: ", this.state.currentBracketNumber),
-    //   1000
-    // );
   }
 
   // Fires when the user chooses their LGA
@@ -245,7 +235,7 @@ class App extends React.Component {
     // Find out if user is in the top LGA for that State
     let leadPanelText;
     if (userLgaCode === leadLgaCode) {
-      leadPanelText = `Congratulations! Your LGA is leading the pack in your state is <strong>${leadLga}</strong>, where <strong>${leadLgaPercent}</strong> per cent of income earners are in the top bracket.`;
+      leadPanelText = `Congratulations! Leading the pack in your state is <strong>${leadLga}</strong>, where <strong>${leadLgaPercent}</strong> per cent of income earners are in the top bracket.`;
     } else {
       leadPanelText = `Leading the pack in your state is <strong>${leadLga}</strong>, where <strong>${leadLgaPercent}</strong> per cent of income earners are in the top bracket.`;
     }
@@ -344,7 +334,6 @@ class App extends React.Component {
               ausStatesGeo={this.state.ausStatesGeo}
               lgaData={this.lgaData}
               currentAusState={this.state.currentAusState}
-              // doMarkerEvent={this.doMarkerEvent}
             />
           )}
 
