@@ -82,7 +82,7 @@ class App extends React.Component {
       currentLga: null,
       currentAusState: 1, // default NSW
       scrollytellerObject: scrollyteller,
-      currentBracketNumber: 13 // default bracket
+      currentBracketNumber: 8 // default bracket
     };
 
     this.setCurrentLga = this.setCurrentLga.bind(this);
