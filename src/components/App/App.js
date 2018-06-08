@@ -599,7 +599,7 @@ class App extends React.Component {
             label="Gender divide"
             dot1Percent={user.male}
             dot1Label="Your bracket"
-            dot2Percent={75.17}
+            dot2Percent={isInTopBracket ? 38.53 : 75.17}
             dot2Label={isInTopBracket ? "Bottom bracket" : "Top bracket"}
             dot2Color={isInTopBracket ?  "#607477" : undefined}
             dot2TextColor={isInTopBracket ?  "#607477" : undefined}
@@ -615,7 +615,7 @@ class App extends React.Component {
             label="Indigenous population"
             dot1Percent={user.indigenous}
             dot1Label="Your bracket"
-            dot2Percent={0.82}
+            dot2Percent={isInTopBracket ? 3.02 : 0.82}
             dot2Label={isInTopBracket ? "Bottom bracket" : "Top bracket"}
             dot2Color={isInTopBracket ?  "#607477" : undefined}
             dot2TextColor={isInTopBracket ?  "#607477" : undefined}

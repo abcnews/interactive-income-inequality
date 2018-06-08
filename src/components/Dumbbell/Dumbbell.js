@@ -102,10 +102,12 @@ class Dumbbell extends React.Component {
 
     if (this.props.dot1LabelColor) {
       dot1LabelStyle.color = this.props.dot1LabelColor;
+      dot1LabelRightStyle.color = this.props.dot1LabelColor;
     }
 
     if (this.props.dot2LabelColor) {
       dot2LabelStyle.color = this.props.dot2LabelColor;
+      dot2LabelRightStyle.color = this.props.dot2LabelColor;
     }
 
     return (
