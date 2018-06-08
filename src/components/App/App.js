@@ -312,6 +312,8 @@ class App extends React.Component {
       this.state.currentBracketNumber
     );
 
+    let isInTopBracket = this.state.currentBracketNumber === 13;
+
     // For this project only we know 1 value will be 12.29% so stretch the bounds a bit
     let dumbbellUserMax = 10;
     if (this.state.currentBracketNumber === 1) dumbbellUserMax = 13;
@@ -385,7 +387,7 @@ class App extends React.Component {
             />
           </DumbbellTop>
         )}
-        
+
         {/* If user is in top bracket show this instead */}
         {this.state.currentBracketNumber === 13 && (
           <DumbbellTop>
@@ -580,8 +582,11 @@ class App extends React.Component {
             label="Bachelor degrees"
             dot1Percent={user.bachelor}
             dot1Label="Your bracket"
-            dot2Percent={61.79}
-            dot2Label="Top bracket"
+            dot2Percent={isInTopBracket ? 11.73 : 61.79}
+            dot2Label={isInTopBracket ? "Bottom bracket" : "Top bracket"}
+            dot2Color={isInTopBracket ?  "#607477" : undefined}
+            dot2TextColor={isInTopBracket ?  "#607477" : undefined}
+            dot2LabelColor={isInTopBracket ?  "#607477" : undefined}
             line1Percent={24.88}
             line1Label="Avg. of all brackets"
             percentMultiplier={1}
@@ -595,7 +600,10 @@ class App extends React.Component {
             dot1Percent={user.male}
             dot1Label="Your bracket"
             dot2Percent={75.17}
-            dot2Label="Top bracket"
+            dot2Label={isInTopBracket ? "Bottom bracket" : "Top bracket"}
+            dot2Color={isInTopBracket ?  "#607477" : undefined}
+            dot2TextColor={isInTopBracket ?  "#607477" : undefined}
+            dot2LabelColor={isInTopBracket ?  "#607477" : undefined}
             line1Percent={49.64}
             line1Label="Avg. of all brackets"
             percentMultiplier={1}
@@ -608,7 +616,10 @@ class App extends React.Component {
             dot1Percent={user.indigenous}
             dot1Label="Your bracket"
             dot2Percent={0.82}
-            dot2Label="Top bracket"
+            dot2Label={isInTopBracket ? "Bottom bracket" : "Top bracket"}
+            dot2Color={isInTopBracket ?  "#607477" : undefined}
+            dot2TextColor={isInTopBracket ?  "#607477" : undefined}
+            dot2LabelColor={isInTopBracket ?  "#607477" : undefined}
             line1Percent={2.05}
             line1Label="Avg. of all brackets"
             percentMultiplier={1}
@@ -621,7 +632,10 @@ class App extends React.Component {
             dot1Percent={user.born}
             dot1Label="Your bracket"
             dot2Percent={65.68}
-            dot2Label="Top bracket"
+            dot2Label={isInTopBracket ? "Bottom bracket" : "Top bracket"}
+            dot2Color={isInTopBracket ?  "#607477" : undefined}
+            dot2TextColor={isInTopBracket ?  "#607477" : undefined}
+            dot2LabelColor={isInTopBracket ?  "#607477" : undefined}
             line1Percent={67}
             line1Label="Avg. of all brackets"
             percentMultiplier={1}
@@ -634,7 +648,10 @@ class App extends React.Component {
             dot1Percent={user.voluntary}
             dot1Label="Your bracket"
             dot2Percent={29.09}
-            dot2Label="Top bracket"
+            dot2Label={isInTopBracket ? "Bottom bracket" : "Top bracket"}
+            dot2Color={isInTopBracket ?  "#607477" : undefined}
+            dot2TextColor={isInTopBracket ?  "#607477" : undefined}
+            dot2LabelColor={isInTopBracket ?  "#607477" : undefined}
             line1Percent={20.76}
             line1Label="Avg. of all brackets"
             percentMultiplier={1}
@@ -647,7 +664,10 @@ class App extends React.Component {
             dot1Percent={user.car1or2}
             dot1Label="Your bracket"
             dot2Percent={66.21}
-            dot2Label="Top bracket"
+            dot2Label={isInTopBracket ? "Bottom bracket" : "Top bracket"}
+            dot2Color={isInTopBracket ?  "#607477" : undefined}
+            dot2TextColor={isInTopBracket ?  "#607477" : undefined}
+            dot2LabelColor={isInTopBracket ?  "#607477" : undefined}
             line1Percent={64.18}
             percentMultiplier={1}
             line1Label="Avg. of all brackets"
@@ -657,6 +677,9 @@ class App extends React.Component {
             label="Owns three or more cars"
             dot1Percent={user.car3ormore}
             dot2Percent={24.04}
+            dot2Color={isInTopBracket ?  "#607477" : undefined}
+            dot2TextColor={isInTopBracket ?  "#607477" : undefined}
+            dot2LabelColor={isInTopBracket ?  "#607477" : undefined}
             line1Percent={25.51}
             percentMultiplier={1}
             maxValue={100}
@@ -668,7 +691,10 @@ class App extends React.Component {
             dot1Percent={user.married}
             dot1Label="Your bracket"
             dot2Percent={72.86}
-            dot2Label="Top bracket"
+            dot2Label={isInTopBracket ? "Bottom bracket" : "Top bracket"}
+            dot2Color={isInTopBracket ?  "#607477" : undefined}
+            dot2TextColor={isInTopBracket ?  "#607477" : undefined}
+            dot2LabelColor={isInTopBracket ?  "#607477" : undefined}
             line1Percent={49.92}
             percentMultiplier={1}
             line1Label="Avg. of all brackets"
@@ -678,6 +704,9 @@ class App extends React.Component {
             label="Never married"
             dot1Percent={user.nevermarried}
             dot2Percent={15.21}
+            dot2Color={isInTopBracket ?  "#607477" : undefined}
+            dot2TextColor={isInTopBracket ?  "#607477" : undefined}
+            dot2LabelColor={isInTopBracket ?  "#607477" : undefined}
             line1Percent={32.57}
             percentMultiplier={1}
             maxValue={100}
@@ -686,6 +715,9 @@ class App extends React.Component {
             label="Divorced"
             dot1Percent={user.divorced}
             dot2Percent={7.26}
+            dot2Color={isInTopBracket ?  "#607477" : undefined}
+            dot2TextColor={isInTopBracket ?  "#607477" : undefined}
+            dot2LabelColor={isInTopBracket ?  "#607477" : undefined}
             line1Percent={9.05}
             percentMultiplier={1}
             maxValue={100}
@@ -698,7 +730,10 @@ class App extends React.Component {
             dot1Percent={user.contmarried}
             dot1Label="Your bracket"
             dot2Percent={61.57}
-            dot2Label="Top bracket"
+            dot2Label={isInTopBracket ? "Bottom bracket" : "Top bracket"}
+            dot2Color={isInTopBracket ?  "#607477" : undefined}
+            dot2TextColor={isInTopBracket ?  "#607477" : undefined}
+            dot2LabelColor={isInTopBracket ?  "#607477" : undefined}
             line1Percent={50.84}
             line1Label="Avg. of all brackets"
             percentMultiplier={1}
@@ -708,6 +743,9 @@ class App extends React.Component {
             label="Never married (control)"
             dot1Percent={user.contnevermarried}
             dot2Percent={26.06}
+            dot2Color={isInTopBracket ?  "#607477" : undefined}
+            dot2TextColor={isInTopBracket ?  "#607477" : undefined}
+            dot2LabelColor={isInTopBracket ?  "#607477" : undefined}
             line1Percent={31.53}
             percentMultiplier={1}
             maxValue={100}
@@ -716,6 +754,9 @@ class App extends React.Component {
             label="Divorced (control)"
             dot1Percent={user.contdivorced}
             dot2Percent={6.23}
+            dot2Color={isInTopBracket ?  "#607477" : undefined}
+            dot2TextColor={isInTopBracket ?  "#607477" : undefined}
+            dot2LabelColor={isInTopBracket ?  "#607477" : undefined}
             line1Percent={9.19}
             percentMultiplier={1}
             maxValue={100}
