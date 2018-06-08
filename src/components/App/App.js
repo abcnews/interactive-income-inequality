@@ -631,7 +631,7 @@ class App extends React.Component {
             label="Born in Australia"
             dot1Percent={user.born}
             dot1Label="Your bracket"
-            dot2Percent={65.68}
+            dot2Percent={isInTopBracket ? 72.24 : 65.68}
             dot2Label={isInTopBracket ? "Bottom bracket" : "Top bracket"}
             dot2Color={isInTopBracket ?  "#607477" : undefined}
             dot2TextColor={isInTopBracket ?  "#607477" : undefined}
@@ -647,7 +647,7 @@ class App extends React.Component {
             label="Voluntary work"
             dot1Percent={user.voluntary}
             dot1Label="Your bracket"
-            dot2Percent={29.09}
+            dot2Percent={isInTopBracket ? 26.14 : 29.09}
             dot2Label={isInTopBracket ? "Bottom bracket" : "Top bracket"}
             dot2Color={isInTopBracket ?  "#607477" : undefined}
             dot2TextColor={isInTopBracket ?  "#607477" : undefined}
@@ -663,7 +663,7 @@ class App extends React.Component {
             label="Owns one or two cars"
             dot1Percent={user.car1or2}
             dot1Label="Your bracket"
-            dot2Percent={66.21}
+            dot2Percent={isInTopBracket ? 58.00 : 66.21}
             dot2Label={isInTopBracket ? "Bottom bracket" : "Top bracket"}
             dot2Color={isInTopBracket ?  "#607477" : undefined}
             dot2TextColor={isInTopBracket ?  "#607477" : undefined}
@@ -676,7 +676,7 @@ class App extends React.Component {
           <Dumbbell
             label="Owns three or more cars"
             dot1Percent={user.car3ormore}
-            dot2Percent={24.04}
+            dot2Percent={isInTopBracket ? 33.16 : 24.04}
             dot2Color={isInTopBracket ?  "#607477" : undefined}
             dot2TextColor={isInTopBracket ?  "#607477" : undefined}
             dot2LabelColor={isInTopBracket ?  "#607477" : undefined}
@@ -690,7 +690,7 @@ class App extends React.Component {
             label="Married"
             dot1Percent={user.married}
             dot1Label="Your bracket"
-            dot2Percent={72.86}
+            dot2Percent={isInTopBracket ? 33.75 : 72.86}
             dot2Label={isInTopBracket ? "Bottom bracket" : "Top bracket"}
             dot2Color={isInTopBracket ?  "#607477" : undefined}
             dot2TextColor={isInTopBracket ?  "#607477" : undefined}
@@ -703,7 +703,7 @@ class App extends React.Component {
           <Dumbbell
             label="Never married"
             dot1Percent={user.nevermarried}
-            dot2Percent={15.21}
+            dot2Percent={isInTopBracket ? 60.37 : 15.21}
             dot2Color={isInTopBracket ?  "#607477" : undefined}
             dot2TextColor={isInTopBracket ?  "#607477" : undefined}
             dot2LabelColor={isInTopBracket ?  "#607477" : undefined}
@@ -714,7 +714,7 @@ class App extends React.Component {
           <Dumbbell
             label="Divorced"
             dot1Percent={user.divorced}
-            dot2Percent={7.26}
+            dot2Percent={isInTopBracket ? 3.00 : 7.26}
             dot2Color={isInTopBracket ?  "#607477" : undefined}
             dot2TextColor={isInTopBracket ?  "#607477" : undefined}
             dot2LabelColor={isInTopBracket ?  "#607477" : undefined}
@@ -729,7 +729,7 @@ class App extends React.Component {
             label="Married (control)"
             dot1Percent={user.contmarried}
             dot1Label="Your bracket"
-            dot2Percent={61.57}
+            dot2Percent={isInTopBracket ? 59.65 : 61.57}
             dot2Label={isInTopBracket ? "Bottom bracket" : "Top bracket"}
             dot2Color={isInTopBracket ?  "#607477" : undefined}
             dot2TextColor={isInTopBracket ?  "#607477" : undefined}
@@ -742,7 +742,7 @@ class App extends React.Component {
           <Dumbbell
             label="Never married (control)"
             dot1Percent={user.contnevermarried}
-            dot2Percent={26.06}
+            dot2Percent={isInTopBracket ? 29.7 : 26.06}
             dot2Color={isInTopBracket ?  "#607477" : undefined}
             dot2TextColor={isInTopBracket ?  "#607477" : undefined}
             dot2LabelColor={isInTopBracket ?  "#607477" : undefined}
@@ -753,7 +753,7 @@ class App extends React.Component {
           <Dumbbell
             label="Divorced (control)"
             dot1Percent={user.contdivorced}
-            dot2Percent={6.23}
+            dot2Percent={isInTopBracket ? 5.21 : 6.23}
             dot2Color={isInTopBracket ?  "#607477" : undefined}
             dot2TextColor={isInTopBracket ?  "#607477" : undefined}
             dot2LabelColor={isInTopBracket ?  "#607477" : undefined}
