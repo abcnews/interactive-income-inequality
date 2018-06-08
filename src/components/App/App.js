@@ -325,7 +325,7 @@ class App extends React.Component {
         />
 
         {/* Conditionally render MapScroller if data loaded */}
-        {this.state.mapData &&
+        {/* {this.state.mapData &&
           this.state.scrollytellerObject && (
             <MapScroller
               scrollyteller={this.state.scrollytellerObject}
@@ -335,53 +335,116 @@ class App extends React.Component {
               lgaData={this.lgaData}
               currentAusState={this.state.currentAusState}
             />
-          )}
+          )} */}
 
-        <DumbbellTop>
-          <Dumbbell
-            label="Medical practitioners"
-            dot1Percent={top5[1]}
-            dot1Label="Your bracket"
-            dot2Percent="7.22"
-            dot2Label="Top bracket"
-            line1Percent="0.56"
-            line1Label="Avg. of all brackets"
-            percentMultiplier={1}
-            maxValue={10}
-          />
-          <Dumbbell
-            label="CEOs, General Managers and Legislators"
-            dot1Percent={top5[2]}
-            dot2Percent="7.19"
-            line1Percent="0.72"
-            percentMultiplier={1}
-            maxValue={10}
-          />
-          <Dumbbell
-            label="Business Administration Managers"
-            dot1Percent={top5[3]}
-            dot2Percent="5.68"
-            line1Percent="0.88"
-            percentMultiplier={1}
-            maxValue={10}
-          />
-          <Dumbbell
-            label="Construction, Distribution &amp; Production Managers"
-            dot1Percent={top5[4]}
-            dot2Percent="5.68"
-            line1Percent="1.39"
-            percentMultiplier={1}
-            maxValue={10}
-          />
-          <Dumbbell
-            label="Legal Professionals"
-            dot1Percent={top5[5]}
-            dot2Percent="3.68"
-            line1Percent="0.45"
-            percentMultiplier={1}
-            maxValue={10}
-          />
-        </DumbbellTop>
+        {/* Top 5 jobs in top bracket */}
+        {this.state.currentBracketNumber !== 13 && (
+          <DumbbellTop>
+            <Dumbbell
+              label="Medical practitioners"
+              dot1Percent={top5[1]}
+              dot1Label="Your bracket"
+              dot2Percent="7.22"
+              dot2Label="Top bracket"
+              line1Percent="0.56"
+              line1Label="Avg. of all brackets"
+              percentMultiplier={1}
+              maxValue={10}
+            />
+            <Dumbbell
+              label="CEOs, General Managers and Legislators"
+              dot1Percent={top5[2]}
+              dot2Percent="7.19"
+              line1Percent="0.72"
+              percentMultiplier={1}
+              maxValue={10}
+            />
+            <Dumbbell
+              label="Business Administration Managers"
+              dot1Percent={top5[3]}
+              dot2Percent="5.68"
+              line1Percent="0.88"
+              percentMultiplier={1}
+              maxValue={10}
+            />
+            <Dumbbell
+              label="Construction, Distribution &amp; Production Managers"
+              dot1Percent={top5[4]}
+              dot2Percent="5.68"
+              line1Percent="1.39"
+              percentMultiplier={1}
+              maxValue={10}
+            />
+            <Dumbbell
+              label="Legal Professionals"
+              dot1Percent={top5[5]}
+              dot2Percent="3.68"
+              line1Percent="0.45"
+              percentMultiplier={1}
+              maxValue={10}
+            />
+          </DumbbellTop>
+        )}
+        
+        {/* If user is in top bracket show this instead */}
+        {this.state.currentBracketNumber === 13 && (
+          <DumbbellTop>
+            <Dumbbell
+              label="Medical practitioners"
+              dot1Percent={top5[1]}
+              dot1Label="Your bracket"
+              dot2Percent="0.01"
+              dot2Label="Bottom bracket"
+              dot2Color="#607477"
+              dot2TextColor="#607477"
+              dot2LabelColor="#607477"
+              line1Percent="0.56"
+              line1Label="Avg. of all brackets"
+              percentMultiplier={1}
+              maxValue={10}
+            />
+            <Dumbbell
+              label="CEOs, General Managers and Legislators"
+              dot1Percent={top5[2]}
+              dot2Percent="0.05"
+              dot2Color="#607477"
+              dot2TextColor="#607477"
+              line1Percent="0.72"
+              percentMultiplier={1}
+              maxValue={10}
+            />
+            <Dumbbell
+              label="Business Administration Managers"
+              dot1Percent={top5[3]}
+              dot2Percent="0.03"
+              dot2Color="#607477"
+              dot2TextColor="#607477"
+              line1Percent="0.88"
+              percentMultiplier={1}
+              maxValue={10}
+            />
+            <Dumbbell
+              label="Construction, Distribution &amp; Production Managers"
+              dot1Percent={top5[4]}
+              dot2Percent="0.13"
+              dot2Color="#607477"
+              dot2TextColor="#607477"
+              line1Percent="1.39"
+              percentMultiplier={1}
+              maxValue={10}
+            />
+            <Dumbbell
+              label="Legal Professionals"
+              dot1Percent={top5[5]}
+              dot2Percent="0.02"
+              dot2Color="#607477"
+              dot2TextColor="#607477"
+              line1Percent="0.45"
+              percentMultiplier={1}
+              maxValue={10}
+            />
+          </DumbbellTop>
+        )}
 
         {/* Check that the user is not in the top 3.8% bracket */}
         {this.state.currentBracketNumber !== 13 && (
