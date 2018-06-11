@@ -11,9 +11,7 @@ const utils = require("../../lib/utils");
 const d3Selection = require("d3-selection");
 require("d3-transition");
 const d3Geo = require("d3-geo");
-// const d3GeoProjection = require("d3-geo-projection");
 const d3Interpolate = require("d3-interpolate");
-// const d3Zoom = require("d3-zoom");
 const d3Scale = require("d3-scale");
 const d3Ease = require("d3-ease");
 const d3Queue = require("d3-queue");
@@ -693,18 +691,6 @@ class MapScroller extends React.Component {
       context.fill();
       context.stroke();
     });
-
-    // TODO: fix Australia stroke outline so it works on IE and Edge
-    // FIXED: Below
-    // if (!detectIE()) { //|| tweening > 0.99) {
-    //   // Render the outline of Australia
-    //   context.beginPath();
-    //   context.globalAlpha = 1;
-    //   context.strokeStyle = "rgba(100, 100, 100, 0.6)";
-    //   context.lineWidth = 1.1;
-    //   path(australiaOutline);
-    //   context.stroke();
-    // }
 
     // If the Australian Outline is a MultiLineString we can chop it up and render only lines on screen
     australiaOutline.coordinates.forEach(line => {
