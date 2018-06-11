@@ -18,8 +18,8 @@
     }
   },
   "devDependencies": {
-    "@abcnews/aunty": "^8.0.0",
-    "babel-preset-env": "^1.6.1",
+    "@abcnews/aunty": "^8.0.1",
+    "babel-preset-env": "^1.7.0",
     "babel-preset-react": "^6.24.1",
     "jest": "^22.4.2",
     "react-test-renderer": "^16.2.0"
