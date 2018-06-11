@@ -11,7 +11,6 @@ const styles = require("./LgaSearch.scss");
 const smoothScrollPollyfill = require("smoothscroll-polyfill");
 smoothScrollPollyfill.polyfill();
 
-const Select = require("react-select").default;
 const Async = require("react-select").Async;
 
 // Configuration
@@ -114,8 +113,8 @@ class LgaSearch extends React.Component {
     if (returnedData.entity.message === "Not Found") return [];
 
     if (returnedData && returnedData.entity.features.length === 0) {
-      console.log("Address not found...");
-      // TODO: alert the user
+      //console.log("Address not found...");
+      // TODO: alert the user maybe
       return [];
     }
 

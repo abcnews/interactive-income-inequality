@@ -512,7 +512,6 @@ class MapScroller extends React.Component {
           .transition("render")
           .delay(0)
           .duration(transitionTime + Math.max(zoomDelay, rotationDelay)) // transition + delay
-          // .ease(d3Ease.easeLinear)
           .tween("render", () => {
             // Return the tween function
             return time => {
@@ -556,8 +555,6 @@ class MapScroller extends React.Component {
     australiaGeoJson.features.forEach(element => {
       // Get bounds of current LGA
       const bounds = path.bounds(element);
-
-      // console.log(element);
 
       // Don't render LGA if not on screen
       if (bounds[0][0] > screenWidth) return;
@@ -698,6 +695,7 @@ class MapScroller extends React.Component {
     });
 
     // TODO: fix Australia stroke outline so it works on IE and Edge
+    // FIXED: Below
     // if (!detectIE()) { //|| tweening > 0.99) {
     //   // Render the outline of Australia
     //   context.beginPath();
@@ -710,7 +708,6 @@ class MapScroller extends React.Component {
 
     // If the Australian Outline is a MultiLineString we can chop it up and render only lines on screen
     australiaOutline.coordinates.forEach(line => {
-      // if (line.length < 200) {
       const lineString = {
         type: "LineString",
         coordinates: line
@@ -723,45 +720,13 @@ class MapScroller extends React.Component {
       if (bounds[1][0] < 0) return;
       if (bounds[1][1] < 0) return;
 
-      // console.log(lineString);
-
       context.beginPath();
       context.globalAlpha = 1;
       context.strokeStyle = "rgba(100, 100, 100, 0.6)";
       context.lineWidth = 1.1;
       path(lineString);
       context.stroke();
-      // }
     });
-
-    // australiaOutline.coordinates.forEach(line => {
-    //   if (line.length > 200) {
-    //     var ausLines = chunkArray(line, 40);
-
-    //     ausLines.forEach(chunkLine => {
-    //       const chunkLineString = {
-    //         type: "LineString",
-    //         coordinates: chunkLine
-    //       };
-
-    //       const chunkBounds = path.bounds(chunkLineString);
-
-    //       if (chunkBounds[0][0] > screenWidth) return;
-    //       if (chunkBounds[0][1] > screenHeight) return;
-    //       if (chunkBounds[1][0] < 0) return;
-    //       if (chunkBounds[1][1] < 0) return;
-
-    //       console.log(chunkLineString);
-
-    //       context.beginPath();
-    //       context.globalAlpha = 1;
-    //       context.strokeStyle = "rgba(100, 100, 100, 0.6)";
-    //       context.lineWidth = 1.1;
-    //       path(chunkLineString);
-    //       context.stroke();
-    //     });
-    //   }
-    // });
 
     // If an LGA is targeted to clip it to achieve an inner stroke
     if (targetElement) {
@@ -770,17 +735,13 @@ class MapScroller extends React.Component {
       context.beginPath();
       context.fillStyle = colorScale(targetElement.properties.TOP); //"#FF5733";
       context.strokeStyle = "#FF5733";
-      // if (tweening > 0.9) context.lineWidth = 3.3;
-      // else context.lineWidth = 1.1;
       context.lineWidth = 1.2;
       path(targetElement);
       context.fill();
       context.stroke();
 
-      // Inner stroke clip
+      // Inner stroke clip for target LGA
       context.beginPath();
-      // if (tweening > 0.9) context.lineWidth = 3.3;
-      // else context.lineWidth = 1.1;
       path(targetElement);
       context.clip();
 
@@ -788,10 +749,6 @@ class MapScroller extends React.Component {
       context.strokeStyle = "#FF5733";
       if (tweening > 0.9) context.lineWidth = 7.3;
       else context.lineWidth = 1.1;
-      // context.shadowBlur = 15;
-      // context.shadowColor = "black";
-      // context.shadowOffsetX = 0;
-      // context.shadowOffsetY = 0;
       path(targetElement);
       context.stroke();
       context.restore();
