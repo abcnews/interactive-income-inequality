@@ -21,10 +21,12 @@ const d3Queue = require("d3-queue");
 // Import styles
 const styles = require("./MapScroller.scss");
 
-const SIMPLIFICATION_LEVELS = 10;
-const SIMPLIFICATION_FACTOR = 1.7; // Higher is more complex per level
-const MAX_ZOOM = 2500;
+// Set up pre-compiled simplification levels
+let baseSimplification = 0.03;
+const SIMPLIFICATION_LEVELS = 5;
+const SIMPLIFICATION_FACTOR = 3.7; // Higher is more complex per level
 
+const MAX_ZOOM = 2500;
 const STATE_ZOOM_MARGINS = 0.23;
 const LGA_ZOOM_MARGINS = 0.46;
 const MAX_ZOOM_LEVEL = 110000;
@@ -130,8 +132,7 @@ class MapScroller extends React.Component {
     // and then apply sticky styles. To reduce scrolly jank
     stickifyStage();
 
-    // Set up pre-compiled simplification levels
-    let baseSimplification = 0.03;
+    
 
     const getGeo = (mapData, level) => {
       const preSimplifiedMapData = topojson.presimplify(mapData);
@@ -344,7 +345,7 @@ class MapScroller extends React.Component {
         let currentRotation = d3Geo.geoCentroid(currentLgaGeometry);
 
         // Zoom to states
-        const ausStatesGeo = this.props.ausStatesGeo.features[0];
+        // const ausStatesGeo = this.props.ausStatesGeo.features[0];
 
         dataZoom = markerData.zoom;
         let previousGlobeScale = projection.scale();
@@ -481,13 +482,13 @@ class MapScroller extends React.Component {
           .delay(zoomDelay)
           .duration(transitionTime);
 
-        let zoomOutDuration = 700;
+        // let zoomOutDuration = 700;
 
-        const zoomOutTween = d3Selection
-          .select(dummyTransition)
-          .transition("zoomout")
-          .delay(0)
-          .duration(zoomOutDuration);
+        // const zoomOutTween = d3Selection
+        //   .select(dummyTransition)
+        //   .transition("zoomout")
+        //   .delay(0)
+        //   .duration(zoomOutDuration);
 
         if (isZoomingIn) zoomTween.ease(d3Ease.easeExp);
         else zoomTween.ease(d3Ease.easeExp);
