@@ -101,8 +101,10 @@ class App extends React.Component {
         whereDoTheyLive.innerHTML =
           "Congratulations! Income-wise, you’re part of a very exclusive club. Scroll on to find out what it looks like spread over Australia.";
       } else {
-        veryTop.innerHTML = "In the very top bracket, earning over $156,000 a year (or $3,000 a week) are only 3.84 per cent of income earners.";
-        whereDoTheyLive.innerHTML = "So where do they live, what do they do, and how do they compare to you?";
+        veryTop.innerHTML =
+          "In the very top bracket, earning over $156,000 a year (or $3,000 a week) are only 3.84 per cent of income earners.";
+        whereDoTheyLive.innerHTML =
+          "So where do they live, what do they do, and how do they compare to you?";
       }
     });
   }
@@ -252,7 +254,7 @@ class App extends React.Component {
     let leadPanelRankText;
     if (userLgaCode === leadLgaCode) {
       leadPanelText = `Your LGA, <strong>${leadLga}</strong>, has the highest concentration of top income earners in ${leadLgaState} at <strong>${leadLgaPercent}</strong> per cent.`;
-      leadPanelRankText = null;
+      leadPanelRankText = "";
     } else {
       leadPanelText = `Leading the pack in ${leadLgaState} is <strong>${leadLga}</strong>, where <strong>${leadLgaPercent}</strong> per cent of income earners are in the top bracket.`;
       leadPanelRankText = `It is ranked number <strong>${leadLgaRank}</strong> out of all LGAs in Australia on this measure.`;
@@ -261,6 +263,8 @@ class App extends React.Component {
     // Then update the component state which will change text on all panels
     this.setState((prevState, props) => {
       let panels = prevState.scrollytellerObject.panels;
+
+      console.log(panels);
 
       // User's LGA
       panels[1].nodes[0].innerHTML = userLgaText;
@@ -275,11 +279,29 @@ class App extends React.Component {
       // Lead LGA in User's Australian State
       panels[3].config.lga = leadLgaCode;
       panels[3].nodes[0].innerHTML = leadPanelText;
-      if (leadPanelRankText === null) {
-        panels[3].nodes[1].outerHTML = "";
+      panels[3].nodes[1].innerHTML = leadPanelRankText;
+
+      if (leadPanelRankText === "") {
+        panels[3].nodes[0].style.marginBottom = "0px";
       } else {
-        panels[3].nodes[1].innerHTML = leadPanelRankText;
+        panels[3].nodes[0].style.marginBottom = "2.25rem";
       }
+
+      // Fiddly manipulation due to panels
+      // if (panels[3].nodes[1].parentNode)
+      //   panels[3].nodes[1].parentNode.removeChild(panels[3].nodes[1]);
+
+      //   var newEl = document.createElement("p");
+      //   newEl.innerHTML = leadPanelRankText;
+      //   insertAfter(newEl, panels[3].nodes[0]);
+        
+      // if (leadPanelRankText !== null) {
+      //   newEl.parentNode.removeChild(newEl);
+      //   insertAfter(newEl, panels[3].nodes[0]);
+      // } else {
+      //   insertAfter(newEl, panels[3].nodes[0]);
+      //   newEl.parentNode.removeChild(newEl);
+      // }
 
       return {
         scrollytellerObject: prevState.scrollytellerObject,
@@ -793,6 +815,10 @@ class App extends React.Component {
 
 function getLgaTop(lgaData, lgaCode) {
   return lgaData.find(lga => +lga.LGA_CODE_2016 === lgaCode); // Pollyfilled in MapScroller.js
+}
+
+function insertAfter(el, referenceNode) {
+  referenceNode.parentNode.insertBefore(el, referenceNode.nextSibling);
 }
 
 module.exports = App;

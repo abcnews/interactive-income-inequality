@@ -22,7 +22,7 @@ const styles = require("./MapScroller.scss");
 // Set up pre-compiled simplification levels
 let baseSimplification = 0.03;
 const SIMPLIFICATION_LEVELS = 5;
-const SIMPLIFICATION_FACTOR = 2.3; // Higher is more complex per level
+const SIMPLIFICATION_FACTOR = 3.3; // Higher is more complex per level
 
 const MAX_ZOOM = 2500;
 const STATE_ZOOM_MARGINS = 0.23;
