@@ -91,21 +91,23 @@ class App extends React.Component {
 
   setCurrentBracket(bracketNumber) {
     this.setState({ currentBracketNumber: bracketNumber }, () => {
-      let isInTopBracket = this.state.currentBracketNumber === 13;
-      let veryTop = document.querySelector(".very-top");
-      let whereDoTheyLive = document.querySelector(".where-do-they-live");
+      setTimeout(() => {
+        let isInTopBracket = this.state.currentBracketNumber === 13;
+        let veryTop = document.querySelector(".very-top");
+        let whereDoTheyLive = document.querySelector(".where-do-they-live");
 
-      // Change some text if in top bracket
-      if (isInTopBracket) {
-        veryTop.innerHTML = "";
-        whereDoTheyLive.innerHTML =
-          "Congratulations! Income-wise, you’re part of a very exclusive club. Scroll on to find out what it looks like spread over Australia.";
-      } else {
-        veryTop.innerHTML =
-          "In the very top bracket, earning over $156,000 a year (or $3,000 a week) are only 3.84 per cent of income earners.";
-        whereDoTheyLive.innerHTML =
-          "So where do they live, what do they do, and how do they compare to you?";
-      }
+        // Change some text if in top bracket
+        if (isInTopBracket) {
+          veryTop.innerHTML = "";
+          whereDoTheyLive.innerHTML =
+            "Congratulations! Income-wise, you’re part of a very exclusive club. Scroll on to find out what it looks like spread over Australia.";
+        } else {
+          veryTop.innerHTML =
+            "In the very top bracket, earning over $156,000 a year (or $3,000 a week) are only 3.84 per cent of income earners.";
+          whereDoTheyLive.innerHTML =
+            "So where do they live, what do they do, and how do they compare to you?";
+        }
+      }, 1000);
     });
   }
 
@@ -294,7 +296,7 @@ class App extends React.Component {
       //   var newEl = document.createElement("p");
       //   newEl.innerHTML = leadPanelRankText;
       //   insertAfter(newEl, panels[3].nodes[0]);
-        
+
       // if (leadPanelRankText !== null) {
       //   newEl.parentNode.removeChild(newEl);
       //   insertAfter(newEl, panels[3].nodes[0]);
