@@ -238,13 +238,11 @@ class App extends React.Component {
     let leadPanelRankText;
     if (userLgaCode === leadLgaCode) {
       leadPanelText = `Your LGA, <strong>${leadLga}</strong>, has the highest concentration of top income earners in ${leadLgaState} at <strong>${leadLgaPercent}</strong> per cent.`;
-      leadPanelRankText = ``;
+      leadPanelRankText = null;
     } else {
       leadPanelText = `Leading the pack in ${leadLgaState} is <strong>${leadLga}</strong>, where <strong>${leadLgaPercent}</strong> per cent of income earners are in the top bracket.`;
       leadPanelRankText = `It is ranked number <strong>${leadLgaRank}</strong> out of all LGAs in Australia on this measure.`;
     }
-
-     
 
     // Then update the component state which will change text on all panels
     this.setState((prevState, props) => {
@@ -263,7 +261,11 @@ class App extends React.Component {
       // Lead LGA in User's Australian State
       panels[3].config.lga = leadLgaCode;
       panels[3].nodes[0].innerHTML = leadPanelText;
-      panels[3].nodes[1].innerHTML = leadPanelRankText;
+      if (leadPanelRankText === null) {
+        panels[3].nodes[1].outerHTML = "";
+      } else {
+        panels[3].nodes[1].innerHTML = leadPanelRankText;
+      }
 
       return {
         scrollytellerObject: prevState.scrollytellerObject,
