@@ -12,6 +12,9 @@ require("babel-polyfill"); // for async/await to work
 const root = document.querySelector(`[data-${PROJECT_NAME}-root]`);
 
 function init() {
+  // Turn CoreMedia span anchors into span tags
+  spanify.spanify();
+
   spanify.hashify({
     hashList: [
       "addressinput",
