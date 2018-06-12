@@ -231,16 +231,20 @@ class App extends React.Component {
     let leadLgaCode = getStateInfo(stateCode).leadLgaCode;
     let leadLgaPercent = getStateInfo(stateCode).leadLgaPercent;
     let leadLgaRank = getLgaTop(this.lgaData, leadLgaCode).RANK;
+    let leadLgaState = getStateInfo(stateCode).text;
 
     // Find out if user is in the top LGA for that State
     let leadPanelText;
+    let leadPanelRankText;
     if (userLgaCode === leadLgaCode) {
-      leadPanelText = `Congratulations! Leading the pack in your state is <strong>${leadLga}</strong>, where <strong>${leadLgaPercent}</strong> per cent of income earners are in the top bracket.`;
+      leadPanelText = `Your LGA, <strong>${leadLga}</strong>, has the highest concentration of top income earners in ${leadLgaState} at <strong>${leadLgaPercent}</strong> per cent.`;
+      leadPanelRankText = ``;
     } else {
-      leadPanelText = `Leading the pack in your state is <strong>${leadLga}</strong>, where <strong>${leadLgaPercent}</strong> per cent of income earners are in the top bracket.`;
+      leadPanelText = `Leading the pack in ${leadLgaState} is <strong>${leadLga}</strong>, where <strong>${leadLgaPercent}</strong> per cent of income earners are in the top bracket.`;
+      leadPanelRankText = `It is ranked number <strong>${leadLgaRank}</strong> out of all LGAs in Australia on this measure.`;
     }
 
-    let leadPanelRankText = `It is ranked number <strong>${leadLgaRank}</strong> out of all LGAs in Australia on this measure.`;
+     
 
     // Then update the component state which will change text on all panels
     this.setState((prevState, props) => {
