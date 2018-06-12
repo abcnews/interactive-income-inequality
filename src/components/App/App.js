@@ -452,7 +452,7 @@ class App extends React.Component {
         {this.state.currentBracketNumber !== 13 && (
           <DumbbellUser>
             <p className={styles.paragraphText}>
-              By contrast, the top five professions in your bracket make up{" "}
+              By contrast, the top five professions in your bracket make up <strong>{" "}
               {parseFloat(
                 user.value1 +
                   user.value2 +
@@ -460,7 +460,7 @@ class App extends React.Component {
                   user.value4 +
                   user.value5
               ).toFixed(2)}{" "}
-              per cent of people in this bracket.
+              per cent</strong> of people in this bracket.
             </p>
 
             <Dumbbell
@@ -514,7 +514,7 @@ class App extends React.Component {
           <DumbbellUser>
             <p className={styles.paragraphText}>
               By contrast, the top five professions in the bottom bracket make
-              up 26.97 per cent of people in that bracket.
+              up <strong>26.97 per cent</strong> of people in that bracket.
             </p>
             <Dumbbell
               label="Sales Assistants and Salespersons"
