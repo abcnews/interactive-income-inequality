@@ -41,8 +41,10 @@ let baseURL = "/";
 if (fragmentData && fragmentData.dataset.rootUrl)
   baseURL = fragmentData.dataset.rootUrl;
 
+// A detailed map used to search LGAs. Other maps are derived from this one using topojson
 const LGA_GEO_JSON_URL = baseURL + "LGA_2016_AUST_SEARCH.topo.json";
 
+// LGA Rankings
 const LGA_TOP_DATA_URL = baseURL + "lga-top-data.csv";
 
 // Used to determine zooming levels for Australian States
@@ -52,6 +54,7 @@ const AUS_STATES_URL = baseURL + "australia-states.topo.json";
 // For the top 5 in top brackets
 const topBracketData = require("./top-bracket-data.json");
 
+// Get the top 5 for the dumbbell charts
 const getUserTopJobsData = (data, bracket) => {
   let userData = {};
 
@@ -69,7 +72,7 @@ const getUserBracketData = (data, bracket) => {
   return data.find(br => br.bracket === bracket);
 };
 
-// React app starts here
+// Main React app starts here
 class App extends React.Component {
   constructor(props) {
     super(props);
@@ -85,6 +88,7 @@ class App extends React.Component {
       currentBracketNumber: 8 // default bracket
     };
 
+    // Bind the this to methods
     this.setCurrentLga = this.setCurrentLga.bind(this);
     this.setCurrentBracket = this.setCurrentBracket.bind(this);
   }
@@ -96,7 +100,7 @@ class App extends React.Component {
         let veryTop = document.querySelector(".very-top");
         let whereDoTheyLive = document.querySelector(".where-do-they-live");
 
-        // Change some text if in top bracket
+        // Change some text if in top bracket (after 1 second delay)
         if (isInTopBracket) {
           veryTop.innerHTML = "";
           whereDoTheyLive.innerHTML =
@@ -817,10 +821,6 @@ class App extends React.Component {
 
 function getLgaTop(lgaData, lgaCode) {
   return lgaData.find(lga => +lga.LGA_CODE_2016 === lgaCode); // Pollyfilled in MapScroller.js
-}
-
-function insertAfter(el, referenceNode) {
-  referenceNode.parentNode.insertBefore(el, referenceNode.nextSibling);
 }
 
 module.exports = App;
