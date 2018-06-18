@@ -293,22 +293,6 @@ class App extends React.Component {
         panels[3].nodes[0].style.marginBottom = "2.25rem";
       }
 
-      // Fiddly manipulation due to panels
-      // if (panels[3].nodes[1].parentNode)
-      //   panels[3].nodes[1].parentNode.removeChild(panels[3].nodes[1]);
-
-      //   var newEl = document.createElement("p");
-      //   newEl.innerHTML = leadPanelRankText;
-      //   insertAfter(newEl, panels[3].nodes[0]);
-
-      // if (leadPanelRankText !== null) {
-      //   newEl.parentNode.removeChild(newEl);
-      //   insertAfter(newEl, panels[3].nodes[0]);
-      // } else {
-      //   insertAfter(newEl, panels[3].nodes[0]);
-      //   newEl.parentNode.removeChild(newEl);
-      // }
-
       return {
         scrollytellerObject: prevState.scrollytellerObject,
         currentLga: lgaObject,
