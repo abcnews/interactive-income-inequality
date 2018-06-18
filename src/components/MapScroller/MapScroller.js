@@ -20,7 +20,7 @@ const d3Queue = require("d3-queue");
 const styles = require("./MapScroller.scss");
 
 // Set up pre-compiled simplification levels
-let baseSimplification = 0.03;
+let baseSimplification = 0.02;
 const SIMPLIFICATION_LEVELS = 5;
 const SIMPLIFICATION_FACTOR = 3.6; // Higher is more complex per level
 
@@ -90,8 +90,8 @@ let currentZoom;
 
 // Zoom scale depending on how many simplification levels there are
 const simplificationScale = d3Scale
-  .scaleQuantize()
-  .domain([100, MAX_ZOOM])
+  .scaleQuantile()
+  .domain([100, 400, 800, 1600, MAX_ZOOM]) // Manual easing TODO: make auto easing later maybe
   .range(Array.from(Array(SIMPLIFICATION_LEVELS).keys()));
 
 // React component class starts here
@@ -308,6 +308,7 @@ class MapScroller extends React.Component {
 
     // Keep current zoomed in state
     currentZoom = projection.scale() / initialGlobeScale * 100;
+
     this.drawWorld(
       australia[simplificationScale(currentZoom)],
       australiaOutline[simplificationScale(currentZoom)],

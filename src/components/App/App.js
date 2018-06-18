@@ -270,8 +270,6 @@ class App extends React.Component {
     this.setState((prevState, props) => {
       let panels = prevState.scrollytellerObject.panels;
 
-      console.log(panels);
-
       // User's LGA
       panels[1].nodes[0].innerHTML = userLgaText;
       panels[1].nodes[1].innerHTML = userRankText;
