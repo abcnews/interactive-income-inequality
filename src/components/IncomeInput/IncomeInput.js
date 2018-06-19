@@ -72,19 +72,30 @@ class IncomeInput extends React.Component {
   calculateResult(event) {
     if (event) event.preventDefault();
 
-    // Show calculating state
-    // this.setState({ narrativeState: "calculate" });
-
     // Fade out while "calculating" css transition fades
     const calculateFade = document.querySelector("." + styles.one);
     calculateFade.style.opacity = 0;
-
 
     // Update App data in parent component
     this.props.setCurrentBracket(this.state.incomeBracket);
 
     // Wait a while then show result
     setTimeout(this.showResult.bind(this), 1000);
+
+    // Send some stats to Loggly
+    // ABC.News.trackEvent({
+    //   // Typically the object that was interacted with (e.g. 'Video')
+    //   category: "Test",
+
+    //   // The type of interaction (e.g. 'play')
+    //   action: "input",
+
+    //   // Optional. Useful for categorizing events (e.g. 'Fall Campaign')
+    //   label: "News Lab",
+
+    //   // Optional. A numeric value associated with the event (e.g. 42)
+    //   value: 42
+    // });
   }
 
   showResult() {
