@@ -94,7 +94,7 @@ class IncomeInput extends React.Component {
         ", guessBracket: " +
         this.state.guessBracket +
         "}",
-      label: "Income Inequality",
+      label: "Income Inequality: User income",
       value: 1
     });
   }

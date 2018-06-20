@@ -130,8 +130,6 @@ class MapScroller extends React.Component {
     // and then apply sticky styles. To reduce scrolly jank
     stickifyStage();
 
-    
-
     const getGeo = (mapData, level) => {
       const preSimplifiedMapData = topojson.presimplify(mapData);
 
@@ -307,7 +305,7 @@ class MapScroller extends React.Component {
     canvasDpiScaler(canvasEl, context);
 
     // Keep current zoomed in state
-    currentZoom = projection.scale() / initialGlobeScale * 100;
+    currentZoom = (projection.scale() / initialGlobeScale) * 100;
 
     this.drawWorld(
       australia[simplificationScale(currentZoom)],
@@ -519,7 +517,7 @@ class MapScroller extends React.Component {
               // If tweening > 1 then it means it's tweening;
               tweening = time;
               // Calculate current zoom and set up simplification scale
-              currentZoom = projection.scale() / initialGlobeScale * 100;
+              currentZoom = (projection.scale() / initialGlobeScale) * 100;
 
               // Draw a version of map based on zoom level
               this.drawWorld(
