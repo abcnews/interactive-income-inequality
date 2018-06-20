@@ -82,21 +82,21 @@ class IncomeInput extends React.Component {
     setTimeout(this.showResult.bind(this), 1000);
 
     // Send some stats to Loggly
-    ABC.News.trackEvent({
-      category: "News Lab Data",
-      action:
-        "{ income: " +
-        this.state.income +
-        ", incomeBracket: " +
-        this.state.incomeBracket +
-        ", sliderGuess: " +
-        this.state.sliderGuess +
-        ", guessBracket: " +
-        this.state.guessBracket +
-        "}",
-      label: "Income Inequality: User income",
-      value: 1
-    });
+    // ABC.News.trackEvent({
+    //   category: "News Lab Data",
+    //   action:
+    //     "{ income: " +
+    //     this.state.income +
+    //     ", incomeBracket: " +
+    //     this.state.incomeBracket +
+    //     ", sliderGuess: " +
+    //     this.state.sliderGuess +
+    //     ", guessBracket: " +
+    //     this.state.guessBracket +
+    //     "}",
+    //   label: "Income Inequality: User income",
+    //   value: 1
+    // });
   }
 
   showResult() {

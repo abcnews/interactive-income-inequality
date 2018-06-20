@@ -90,17 +90,17 @@ class LgaSearch extends React.Component {
     console.log(selectedOption);
 
     // Send some stats to Loggly
-    ABC.News.trackEvent({
-      category: "News Lab Data",
-      action:
-        "{ lga: " +
-        selectedOption.value +
-        ", lgaName: " +
-        selectedOption.label +
-        "}",
-      label: "Income Inequality: User LGA",
-      value: 2
-    });
+    // ABC.News.trackEvent({
+    //   category: "News Lab Data",
+    //   action:
+    //     "{ lga: " +
+    //     selectedOption.value +
+    //     ", lgaName: " +
+    //     selectedOption.label +
+    //     "}",
+    //   label: "Income Inequality: User LGA",
+    //   value: 2
+    // });
 
     // Handle clear the select
     if (selectedOption == null) return;
