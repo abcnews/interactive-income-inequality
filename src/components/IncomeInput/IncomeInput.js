@@ -82,19 +82,21 @@ class IncomeInput extends React.Component {
     setTimeout(this.showResult.bind(this), 1000);
 
     // Send some stats to Loggly
-    // ABC.News.trackEvent({
-    //   // Typically the object that was interacted with (e.g. 'Video')
-    //   category: "Test",
-
-    //   // The type of interaction (e.g. 'play')
-    //   action: "input",
-
-    //   // Optional. Useful for categorizing events (e.g. 'Fall Campaign')
-    //   label: "News Lab",
-
-    //   // Optional. A numeric value associated with the event (e.g. 42)
-    //   value: 42
-    // });
+    ABC.News.trackEvent({
+      category: "News Lab Data",
+      action:
+        "{ income: " +
+        this.state.income +
+        ", incomeBracket: " +
+        this.state.incomeBracket +
+        ", sliderGuess: " +
+        this.state.sliderGuess +
+        ", guessBracket: " +
+        this.state.guessBracket +
+        "}",
+      label: "Income Inequality",
+      value: 1
+    });
   }
 
   showResult() {

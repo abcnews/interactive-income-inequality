@@ -258,6 +258,7 @@ class App extends React.Component {
     // Find out if user is in the top LGA for that State
     let leadPanelText;
     let leadPanelRankText;
+    
     if (userLgaCode === leadLgaCode) {
       leadPanelText = `Your LGA, <strong>${leadLga}</strong>, has the highest concentration of top income earners in ${leadLgaState} at <strong>${leadLgaPercent}</strong> per cent.`;
       leadPanelRankText = "";
