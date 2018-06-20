@@ -22,7 +22,7 @@ const styles = require("./MapScroller.scss");
 // Set up pre-compiled simplification levels
 let baseSimplification = 0.02;
 const SIMPLIFICATION_LEVELS = 5;
-const SIMPLIFICATION_FACTOR = 3.6; // Higher is more complex per level
+const SIMPLIFICATION_FACTOR = 3.4; // Higher is more complex per level
 
 const MAX_ZOOM = 2500;
 const STATE_ZOOM_MARGINS = 0.23;
@@ -320,7 +320,7 @@ class MapScroller extends React.Component {
   // When a Scrollyteller mark is triggered add a transition to the queue
   markTrigger(markerData) {
     q.defer(this.doMarker, markerData);
-    
+
     console.log(markerData);
   }
 

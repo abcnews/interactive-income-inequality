@@ -28,7 +28,6 @@ class IncomeInput extends React.Component {
     // Set initial state of component
     this.state = {
       income: 800,
-      infoIsSet: false,
       narrativeState: "initial", // locked, calculate, result
       incomeBracket: 8,
       sliderGuess: 50,
@@ -118,7 +117,6 @@ class IncomeInput extends React.Component {
   }
 
   tryAgain(event) {
-    this.setState({ infoIsSet: false });
     this.setState({ narrativeState: "initial" });
     this.slider.style.height = "326px";
 
