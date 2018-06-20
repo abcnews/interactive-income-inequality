@@ -1,0 +1,284 @@
+---
+  0 debug pnpm:package-json: 
+    initial: 
+      name: "income-comparisons-react"
+      version: "1.0.0"
+      description: "Measure income amongst Australians"
+      license: "MIT"
+      private: true
+      contributors: 
+        - 
+          name: "Joshua Byrd"
+          email: "phocks@gmail.com"
+      aunty: "react-app"
+      scripts: 
+        start: "aunty serve"
+        test: "jest"
+      jest: 
+        transform: 
+          .*: "<rootDir>/node_modules/@abcnews/aunty/src/utils/jest"
+      devDependencies: 
+        @abcnews/aunty: "^8.0.1"
+        babel-preset-env: "^1.7.0"
+        babel-preset-react: "^6.24.1"
+        jest: "^22.4.2"
+        react-test-renderer: "^16.2.0"
+      dependencies: 
+        @abcnews/scrollyteller: "^1.0.3"
+        canvas-dpi-scaler: "0.0.3"
+        d3-ease: "^1.0.3"
+        d3-geo: "^1.9.1"
+        d3-interpolate: "^1.1.6"
+        d3-queue: "^3.0.7"
+        d3-request: "^1.0.6"
+        d3-scale: "^2.0.0"
+        d3-selection: "^1.3.0"
+        d3-transition: "^1.1.1"
+        debounce: "^1.1.0"
+        mapbox: "^1.0.0-beta9"
+        nouislider: "^11.0.3"
+        point-in-polygon: "^1.0.1"
+        react: "^16.2.0"
+        react-dom: "^16.2.0"
+        react-portal: "^4.1.3"
+        react-select: "^1.2.1"
+        smoothscroll: "^0.4.0"
+        smoothscroll-polyfill: "^0.4.3"
+        spanify: "^1.2.5"
+        topojson: "^3.0.2"
+        wnumb: "^1.1.0"
+      gitHead: "88fb5ac1d7c63f3baf62f5320e2702c25ed5adaa"
+      readme: "# Income Comparisons React\n\nLooking at Australian Incomes\n\n## Authors\n\n- Joshua Byrd ([phocks@gmail.com](mailto:phocks@gmail.com))\n"
+      readmeFilename: "README.md"
+      _id: "income-comparisons-react@1.0.0"
+  1 debug pnpm:stage: "resolution_started"
+  2 debug pnpm:progress: 
+    pkg: 
+      name: "topojson"
+      rawSpec: "topojson"
+    status: "installing"
+  3 debug pnpm:progress: 
+    status: "resolved"
+    pkgId: "registry.npmjs.org/topojson/3.0.2"
+    pkg: 
+      name: "topojson"
+      rawSpec: "topojson"
+  4 debug pnpm:progress: 
+    pkgId: "registry.npmjs.org/topojson/3.0.2"
+    pkgVersion: "3.0.2"
+    status: "downloaded_manifest"
+  5 debug pnpm:progress: 
+    pkgId: "registry.npmjs.org/topojson/3.0.2"
+    status: "resolving_content"
+  6 debug pnpm:progress: 
+    pkg: 
+      dependentId: "registry.npmjs.org/topojson/3.0.2"
+      name: "topojson-client"
+      rawSpec: "topojson-client@3.0.0"
+    status: "installing"
+  7 debug pnpm:progress: 
+    pkg: 
+      dependentId: "registry.npmjs.org/topojson/3.0.2"
+      name: "topojson-server"
+      rawSpec: "topojson-server@3.0.0"
+    status: "installing"
+  8 debug pnpm:progress: 
+    pkg: 
+      dependentId: "registry.npmjs.org/topojson/3.0.2"
+      name: "topojson-simplify"
+      rawSpec: "topojson-simplify@3.0.2"
+    status: "installing"
+  9 debug pnpm:progress: 
+    status: "resolved"
+    pkgId: "registry.npmjs.org/topojson-server/3.0.0"
+    pkg: 
+      dependentId: "registry.npmjs.org/topojson/3.0.2"
+      name: "topojson-server"
+      rawSpec: "topojson-server@3.0.0"
+  10 debug pnpm:progress: 
+    pkgId: "registry.npmjs.org/topojson-server/3.0.0"
+    pkgVersion: "3.0.0"
+    status: "downloaded_manifest"
+  11 debug pnpm:progress: 
+    pkgId: "registry.npmjs.org/topojson-server/3.0.0"
+    status: "resolving_content"
+  12 debug pnpm:progress: 
+    pkg: 
+      dependentId: "registry.npmjs.org/topojson-server/3.0.0"
+      name: "commander"
+      rawSpec: "commander@2"
+    status: "installing"
+  13 debug pnpm:progress: 
+    status: "resolved"
+    pkgId: "registry.npmjs.org/topojson-simplify/3.0.2"
+    pkg: 
+      dependentId: "registry.npmjs.org/topojson/3.0.2"
+      name: "topojson-simplify"
+      rawSpec: "topojson-simplify@3.0.2"
+  14 debug pnpm:progress: 
+    pkgId: "registry.npmjs.org/topojson-simplify/3.0.2"
+    pkgVersion: "3.0.2"
+    status: "downloaded_manifest"
+  15 debug pnpm:progress: 
+    pkgId: "registry.npmjs.org/topojson-simplify/3.0.2"
+    status: "resolving_content"
+  16 debug pnpm:progress: 
+    pkg: 
+      dependentId: "registry.npmjs.org/topojson-simplify/3.0.2"
+      name: "commander"
+      rawSpec: "commander@2"
+    status: "installing"
+  17 debug pnpm:progress: 
+    pkg: 
+      dependentId: "registry.npmjs.org/topojson-simplify/3.0.2"
+      name: "topojson-client"
+      rawSpec: "topojson-client@3"
+    status: "installing"
+  18 debug pnpm:progress: 
+    status: "resolved"
+    pkgId: "registry.npmjs.org/topojson-client/3.0.0"
+    pkg: 
+      dependentId: "registry.npmjs.org/topojson/3.0.2"
+      name: "topojson-client"
+      rawSpec: "topojson-client@3.0.0"
+  19 debug pnpm:progress: 
+    pkgId: "registry.npmjs.org/topojson-client/3.0.0"
+    pkgVersion: "3.0.0"
+    status: "downloaded_manifest"
+  20 debug pnpm:progress: 
+    pkgId: "registry.npmjs.org/topojson-client/3.0.0"
+    status: "resolving_content"
+  21 debug pnpm:progress: 
+    pkg: 
+      dependentId: "registry.npmjs.org/topojson-client/3.0.0"
+      name: "commander"
+      rawSpec: "commander@2"
+    status: "installing"
+  22 debug pnpm:progress: 
+    pkgId: "registry.npmjs.org/topojson/3.0.2"
+    status: "found_in_store"
+  23 debug pnpm:progress: 
+    pkgId: "registry.npmjs.org/topojson-simplify/3.0.2"
+    status: "found_in_store"
+  24 debug pnpm:progress: 
+    pkgId: "registry.npmjs.org/topojson-server/3.0.0"
+    status: "found_in_store"
+  25 debug pnpm:progress: 
+    pkgId: "registry.npmjs.org/topojson-client/3.0.0"
+    status: "found_in_store"
+  26 debug pnpm:progress: 
+    status: "resolved"
+    pkgId: "registry.npmjs.org/commander/2.15.1"
+    pkg: 
+      dependentId: "registry.npmjs.org/topojson-server/3.0.0"
+      name: "commander"
+      rawSpec: "commander@2"
+  27 debug pnpm:progress: 
+    pkgId: "registry.npmjs.org/commander/2.15.1"
+    pkgVersion: "2.15.1"
+    status: "downloaded_manifest"
+  28 debug pnpm:progress: 
+    pkgId: "registry.npmjs.org/commander/2.15.1"
+    status: "resolving_content"
+  29 debug pnpm:progress: 
+    pkgId: "registry.npmjs.org/commander/2.15.1"
+    status: "found_in_store"
+  30 debug pnpm:progress: 
+    status: "resolved"
+    pkgId: "registry.npmjs.org/topojson-client/3.0.0"
+    pkg: 
+      dependentId: "registry.npmjs.org/topojson-simplify/3.0.2"
+      name: "topojson-client"
+      rawSpec: "topojson-client@3"
+  31 debug pnpm:progress: 
+    pkgId: "registry.npmjs.org/topojson-client/3.0.0"
+    pkgVersion: "3.0.0"
+    status: "downloaded_manifest"
+  32 debug pnpm:progress: 
+    status: "resolved"
+    pkgId: "registry.npmjs.org/commander/2.15.1"
+    pkg: 
+      dependentId: "registry.npmjs.org/topojson-client/3.0.0"
+      name: "commander"
+      rawSpec: "commander@2"
+  33 debug pnpm:progress: 
+    pkgId: "registry.npmjs.org/commander/2.15.1"
+    pkgVersion: "2.15.1"
+    status: "downloaded_manifest"
+  34 debug pnpm:progress: 
+    status: "resolved"
+    pkgId: "registry.npmjs.org/commander/2.15.1"
+    pkg: 
+      dependentId: "registry.npmjs.org/topojson-simplify/3.0.2"
+      name: "commander"
+      rawSpec: "commander@2"
+  35 debug pnpm:progress: 
+    pkgId: "registry.npmjs.org/commander/2.15.1"
+    pkgVersion: "2.15.1"
+    status: "downloaded_manifest"
+  36 debug pnpm:stage: "resolution_done"
+  37 debug pnpm:package-json: 
+    updated: 
+      name: "income-comparisons-react"
+      version: "1.0.0"
+      description: "Measure income amongst Australians"
+      license: "MIT"
+      private: true
+      contributors: 
+        - "Joshua Byrd <phocks@gmail.com>"
+      aunty: "react-app"
+      scripts: 
+        start: "aunty serve"
+        test: "jest"
+      jest: 
+        transform: 
+          .*: "<rootDir>/node_modules/@abcnews/aunty/src/utils/jest"
+      devDependencies: 
+        @abcnews/aunty: "^8.0.1"
+        babel-preset-env: "^1.7.0"
+        babel-preset-react: "^6.24.1"
+        jest: "^22.4.2"
+        react-test-renderer: "^16.2.0"
+      dependencies: 
+        @abcnews/scrollyteller: "^1.0.3"
+        canvas-dpi-scaler: "0.0.3"
+        d3-ease: "^1.0.3"
+        d3-geo: "^1.9.1"
+        d3-interpolate: "^1.1.6"
+        d3-queue: "^3.0.7"
+        d3-request: "^1.0.6"
+        d3-scale: "^2.0.0"
+        d3-selection: "^1.3.0"
+        d3-transition: "^1.1.1"
+        debounce: "^1.1.0"
+        mapbox: "^1.0.0-beta9"
+        nouislider: "^11.0.3"
+        point-in-polygon: "^1.0.1"
+        react: "^16.2.0"
+        react-dom: "^16.2.0"
+        react-portal: "^4.1.3"
+        react-select: "^1.2.1"
+        smoothscroll: "^0.4.0"
+        smoothscroll-polyfill: "^0.4.3"
+        spanify: "^1.2.5"
+        topojson: "^3.0.2"
+        wnumb: "^1.1.0"
+  38 debug pnpm:stats: 
+    prefix: "/Users/byrdj5d/Sites/ABC/income-comparisons-react"
+    removed: 0
+  39 debug pnpm:stage: "importing_started"
+  40 debug pnpm:stats: 
+    added: 5
+    prefix: "/Users/byrdj5d/Sites/ABC/income-comparisons-react"
+  41 debug pnpm:stage: "importing_done"
+  42 error pnpm: 
+    message: 
+      errno: -2
+      code: "ENOENT"
+      syscall: "stat"
+      path: "/Users/byrdj5d/Sites/ABC/income-comparisons-react/node_modules/topojson/node_modules/topojson-server/bin/geo2topo"
+    err: 
+      name: "Error"
+      message: "ENOENT: no such file or directory, stat '/Users/byrdj5d/Sites/ABC/income-comparisons-react/node_modules/topojson/node_modules/topojson-server/bin/geo2topo'"
+      code: "ENOENT"
+      stack: "Error: ENOENT: no such file or directory, stat '/Users/byrdj5d/Sites/ABC/income-comparisons-react/node_modules/topojson/node_modules/topojson-server/bin/geo2topo'"

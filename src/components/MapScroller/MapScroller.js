@@ -320,6 +320,8 @@ class MapScroller extends React.Component {
   // When a Scrollyteller mark is triggered add a transition to the queue
   markTrigger(markerData) {
     q.defer(this.doMarker, markerData);
+    
+    console.log(markerData);
   }
 
   doMarker(markerData, callback) {
