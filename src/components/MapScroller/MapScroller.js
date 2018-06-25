@@ -41,6 +41,12 @@ let path;
 let projection;
 let canvas;
 let canvasEl;
+let prefersReducedMotion;
+
+// Set up reduced motion if set on browser
+var media = window.matchMedia("screen and (prefers-reduced-motion: reduce)");
+if (media.matches) prefersReducedMotion = true;
+else prefersReducedMotion = false;
 
 // Different levels of zoom pre-compilied
 let australia = [];
@@ -127,7 +133,7 @@ class MapScroller extends React.Component {
     scrollToEl.style.marginTop = "-50vh";
 
     // Check to see if position.sticky is supported
-    // and then apply sticky styles. To reduce scrolly jank
+    // and then apply sticky styles. To reduce scroll jank when stage is fixed to screen
     stickifyStage();
 
     const getGeo = (mapData, level) => {
@@ -449,6 +455,8 @@ class MapScroller extends React.Component {
         // Don't go too fast
         if (transitionTime < minTransitionTime)
           transitionTime = minTransitionTime;
+
+        if (prefersReducedMotion) transitionTime = 0;
 
         let transitionDelayMultiplyer = 0.5;
         let isZoomingIn = true;
