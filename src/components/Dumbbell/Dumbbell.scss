@@ -85,8 +85,9 @@
   color: #cf4200;
   position: absolute;
   left: 50%;
-  -webkit-transform: translateX(-100%) translateY(-75%);
-  transform: translateX(-100%) translateY(-75%);
+  top: 50%;
+  -webkit-transform: translateX(-100%) translateY(-125%);
+  transform: translateX(-100%) translateY(-125%);
   max-width: 60px;
   font-weight: bold;
   text-shadow: -1px -1px 0 rgb(255, 255, 255), 1px -1px 0 rgb(255, 255, 255),
@@ -99,8 +100,9 @@
   color: #cf4200;
   position: absolute;
   left: 50%;
-  -webkit-transform: translateX(0%) translateY(-75%);
-  transform: translateX(0%) translateY(-75%);
+  top: 50%;
+  -webkit-transform: translateX(0%) translateY(-125%);
+  transform: translateX(0%) translateY(-125%);
   max-width: 60px;
   font-weight: bold;
   text-shadow: -1px -1px 0 rgb(255, 255, 255), 1px -1px 0 rgb(255, 255, 255),
@@ -112,8 +114,9 @@
   color: #001050;
   position: absolute;
   left: 50%;
-  -webkit-transform: translateX(-100%) translateY(-75%);
-  transform: translateX(-100%) translateY(-75%);
+  top: 50%;
+  -webkit-transform: translateX(-100%) translateY(-125%);
+  transform: translateX(-100%) translateY(-125%);
   max-width: 60px;
   font-weight: bold;
   text-shadow: -1px -1px 0 rgb(255, 255, 255), 1px -1px 0 rgb(255, 255, 255),
@@ -126,8 +129,9 @@
   color: #001050;
   position: absolute;
   left: 50%;
-  -webkit-transform: translateX(0%) translateY(-75%);
-  transform: translateX(0%) translateY(-75%);
+  top: 50%;
+  -webkit-transform: translateX(0%) translateY(-125%);
+  transform: translateX(0%) translateY(-125%);
   max-width: 60px;
   font-weight: bold;
   text-shadow: -1px -1px 0 rgb(255, 255, 255), 1px -1px 0 rgb(255, 255, 255),
@@ -148,7 +152,6 @@
   font-weight: bold;
   text-shadow: -1px -1px 0 rgb(255, 255, 255), 1px -1px 0 rgb(255, 255, 255),
     -1px 1px 0 rgb(255, 255, 255), 1px 1px 0 rgb(255, 255, 255);
-  // text-align: right;
   // line-height: 14px;
 }
 
