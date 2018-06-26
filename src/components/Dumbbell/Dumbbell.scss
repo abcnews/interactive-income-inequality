@@ -85,7 +85,7 @@
   color: #cf4200;
   position: absolute;
   left: 50%;
-  -webkit-transform: translateX(-100%) translateY(-755%);
+  -webkit-transform: translateX(-100%) translateY(-75%);
   transform: translateX(-100%) translateY(-75%);
   max-width: 60px;
   font-weight: bold;
@@ -138,16 +138,18 @@
 .line1Label {
   color: #1B7C8F;
   position: absolute;
+  left: -50px;
+  position: absolute;
   left: 50%;
-  -webkit-transform: translateX(-50%) translateY(120%);
-  transform: translateX(-50%) translateY(120%);
-  // max-width: 60px;
+  top: 50%;
+  -webkit-transform: translateY(50%) translateX(-50%);
+  transform: translateY(50%) translateX(-50%);
   white-space: nowrap;
   font-weight: bold;
   text-shadow: -1px -1px 0 rgb(255, 255, 255), 1px -1px 0 rgb(255, 255, 255),
     -1px 1px 0 rgb(255, 255, 255), 1px 1px 0 rgb(255, 255, 255);
-  text-align: right;
-  line-height: 14px;
+  // text-align: right;
+  // line-height: 14px;
 }
 
 @media all and (-ms-high-contrast: none) {
