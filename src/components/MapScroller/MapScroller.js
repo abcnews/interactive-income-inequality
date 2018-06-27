@@ -544,7 +544,7 @@ class MapScroller extends React.Component {
           canvas.style("transition", "background-color 0.3s");
           // Transition background after spin/zoom
           if (markerData.background && markerData.background === "dark")
-            canvas.style("background-color", "#333");
+            canvas.style("background-color", "#414F54");
 
           // Call back d3-queue to let it know the transition is finished
           callback(null);
