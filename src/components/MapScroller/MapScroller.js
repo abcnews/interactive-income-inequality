@@ -715,9 +715,10 @@ class MapScroller extends React.Component {
       if (bounds[1][0] < 0) return;
       if (bounds[1][1] < 0) return;
 
+      // Draw the outline paths
       context.beginPath();
       context.globalAlpha = 1;
-      context.strokeStyle = "rgba(100, 100, 100, 0.6)";
+      context.strokeStyle = "rgba(130, 130, 130, 0.6)";
       context.lineWidth = 1.1;
       path(lineString);
       context.stroke();
@@ -740,6 +741,7 @@ class MapScroller extends React.Component {
       path(targetElement);
       context.clip();
 
+      // Thin line until we zoom in
       context.beginPath();
       context.strokeStyle = "#FF5733";
       if (tweening > 0.9) context.lineWidth = 7.3;
