@@ -26,7 +26,7 @@ const SIMPLIFICATION_FACTOR = 3.4; // Higher is more complex per level
 
 const MAX_ZOOM = 2500;
 const STATE_ZOOM_MARGINS = 0.23;
-const LGA_ZOOM_MARGINS = 0.46;
+const LGA_ZOOM_MARGINS = 0.42;
 const MAX_ZOOM_LEVEL = 110000;
 const MIN_ZOOM_LEVEL = 3000;
 const MAX_TRANSITION_TIME = 1300;
@@ -743,9 +743,9 @@ class MapScroller extends React.Component {
       context.beginPath();
       context.strokeStyle = "#FF5733";
       // Expand line width depending on screen size
-      if (tweening > 0.9 && Math.min(screenWidth, screenHeight) > 400) context.lineWidth = 7.3;
-      else if (tweening > 0.9 && Math.min(screenWidth, screenHeight) > 350) context.lineWidth = 5.3;
-      else if (tweening > 0.9) context.lineWidth = 3.4;
+      if (tweening > 0.9 && Math.min(screenWidth, screenHeight) > 400) context.lineWidth = 5.3;
+      else if (tweening > 0.9 && Math.min(screenWidth, screenHeight) > 350) context.lineWidth = 2.2;
+      else if (tweening > 0.9) context.lineWidth = 1.8;
       else context.lineWidth = 1.1;
       path(targetElement);
       context.stroke();
