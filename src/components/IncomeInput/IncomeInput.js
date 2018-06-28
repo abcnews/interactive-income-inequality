@@ -315,8 +315,8 @@ class IncomeInput extends React.Component {
                   </span>{" "}
                   of income earners.
                 </div>
-                <button onClick={this.tryAgain.bind(this)}>
-                  <div className={styles.tryAgain}>
+                <button className={styles.tryAgain} onClick={this.tryAgain.bind(this)}>
+                  <div>
                     <span className={styles.reloadIcon}>
                       <img
                         src={PUBLIC_URL_BASE + "refresh.svg"}
@@ -324,7 +324,7 @@ class IncomeInput extends React.Component {
                         height="20px"
                       />
                     </span>
-                    <span>&nbsp;&nbsp;Try again</span>
+                    <span className={styles.tryAgainText}>&nbsp;&nbsp;Try again&nbsp;&nbsp;&nbsp;</span>
                   </div>
                 </button>
               </div>

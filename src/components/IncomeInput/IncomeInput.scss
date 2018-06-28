@@ -118,13 +118,23 @@
     // font-family: ABCSans, Arial, Helvetica, sans-serif;
   }
 
-  .try-again span {
-    // vertical-align: middle;
+  .try-again {
+    // display: flex;
+    // flex-direction: row;
+    // align-items: center;
+    // justify-content: center;
+    cursor: pointer;
   }
+  
 
   .reload-icon img {
     position: relative;
-    top: 5px;
+    top: 4px;
+  }
+
+  .try-again-text {
+    position: relative;
+    top: -1px;
   }
 
   .scale-labels {
