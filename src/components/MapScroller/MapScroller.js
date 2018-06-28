@@ -742,7 +742,10 @@ class MapScroller extends React.Component {
       // Thin line until we zoom in
       context.beginPath();
       context.strokeStyle = "#FF5733";
-      if (tweening > 0.9) context.lineWidth = 7.3;
+      // Expand line width depending on screen size
+      if (tweening > 0.9 && Math.min(screenWidth, screenHeight) > 400) context.lineWidth = 7.3;
+      else if (tweening > 0.9 && Math.min(screenWidth, screenHeight) > 350) context.lineWidth = 5.3;
+      else if (tweening > 0.9) context.lineWidth = 3.4;
       else context.lineWidth = 1.1;
       path(targetElement);
       context.stroke();
