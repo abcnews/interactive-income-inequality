@@ -118,14 +118,19 @@
     // font-family: ABCSans, Arial, Helvetica, sans-serif;
   }
 
-  .try-again {
-    // display: flex;
-    // flex-direction: row;
-    // align-items: center;
-    // justify-content: center;
+  @media screen and (max-width: 400px) {
+    .lock-it-in,
+    .try-again,
+    .show-me {
+      max-width: 200px;
+    }
+  }
+
+  .lock-it-in,
+  .try-again,
+  .show-me {
     cursor: pointer;
   }
-  
 
   .reload-icon img {
     position: relative;
@@ -175,7 +180,7 @@
   button:focus {
     // outline: 1px dotted #555;
     // outline-offset: 1px;
-    box-shadow: 0 0 5px rgba(81, 203, 238, 1);;
+    box-shadow: 0 0 5px rgba(81, 203, 238, 1);
     border: 1px solid rgba(81, 203, 238, 1);
   }
 
@@ -216,7 +221,7 @@
   input[type="text"]:focus {
     // outline: 1px dotted #555;
     // outline-offset: 2px;
-    box-shadow: 0 0 5px rgba(81, 203, 238, 1);;
+    box-shadow: 0 0 5px rgba(81, 203, 238, 1);
     border: 1px solid rgba(81, 203, 238, 1);
     border-bottom: 2px solid #143d47;
   }
@@ -895,7 +900,7 @@
   .noUi-handle:focus {
     // outline: none;
     // border: 1px dotted #555;
-    box-shadow: 0 0 5px rgba(81, 203, 238, 1);;
+    box-shadow: 0 0 5px rgba(81, 203, 238, 1);
     border: 1px solid rgba(81, 203, 238, 1);
   }
   .noUi-vertical .noUi-handle:before,

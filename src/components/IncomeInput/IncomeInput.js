@@ -231,7 +231,7 @@ class IncomeInput extends React.Component {
 
               <div className={styles.push4} />
 
-              <button onClick={this.lockIn.bind(this)}>Lock it in</button>
+              <button className={styles.lockItIn} onClick={this.lockIn.bind(this)}>Lock it in</button>
             </div>
           )}
 
@@ -262,7 +262,7 @@ class IncomeInput extends React.Component {
                   </form>
                 </div>
                 <div className={styles.smalltext}>Enter your weekly income</div>{" "}
-                <button onClick={this.calculateResult.bind(this)}>
+                <button className={styles.showMe} onClick={this.calculateResult.bind(this)}>
                   Show me where I sit
                 </button>
               </div>
@@ -324,7 +324,7 @@ class IncomeInput extends React.Component {
                         height="20px"
                       />
                     </span>
-                    <span className={styles.tryAgainText}>&nbsp;&nbsp;Try again&nbsp;&nbsp;&nbsp;</span>
+                    <span className={styles.tryAgainText}>&nbsp;&nbsp;Try again&nbsp;&nbsp;</span>
                   </div>
                 </button>
               </div>
