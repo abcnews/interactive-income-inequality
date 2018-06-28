@@ -87,8 +87,6 @@ class LgaSearch extends React.Component {
     this.setState({ selectedOption });
     this.props.setCurrentLga(selectedOption);
 
-    console.log(selectedOption);
-
     // Send some stats to Loggly
     // ABC.News.trackEvent({
     //   category: "News Lab Data",
