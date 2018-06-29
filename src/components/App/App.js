@@ -631,7 +631,7 @@ class App extends React.Component {
 
         <DumbbellGender>
           <Dumbbell
-            label="Gender divide"
+            label="Males"
             dot1Percent={user.male}
             dot1Label="Your bracket"
             dot2Percent={isInTopBracket ? 38.53 : 75.17}
