@@ -5,7 +5,6 @@
 const React = require("react");
 const styles = require("./IncomeInput.scss");
 const ReactDOM = require("react-dom");
-const Portal = require("react-portal");
 const noUiSlider = require("nouislider");
 const wNumb = require("wnumb");
 
@@ -231,7 +230,12 @@ class IncomeInput extends React.Component {
 
               <div className={styles.push4} />
 
-              <button className={styles.lockItIn} onClick={this.lockIn.bind(this)}>Lock it in</button>
+              <button
+                className={styles.lockItIn}
+                onClick={this.lockIn.bind(this)}
+              >
+                Lock it in
+              </button>
             </div>
           )}
 
@@ -262,7 +266,10 @@ class IncomeInput extends React.Component {
                   </form>
                 </div>
                 <div className={styles.smalltext}>Enter your weekly income</div>{" "}
-                <button className={styles.showMe} onClick={this.calculateResult.bind(this)}>
+                <button
+                  className={styles.showMe}
+                  onClick={this.calculateResult.bind(this)}
+                >
                   Show me where I sit
                 </button>
               </div>
@@ -315,7 +322,10 @@ class IncomeInput extends React.Component {
                   </span>{" "}
                   of income earners.
                 </div>
-                <button className={styles.tryAgain} onClick={this.tryAgain.bind(this)}>
+                <button
+                  className={styles.tryAgain}
+                  onClick={this.tryAgain.bind(this)}
+                >
                   <div>
                     <span className={styles.reloadIcon}>
                       <img
@@ -324,7 +334,9 @@ class IncomeInput extends React.Component {
                         height="20px"
                       />
                     </span>
-                    <span className={styles.tryAgainText}>&nbsp;&nbsp;Try again&nbsp;&nbsp;</span>
+                    <span className={styles.tryAgainText}>
+                      &nbsp;&nbsp;Try again&nbsp;&nbsp;
+                    </span>
                   </div>
                 </button>
               </div>
@@ -1066,22 +1078,6 @@ function hasClass(el, className) {
 function addClass(el, className) {
   if (el.classList) el.classList.add(className);
   else if (!hasClass(el, className)) el.className += " " + className;
-}
-
-function removeClass(el, className) {
-  if (el.classList) el.classList.remove(className);
-  else
-    el.className = el.className.replace(
-      new RegExp("\\b" + className + "\\b", "g"),
-      ""
-    );
-}
-
-// Helper random number
-function getRandomInt(min, max) {
-  min = Math.ceil(min);
-  max = Math.floor(max);
-  return Math.floor(Math.random() * (max - min)) + min; //The maximum is exclusive and the minimum is inclusive
 }
 
 module.exports = IncomeInput;
