@@ -107,9 +107,6 @@ class LgaSearch extends React.Component {
     let firstPanel = document.querySelector('[name="scrolltothispoint"]');
     if (!firstPanel) return;
 
-    // Scroll the first panel into view
-    // firstPanel.scrollIntoView({ behavior: "smooth", block: "center", inline: "center" });
-
     // Use an NPM module to scroll because native scolling is not consistent across browsers
     smoothScroll(firstPanel);
   }
@@ -182,8 +179,6 @@ class LgaSearch extends React.Component {
 
       // Check if string is a postcode
       if (/^[0-9]{4}$/.test(input)) {
-        // console.log("Postcode detected...");
-
         let lgaFromPostcode = await this.addressToLGAs(
           input,
           this.props.mapData
@@ -207,8 +202,6 @@ class LgaSearch extends React.Component {
 
         // Show matching local LGAs otherwise assume address search
         if (filteredLgas.length == 0) {
-          // console.log("searching by address");
-
           let lgasFromAddress = await this.addressToLGAs(
             input,
             this.props.mapData

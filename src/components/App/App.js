@@ -11,8 +11,7 @@ const LgaSearch = require("../LgaSearch/LgaSearch");
 const IncomeInput = require("../IncomeInput/IncomeInput");
 const MapScroller = require("../MapScroller/MapScroller");
 
-// Dumbbell charts -
-// Could possibly have only done 1 and fed in the mount point but whatever
+// Dumbbell charts
 const Dumbbell = require("../Dumbbell/Dumbbell");
 const DumbbellTop = require("../DumbbellTop/DumbbellTop");
 const DumbbellUser = require("../DumbbellUser/DumbbellUser");
@@ -258,7 +257,7 @@ class App extends React.Component {
     // Find out if user is in the top LGA for that State
     let leadPanelText;
     let leadPanelRankText;
-    
+
     if (userLgaCode === leadLgaCode) {
       leadPanelText = `Your LGA, <strong>${leadLga}</strong>, has the highest concentration of top income earners in ${leadLgaState} at <strong>${leadLgaPercent}</strong> per cent.`;
       leadPanelRankText = "";

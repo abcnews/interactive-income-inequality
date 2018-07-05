@@ -149,9 +149,6 @@ class IncomeInput extends React.Component {
 
     const handle = document.getElementsByClassName("noUi-handle-lower")[0];
 
-    // TODO: if we really want this indexed first then reorder page layout and float
-    // handle.setAttribute("tabIndex", "1");
-
     // Keyboard changing of slider
     handle.addEventListener("keydown", e => {
       var value = Number(this.slider.noUiSlider.get());
@@ -740,7 +737,7 @@ class IncomeInput extends React.Component {
                 </div>
 
                 {/*########################################################################
-                ANOTHER SECTION GUESS 
+                ANOTHER SECTION GUESS
                 ########################################################################*/}
 
                 <div
@@ -941,11 +938,6 @@ class IncomeInput extends React.Component {
 
                 <div id="range" />
               </div>
-
-              {/* <div className={styles.bracketContainer}>
-                
-                <div id="range" />
-              </div> */}
 
               {this.state.narrativeState === "result" ? (
                 <div className={styles.scaleLabels}>
