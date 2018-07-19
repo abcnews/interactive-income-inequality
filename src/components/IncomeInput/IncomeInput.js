@@ -26,9 +26,9 @@ class IncomeInput extends React.Component {
     this.guessResults = {};
     // Set initial state of component
     this.state = {
-      income: 800,
+      income: 600,
       narrativeState: "initial", // locked, calculate, result
-      incomeBracket: 8,
+      incomeBracket: 6,
       sliderGuess: 50,
       guessBracket: 6,
       guessMessage: "Nice try..."

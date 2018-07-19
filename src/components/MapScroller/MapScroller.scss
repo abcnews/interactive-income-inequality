@@ -86,7 +86,7 @@
     position: -webkit-sticky;
     position: sticky;
     top: 0px;
-    z-index: -1;
+    // z-index: -1;
   }
   .yes-csspositionsticky.is-piecemeal > .Block-content:nth-child(2) {
     // For position sticky the block takes up space so we don't want margin-top
