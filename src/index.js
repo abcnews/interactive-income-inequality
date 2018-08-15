@@ -1,5 +1,6 @@
 const React = require("react");
 const { render } = require("react-dom");
+const xhr = require("xhr");
 const spanify = require("spanify");
 
 require("react-select/dist/react-select.css");
@@ -42,7 +43,77 @@ function init() {
   );
 }
 
-init();
+// Set up a twin dynamic content article
+const getSupplementaryCMID = () => {
+  const SUPPLEMENTARY_CMID_META_SELECTOR = 'meta[name="supplementary"]';
+  const metaEl = document.querySelector(SUPPLEMENTARY_CMID_META_SELECTOR);
+
+  if (!metaEl) {
+    throw new Error(`${SUPPLEMENTARY_CMID_META_SELECTOR} does not exist`);
+  }
+
+  let cmid = metaEl.getAttribute("content");
+
+  if (cmid.indexOf("CMArticle") > -1) {
+    cmid = cmid.match(/id=(\d+)/)[1];
+  }
+
+  if (cmid != +cmid) {
+    throw new Error(`"${cmid}" does not look like a CMID`);
+  }
+
+  return cmid;
+};
+
+// Fetch another CoreMedia article and parse it for dynamic use
+xhr({ url: "/news/" + getSupplementaryCMID() }, (err, response, body) => {
+  function transform() {
+    const doc = new DOMParser().parseFromString(body, "text/html");
+    const startNode = doc.querySelector('a[name="content"]');
+    const endNode = doc.querySelector('a[name="endcontent"]');
+
+    if (!startNode || !endNode) {
+      console.error(new Error("No content bookends found in document."));
+
+      return init();
+    }
+
+    let currentNode = startNode;
+    const injectionRoot = document.querySelector('[name="fullscript"]');
+
+    let fetchedNodes = [];
+
+    while (
+      ((currentNode = currentNode.nextSibling),
+      currentNode && currentNode !== endNode)
+    ) {
+      fetchedNodes.push(currentNode);
+    }
+
+    fetchedNodes.forEach(node => {
+      // Use Odyssey API to re-apply smart quotes
+      window.__ODYSSEY__.utils.misc.smartquotes(node);
+
+      // Append fetched content
+      injectionRoot.appendChild(node);
+    });
+
+    // Unwraps injected content from parent
+    var parent = injectionRoot.parentNode;
+    while (injectionRoot.firstChild)
+    parent.insertBefore(injectionRoot.firstChild, injectionRoot);
+    parent.removeChild(injectionRoot);
+
+    init();
+  }
+
+  // Wait for Odyssey
+  if (window.__ODYSSEY__) {
+    transform();
+  } else {
+    window.addEventListener("odyssey:api", transform);
+  }
+});
 
 if (module.hot) {
   module.hot.accept("./components/App/App", () => {

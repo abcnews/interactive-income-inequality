@@ -46,6 +46,7 @@
     "smoothscroll-polyfill": "^0.4.3",
     "spanify": "^1.2.5",
     "topojson": "^3.0.2",
-    "wnumb": "^1.1.0"
+    "wnumb": "^1.1.0",
+    "xhr": "^2.5.0"
   }
 }

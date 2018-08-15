@@ -123,7 +123,6 @@ class LgaSearch extends React.Component {
     if (returnedData.entity.message === "Not Found") return [];
 
     if (returnedData && returnedData.entity.features.length === 0) {
-      //console.log("Address not found...");
       // TODO: alert the user maybe
       return [];
     }
