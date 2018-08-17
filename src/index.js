@@ -35,6 +35,9 @@ function init() {
     ]
   }); // Turn anchor hash tags into divs
 
+  // Re-apply smart quotes to main content
+  window.__ODYSSEY__.utils.misc.smartquotes(document.getElementById("main_content"));
+
   const App = require("./components/App/App");
 
   render(<App projectName={PROJECT_NAME} />, root);
