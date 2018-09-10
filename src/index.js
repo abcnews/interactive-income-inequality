@@ -3,7 +3,9 @@ const { render } = require("react-dom");
 const xhr = require("xhr");
 const spanify = require("spanify");
 
-import * as gemini from "gemini";
+import * as gemini from "@abcnews/gemini";
+
+// const gemini = require("@abcnews/gemini");
 
 require("react-select/dist/react-select.css");
 
@@ -117,6 +119,7 @@ function init() {
 
 // Wait for Odyssey
 if (window.__ODYSSEY__) {
+  console.log(gemini)
   gemini.fullReplace(init);
 } else {
   window.addEventListener("odyssey:api", () => {

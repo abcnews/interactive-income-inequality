@@ -25,7 +25,7 @@
     "react-test-renderer": "^16.4.1"
   },
   "dependencies": {
-    "@abcnews/gemini": "file:../gemini",
+    "@abcnews/gemini": "^1.0.0",
     "@abcnews/scrollyteller": "^1.0.4",
     "canvas-dpi-scaler": "0.0.3",
     "d3-ease": "^1.0.3",
