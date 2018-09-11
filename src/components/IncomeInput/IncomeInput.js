@@ -247,19 +247,21 @@ class IncomeInput extends React.Component {
               </div>
               <div className={styles.push4} /> {/* Just a spacer */}
               <div className={styles.opacityTransition}>
-                <div className={styles.boldtext}>
-                  What's your weekly take-home pay?:<br />
+                <div id="takeHomePay" className={styles.boldtext}>
+                  What's your weekly take-home pay?:
+                  <br />
                   <form onSubmit={this.calculateResult.bind(this)}>
                     <label />
                     $&nbsp;{" "}
                     <input
+                      labelledby="takeHomePay perweek"
                       onChange={this.handleIncomeChange.bind(this)}
                       type="text"
                       value={Number(this.state.income).toLocaleString("en", {
                         useGrouping: true
                       })}
                     />
-                    &nbsp;&nbsp; per week
+                    &nbsp;&nbsp; <span id="perweek">per week</span>
                   </form>
                 </div>
                 <div className={styles.smalltext}>Enter your weekly income</div>{" "}
@@ -565,7 +567,9 @@ class IncomeInput extends React.Component {
                       : styles.opacityNone)
                   }
                 >
-                  Your<br />bracket
+                  Your
+                  <br />
+                  bracket
                 </div>
                 <div
                   className={
@@ -579,7 +583,9 @@ class IncomeInput extends React.Component {
                       : styles.opacityNone)
                   }
                 >
-                  Your<br />bracket
+                  Your
+                  <br />
+                  bracket
                 </div>
                 <div
                   className={
@@ -593,7 +599,9 @@ class IncomeInput extends React.Component {
                       : styles.opacityNone)
                   }
                 >
-                  Your<br />bracket
+                  Your
+                  <br />
+                  bracket
                 </div>
                 <div
                   className={
@@ -607,7 +615,9 @@ class IncomeInput extends React.Component {
                       : styles.opacityNone)
                   }
                 >
-                  Your<br />bracket
+                  Your
+                  <br />
+                  bracket
                 </div>
                 <div
                   className={
@@ -621,7 +631,9 @@ class IncomeInput extends React.Component {
                       : styles.opacityNone)
                   }
                 >
-                  Your<br />bracket
+                  Your
+                  <br />
+                  bracket
                 </div>
                 <div
                   className={
@@ -635,7 +647,9 @@ class IncomeInput extends React.Component {
                       : styles.opacityNone)
                   }
                 >
-                  Your<br />bracket
+                  Your
+                  <br />
+                  bracket
                 </div>
                 <div
                   className={
@@ -649,7 +663,9 @@ class IncomeInput extends React.Component {
                       : styles.opacityNone)
                   }
                 >
-                  Your<br />bracket
+                  Your
+                  <br />
+                  bracket
                 </div>
                 <div
                   className={
@@ -663,7 +679,9 @@ class IncomeInput extends React.Component {
                       : styles.opacityNone)
                   }
                 >
-                  Your<br />bracket
+                  Your
+                  <br />
+                  bracket
                 </div>
                 <div
                   className={
@@ -677,7 +695,9 @@ class IncomeInput extends React.Component {
                       : styles.opacityNone)
                   }
                 >
-                  Your<br />bracket
+                  Your
+                  <br />
+                  bracket
                 </div>
                 <div
                   className={
@@ -691,7 +711,9 @@ class IncomeInput extends React.Component {
                       : styles.opacityNone)
                   }
                 >
-                  Your<br />bracket
+                  Your
+                  <br />
+                  bracket
                 </div>
                 <div
                   className={
@@ -705,7 +727,9 @@ class IncomeInput extends React.Component {
                       : styles.opacityNone)
                   }
                 >
-                  Your<br />bracket
+                  Your
+                  <br />
+                  bracket
                 </div>
                 <div
                   className={
@@ -719,7 +743,9 @@ class IncomeInput extends React.Component {
                       : styles.opacityNone)
                   }
                 >
-                  Your<br />bracket
+                  Your
+                  <br />
+                  bracket
                 </div>
                 <div
                   className={
@@ -733,7 +759,9 @@ class IncomeInput extends React.Component {
                       : styles.opacityNone)
                   }
                 >
-                  Your<br />bracket
+                  Your
+                  <br />
+                  bracket
                 </div>
 
                 {/*########################################################################
@@ -752,7 +780,9 @@ class IncomeInput extends React.Component {
                       : styles.opacityNone)
                   }
                 >
-                  Your<br />guess
+                  Your
+                  <br />
+                  guess
                 </div>
                 <div
                   className={
@@ -766,7 +796,9 @@ class IncomeInput extends React.Component {
                       : styles.opacityNone)
                   }
                 >
-                  Your<br />guess
+                  Your
+                  <br />
+                  guess
                 </div>
                 <div
                   className={
@@ -780,7 +812,9 @@ class IncomeInput extends React.Component {
                       : styles.opacityNone)
                   }
                 >
-                  Your<br />guess
+                  Your
+                  <br />
+                  guess
                 </div>
                 <div
                   className={
@@ -794,7 +828,9 @@ class IncomeInput extends React.Component {
                       : styles.opacityNone)
                   }
                 >
-                  Your<br />guess
+                  Your
+                  <br />
+                  guess
                 </div>
                 <div
                   className={
@@ -808,7 +844,9 @@ class IncomeInput extends React.Component {
                       : styles.opacityNone)
                   }
                 >
-                  Your<br />guess
+                  Your
+                  <br />
+                  guess
                 </div>
                 <div
                   className={
@@ -822,7 +860,9 @@ class IncomeInput extends React.Component {
                       : styles.opacityNone)
                   }
                 >
-                  Your<br />guess
+                  Your
+                  <br />
+                  guess
                 </div>
                 <div
                   className={
@@ -836,7 +876,9 @@ class IncomeInput extends React.Component {
                       : styles.opacityNone)
                   }
                 >
-                  Your<br />guess
+                  Your
+                  <br />
+                  guess
                 </div>
                 <div
                   className={
@@ -850,7 +892,9 @@ class IncomeInput extends React.Component {
                       : styles.opacityNone)
                   }
                 >
-                  Your<br />guess
+                  Your
+                  <br />
+                  guess
                 </div>
                 <div
                   className={
@@ -864,7 +908,9 @@ class IncomeInput extends React.Component {
                       : styles.opacityNone)
                   }
                 >
-                  Your<br />guess
+                  Your
+                  <br />
+                  guess
                 </div>
                 <div
                   className={
@@ -878,7 +924,9 @@ class IncomeInput extends React.Component {
                       : styles.opacityNone)
                   }
                 >
-                  Your<br />guess
+                  Your
+                  <br />
+                  guess
                 </div>
                 <div
                   className={
@@ -892,7 +940,9 @@ class IncomeInput extends React.Component {
                       : styles.opacityNone)
                   }
                 >
-                  Your<br />guess
+                  Your
+                  <br />
+                  guess
                 </div>
                 <div
                   className={
@@ -906,7 +956,9 @@ class IncomeInput extends React.Component {
                       : styles.opacityNone)
                   }
                 >
-                  Your<br />guess
+                  Your
+                  <br />
+                  guess
                 </div>
                 <div
                   className={
@@ -920,7 +972,9 @@ class IncomeInput extends React.Component {
                       : styles.opacityNone)
                   }
                 >
-                  Your<br />guess
+                  Your
+                  <br />
+                  guess
                 </div>
 
                 <div className={styles.barSpacer + " " + styles.space1} />
