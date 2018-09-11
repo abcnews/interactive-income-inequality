@@ -27,6 +27,7 @@
   "dependencies": {
     "@abcnews/gemini": "^1.0.0",
     "@abcnews/scrollyteller": "^1.0.4",
+    "@babel/polyfill": "^7.0.0",
     "canvas-dpi-scaler": "0.0.3",
     "d3-ease": "^1.0.3",
     "d3-geo": "^1.10.0",

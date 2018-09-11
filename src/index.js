@@ -9,7 +9,7 @@ require("react-select/dist/react-select.css");
 require("./lib/modernizr.js"); // Detect browser features
 
 const PROJECT_NAME = "income-comparisons";
-require("babel-polyfill"); // for async/await to work
+require("@babel/polyfill"); // for async/await to work
 
 const root = document.querySelector(`[data-${PROJECT_NAME}-root]`);
 

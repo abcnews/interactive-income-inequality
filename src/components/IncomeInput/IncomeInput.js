@@ -212,7 +212,7 @@ class IncomeInput extends React.Component {
 
   render() {
     return ReactDOM.createPortal(
-      <div className={styles.wrapper}>
+      <div aria-live="polite" className={styles.wrapper}>
         <div className={styles.flexWrapper}>
           {/* Choose whether to display the input or the output text etc. */}
           {this.state.narrativeState === "initial" && (
