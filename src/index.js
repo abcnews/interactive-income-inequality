@@ -2,13 +2,10 @@ const React = require("react");
 const { render } = require("react-dom");
 const xhr = require("xhr");
 const spanify = require("spanify");
+const gemini = require("@abcnews/gemini");
 
-import * as gemini from "@abcnews/gemini";
-
-// const gemini = require("@abcnews/gemini");
-
+// Directly pull in some code
 require("react-select/dist/react-select.css");
-
 require("./lib/modernizr.js"); // Detect browser features
 
 const PROJECT_NAME = "income-comparisons";
@@ -119,7 +116,6 @@ function init() {
 
 // Wait for Odyssey
 if (window.__ODYSSEY__) {
-  console.log(gemini)
   gemini.fullReplace(init);
 } else {
   window.addEventListener("odyssey:api", () => {

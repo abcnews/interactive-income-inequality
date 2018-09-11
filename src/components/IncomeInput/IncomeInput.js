@@ -222,7 +222,7 @@ class IncomeInput extends React.Component {
                 least to most rich Australians?
               </div>
               <div className={styles.smalltext}>
-                Use the slider on the right to estimate your position
+                Use the slider to estimate your position
               </div>
 
               <div className={styles.push4} />
@@ -1028,7 +1028,7 @@ function getGuessMessageAboveOrBelow(difference) {
     case 4:
     case 3:
     case 2:
-      return "A few brackets over...";
+      return "Overestimating a little...";
     case 1:
       return "Just a little over...";
     case 0:
