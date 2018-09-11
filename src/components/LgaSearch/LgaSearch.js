@@ -269,6 +269,14 @@ class LgaSearch extends React.Component {
     );
   }
 
+  componentDidMount() {
+    // Add accessibility options to drop-down menu so they are read out aloud by screen reader
+    const selectPlaceholder = document.querySelector(".Select-input");
+    const selectInput = selectPlaceholder.firstElementChild;
+    selectPlaceholder.setAttribute("id", "addressLbl");
+    selectInput.setAttribute("aria-labelledby", "addressLbl");
+  }
+
   render() {
     const { selectedOption } = this.state;
     const value = selectedOption && selectedOption.value;
