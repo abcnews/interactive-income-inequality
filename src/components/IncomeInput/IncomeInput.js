@@ -243,7 +243,7 @@ class IncomeInput extends React.Component {
                 least to most rich Australians?
               </div>
               <div className={styles.smalltext}>
-                Use the slider on the right to estimate your position
+                Use the slider to estimate your position
               </div>
               <div className={styles.push4} /> {/* Just a spacer */}
               <div className={styles.opacityTransition}>
@@ -344,7 +344,7 @@ class IncomeInput extends React.Component {
             <div className={styles.resultContainer}>
               {this.state.narrativeState === "result" ? (
                 <div className={styles.scaleLabels}>
-                  {this.results.percentAbove}% are richer
+                  {Math.round(this.results.percentAbove)}% are richer
                 </div>
               ) : (
                 <div className={styles.scaleLabels}>Richest</div>
@@ -941,7 +941,7 @@ class IncomeInput extends React.Component {
 
               {this.state.narrativeState === "result" ? (
                 <div className={styles.scaleLabels}>
-                  {this.results.percentBelow}% are poorer
+                  {Math.round(this.results.percentBelow)}% earn less
                 </div>
               ) : (
                 <div className={styles.scaleLabels}>Poorest</div>
