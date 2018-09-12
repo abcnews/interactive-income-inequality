@@ -214,134 +214,6 @@ class IncomeInput extends React.Component {
     return ReactDOM.createPortal(
       <div aria-live="polite" className={styles.wrapper}>
         <div className={styles.flexWrapper}>
-          {/* Choose whether to display the input or the output text etc. */}
-          {this.state.narrativeState === "initial" && (
-            <div className={styles.column + " " + styles.one}>
-              <div className={styles.boldtext}>
-                Where do you think your income bracket sits on the scale of
-                least to most rich Australians?
-              </div>
-              <div className={styles.smalltext}>
-                Use the slider to estimate your position
-              </div>
-
-              <div className={styles.push4} />
-
-              <button
-                className={styles.lockItIn}
-                onClick={this.lockIn.bind(this)}
-              >
-                Lock it in
-              </button>
-            </div>
-          )}
-
-          {this.state.narrativeState === "locked" && (
-            <div className={styles.column + " " + styles.one}>
-              <div className={styles.boldtext}>
-                Where do you think your income bracket sits on the scale of
-                least to most rich Australians?
-              </div>
-              <div className={styles.smalltext}>
-                Use the slider to estimate your position
-              </div>
-              <div className={styles.push4} /> {/* Just a spacer */}
-              <div className={styles.opacityTransition}>
-                <div id="takeHomePay" className={styles.boldtext}>
-                  What's your weekly take-home pay?:
-                  <br />
-                  <form onSubmit={this.calculateResult.bind(this)}>
-                    <label />
-                    $&nbsp;{" "}
-                    <input
-                      labelledby="takeHomePay perweek"
-                      onChange={this.handleIncomeChange.bind(this)}
-                      type="text"
-                      value={Number(this.state.income).toLocaleString("en", {
-                        useGrouping: true
-                      })}
-                    />
-                    &nbsp;&nbsp; <span id="perweek">per week</span>
-                  </form>
-                </div>
-                <div className={styles.smalltext}>Enter your weekly income</div>{" "}
-                <button
-                  className={styles.showMe}
-                  onClick={this.calculateResult.bind(this)}
-                >
-                  Show me where I sit
-                </button>
-              </div>
-            </div>
-          )}
-
-          {this.state.narrativeState === "calculate" && (
-            <div className={styles.column + " " + styles.one}>
-              <div
-                className={
-                  styles.calculatingResult + " " + styles.opacityTransition
-                }
-              >
-                <div />
-              </div>
-            </div>
-          )}
-
-          {this.state.narrativeState === "result" && (
-            <div className={styles.column + " " + styles.one}>
-              <div className={styles.opacityTransition}>
-                <div
-                  className={styles.standardText + " " + styles.guessMessage}
-                >
-                  {/* Not even close! or Spot on! etc */}
-                  {this.state.guessMessage}
-                </div>
-                <div className={styles.standardText}>
-                  Your income puts you in the{" "}
-                  <span className={styles.resultsStandard}>
-                    {this.results.text}
-                  </span>{" "}
-                  per annum income bracket for Australia, with{" "}
-                  <span className={styles.resultsStandard}>
-                    {this.results.percent} per cent
-                  </span>{" "}
-                  of other income earners.
-                </div>
-                <div className={styles.standardText}>
-                  Above your bracket are{" "}
-                  <span className={styles.resultsAbove}>
-                    {this.results.percentAbove} per cent
-                  </span>{" "}
-                  of income earners.
-                </div>
-                <div className={styles.standardText}>
-                  Below your bracket are{" "}
-                  <span className={styles.resultsBelow}>
-                    {this.results.percentBelow} per cent
-                  </span>{" "}
-                  of income earners.
-                </div>
-                <button
-                  className={styles.tryAgain}
-                  onClick={this.tryAgain.bind(this)}
-                >
-                  <div>
-                    <span className={styles.reloadIcon}>
-                      <img
-                        src={PUBLIC_URL_BASE + "refresh.svg"}
-                        width="20px"
-                        height="20px"
-                      />
-                    </span>
-                    <span className={styles.tryAgainText}>
-                      &nbsp;&nbsp;Try again&nbsp;&nbsp;
-                    </span>
-                  </div>
-                </button>
-              </div>
-            </div>
-          )}
-
           <div className={styles.column + " " + styles.two}>
             <div className={styles.resultContainer}>
               {this.state.narrativeState === "result" ? (
@@ -1005,6 +877,133 @@ class IncomeInput extends React.Component {
             {/* Render results */}
             {this.state.narrativeState === "result" && <div />}
           </div>
+          {/* Choose whether to display the input or the output text etc. */}
+          {this.state.narrativeState === "initial" && (
+            <div className={styles.column + " " + styles.one}>
+              <div className={styles.boldtext}>
+                Where do you think your income bracket sits on the scale of
+                least to most rich Australians?
+              </div>
+              <div className={styles.smalltext}>
+                Use the slider to estimate your position
+              </div>
+
+              <div className={styles.push4} />
+
+              <button
+                className={styles.lockItIn}
+                onClick={this.lockIn.bind(this)}
+              >
+                Lock it in
+              </button>
+            </div>
+          )}
+
+          {this.state.narrativeState === "locked" && (
+            <div className={styles.column + " " + styles.one}>
+              <div className={styles.boldtext}>
+                Where do you think your income bracket sits on the scale of
+                least to most rich Australians?
+              </div>
+              <div className={styles.smalltext}>
+                Use the slider to estimate your position
+              </div>
+              <div className={styles.push4} /> {/* Just a spacer */}
+              <div className={styles.opacityTransition}>
+                <div id="takeHomePay" className={styles.boldtext}>
+                  What's your weekly take-home pay?:
+                  <br />
+                  <form onSubmit={this.calculateResult.bind(this)}>
+                    <label />
+                    $&nbsp;{" "}
+                    <input
+                      labelledby="takeHomePay perweek"
+                      onChange={this.handleIncomeChange.bind(this)}
+                      type="text"
+                      value={Number(this.state.income).toLocaleString("en", {
+                        useGrouping: true
+                      })}
+                    />
+                    &nbsp;&nbsp; <span id="perweek">per week</span>
+                  </form>
+                </div>
+                <div className={styles.smalltext}>Enter your weekly income</div>{" "}
+                <button
+                  className={styles.showMe}
+                  onClick={this.calculateResult.bind(this)}
+                >
+                  Show me where I sit
+                </button>
+              </div>
+            </div>
+          )}
+
+          {this.state.narrativeState === "calculate" && (
+            <div className={styles.column + " " + styles.one}>
+              <div
+                className={
+                  styles.calculatingResult + " " + styles.opacityTransition
+                }
+              >
+                <div />
+              </div>
+            </div>
+          )}
+
+          {this.state.narrativeState === "result" && (
+            <div className={styles.column + " " + styles.one}>
+              <div className={styles.opacityTransition}>
+                <div
+                  className={styles.standardText + " " + styles.guessMessage}
+                >
+                  {/* Not even close! or Spot on! etc */}
+                  {this.state.guessMessage}
+                </div>
+                <div className={styles.standardText}>
+                  Your income puts you in the{" "}
+                  <span className={styles.resultsStandard}>
+                    {this.results.text}
+                  </span>{" "}
+                  per annum income bracket for Australia, with{" "}
+                  <span className={styles.resultsStandard}>
+                    {this.results.percent} per cent
+                  </span>{" "}
+                  of other income earners.
+                </div>
+                <div className={styles.standardText}>
+                  Above your bracket are{" "}
+                  <span className={styles.resultsAbove}>
+                    {this.results.percentAbove} per cent
+                  </span>{" "}
+                  of income earners.
+                </div>
+                <div className={styles.standardText}>
+                  Below your bracket are{" "}
+                  <span className={styles.resultsBelow}>
+                    {this.results.percentBelow} per cent
+                  </span>{" "}
+                  of income earners.
+                </div>
+                <button
+                  className={styles.tryAgain}
+                  onClick={this.tryAgain.bind(this)}
+                >
+                  <div>
+                    <span className={styles.reloadIcon}>
+                      <img
+                        src={PUBLIC_URL_BASE + "refresh.svg"}
+                        width="20px"
+                        height="20px"
+                      />
+                    </span>
+                    <span className={styles.tryAgainText}>
+                      &nbsp;&nbsp;Try again&nbsp;&nbsp;
+                    </span>
+                  </div>
+                </button>
+              </div>
+            </div>
+          )}
         </div>
         <div />
       </div>,
