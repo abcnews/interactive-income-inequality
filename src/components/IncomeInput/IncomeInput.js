@@ -144,6 +144,12 @@ class IncomeInput extends React.Component {
       range: {
         min: 0,
         max: 100
+      },
+      ariaFormat: {
+        to: (value) => {
+          return value !== undefined && Math.round(value) + " per cent";
+        },
+        from: Number
       }
     });
 
@@ -167,6 +173,8 @@ class IncomeInput extends React.Component {
     // Event fires when slider is set
     this.slider.noUiSlider.on("set", () => {
       let sliderValue = this.slider.noUiSlider.get();
+
+      console.log(sliderValue);
 
       this.setState({ sliderGuess: sliderValue });
       this.setState({ guessBracket: whatIncomeBracketPercent(sliderValue) });
