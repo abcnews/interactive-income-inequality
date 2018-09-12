@@ -81,6 +81,7 @@ class IncomeInput extends React.Component {
     setTimeout(this.showResult.bind(this), 1000);
 
     // Send some stats to Loggly
+    // TODO: Uncomment below to collect stats 
     // ABC.News.trackEvent({
     //   category: "News Lab Data",
     //   action:
