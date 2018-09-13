@@ -382,6 +382,7 @@ class App extends React.Component {
               line1Label="Avg. of all brackets"
               percentMultiplier={1}
               maxValue={10}
+              isInTopBracket={isInTopBracket}
             />
             <Dumbbell
               label="CEOs, General Managers and Legislators"
@@ -390,6 +391,7 @@ class App extends React.Component {
               line1Percent="0.72"
               percentMultiplier={1}
               maxValue={10}
+              isInTopBracket={isInTopBracket}
             />
             <Dumbbell
               label="Business Administration Managers"
@@ -398,6 +400,7 @@ class App extends React.Component {
               line1Percent="0.88"
               percentMultiplier={1}
               maxValue={10}
+              isInTopBracket={isInTopBracket}
             />
             <Dumbbell
               label="Construction, Distribution &amp; Production Managers"
@@ -406,6 +409,7 @@ class App extends React.Component {
               line1Percent="1.39"
               percentMultiplier={1}
               maxValue={10}
+              isInTopBracket={isInTopBracket}
             />
             <Dumbbell
               label="Legal Professionals"
@@ -414,6 +418,7 @@ class App extends React.Component {
               line1Percent="0.45"
               percentMultiplier={1}
               maxValue={10}
+              isInTopBracket={isInTopBracket}
             />
           </DumbbellTop>
         )}
@@ -434,6 +439,7 @@ class App extends React.Component {
               line1Label="Avg. of all brackets"
               percentMultiplier={1}
               maxValue={10}
+              isInTopBracket={isInTopBracket}
             />
             <Dumbbell
               label="CEOs, General Managers and Legislators"
@@ -444,6 +450,7 @@ class App extends React.Component {
               line1Percent="0.72"
               percentMultiplier={1}
               maxValue={10}
+              isInTopBracket={isInTopBracket}
             />
             <Dumbbell
               label="Business Administration Managers"
@@ -454,6 +461,7 @@ class App extends React.Component {
               line1Percent="0.88"
               percentMultiplier={1}
               maxValue={10}
+              isInTopBracket={isInTopBracket}
             />
             <Dumbbell
               label="Construction, Distribution &amp; Production Managers"
@@ -464,6 +472,7 @@ class App extends React.Component {
               line1Percent="1.39"
               percentMultiplier={1}
               maxValue={10}
+              isInTopBracket={isInTopBracket}
             />
             <Dumbbell
               label="Legal Professionals"
@@ -474,6 +483,7 @@ class App extends React.Component {
               line1Percent="0.45"
               percentMultiplier={1}
               maxValue={10}
+              isInTopBracket={isInTopBracket}
             />
           </DumbbellTop>
         )}
@@ -507,6 +517,7 @@ class App extends React.Component {
               line1Label="Avg. of all brackets"
               percentMultiplier={1}
               maxValue={dumbbellUserMax}
+              isInTopBracket={isInTopBracket}
             />
             <Dumbbell
               label={user.name2}
@@ -515,6 +526,7 @@ class App extends React.Component {
               line1Percent={user.average2}
               percentMultiplier={1}
               maxValue={dumbbellUserMax}
+              isInTopBracket={isInTopBracket}
             />
             <Dumbbell
               label={user.name3}
@@ -523,6 +535,7 @@ class App extends React.Component {
               line1Percent={user.average3}
               percentMultiplier={1}
               maxValue={dumbbellUserMax}
+              isInTopBracket={isInTopBracket}
             />
             <Dumbbell
               label={user.name4}
@@ -531,6 +544,7 @@ class App extends React.Component {
               line1Percent={user.average4}
               percentMultiplier={1}
               maxValue={dumbbellUserMax}
+              isInTopBracket={isInTopBracket}
             />
             <Dumbbell
               label={user.name5}
@@ -539,6 +553,7 @@ class App extends React.Component {
               line1Percent={user.average5}
               percentMultiplier={1}
               maxValue={dumbbellUserMax}
+              isInTopBracket={isInTopBracket}
             />
           </DumbbellUser>
         )}
@@ -563,6 +578,7 @@ class App extends React.Component {
               line1Label="Avg. of all brackets"
               percentMultiplier={1}
               maxValue={13}
+              isInTopBracket={isInTopBracket}
             />
             <Dumbbell
               label="Food Preparation Assistants"
@@ -574,6 +590,7 @@ class App extends React.Component {
               line1Percent={0.94}
               percentMultiplier={1}
               maxValue={13}
+              isInTopBracket={isInTopBracket}
             />
             <Dumbbell
               label="Hospitality Workers"
@@ -585,6 +602,7 @@ class App extends React.Component {
               line1Percent={1.56}
               percentMultiplier={1}
               maxValue={13}
+              isInTopBracket={isInTopBracket}
             />
             <Dumbbell
               label="Checkout Operators and Office Cashiers"
@@ -596,6 +614,7 @@ class App extends React.Component {
               line1Percent={0.64}
               percentMultiplier={1}
               maxValue={13}
+              isInTopBracket={isInTopBracket}
             />
             <Dumbbell
               label="Sports and Fitness Workers"
@@ -607,6 +626,7 @@ class App extends React.Component {
               line1Percent={0.48}
               percentMultiplier={1}
               maxValue={13}
+              isInTopBracket={isInTopBracket}
             />
           </DumbbellUser>
         )}
@@ -625,6 +645,7 @@ class App extends React.Component {
             line1Label="Avg. of all brackets"
             percentMultiplier={1}
             maxValue={100}
+            isInTopBracket={isInTopBracket}
           />
         </DumbbellEducation>
 
@@ -642,6 +663,7 @@ class App extends React.Component {
             line1Label="Avg. of all brackets"
             percentMultiplier={1}
             maxValue={100}
+            isInTopBracket={isInTopBracket}
           />
         </DumbbellGender>
         <DumbbellIndigenous>
@@ -658,6 +680,7 @@ class App extends React.Component {
             line1Label="Avg. of all brackets"
             percentMultiplier={1}
             maxValue={10}
+            isInTopBracket={isInTopBracket}
           />
         </DumbbellIndigenous>
         <DumbbellBorn>
@@ -674,6 +697,7 @@ class App extends React.Component {
             line1Label="Avg. of all brackets"
             percentMultiplier={1}
             maxValue={100}
+            isInTopBracket={isInTopBracket}
           />
         </DumbbellBorn>
         <DumbbellVoluntary>
@@ -690,6 +714,7 @@ class App extends React.Component {
             line1Label="Avg. of all brackets"
             percentMultiplier={1}
             maxValue={100}
+            isInTopBracket={isInTopBracket}
           />
         </DumbbellVoluntary>
         <DumbbellCar>
@@ -706,6 +731,7 @@ class App extends React.Component {
             percentMultiplier={1}
             line1Label="Avg. of all brackets"
             maxValue={100}
+            isInTopBracket={isInTopBracket}
           />
           <Dumbbell
             label="Owns three or more cars"
@@ -717,6 +743,7 @@ class App extends React.Component {
             line1Percent={25.51}
             percentMultiplier={1}
             maxValue={100}
+            isInTopBracket={isInTopBracket}
           />
         </DumbbellCar>
         <DumbbellMarriage>
@@ -733,6 +760,7 @@ class App extends React.Component {
             percentMultiplier={1}
             line1Label="Avg. of all brackets"
             maxValue={100}
+            isInTopBracket={isInTopBracket}
           />
           <Dumbbell
             label="Never married"
@@ -744,6 +772,7 @@ class App extends React.Component {
             line1Percent={32.57}
             percentMultiplier={1}
             maxValue={100}
+            isInTopBracket={isInTopBracket}
           />
           <Dumbbell
             label="Divorced"
@@ -755,6 +784,7 @@ class App extends React.Component {
             line1Percent={9.05}
             percentMultiplier={1}
             maxValue={100}
+            isInTopBracket={isInTopBracket}
           />
         </DumbbellMarriage>
 
@@ -772,6 +802,7 @@ class App extends React.Component {
             line1Label="Avg. of all brackets"
             percentMultiplier={1}
             maxValue={100}
+            isInTopBracket={isInTopBracket}
           />
           <Dumbbell
             label="Never married (control)"
@@ -783,6 +814,7 @@ class App extends React.Component {
             line1Percent={31.53}
             percentMultiplier={1}
             maxValue={100}
+            isInTopBracket={isInTopBracket}
           />
           <Dumbbell
             label="Divorced (control)"
@@ -794,6 +826,7 @@ class App extends React.Component {
             line1Percent={9.19}
             percentMultiplier={1}
             maxValue={100}
+            isInTopBracket={isInTopBracket}
           />
         </DumbbellContMarriage>
       </div>

@@ -141,7 +141,7 @@
 }
 
 .line1Label {
-  color: #1B7C8F;
+  color: #1b7c8f;
   position: absolute;
   left: -50px;
   position: absolute;
@@ -224,4 +224,15 @@
   -webkit-transform: translateY(-50%) translateX(-50%);
   transform: translateY(-50%) translateX(-50%);
   background-color: #78b8c4;
+}
+
+.screen-reader-only {
+  position: absolute;
+  height: 1px;
+  width: 1px;
+  clip: rect(1px 1px 1px 1px); // IE 6 and 7
+  clip: rect(1px, 1px, 1px, 1px);
+  clip-path: polygon(0px 0px, 0px 0px, 0px 0px);
+  -webkit-clip-path: polygon(0px 0px, 0px 0px, 0px 0px);
+  overflow: hidden !important;
 }

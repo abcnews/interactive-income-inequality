@@ -29,7 +29,7 @@ class Dumbbell extends React.Component {
 
   render() {
     // Extract vars
-    let { dot1Percent, dot2Percent, line1Percent } = this.props;
+    let { dot1Percent, dot2Percent, line1Percent, isInTopBracket } = this.props;
 
     // Align the labels
     let dot1Align = "left";
@@ -81,7 +81,7 @@ class Dumbbell extends React.Component {
     // Don't push the average too far
     // TODO: maybe make this more elegant by calculating the width
     let lineLabelWithinLimits = this.scale(line1Percent);
-    
+
     if (lineLabelWithinLimits < 10) lineLabelWithinLimits = 10;
     else if (lineLabelWithinLimits > 90) lineLabelWithinLimits = 90;
 
@@ -111,80 +111,94 @@ class Dumbbell extends React.Component {
     }
 
     return (
-      <div className={styles.wrapper} aria-hidden="true">
-        <div className={styles.label}>{this.props.label}</div>
-        <div className={styles.chart}>
-          {line1Percent && (
-            <span
-              className={styles.line1}
-              style={{ left: this.scale(line1Percent) + "%" }}
-            />
-          )}
+      <div>
+        <div class={styles.screenReaderOnly}>
+          {this.props.label}
+          Your bracket
+          {this.props.dot1Percent}
+          per cent.
+          {isInTopBracket ? "Bottom bracket" : "Top Bracket"}
+          {this.props.dot2Percent}
+          {"per cent."}
+          Avg. of all brackets
+          {this.props.line1Percent}
+          per cent
+        </div>
+        <div className={styles.wrapper} aria-hidden="true">
+          <div className={styles.label}>{this.props.label}</div>
+          <div className={styles.chart}>
+            {line1Percent && (
+              <span
+                className={styles.line1}
+                style={{ left: this.scale(line1Percent) + "%" }}
+              />
+            )}
 
-          {dot1Percent && <span className={styles.dot1} style={dot1Style} />}
-          <span className={styles.dot2} style={dot2Style} />
-          {/* Check if we want dot1 labels left or right */}
-          {dot1Percent &&
-            (dot1Align === "left" ? (
-              <span className={styles.dot1Percent} style={dot1PercentStyle}>
-                {this.getActualPercent(dot1Percent)}%
+            {dot1Percent && <span className={styles.dot1} style={dot1Style} />}
+            <span className={styles.dot2} style={dot2Style} />
+            {/* Check if we want dot1 labels left or right */}
+            {dot1Percent &&
+              (dot1Align === "left" ? (
+                <span className={styles.dot1Percent} style={dot1PercentStyle}>
+                  {this.getActualPercent(dot1Percent)}%
+                </span>
+              ) : (
+                <span
+                  className={styles.dot1PercentRight}
+                  style={dot1PercentRightStyle}
+                >
+                  {this.getActualPercent(dot1Percent)}%
+                </span>
+              ))}
+            {/* Dot 1 labels if applicable */}
+            {this.props.dot1Label &&
+              (dot1Align === "left" ? (
+                <span className={styles.dot1Label} style={dot1LabelStyle}>
+                  {this.props.dot1Label}
+                </span>
+              ) : (
+                <span
+                  className={styles.dot1LabelRight}
+                  style={dot1LabelRightStyle}
+                >
+                  {this.props.dot1Label}
+                </span>
+              ))}
+            {/* Dot 2 labels if applicable */}
+            {this.props.dot2Label &&
+              (dot2Align === "left" ? (
+                <span className={styles.dot2Label} style={dot2LabelStyle}>
+                  {this.props.dot2Label}
+                </span>
+              ) : (
+                <span
+                  className={styles.dot2LabelRight}
+                  style={dot2LabelRightStyle}
+                >
+                  {this.props.dot2Label}
+                </span>
+              ))}
+            {/* Check if we want dot2 percents left or right */}
+            {dot2Align === "left" ? (
+              <span className={styles.dot2Percent} style={dot2PercentStyle}>
+                {this.getActualPercent(dot2Percent)}%
               </span>
             ) : (
               <span
-                className={styles.dot1PercentRight}
-                style={dot1PercentRightStyle}
+                className={styles.dot2PercentRight}
+                style={dot2PercentRightStyle}
               >
-                {this.getActualPercent(dot1Percent)}%
+                {this.getActualPercent(dot2Percent)}%
               </span>
-            ))}
-          {/* Dot 1 labels if applicable */}
-          {this.props.dot1Label &&
-            (dot1Align === "left" ? (
-              <span className={styles.dot1Label} style={dot1LabelStyle}>
-                {this.props.dot1Label}
+            )}
+            {/* Mid bar */}
+            <div className={styles.midBar} />
+            {this.props.line1Label && (
+              <span className={styles.line1Label} style={line1LabelStyle}>
+                {this.props.line1Label}
               </span>
-            ) : (
-              <span
-                className={styles.dot1LabelRight}
-                style={dot1LabelRightStyle}
-              >
-                {this.props.dot1Label}
-              </span>
-            ))}
-          {/* Dot 2 labels if applicable */}
-          {this.props.dot2Label &&
-            (dot2Align === "left" ? (
-              <span className={styles.dot2Label} style={dot2LabelStyle}>
-                {this.props.dot2Label}
-              </span>
-            ) : (
-              <span
-                className={styles.dot2LabelRight}
-                style={dot2LabelRightStyle}
-              >
-                {this.props.dot2Label}
-              </span>
-            ))}
-          {/* Check if we want dot2 percents left or right */}
-          {dot2Align === "left" ? (
-            <span className={styles.dot2Percent} style={dot2PercentStyle}>
-              {this.getActualPercent(dot2Percent)}%
-            </span>
-          ) : (
-            <span
-              className={styles.dot2PercentRight}
-              style={dot2PercentRightStyle}
-            >
-              {this.getActualPercent(dot2Percent)}%
-            </span>
-          )}
-          {/* Mid bar */}
-          <div className={styles.midBar} />
-          {this.props.line1Label && (
-            <span className={styles.line1Label} style={line1LabelStyle}>
-              {this.props.line1Label}
-            </span>
-          )}
+            )}
+          </div>
         </div>
       </div>
     );
