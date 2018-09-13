@@ -112,17 +112,16 @@ class Dumbbell extends React.Component {
 
     return (
       <div>
-        <div class={styles.screenReaderOnly}>
-          {this.props.label}
-          Your bracket
-          {this.props.dot1Percent}
-          per cent.
-          {isInTopBracket ? "Bottom bracket" : "Top Bracket"}
-          {this.props.dot2Percent}
-          {"per cent."}
-          Avg. of all brackets
-          {this.props.line1Percent}
-          per cent
+        <div className={styles.screenReaderOnly}>
+          {this.props.label +
+            ". Your bracket: " +
+            this.props.dot1Percent +
+            " per cent. " +
+            (isInTopBracket ? "Bottom bracket: " : "Top Bracket: ") +
+            this.props.dot2Percent +
+            " per cent. Average of all brackets: " +
+            this.props.line1Percent +
+            " per cent."}
         </div>
         <div className={styles.wrapper} aria-hidden="true">
           <div className={styles.label}>{this.props.label}</div>
