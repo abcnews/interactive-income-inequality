@@ -111,7 +111,7 @@ class Dumbbell extends React.Component {
     }
 
     return (
-      <div className={styles.wrapper}>
+      <div className={styles.wrapper} aria-hidden="true">
         <div className={styles.label}>{this.props.label}</div>
         <div className={styles.chart}>
           {line1Percent && (
