@@ -92,9 +92,18 @@ class App extends React.Component {
     this.setCurrentBracket = this.setCurrentBracket.bind(this);
   }
 
+  componentDidMount() {
+    // Hide top bracket paragraphs
+    let veryTop = document.querySelector(".verytop");
+    let notTop = document.querySelector(".nottop");
+    veryTop.classList.add(styles.hidden);
+    notTop.classList.remove(styles.hidden);
+  }
+
   setCurrentBracket(bracketNumber) {
     this.setState({ currentBracketNumber: bracketNumber }, () => {
       setTimeout(() => {
+        // Update text if someone is in the top bracket
         let isInTopBracket = this.state.currentBracketNumber === 13;
         let veryTop = document.querySelector(".verytop");
         let notTop = document.querySelector(".nottop");
