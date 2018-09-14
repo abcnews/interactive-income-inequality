@@ -1,6 +1,6 @@
 const React = require("react");
 const { render } = require("react-dom");
-const xhr = require("xhr");
+// const xhr = require("xhr");
 const spanify = require("spanify");
 const gemini = require("@abcnews/gemini");
 
@@ -36,6 +36,34 @@ function init() {
 
   // Re-apply smart quotes to main content
   window.__ODYSSEY__.utils.misc.smartquotes(document.querySelector(".Main"));
+
+  // Add class via CoreMedia hashtags #classverytop
+  function hashNext(targetString) {
+    const anchors = document.querySelectorAll("a");
+
+    // Loop through all the anchor nodes
+    anchors.forEach(anchor => {
+      // Leave normal links on the page alone
+      if (anchor.innerHTML !== " ") return;
+
+      // Get name value
+      const elementName = anchor.getAttribute("name");
+
+      // Detect class
+      if (elementName.slice(0, targetString.length) !== targetString) return;
+
+      const classToApply = elementName.substr(targetString.length);
+
+      const nextElement = anchor.nextElementSibling;
+      nextElement.classList.add(classToApply);
+
+      console.log(nextElement);
+
+      console.log(elementName.substr(targetString.length));
+    });
+  }
+
+  hashNext("class");
 
   const App = require("./components/App/App");
 
