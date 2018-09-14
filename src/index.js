@@ -37,8 +37,13 @@ function init() {
   // Re-apply smart quotes to main content
   window.__ODYSSEY__.utils.misc.smartquotes(document.querySelector(".Main"));
 
-  // Add class via CoreMedia hashtags #classverytop
+  // Add class via CoreMedia hashtags eg. #classverytop
   function hashNext(targetString) {
+    // Set deafult for params
+    if (targetString === undefined) {
+      targetString = "class";
+    }
+
     const anchors = document.querySelectorAll("a");
 
     // Loop through all the anchor nodes
@@ -52,18 +57,18 @@ function init() {
       // Detect class
       if (elementName.slice(0, targetString.length) !== targetString) return;
 
+      // Get class name to apply
       const classToApply = elementName.substr(targetString.length);
 
+      // Get the next paragraph to work with
       const nextElement = anchor.nextElementSibling;
+
+      // Apply the class
       nextElement.classList.add(classToApply);
-
-      console.log(nextElement);
-
-      console.log(elementName.substr(targetString.length));
     });
   }
 
-  hashNext("class");
+  hashNext();
 
   const App = require("./components/App/App");
 
