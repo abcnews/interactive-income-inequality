@@ -81,7 +81,7 @@ class IncomeInput extends React.Component {
     setTimeout(this.showResult.bind(this), 1000);
 
     // Send some stats to Loggly
-    // TODO: Uncomment below to collect stats 
+    // TODO: Uncomment below to collect stats
     // ABC.News.trackEvent({
     //   category: "News Lab Data",
     //   action:
@@ -147,7 +147,7 @@ class IncomeInput extends React.Component {
         max: 100
       },
       ariaFormat: {
-        to: (value) => {
+        to: value => {
           return value !== undefined && Math.round(value) + " per cent";
         },
         from: Number
@@ -1074,43 +1074,57 @@ function whatIncomeBracketNet(incomeNetPerWeek) {
 }
 
 function getGuessMessageAboveOrBelow(difference) {
+  const userMessages = [""];
+
   switch (difference) {
     case 12:
+      return "Not even close...";
     case 11:
-      return "Keep dreaming...";
+      return "Not even close...";
     case 10:
+      return "Not even close...";
     case 9:
-      return "Way off...";
+      return "Not even close...";
     case 8:
+      return "Way off...";
     case 7:
-      return "You're reaching...";
+      return "Way off...";
     case 6:
+      return "Way off...";
     case 5:
-      return "A bit of a stretch...";
+      return "Nice try...";
     case 4:
+      return "Nice try...";
     case 3:
+      return "Nice try...";
     case 2:
-      return "Overestimating a little...";
+      return "So close...";
     case 1:
-      return "Just a little over...";
+      return "So close...";
     case 0:
       return "Spot on!";
     case -1:
-      return "Just a little under...";
+      return "So close...";
     case -2:
-      return "A few brackets under...";
+      return "So close...";
     case -3:
+      return "Nice try...";
     case -4:
+      return "Nice try...";
     case -5:
+      return "Nice try...";
     case -6:
-      return "A moderate underestimation...";
-    case -7:
-    case -8:
-      return "A large underestimation...";
-    case -9:
-    case -10:
       return "Way off...";
+    case -7:
+      return "Way off...";
+    case -8:
+      return "Way off...";
+    case -9:
+      return "Not even close...";
+    case -10:
+      return "Not even close...";
     case -11:
+      return "Not even close...";
     case -12:
       return "Not even close...";
     default:
