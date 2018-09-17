@@ -11,9 +11,16 @@ const wNumb = require("wnumb");
 const FromLocaleString = require("../../lib/fromlocalestring");
 const fromLocaleString = new FromLocaleString();
 
+// Let devs specify a custom base URL
+const fragmentData = document.querySelector("[data-income-comparisons-root]");
+
 // Set up some constants
-const PUBLIC_URL_BASE =
+let PUBLIC_URL_BASE =
   "http://www.abc.net.au/res/sites/news-projects/income-comparisons-react/master/";
+
+// Get baseURL from HTML Fragment
+if (fragmentData && fragmentData.dataset.rootUrl)
+  PUBLIC_URL_BASE = fragmentData.dataset.rootUrl;
 
 class IncomeInput extends React.Component {
   constructor(props) {
@@ -1098,7 +1105,7 @@ function getGuessMessageAboveOrBelow(difference) {
     case 3:
       return "Nice try...";
     case 2:
-      return "So close...";
+      return "Close...";
     case 1:
       return "So close...";
     case 0:
@@ -1106,7 +1113,7 @@ function getGuessMessageAboveOrBelow(difference) {
     case -1:
       return "So close...";
     case -2:
-      return "So close...";
+      return "Close...";
     case -3:
       return "Nice try...";
     case -4:
