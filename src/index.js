@@ -70,6 +70,13 @@ function init() {
 
   hashNext();
 
+  if (typeof Storage !== "undefined") {
+    sessionStorage.setItem("loggingLevel", "0");
+    console.log(sessionStorage.loggingLevel)
+  } else {
+    console.log("No session storage detected...")
+  }
+
   const App = require("./components/App/App");
 
   render(<App projectName={PROJECT_NAME} />, root);

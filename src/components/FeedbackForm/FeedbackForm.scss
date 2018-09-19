@@ -1,6 +1,41 @@
 .wrapper {
-  border: 1px solid rgb(255, 115, 0);
-  padding: 20px;
   text-align: center;
-  color: black;
+}
+
+.submit-button {
+  width: 100%;
+  max-width: 200px;
+  display: block;
+  color: white;
+  background-color: #1c1c1c;
+  text-transform: uppercase;
+  font-family: ABCSans, Arial, Helvetica, sans-serif;
+  padding-top: 12px;
+  padding-bottom: 12px;
+  font-size: 12px;
+  letter-spacing: 2px;
+  border: 0;
+  line-height: 1.5rem;
+
+  -webkit-transition: all 0.3s ease-in-out;
+  -moz-transition: all 0.3s ease-in-out;
+  -ms-transition: all 0.3s ease-in-out;
+  -o-transition: all 0.3s ease-in-out;
+  outline: none;
+  border: 1px solid #dddddd;
+}
+
+.submit-button:focus {
+  // outline: 1px dotted #555;
+  // outline-offset: 1px;
+  box-shadow: 0 0 5px rgba(81, 203, 238, 1);
+  border: 1px solid rgba(81, 203, 238, 1);
+}
+
+.text-box {
+  width: 100%;
+  font-size: 16px;
+  margin-bottom: 15px;
+  padding: 8px 10px;
+  border: 1px solid black;
 }

@@ -122,6 +122,12 @@
     }
   }
 
+  @media screen and (max-width: 350px) {
+    .show-me {
+      font-size: 10px;
+    }
+  }
+
   .lock-it-in,
   .try-again,
   .show-me {

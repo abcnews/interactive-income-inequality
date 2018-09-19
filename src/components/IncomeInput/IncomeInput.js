@@ -90,22 +90,27 @@ class IncomeInput extends React.Component {
     setTimeout(this.showResult.bind(this), 1000);
 
     // Send some stats to Loggly
-    // TODO: Uncomment below to collect stats
-    // ABC.News.trackEvent({
-    //   category: "News Lab Data",
-    //   action:
-    //     "{ income: " +
-    //     this.state.income +
-    //     ", incomeBracket: " +
-    //     this.state.incomeBracket +
-    //     ", sliderGuess: " +
-    //     this.state.sliderGuess +
-    //     ", guessBracket: " +
-    //     this.state.guessBracket +
-    //     "}",
-    //   label: "Income Inequality: User income",
-    //   value: 1
-    // });
+    if (
+      sessionStorage &&
+      sessionStorage.loggingLevel &&
+      sessionStorage.loggingLevel !== "0"
+    ) {
+      ABC.News.trackEvent({
+        category: "News Story Lab Data",
+        action:
+          "{ income: " +
+          this.state.income +
+          ", incomeBracket: " +
+          this.state.incomeBracket +
+          ", sliderGuess: " +
+          this.state.sliderGuess +
+          ", guessBracket: " +
+          this.state.guessBracket +
+          "}",
+        label: "Income Inequality: User income",
+        value: 1
+      });
+    }
   }
 
   showResult() {
@@ -1028,10 +1033,10 @@ class IncomeInput extends React.Component {
         </div>
         {this.state.narrativeState === "result" && (
           <div>
-          <p className={styles.standardText}>
-            How do you feel about the result?
-          </p>
-          <FeedbackForm />
+            <p className={styles.standardText}>
+              How do you feel about the result?
+            </p>
+            <FeedbackForm />
           </div>
         )}
       </div>,

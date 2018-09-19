@@ -88,17 +88,23 @@ class LgaSearch extends React.Component {
     this.props.setCurrentLga(selectedOption);
 
     // Send some stats to Loggly
-    // ABC.News.trackEvent({
-    //   category: "News Lab Data",
-    //   action:
-    //     "{ lga: " +
-    //     selectedOption.value +
-    //     ", lgaName: " +
-    //     selectedOption.label +
-    //     "}",
-    //   label: "Income Inequality: User LGA",
-    //   value: 2
-    // });
+    if (
+      sessionStorage &&
+      sessionStorage.loggingLevel &&
+      sessionStorage.loggingLevel !== "0"
+    ) {
+      ABC.News.trackEvent({
+        category: "News Story Lab Data",
+        action:
+          "{ lga: " +
+          selectedOption.value +
+          ", lgaName: " +
+          selectedOption.label +
+          "}",
+        label: "Income Inequality: User LGA",
+        value: 2
+      });
+    }
 
     // Handle clear the select
     if (selectedOption == null) return;
