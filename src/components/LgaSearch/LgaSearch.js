@@ -95,12 +95,9 @@ class LgaSearch extends React.Component {
     ) {
       ABC.News.trackEvent({
         category: "News Story Lab Data",
-        action:
-          "{ lga: " +
-          selectedOption.value +
-          ", lgaName: " +
-          selectedOption.label +
-          "}",
+        action: `{ "lga": "${selectedOption.value}", "lgaName": "${
+          selectedOption.label
+        }"}`,
         label: "Income Inequality: User LGA",
         value: 2
       });
