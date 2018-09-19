@@ -25,7 +25,7 @@ class FeedbackForm extends React.Component {
     ) {
       ABC.News.trackEvent({
         category: "News Story Lab Data",
-        action: "{ feedback: " + this.state.value + "}",
+        action: `{ "feedback": "${this.state.value}" }`,
         label: "Income Inequality: Result feedback",
         value: 1
       });

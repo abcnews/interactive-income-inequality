@@ -97,16 +97,11 @@ class IncomeInput extends React.Component {
     ) {
       ABC.News.trackEvent({
         category: "News Story Lab Data",
-        action:
-          "{ income: " +
-          this.state.income +
-          ", incomeBracket: " +
-          this.state.incomeBracket +
-          ", sliderGuess: " +
-          this.state.sliderGuess +
-          ", guessBracket: " +
-          this.state.guessBracket +
-          "}",
+        action: `{ "income": "${this.state.income}", "incomeBracket": "${
+          this.state.incomeBracket
+        }", "sliderGuess": "${this.state.sliderGuess}", "guessBracket": "${
+          this.state.guessBracket
+        }" }`,
         label: "Income Inequality: User income",
         value: 1
       });
