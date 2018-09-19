@@ -1,5 +1,8 @@
 {
   "@abcnews/generator-aunty": {
     "template": "react"
+  },
+  "@abcnews/aunty": {
+    "template": "react"
   }
 }
