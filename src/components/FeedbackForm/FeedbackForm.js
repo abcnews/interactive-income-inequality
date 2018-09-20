@@ -4,19 +4,20 @@ const styles = require("./FeedbackForm.scss");
 class FeedbackForm extends React.Component {
   constructor(props) {
     super(props);
-    this.state = { value: "", submitted: false };
+    this.state = { feedbackText: "", submitted: false };
 
     this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
   }
 
   handleChange(event) {
-    this.setState({ value: event.target.value }, () => {
+    this.setState({ feedbackText: event.target.value }, () => {
       //console.log(this.state.value);
     });
   }
 
   handleSubmit(event) {
+    console.log(this.state.feedbackText);
     // Send feedback if logging is turned on
     if (
       sessionStorage &&
@@ -25,8 +26,11 @@ class FeedbackForm extends React.Component {
     ) {
       ABC.News.trackEvent({
         category: "userFeedback",
-        action: this.state.value,
-        label: "storyLabIncome"
+        action: this.state.feedbackText
+          ? this.state.feedbackText
+          : "FIELD LEFT EMPTY BY USER",
+        label: "storyLabIncome",
+        value: this.state.feedbackText ? 1 : -1
       });
     }
 
@@ -43,7 +47,7 @@ class FeedbackForm extends React.Component {
           <input
             className={styles.textBox}
             type="text"
-            value={this.state.value}
+            value={this.state.feedbackText}
             onChange={this.handleChange}
             disabled={this.state.submitted}
           />

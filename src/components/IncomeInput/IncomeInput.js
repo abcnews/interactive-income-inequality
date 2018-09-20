@@ -58,7 +58,7 @@ class IncomeInput extends React.Component {
   lockIn() {
     this.setState({ narrativeState: "locked" });
 
-    // Send percent guess to Loggly
+    // Send percent guess and bracket guess to Loggly
     if (
       sessionStorage &&
       sessionStorage.loggingLevel &&
@@ -69,6 +69,13 @@ class IncomeInput extends React.Component {
         action: this.state.sliderGuess,
         label: "storyLabIncome",
         value: this.state.sliderGuess
+      });
+
+      ABC.News.trackEvent({
+        category: "bracketGuess",
+        action: this.state.guessBracket,
+        label: "storyLabIncome",
+        value: this.state.guessBracket
       });
     }
   }
@@ -103,7 +110,7 @@ class IncomeInput extends React.Component {
     // Wait a while then show result
     setTimeout(this.showResult.bind(this), 1000);
 
-    // Send some stats to Loggly
+    // Send weekly pay to Loggly
     if (
       sessionStorage &&
       sessionStorage.loggingLevel &&
@@ -135,6 +142,20 @@ class IncomeInput extends React.Component {
     this.setState({ narrativeState: "result" });
 
     setTimeout(this.splitUpBar.bind(this), 200);
+
+     // Send calculated bracket to Loggly
+     if (
+      sessionStorage &&
+      sessionStorage.loggingLevel &&
+      sessionStorage.loggingLevel !== "0"
+    ) {
+      ABC.News.trackEvent({
+        category: "incomeBracket",
+        action: this.state.incomeBracket,
+        label: "storyLabIncome",
+        value: this.state.incomeBracket
+      });
+    }
   }
 
   tryAgain(event) {
