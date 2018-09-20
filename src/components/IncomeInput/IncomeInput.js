@@ -57,6 +57,20 @@ class IncomeInput extends React.Component {
 
   lockIn() {
     this.setState({ narrativeState: "locked" });
+
+    // Send percent guess to Loggly
+    if (
+      sessionStorage &&
+      sessionStorage.loggingLevel &&
+      sessionStorage.loggingLevel !== "0"
+    ) {
+      ABC.News.trackEvent({
+        category: "percentGuess",
+        action: this.state.sliderGuess,
+        label: "storyLabIncome",
+        value: this.state.sliderGuess
+      });
+    }
   }
 
   splitUpBar() {
@@ -96,14 +110,10 @@ class IncomeInput extends React.Component {
       sessionStorage.loggingLevel !== "0"
     ) {
       ABC.News.trackEvent({
-        category: "News Story Lab Data",
-        action: `{ "income": "${this.state.income}", "incomeBracket": "${
-          this.state.incomeBracket
-        }", "sliderGuess": "${this.state.sliderGuess}", "guessBracket": "${
-          this.state.guessBracket
-        }" }`,
-        label: "Income Inequality: User income",
-        value: 1
+        category: "weeklyPay",
+        action: this.state.income,
+        label: "storyLabIncome",
+        value: this.state.income
       });
     }
   }

@@ -89,17 +89,16 @@ class LgaSearch extends React.Component {
 
     // Send some stats to Loggly
     if (
+      selectedOption &&
       sessionStorage &&
       sessionStorage.loggingLevel &&
       sessionStorage.loggingLevel !== "0"
     ) {
       ABC.News.trackEvent({
-        category: "News Story Lab Data",
-        action: `{ "lga": "${selectedOption.value}", "lgaName": "${
-          selectedOption.label
-        }"}`,
-        label: "Income Inequality: User LGA",
-        value: 2
+        category: "lgaDropdown",
+        action: selectedOption.label,
+        label: "storyLabIncome",
+        value: selectedOption.value
       });
     }
 

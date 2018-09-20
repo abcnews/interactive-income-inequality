@@ -71,7 +71,7 @@ function init() {
   hashNext();
 
   if (typeof Storage !== "undefined") {
-    sessionStorage.setItem("loggingLevel", "0");
+    sessionStorage.setItem("loggingLevel", "1");
   } else {
     console.log("No session storage detected...")
   }

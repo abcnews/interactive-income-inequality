@@ -12,7 +12,7 @@ class FeedbackForm extends React.Component {
 
   handleChange(event) {
     this.setState({ value: event.target.value }, () => {
-      console.log(this.state.value);
+      //console.log(this.state.value);
     });
   }
 
@@ -24,10 +24,9 @@ class FeedbackForm extends React.Component {
       sessionStorage.loggingLevel !== "0"
     ) {
       ABC.News.trackEvent({
-        category: "News Story Lab Data",
-        action: `{ "feedback": "${this.state.value}" }`,
-        label: "Income Inequality: Result feedback",
-        value: 1
+        category: "userFeedback",
+        action: this.state.value,
+        label: "storyLabIncome"
       });
     }
 
