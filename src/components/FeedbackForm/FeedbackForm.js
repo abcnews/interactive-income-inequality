@@ -17,7 +17,6 @@ class FeedbackForm extends React.Component {
   }
 
   handleSubmit(event) {
-    console.log(this.state.feedbackText);
     // Send feedback if logging is turned on
     if (
       sessionStorage &&

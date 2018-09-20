@@ -94,10 +94,18 @@ class App extends React.Component {
 
   componentDidMount() {
     // Hide top bracket paragraphs
-    let veryTop = document.querySelector(".verytop");
-    let notTop = document.querySelector(".nottop");
-    veryTop.classList.add(styles.hidden);
-    notTop.classList.remove(styles.hidden);
+    let veryTop = document.querySelectorAll(".verytop");
+    let notTop = document.querySelectorAll(".nottop");
+
+    veryTop.forEach(paragraph => {
+      paragraph ? paragraph.classList.add(styles.hidden) : null;
+    });
+
+    notTop.forEach(paragraph => {
+      paragraph ? paragraph.classList.remove(styles.hidden) : null;
+    });
+    // veryTop ? veryTop.classList.add(styles.hidden) : null;
+    // notTop ? notTop.classList.remove(styles.hidden) : null;
   }
 
   setCurrentBracket(bracketNumber) {
@@ -105,15 +113,35 @@ class App extends React.Component {
       setTimeout(() => {
         // Update text if someone is in the top bracket
         let isInTopBracket = this.state.currentBracketNumber === 13;
-        let veryTop = document.querySelector(".verytop");
-        let notTop = document.querySelector(".nottop");
+        // let veryTop = document.querySelector(".verytop");
+        // let notTop = document.querySelector(".nottop");
+        let veryTop = document.querySelectorAll(".verytop");
+        let notTop = document.querySelectorAll(".nottop");
 
         if (isInTopBracket) {
-          veryTop.classList.remove(styles.hidden);
-          notTop.classList.add(styles.hidden);
+          veryTop.forEach(paragraph => {
+            paragraph ? paragraph.classList.remove(styles.hidden) : null;
+          });
+
+          notTop.forEach(paragraph => {
+            paragraph ? paragraph.classList.add(styles.hidden) : null;
+          });
+
+          // veryTop ? veryTop.classList.remove(styles.hidden) : null;
+
+          // notTop ? notTop.classList.add(styles.hidden) : null;
         } else {
-          veryTop.classList.add(styles.hidden);
-          notTop.classList.remove(styles.hidden);
+          veryTop.forEach(paragraph => {
+            paragraph ? paragraph.classList.add(styles.hidden) : null;
+          });
+
+          notTop.forEach(paragraph => {
+            paragraph ? paragraph.classList.remove(styles.hidden) : null;
+          });
+
+          // veryTop ? veryTop.classList.add(styles.hidden) : null;
+
+          // notTop ? notTop.classList.remove(styles.hidden) : null;
         }
       }, 1000);
     });
