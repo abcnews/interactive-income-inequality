@@ -178,7 +178,7 @@ class App extends React.Component {
       percentageDifference
     )} than the average.`;
 
-    const userRankText = `It is ranked <strong>${currentRank}</strong> out of all LGAs in Australia on this measure.`;
+    const userRankText = `It is ranked <strong>${currentRank}</strong> out of all 547 LGAs in Australia.`;
 
     /*
      * Then set up Australian state panel
@@ -267,7 +267,7 @@ class App extends React.Component {
 
     let statePercentDifferent = getStateInfo(stateCode).percent - 3.84;
 
-    const stateText = `In <strong>${
+    const stateText = `Zooming out to <strong>${
       getStateInfo(stateCode).text
     }</strong>, <strong>${
       getStateInfo(stateCode).percent
@@ -295,7 +295,7 @@ class App extends React.Component {
       leadPanelText = `Your LGA, <strong>${leadLga}</strong>, has the highest concentration of top income earners in ${leadLgaState} at <strong>${leadLgaPercent}</strong> per cent.`;
       leadPanelRankText = "";
     } else {
-      leadPanelText = `Leading the pack in ${leadLgaState} is <strong>${leadLga}</strong>, where <strong>${leadLgaPercent}</strong> per cent of income earners are in the top bracket.`;
+      leadPanelText = `The area with the highest concentration of top earners in ${leadLgaState} is <strong>${leadLga}</strong>, at <strong>${leadLgaPercent}</strong> per cent.`;
       leadPanelRankText = `It is ranked number <strong>${leadLgaRank}</strong> out of all LGAs in Australia on this measure.`;
     }
 
