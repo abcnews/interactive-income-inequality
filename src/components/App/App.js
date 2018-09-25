@@ -525,7 +525,7 @@ class App extends React.Component {
         {this.state.currentBracketNumber !== 13 && (
           <DumbbellUser>
             <p className={styles.paragraphText}>
-              By contrast, the top five professions in your bracket make up{" "}
+            Now, let's look at the five most common jobs for people in your tax bracket. Only{" "}
               <strong>
                 {" "}
                 {parseFloat(
@@ -537,7 +537,7 @@ class App extends React.Component {
                 ).toFixed(2)}{" "}
                 per cent
               </strong>{" "}
-              of people in this bracket.
+              of people in those jobs make it into the top earners group.
             </p>
 
             <Dumbbell
@@ -595,8 +595,7 @@ class App extends React.Component {
         {this.state.currentBracketNumber === 13 && (
           <DumbbellUser>
             <p className={styles.paragraphText}>
-              By contrast, the top five professions in the bottom bracket make
-              up <strong>26.97 per cent</strong> of people in that bracket.
+            Now, let's look at the five most common jobs for people earning the least. Only <strong>1.71 per cent</strong> of people in those jobs make it into the top earners group.
             </p>
             <Dumbbell
               label="Sales Assistants and Salespersons"
