@@ -529,11 +529,11 @@ class App extends React.Component {
               <strong>
                 {" "}
                 {parseFloat(
-                  user.value1 +
-                    user.value2 +
-                    user.value3 +
-                    user.value4 +
-                    user.value5
+                  user.top1 +
+                    user.top2 +
+                    user.top3 +
+                    user.top4 +
+                    user.top5
                 ).toFixed(2)}{" "}
                 per cent
               </strong>{" "}
