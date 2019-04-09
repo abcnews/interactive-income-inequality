@@ -259,6 +259,7 @@ class MapScroller extends React.Component {
     const panelParagraphs = d3Selection.selectAll(".Block-content p");
 
     panelParagraphs.classed("panel-fix", true);
+    panelParagraphs.attr("id", "panel-fix");
 
     // Override the viewheight vh margins to prevent jumping on mobile scroll changing directions
     // This seems to only happen in Chrome and probably the Facebook browser

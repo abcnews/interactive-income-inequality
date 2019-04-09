@@ -64,6 +64,10 @@
 :global {
   .Block-content {
     min-height: unset;
+
+    * {
+      width: 100%;
+    }
   }
   
   .Block-content:last-child {
@@ -97,7 +101,9 @@
     margin-top: 0px !important;
   }
   // end sticky positioning
-  #main_content > div > div > div > div > p.panel-fix {
+
+  // #main_content > div > div > div > div > p.panel-fix {
+  div.Block-content > p#panel-fix {
     margin-top: 0px !important;
     margin-bottom: 0px !important;
   }
