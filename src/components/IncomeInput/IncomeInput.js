@@ -59,7 +59,7 @@ class IncomeInput extends React.Component {
     this.setState({ narrativeState: "locked" });
 
     // Lock the slider so no more changes can be made
-    this.slider.setAttribute('disabled', true);
+    this.slider.setAttribute("disabled", true);
 
     // Send percent guess and bracket guess to Loggly
     if (
@@ -146,8 +146,8 @@ class IncomeInput extends React.Component {
 
     setTimeout(this.splitUpBar.bind(this), 200);
 
-     // Send calculated bracket to Loggly
-     if (
+    // Send calculated bracket to Loggly
+    if (
       sessionStorage &&
       sessionStorage.loggingLevel &&
       sessionStorage.loggingLevel !== "0"
@@ -166,7 +166,7 @@ class IncomeInput extends React.Component {
     this.slider.style.height = "326px";
 
     // Re-enable the slider for next try
-    this.slider.removeAttribute('disabled');
+    this.slider.removeAttribute("disabled");
 
     for (var i = 0; i < this.spaces.length; i++) {
       this.spaces[i].style.opacity = "0";
@@ -1063,14 +1063,14 @@ class IncomeInput extends React.Component {
           </div>
           <div />
         </div>
-        {this.state.narrativeState === "result" && (
+        {/* {this.state.narrativeState === "result" && (
           <div>
             <p className={styles.standardText}>
               How do you feel about the result?
             </p>
             <FeedbackForm />
           </div>
-        )}
+        )} */}
       </div>,
       document.querySelector(".incomeinput")
     );

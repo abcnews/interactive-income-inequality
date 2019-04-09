@@ -130,7 +130,7 @@ class MapScroller extends React.Component {
     // Hack to hide the a tag we scroll to with LgaSearch
     const scrollToEl = document.querySelector('[name="scrolltothispoint"]');
     scrollToEl.style.position = "absolute";
-    scrollToEl.style.top = "-130vh";
+    scrollToEl.style.top = "-50vh";
 
     // Check to see if position.sticky is supported
     // and then apply sticky styles. To reduce scroll jank when stage is fixed to screen
