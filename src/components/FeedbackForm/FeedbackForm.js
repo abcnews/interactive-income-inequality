@@ -11,9 +11,7 @@ class FeedbackForm extends React.Component {
   }
 
   handleChange(event) {
-    this.setState({ feedbackText: event.target.value }, () => {
-      //console.log(this.state.value);
-    });
+    this.setState({ feedbackText: event.target.value }, () => {});
   }
 
   handleSubmit(event) {

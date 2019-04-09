@@ -257,7 +257,6 @@ class MapScroller extends React.Component {
 
     // Fix subsequent Odyssey changes
     const panelParagraphs = d3Selection.selectAll(".Block-content p");
-    console.log(panelParagraphs);
 
     panelParagraphs.classed("panel-fix", true);
 
