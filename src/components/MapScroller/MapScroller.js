@@ -130,7 +130,7 @@ class MapScroller extends React.Component {
     // Hack to hide the a tag we scroll to with LgaSearch
     const scrollToEl = document.querySelector('[name="scrolltothispoint"]');
     scrollToEl.style.position = "absolute";
-    scrollToEl.style.marginTop = "-50vh";
+    scrollToEl.style.top = "-130vh";
 
     // Check to see if position.sticky is supported
     // and then apply sticky styles. To reduce scroll jank when stage is fixed to screen
@@ -254,6 +254,12 @@ class MapScroller extends React.Component {
 
     // Draw the inital state of the world
     this.drawWorld(australia[0], australiaOutline[0], null, 1);
+
+    // Fix subsequent Odyssey changes
+    const panelParagraphs = d3Selection.selectAll(".Block-content p");
+    console.log(panelParagraphs);
+
+    panelParagraphs.classed("panel-fix", true);
 
     // Override the viewheight vh margins to prevent jumping on mobile scroll changing directions
     // This seems to only happen in Chrome and probably the Facebook browser

@@ -62,6 +62,10 @@
 }
 
 :global {
+  .Block-content {
+    min-height: unset;
+  }
+  
   .Block-content:last-child {
     margin-bottom: 99vh !important; // So content scrolls off before moving on
     // We use 99vh so that there's a little bit always on the screen
@@ -93,4 +97,8 @@
     margin-top: 0px !important;
   }
   // end sticky positioning
+  #main_content > div > div > div > div > p.panel-fix {
+    margin-top: 0px !important;
+    margin-bottom: 0px !important;
+  }
 }

@@ -107,6 +107,7 @@ class LgaSearch extends React.Component {
 
     // Select element and scroll to it
     let firstPanel = document.querySelector('[name="scrolltothispoint"]');
+    
     if (!firstPanel) return;
 
     // Use an NPM module to scroll because native scolling is not consistent across browsers
