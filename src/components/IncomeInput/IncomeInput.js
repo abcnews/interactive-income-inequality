@@ -939,7 +939,7 @@ class IncomeInput extends React.Component {
                   highest-earning Australians?
                 </div>
                 <div className={styles.smalltext}>
-                  Use the slider to estimate your position
+                  Use the slider to estimate your position →
                 </div>
 
                 <div className={styles.push4} />
@@ -960,7 +960,7 @@ class IncomeInput extends React.Component {
                   least to most rich Australians?
                 </div>
                 <div className={styles.smalltext}>
-                  Use the slider to estimate your position
+                  Use the slider to estimate your position →
                 </div>
                 <div className={styles.push4} /> {/* Just a spacer */}
                 <div className={styles.opacityTransition}>

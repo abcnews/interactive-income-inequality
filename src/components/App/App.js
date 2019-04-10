@@ -624,7 +624,7 @@ class App extends React.Component {
           <DumbbellUser>
             <p className={styles.paragraphText}>
               Now, let's look at the five most common jobs for people earning
-              the least. Only <strong>1.71 per cent</strong> of people in those
+              the least. Only <strong>2 per cent</strong> of people in those
               jobs make it into the top earners group.
             </p>
             <Dumbbell
