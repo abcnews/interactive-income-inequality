@@ -170,11 +170,15 @@ class App extends React.Component {
     }
 
     // Modify panels according to LGA choice
-    const userLgaText = `In <strong>${
+    // Note: modified to detect singular and plural
+    const userLgaText = `In the <strong>${
       lgaObject.label.replace(/ *\([^)]*\) */g, "") // Strip (NSW) etc.
-    }</strong>, <strong>${currentTopPercentValue}</strong> per cent of income earners are in the top bracket, which is <strong>${Math.abs(
-      percentageDifference.toFixed(2)
-    )}</strong> percentage points ${higherOrLower(
+    }</strong> LGA, <strong>${Math.round(
+      currentTopPercentValue
+    )} per cent</strong> of income earners are in the top bracket, which is <strong>${Math.round(
+      Math.abs(percentageDifference.toFixed(2))
+    )}</strong> percentage ${Math.round(
+      Math.abs(percentageDifference.toFixed(2))) == 1 ? "point" : "points"} ${higherOrLower(
       percentageDifference
     )} than the average.`;
 
@@ -270,10 +274,11 @@ class App extends React.Component {
     const stateText = `Zooming out to <strong>${
       getStateInfo(stateCode).text
     }</strong>, <strong>${
-      getStateInfo(stateCode).percent
-    }</strong> per cent of income earners are in the top bracket, which is <strong>${Math.abs(
+      Math.round(getStateInfo(stateCode).percent)
+    } per cent</strong> of income earners are in the top bracket, which is <strong>${Math.round(Math.abs(
       statePercentDifferent.toFixed(2)
-    )}</strong> percentage points ${higherOrLower(
+    ))}</strong> percentage ${Math.round(
+      Math.abs(statePercentDifferent.toFixed(2))) == 1 ? "point" : "points"} ${higherOrLower(
       statePercentDifferent
     )} than the average.`;
 
@@ -292,10 +297,10 @@ class App extends React.Component {
     let leadPanelRankText;
 
     if (userLgaCode === leadLgaCode) {
-      leadPanelText = `Your LGA, <strong>${leadLga}</strong>, has the highest concentration of top income earners in ${leadLgaState} at <strong>${leadLgaPercent}</strong> per cent.`;
-      leadPanelRankText = "";
+      leadPanelText = `Your LGA, <strong>${leadLga}</strong>, has the highest concentration of top income earners in ${leadLgaState} at <strong>${Math.round(leadLgaPercent)} per cent</strong>.`;
+      leadPanelRankText = `It is ranked number <strong>${leadLgaRank}</strong> out of all LGAs in Australia on this measure.`;
     } else {
-      leadPanelText = `The area with the highest concentration of top earners in ${leadLgaState} is <strong>${leadLga}</strong>, at <strong>${leadLgaPercent}</strong> per cent.`;
+      leadPanelText = `The area with the highest concentration of top earners in ${leadLgaState} is <strong>${leadLga}</strong>, at <strong>${Math.round(leadLgaPercent)} per cent</strong>.`;
       leadPanelRankText = `It is ranked number <strong>${leadLgaRank}</strong> out of all LGAs in Australia on this measure.`;
     }
 
@@ -390,17 +395,16 @@ class App extends React.Component {
         />
 
         {/* Conditionally render MapScroller if data loaded */}
-        {this.state.mapData &&
-          this.state.scrollytellerObject && (
-            <MapScroller
-              scrollyteller={this.state.scrollytellerObject}
-              mapData={this.state.mapDataScroller}
-              currentLga={this.state.currentLga}
-              ausStatesGeo={this.state.ausStatesGeo}
-              lgaData={this.lgaData}
-              currentAusState={this.state.currentAusState}
-            />
-          )}
+        {this.state.mapData && this.state.scrollytellerObject && (
+          <MapScroller
+            scrollyteller={this.state.scrollytellerObject}
+            mapData={this.state.mapDataScroller}
+            currentLga={this.state.currentLga}
+            ausStatesGeo={this.state.ausStatesGeo}
+            lgaData={this.lgaData}
+            currentAusState={this.state.currentAusState}
+          />
+        )}
 
         {/* Top 5 jobs in top bracket */}
         {this.state.currentBracketNumber !== 13 && (
@@ -525,15 +529,12 @@ class App extends React.Component {
         {this.state.currentBracketNumber !== 13 && (
           <DumbbellUser>
             <p className={styles.paragraphText}>
-            Now, let's look at the five most common jobs for people in your tax bracket. Only{" "}
+              Now, let's look at the five most common jobs for people in your
+              tax bracket. Only{" "}
               <strong>
                 {" "}
                 {parseFloat(
-                  user.top1 +
-                    user.top2 +
-                    user.top3 +
-                    user.top4 +
-                    user.top5
+                  user.top1 + user.top2 + user.top3 + user.top4 + user.top5
                 ).toFixed(2)}{" "}
                 per cent
               </strong>{" "}
@@ -595,7 +596,9 @@ class App extends React.Component {
         {this.state.currentBracketNumber === 13 && (
           <DumbbellUser>
             <p className={styles.paragraphText}>
-            Now, let's look at the five most common jobs for people earning the least. Only <strong>1.71 per cent</strong> of people in those jobs make it into the top earners group.
+              Now, let's look at the five most common jobs for people earning
+              the least. Only <strong>1.71 per cent</strong> of people in those
+              jobs make it into the top earners group.
             </p>
             <Dumbbell
               label="Sales Assistants and Salespersons"
