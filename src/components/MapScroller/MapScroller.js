@@ -800,8 +800,18 @@ class MapScroller extends React.Component {
 } // End of MapScroller component
 
 function stickifyStage() {
+  var chrome = navigator.userAgent.indexOf("Chrome") > -1;
+  var explorer = navigator.userAgent.indexOf("MSIE") > -1;
+  var firefox = navigator.userAgent.indexOf("Firefox") > -1;
+  var safari = navigator.userAgent.indexOf("Safari") > -1;
+  var camino = navigator.userAgent.indexOf("Camino") > -1;
+  var opera = navigator.userAgent.toLowerCase().indexOf("op") > -1;
+  if (chrome && safari) safari = false;
+  if (chrome && opera) chrome = false;
+
   // Detect whether position: sticky is supported (and not IE or Edge browser) and apply styles
-  if (Modernizr.csspositionsticky && utils.detectIE() === false) {
+  // Weirdly Safari adds a horizontal scroll if we set body overflow to visible, so disable for now
+  if (Modernizr.csspositionsticky && utils.detectIE() === false && !safari) {
     document.body.style.overflowX = "visible";
     document.body.style.overflowY = "visible";
 

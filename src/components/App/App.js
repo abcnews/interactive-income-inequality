@@ -84,7 +84,8 @@ class App extends React.Component {
       currentLga: null,
       currentAusState: 1, // default NSW
       scrollytellerObject: scrollyteller,
-      currentBracketNumber: 8 // default bracket
+      currentBracketNumber: 8, // default bracket
+      hasSetBracket: false
     };
 
     // Bind the this to methods
@@ -109,42 +110,45 @@ class App extends React.Component {
   }
 
   setCurrentBracket(bracketNumber) {
-    this.setState({ currentBracketNumber: bracketNumber }, () => {
-      setTimeout(() => {
-        // Update text if someone is in the top bracket
-        let isInTopBracket = this.state.currentBracketNumber === 13;
-        // let veryTop = document.querySelector(".verytop");
-        // let notTop = document.querySelector(".nottop");
-        let veryTop = document.querySelectorAll(".verytop");
-        let notTop = document.querySelectorAll(".nottop");
+    this.setState(
+      { currentBracketNumber: bracketNumber, hasSetBracket: true },
+      () => {
+        setTimeout(() => {
+          // Update text if someone is in the top bracket
+          let isInTopBracket = this.state.currentBracketNumber === 13;
+          // let veryTop = document.querySelector(".verytop");
+          // let notTop = document.querySelector(".nottop");
+          let veryTop = document.querySelectorAll(".verytop");
+          let notTop = document.querySelectorAll(".nottop");
 
-        if (isInTopBracket) {
-          veryTop.forEach(paragraph => {
-            paragraph ? paragraph.classList.remove(styles.hidden) : null;
-          });
+          if (isInTopBracket) {
+            veryTop.forEach(paragraph => {
+              paragraph ? paragraph.classList.remove(styles.hidden) : null;
+            });
 
-          notTop.forEach(paragraph => {
-            paragraph ? paragraph.classList.add(styles.hidden) : null;
-          });
+            notTop.forEach(paragraph => {
+              paragraph ? paragraph.classList.add(styles.hidden) : null;
+            });
 
-          // veryTop ? veryTop.classList.remove(styles.hidden) : null;
+            // veryTop ? veryTop.classList.remove(styles.hidden) : null;
 
-          // notTop ? notTop.classList.add(styles.hidden) : null;
-        } else {
-          veryTop.forEach(paragraph => {
-            paragraph ? paragraph.classList.add(styles.hidden) : null;
-          });
+            // notTop ? notTop.classList.add(styles.hidden) : null;
+          } else {
+            veryTop.forEach(paragraph => {
+              paragraph ? paragraph.classList.add(styles.hidden) : null;
+            });
 
-          notTop.forEach(paragraph => {
-            paragraph ? paragraph.classList.remove(styles.hidden) : null;
-          });
+            notTop.forEach(paragraph => {
+              paragraph ? paragraph.classList.remove(styles.hidden) : null;
+            });
 
-          // veryTop ? veryTop.classList.add(styles.hidden) : null;
+            // veryTop ? veryTop.classList.add(styles.hidden) : null;
 
-          // notTop ? notTop.classList.remove(styles.hidden) : null;
-        }
-      }, 1000);
-    });
+            // notTop ? notTop.classList.remove(styles.hidden) : null;
+          }
+        }, 1000);
+      }
+    );
   }
 
   // Fires when the user chooses their LGA
@@ -412,7 +416,7 @@ class App extends React.Component {
         />
 
         {/* Conditionally render MapScroller if data loaded */}
-        {this.state.mapData && this.state.scrollytellerObject && (
+        {/* {this.state.mapData && this.state.scrollytellerObject && (
           <MapScroller
             scrollyteller={this.state.scrollytellerObject}
             mapData={this.state.mapDataScroller}
@@ -421,15 +425,15 @@ class App extends React.Component {
             lgaData={this.lgaData}
             currentAusState={this.state.currentAusState}
           />
-        )}
+        )} */}
 
         {/* Top 5 jobs in top bracket */}
         {this.state.currentBracketNumber !== 13 && (
           <DumbbellTop>
             <Dumbbell
               label="Medical practitioners"
-              dot1Percent={top5[1]}
-              dot1Label="Your bracket"
+              dot1Percent={this.state.hasSetBracket ? top5[1] : false}
+              dot1Label={this.state.hasSetBracket ? "Your bracket" : false}
               dot2Percent="7.22"
               dot2Label="Top bracket"
               line1Percent="0.56"
@@ -440,7 +444,7 @@ class App extends React.Component {
             />
             <Dumbbell
               label="CEOs, General Managers and Legislators"
-              dot1Percent={top5[2]}
+              dot1Percent={this.state.hasSetBracket ? top5[2] : false}
               dot2Percent="7.19"
               line1Percent="0.72"
               percentMultiplier={1}
@@ -449,7 +453,7 @@ class App extends React.Component {
             />
             <Dumbbell
               label="Business Administration Managers"
-              dot1Percent={top5[3]}
+              dot1Percent={this.state.hasSetBracket ? top5[3] : false}
               dot2Percent="5.68"
               line1Percent="0.88"
               percentMultiplier={1}
@@ -458,7 +462,7 @@ class App extends React.Component {
             />
             <Dumbbell
               label="Construction, Distribution &amp; Production Managers"
-              dot1Percent={top5[4]}
+              dot1Percent={this.state.hasSetBracket ? top5[4] : false}
               dot2Percent="5.68"
               line1Percent="1.39"
               percentMultiplier={1}
@@ -467,7 +471,7 @@ class App extends React.Component {
             />
             <Dumbbell
               label="Legal Professionals"
-              dot1Percent={top5[5]}
+              dot1Percent={this.state.hasSetBracket ? top5[5] : false}
               dot2Percent="3.68"
               line1Percent="0.45"
               percentMultiplier={1}
@@ -482,7 +486,7 @@ class App extends React.Component {
           <DumbbellTop>
             <Dumbbell
               label="Medical practitioners"
-              dot1Percent={top5[1]}
+              dot1Percent={this.state.hasSetBracket ? top5[1] : false}
               dot1Label="Your bracket"
               dot2Percent="0.01"
               dot2Label="Bottom bracket"
@@ -497,7 +501,7 @@ class App extends React.Component {
             />
             <Dumbbell
               label="CEOs, General Managers and Legislators"
-              dot1Percent={top5[2]}
+              dot1Percent={this.state.hasSetBracket ? top5[2] : false}
               dot2Percent="0.05"
               dot2Color="#607477"
               dot2TextColor="#607477"
@@ -508,7 +512,7 @@ class App extends React.Component {
             />
             <Dumbbell
               label="Business Administration Managers"
-              dot1Percent={top5[3]}
+              dot1Percent={this.state.hasSetBracket ? top5[3] : false}
               dot2Percent="0.03"
               dot2Color="#607477"
               dot2TextColor="#607477"
@@ -519,7 +523,7 @@ class App extends React.Component {
             />
             <Dumbbell
               label="Construction, Distribution &amp; Production Managers"
-              dot1Percent={top5[4]}
+              dot1Percent={this.state.hasSetBracket ? top5[4] : false}
               dot2Percent="0.13"
               dot2Color="#607477"
               dot2TextColor="#607477"
@@ -530,7 +534,7 @@ class App extends React.Component {
             />
             <Dumbbell
               label="Legal Professionals"
-              dot1Percent={top5[5]}
+              dot1Percent={this.state.hasSetBracket ? top5[5] : false}
               dot2Percent="0.02"
               dot2Color="#607477"
               dot2TextColor="#607477"
@@ -542,8 +546,11 @@ class App extends React.Component {
           </DumbbellTop>
         )}
 
-        {/* Check that the user is not in the top 3.8% bracket */}
-        {this.state.currentBracketNumber !== 13 && (
+        {/*
+          Check that the user is not in the top 3.8% bracket
+          And if no bracket set, just hide 
+        */}
+        {this.state.currentBracketNumber !== 13 && this.state.hasSetBracket && (
           <DumbbellUser>
             <p className={styles.paragraphText}>
               Now, let's look at the five most common jobs for people in your
@@ -609,8 +616,11 @@ class App extends React.Component {
           </DumbbellUser>
         )}
 
-        {/* If user is in top beacket we want to show something different */}
-        {this.state.currentBracketNumber === 13 && (
+        {/* 
+          If user is in top beacket we want to show something different 
+          And if no bracket set, just hide 
+        */}
+        {this.state.currentBracketNumber === 13 && this.state.hasSetBracket && (
           <DumbbellUser>
             <p className={styles.paragraphText}>
               Now, let's look at the five most common jobs for people earning
@@ -683,11 +693,14 @@ class App extends React.Component {
           </DumbbellUser>
         )}
 
+        {/* 
+          Smaller dumbbell charts
+        */}
         <DumbbellEducation>
           <Dumbbell
             label="Bachelor degrees"
-            dot1Percent={user.bachelor}
-            dot1Label="Your bracket"
+            dot1Percent={this.state.hasSetBracket ? user.bachelor : false}
+            dot1Label={this.state.hasSetBracket ? "Your bracket" : false}
             dot2Percent={isInTopBracket ? 11.73 : 61.79}
             dot2Label={isInTopBracket ? "Bottom bracket" : "Top bracket"}
             dot2Color={isInTopBracket ? "#607477" : undefined}
@@ -704,8 +717,8 @@ class App extends React.Component {
         <DumbbellGender>
           <Dumbbell
             label="Males"
-            dot1Percent={user.male}
-            dot1Label="Your bracket"
+            dot1Percent={this.state.hasSetBracket ? user.male : false}
+            dot1Label={this.state.hasSetBracket ? "Your bracket" : false}
             dot2Percent={isInTopBracket ? 38.53 : 75.17}
             dot2Label={isInTopBracket ? "Bottom bracket" : "Top bracket"}
             dot2Color={isInTopBracket ? "#607477" : undefined}
@@ -721,8 +734,8 @@ class App extends React.Component {
         <DumbbellIndigenous>
           <Dumbbell
             label="Indigenous population"
-            dot1Percent={user.indigenous}
-            dot1Label="Your bracket"
+            dot1Percent={this.state.hasSetBracket ? user.indigenous : false}
+            dot1Label={this.state.hasSetBracket ? "Your bracket" : false}
             dot2Percent={isInTopBracket ? 3.02 : 0.82}
             dot2Label={isInTopBracket ? "Bottom bracket" : "Top bracket"}
             dot2Color={isInTopBracket ? "#607477" : undefined}
@@ -738,8 +751,8 @@ class App extends React.Component {
         <DumbbellBorn>
           <Dumbbell
             label="Born in Australia"
-            dot1Percent={user.born}
-            dot1Label="Your bracket"
+            dot1Percent={this.state.hasSetBracket ? user.born : false}
+            dot1Label={this.state.hasSetBracket ? "Your bracket" : false}
             dot2Percent={isInTopBracket ? 72.24 : 65.68}
             dot2Label={isInTopBracket ? "Bottom bracket" : "Top bracket"}
             dot2Color={isInTopBracket ? "#607477" : undefined}
@@ -755,8 +768,8 @@ class App extends React.Component {
         <DumbbellVoluntary>
           <Dumbbell
             label="Voluntary work"
-            dot1Percent={user.voluntary}
-            dot1Label="Your bracket"
+            dot1Percent={this.state.hasSetBracket ? user.voluntary : false}
+            dot1Label={this.state.hasSetBracket ? "Your bracket" : false}
             dot2Percent={isInTopBracket ? 26.14 : 29.09}
             dot2Label={isInTopBracket ? "Bottom bracket" : "Top bracket"}
             dot2Color={isInTopBracket ? "#607477" : undefined}
@@ -772,8 +785,8 @@ class App extends React.Component {
         <DumbbellCar>
           <Dumbbell
             label="Owns one or two cars"
-            dot1Percent={user.car1or2}
-            dot1Label="Your bracket"
+            dot1Percent={this.state.hasSetBracket ? user.car1or2 : false}
+            dot1Label={this.state.hasSetBracket ? "Your bracket" : false}
             dot2Percent={isInTopBracket ? 58.0 : 66.21}
             dot2Label={isInTopBracket ? "Bottom bracket" : "Top bracket"}
             dot2Color={isInTopBracket ? "#607477" : undefined}
@@ -787,7 +800,7 @@ class App extends React.Component {
           />
           <Dumbbell
             label="Owns three or more cars"
-            dot1Percent={user.car3ormore}
+            dot1Percent={this.state.hasSetBracket ? user.car3ormore: false}
             dot2Percent={isInTopBracket ? 33.16 : 24.04}
             dot2Color={isInTopBracket ? "#607477" : undefined}
             dot2TextColor={isInTopBracket ? "#607477" : undefined}
@@ -801,8 +814,8 @@ class App extends React.Component {
         <DumbbellMarriage>
           <Dumbbell
             label="Married"
-            dot1Percent={user.married}
-            dot1Label="Your bracket"
+            dot1Percent={this.state.hasSetBracket ? user.married : false}
+            dot1Label={this.state.hasSetBracket ? "Your bracket" : false}
             dot2Percent={isInTopBracket ? 33.75 : 72.86}
             dot2Label={isInTopBracket ? "Bottom bracket" : "Top bracket"}
             dot2Color={isInTopBracket ? "#607477" : undefined}
@@ -816,7 +829,7 @@ class App extends React.Component {
           />
           <Dumbbell
             label="Never married"
-            dot1Percent={user.nevermarried}
+            dot1Percent={this.state.hasSetBracket ? user.nevermarried : false}
             dot2Percent={isInTopBracket ? 60.37 : 15.21}
             dot2Color={isInTopBracket ? "#607477" : undefined}
             dot2TextColor={isInTopBracket ? "#607477" : undefined}
@@ -828,7 +841,7 @@ class App extends React.Component {
           />
           <Dumbbell
             label="Divorced"
-            dot1Percent={user.divorced}
+            dot1Percent={this.state.hasSetBracket ? user.divorced : false}
             dot2Percent={isInTopBracket ? 3.0 : 7.26}
             dot2Color={isInTopBracket ? "#607477" : undefined}
             dot2TextColor={isInTopBracket ? "#607477" : undefined}
@@ -843,8 +856,8 @@ class App extends React.Component {
         <DumbbellContMarriage>
           <Dumbbell
             label="Married (control)"
-            dot1Percent={user.contmarried}
-            dot1Label="Your bracket"
+            dot1Percent={this.state.hasSetBracket ? user.contmarried : false}
+            dot1Label={this.state.hasSetBracket ? "Your bracket" : false}
             dot2Percent={isInTopBracket ? 59.65 : 61.57}
             dot2Label={isInTopBracket ? "Bottom bracket" : "Top bracket"}
             dot2Color={isInTopBracket ? "#607477" : undefined}
@@ -858,7 +871,7 @@ class App extends React.Component {
           />
           <Dumbbell
             label="Never married (control)"
-            dot1Percent={user.contnevermarried}
+            dot1Percent={this.state.hasSetBracket ? user.contnevermarried : false}
             dot2Percent={isInTopBracket ? 29.7 : 26.06}
             dot2Color={isInTopBracket ? "#607477" : undefined}
             dot2TextColor={isInTopBracket ? "#607477" : undefined}
@@ -870,7 +883,7 @@ class App extends React.Component {
           />
           <Dumbbell
             label="Divorced (control)"
-            dot1Percent={user.contdivorced}
+            dot1Percent={this.state.hasSetBracket ? user.contdivorced : false}
             dot2Percent={isInTopBracket ? 5.21 : 6.23}
             dot2Color={isInTopBracket ? "#607477" : undefined}
             dot2TextColor={isInTopBracket ? "#607477" : undefined}
