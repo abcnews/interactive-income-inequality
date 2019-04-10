@@ -416,7 +416,7 @@ class App extends React.Component {
         />
 
         {/* Conditionally render MapScroller if data loaded */}
-        {/* {this.state.mapData && this.state.scrollytellerObject && (
+        {this.state.mapData && this.state.scrollytellerObject && (
           <MapScroller
             scrollyteller={this.state.scrollytellerObject}
             mapData={this.state.mapDataScroller}
@@ -425,7 +425,7 @@ class App extends React.Component {
             lgaData={this.lgaData}
             currentAusState={this.state.currentAusState}
           />
-        )} */}
+        )}
 
         {/* Top 5 jobs in top bracket */}
         {this.state.currentBracketNumber !== 13 && (
