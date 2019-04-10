@@ -272,10 +272,10 @@ class IncomeInput extends React.Component {
               <div className={styles.resultContainer}>
                 {this.state.narrativeState === "result" ? (
                   <div className={styles.scaleLabels}>
-                    {Math.round(this.results.percentAbove)}% are richer
+                    {Math.round(this.results.percentAbove)}% earn more
                   </div>
                 ) : (
-                  <div className={styles.scaleLabels}>Richest</div>
+                  <div className={styles.scaleLabels}>Highest</div>
                 )}
 
                 <div className={styles.bracketContainer}>
@@ -924,7 +924,7 @@ class IncomeInput extends React.Component {
                     {Math.round(this.results.percentBelow)}% earn less
                   </div>
                 ) : (
-                  <div className={styles.scaleLabels}>Poorest</div>
+                  <div className={styles.scaleLabels}>Lowest</div>
                 )}
               </div>
 
@@ -935,8 +935,8 @@ class IncomeInput extends React.Component {
             {this.state.narrativeState === "initial" && (
               <div className={styles.column + " " + styles.one}>
                 <div className={styles.boldtext}>
-                  Where do you think your income bracket sits on the scale of
-                  least to most rich Australians?
+                  Where do you think your income sits on the scale of lowest to
+                  highest-earning Australians?
                 </div>
                 <div className={styles.smalltext}>
                   Use the slider to estimate your position
