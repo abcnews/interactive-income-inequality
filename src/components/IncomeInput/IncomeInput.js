@@ -1022,23 +1022,21 @@ class IncomeInput extends React.Component {
                     </span>{" "}
                     per annum income bracket for Australia, with{" "}
                     <span className={styles.resultsStandard}>
-                      {this.results.percent} per cent
+                      {Math.round(this.results.percent)} per cent
                     </span>{" "}
                     of other income earners.
                   </div>
                   <div className={styles.standardText}>
-                    Above your bracket are{" "}
                     <span className={styles.resultsAbove}>
-                      {this.results.percentAbove} per cent
+                      {Math.round(this.results.percentAbove)} per cent
                     </span>{" "}
-                    of income earners.
+                    of Aussies earn more than you.
                   </div>
                   <div className={styles.standardText}>
-                    Below your bracket are{" "}
                     <span className={styles.resultsBelow}>
-                      {this.results.percentBelow} per cent
+                      {Math.round(this.results.percentBelow)} per cent
                     </span>{" "}
-                    of income earners.
+                    of Aussies earn less than you.
                   </div>
                   <button
                     className={styles.tryAgain}
