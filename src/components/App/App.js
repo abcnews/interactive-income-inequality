@@ -171,16 +171,23 @@ class App extends React.Component {
 
     // Modify panels according to LGA choice
     // Note: modified to detect singular and plural
+    // Also modified to be "on par with national average if zero"
+    const roundedPercentageDifference = Math.round(
+      Math.abs(percentageDifference.toFixed(2))
+    );
+
     const userLgaText = `In the <strong>${
       lgaObject.label.replace(/ *\([^)]*\) */g, "") // Strip (NSW) etc.
     }</strong> LGA, <strong>${Math.round(
       currentTopPercentValue
-    )} per cent</strong> of income earners are in the top bracket, which is <strong>${Math.round(
-      Math.abs(percentageDifference.toFixed(2))
-    )}</strong> percentage ${Math.round(
-      Math.abs(percentageDifference.toFixed(2))) == 1 ? "point" : "points"} ${higherOrLower(
-      percentageDifference
-    )} than the average.`;
+    )} per cent</strong> of income earners are in the top bracket, which is 
+    ${
+      roundedPercentageDifference === 0
+        ? "on par with the national average."
+        : `<strong>${roundedPercentageDifference}</strong> percentage ${
+            roundedPercentageDifference === 1 ? "point" : "points"
+          } ${higherOrLower(percentageDifference)} than the average.`
+    }`;
 
     const userRankText = `It is ranked <strong>${currentRank}</strong> out of all 547 LGAs in Australia.`;
 
@@ -269,18 +276,24 @@ class App extends React.Component {
       }
     };
 
-    let statePercentDifferent = getStateInfo(stateCode).percent - 3.84;
+    const statePercentDifferent = getStateInfo(stateCode).percent - 3.84; // Magic number?
+
+    const roundedStatePercentDifferent = Math.round(
+      Math.abs(statePercentDifferent.toFixed(2))
+    );
 
     const stateText = `Zooming out to <strong>${
       getStateInfo(stateCode).text
-    }</strong>, <strong>${
-      Math.round(getStateInfo(stateCode).percent)
-    } per cent</strong> of income earners are in the top bracket, which is <strong>${Math.round(Math.abs(
-      statePercentDifferent.toFixed(2)
-    ))}</strong> percentage ${Math.round(
-      Math.abs(statePercentDifferent.toFixed(2))) == 1 ? "point" : "points"} ${higherOrLower(
-      statePercentDifferent
-    )} than the average.`;
+    }</strong>, <strong>${Math.round(
+      getStateInfo(stateCode).percent
+    )} per cent</strong> of income earners are in the top bracket, which is 
+    ${
+      roundedStatePercentDifferent === 0
+        ? "on par with the national average."
+        : `<strong>${roundedStatePercentDifferent}</strong> percentage ${
+            roundedStatePercentDifferent == 1 ? "point" : "points"
+          } ${higherOrLower(statePercentDifferent)} than the average.`
+    }`;
 
     // *
     // * Lastly set up the top LGA in State
@@ -297,10 +310,14 @@ class App extends React.Component {
     let leadPanelRankText;
 
     if (userLgaCode === leadLgaCode) {
-      leadPanelText = `Your LGA, <strong>${leadLga}</strong>, has the highest concentration of top income earners in ${leadLgaState} at <strong>${Math.round(leadLgaPercent)} per cent</strong>.`;
+      leadPanelText = `Your LGA, <strong>${leadLga}</strong>, has the highest concentration of top income earners in ${leadLgaState} at <strong>${Math.round(
+        leadLgaPercent
+      )} per cent</strong>.`;
       leadPanelRankText = `It is ranked number <strong>${leadLgaRank}</strong> out of all LGAs in Australia on this measure.`;
     } else {
-      leadPanelText = `The area with the highest concentration of top earners in ${leadLgaState} is <strong>${leadLga}</strong>, at <strong>${Math.round(leadLgaPercent)} per cent</strong>.`;
+      leadPanelText = `The area with the highest concentration of top earners in ${leadLgaState} is <strong>${leadLga}</strong>, at <strong>${Math.round(
+        leadLgaPercent
+      )} per cent</strong>.`;
       leadPanelRankText = `It is ranked number <strong>${leadLgaRank}</strong> out of all LGAs in Australia on this measure.`;
     }
 
