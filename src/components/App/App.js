@@ -557,9 +557,9 @@ class App extends React.Component {
               tax bracket. Only{" "}
               <strong>
                 {" "}
-                {parseFloat(
+                {Math.round(parseFloat(
                   user.top1 + user.top2 + user.top3 + user.top4 + user.top5
-                ).toFixed(2)}{" "}
+                ).toFixed(2))}{" "}
                 per cent
               </strong>{" "}
               of people in those jobs make it into the top earners group.
