@@ -741,6 +741,7 @@ class App extends React.Component {
             dot2Color={isInTopBracket ? "#607477" : undefined}
             dot2TextColor={isInTopBracket ? "#607477" : undefined}
             dot2LabelColor={isInTopBracket ? "#607477" : undefined}
+            dot2Align={this.state.hasSetBracket ? undefined : "left"}
             line1Percent={2.05}
             line1Label="Avg. of all brackets"
             percentMultiplier={1}
@@ -758,6 +759,7 @@ class App extends React.Component {
             dot2Color={isInTopBracket ? "#607477" : undefined}
             dot2TextColor={isInTopBracket ? "#607477" : undefined}
             dot2LabelColor={isInTopBracket ? "#607477" : undefined}
+            dot2Align={this.state.hasSetBracket ? undefined : "left"}
             line1Percent={67}
             line1Label="Avg. of all brackets"
             percentMultiplier={1}
@@ -805,6 +807,7 @@ class App extends React.Component {
             dot2Color={isInTopBracket ? "#607477" : undefined}
             dot2TextColor={isInTopBracket ? "#607477" : undefined}
             dot2LabelColor={isInTopBracket ? "#607477" : undefined}
+            dot2Align={this.state.hasSetBracket ? undefined : "left"}
             line1Percent={25.51}
             percentMultiplier={1}
             maxValue={100}
@@ -834,6 +837,7 @@ class App extends React.Component {
             dot2Color={isInTopBracket ? "#607477" : undefined}
             dot2TextColor={isInTopBracket ? "#607477" : undefined}
             dot2LabelColor={isInTopBracket ? "#607477" : undefined}
+            dot2Align={this.state.hasSetBracket ? undefined : "left"}
             line1Percent={32.57}
             percentMultiplier={1}
             maxValue={100}
@@ -846,6 +850,7 @@ class App extends React.Component {
             dot2Color={isInTopBracket ? "#607477" : undefined}
             dot2TextColor={isInTopBracket ? "#607477" : undefined}
             dot2LabelColor={isInTopBracket ? "#607477" : undefined}
+            dot2Align={this.state.hasSetBracket ? undefined : "left"}
             line1Percent={9.05}
             percentMultiplier={1}
             maxValue={100}
@@ -876,6 +881,7 @@ class App extends React.Component {
             dot2Color={isInTopBracket ? "#607477" : undefined}
             dot2TextColor={isInTopBracket ? "#607477" : undefined}
             dot2LabelColor={isInTopBracket ? "#607477" : undefined}
+            dot2Align={this.state.hasSetBracket ? undefined : "left"}
             line1Percent={31.53}
             percentMultiplier={1}
             maxValue={100}
@@ -888,6 +894,7 @@ class App extends React.Component {
             dot2Color={isInTopBracket ? "#607477" : undefined}
             dot2TextColor={isInTopBracket ? "#607477" : undefined}
             dot2LabelColor={isInTopBracket ? "#607477" : undefined}
+            dot2Align={this.state.hasSetBracket ? undefined : "left"}
             line1Percent={9.19}
             percentMultiplier={1}
             maxValue={100}
