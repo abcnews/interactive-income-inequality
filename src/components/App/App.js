@@ -40,6 +40,8 @@ let baseURL = "/";
 if (fragmentData && fragmentData.dataset.rootUrl)
   baseURL = fragmentData.dataset.rootUrl;
 
+if (__webpack_public_path__) baseURL = __webpack_public_path__;
+
 // A detailed map used to search LGAs. Other maps are derived from this one using topojson
 const LGA_GEO_JSON_URL = baseURL + "LGA_2016_AUST_SEARCH.topo.json";
 
@@ -434,9 +436,9 @@ class App extends React.Component {
               label="Medical practitioners"
               dot1Percent={this.state.hasSetBracket ? top5[1] : false}
               dot1Label={this.state.hasSetBracket ? "Your bracket" : false}
-              dot2Percent="7.22"
+              dot2Percent={7.22}
               dot2Label="Top bracket"
-              line1Percent="0.56"
+              line1Percent={0.56}
               line1Label="Avg. of all brackets"
               percentMultiplier={1}
               maxValue={10}

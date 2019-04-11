@@ -84,9 +84,11 @@ function init() {
 // Wait for Odyssey
 if (window.__ODYSSEY__) {
   gemini.fullReplace(init);
+  // init();
 } else {
   window.addEventListener("odyssey:api", () => {
     gemini.fullReplace(init);
+    // init()
   });
 }
 

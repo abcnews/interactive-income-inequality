@@ -43,8 +43,6 @@ class Dumbbell extends React.Component {
       dot2Align = "left";
     }
 
-    
-
     // If too close to the borders flip them
     if (this.scale(dot1Percent) < 0) dot1Align = "right";
     if (this.scale(dot2Percent) < 0) dot2Align = "right";
@@ -143,14 +141,20 @@ class Dumbbell extends React.Component {
             {dot1Percent &&
               (dot1Align === "left" ? (
                 <span className={styles.dot1Percent} style={dot1PercentStyle}>
-                  {this.getActualPercent(dot1Percent)}%
+                  {/* {this.getActualPercent(dot1Percent)}% */}
+                  {Math.round(this.getActualPercent(dot1Percent)) < 0.5
+                    ? "<1%"
+                    : Math.round(this.getActualPercent(dot1Percent)) + "%"}
                 </span>
               ) : (
                 <span
                   className={styles.dot1PercentRight}
                   style={dot1PercentRightStyle}
                 >
-                  {this.getActualPercent(dot1Percent)}%
+                  {/* {this.getActualPercent(dot1Percent)}% */}
+                  {Math.round(this.getActualPercent(dot1Percent)) < 0.5
+                    ? "<1%"
+                    : Math.round(this.getActualPercent(dot1Percent)) + "%"}
                 </span>
               ))}
             {/* Dot 1 labels if applicable */}
@@ -184,14 +188,20 @@ class Dumbbell extends React.Component {
             {/* Check if we want dot2 percents left or right */}
             {dot2Align === "left" ? (
               <span className={styles.dot2Percent} style={dot2PercentStyle}>
-                {this.getActualPercent(dot2Percent)}%
+                {/* {this.getActualPercent(dot2Percent)}% */}
+                {Math.round(this.getActualPercent(dot2Percent)) < 0.5
+                  ? "<1%"
+                  : Math.round(this.getActualPercent(dot2Percent)) + "%"}
               </span>
             ) : (
               <span
                 className={styles.dot2PercentRight}
                 style={dot2PercentRightStyle}
               >
-                {this.getActualPercent(dot2Percent)}%
+                {/* {this.getActualPercent(dot2Percent)}% */}
+                {Math.round(this.getActualPercent(dot2Percent)) < 0.5
+                  ? "<1%"
+                  : Math.round(this.getActualPercent(dot2Percent)) + "%"}
               </span>
             )}
             {/* Mid bar */}
