@@ -266,8 +266,8 @@ class MapScroller extends React.Component {
     let blockArray = document.getElementsByClassName("Block-content");
 
     for (var i = 0; i < blockArray.length; i++) {
-      blockArray[i].style.marginTop = screenHeight / 2 - 16 + "px";
-      blockArray[i].style.marginBottom = screenHeight / 2 - 16 + "px";
+      blockArray[i].style.marginTop = screenHeight / 2 - 32 + "px";
+      blockArray[i].style.marginBottom = screenHeight / 2 - 32 + "px";
     }
 
     // Top and bottom have full length margins

@@ -144,7 +144,7 @@ class Dumbbell extends React.Component {
                   {/* {this.getActualPercent(dot1Percent)}% */}
                   {this.getActualPercent(dot1Percent) < 0.05
                     ? "<0.1%"
-                    : this.getActualPercent(dot1Percent).toFixed(1) + "%"}
+                    : parseFloat(this.getActualPercent(dot1Percent).toFixed(1)) + "%"}
                 </span>
               ) : (
                 <span
@@ -154,7 +154,7 @@ class Dumbbell extends React.Component {
                   {/* {this.getActualPercent(dot1Percent)}% */}
                   {this.getActualPercent(dot1Percent) < 0.05
                     ? "<0.1%"
-                    : this.getActualPercent(dot1Percent).toFixed(1) + "%"}
+                    : parseFloat(this.getActualPercent(dot1Percent).toFixed(1)) + "%"}
                 </span>
               ))}
             {/* Dot 1 labels if applicable */}
@@ -191,7 +191,7 @@ class Dumbbell extends React.Component {
                 {/* {this.getActualPercent(dot2Percent)}% */}
                 {this.getActualPercent(dot2Percent) < 0.05
                   ? "<0.1%"
-                  : this.getActualPercent(dot2Percent).toFixed(1) + "%"}
+                  : parseFloat(this.getActualPercent(dot2Percent).toFixed(1)) + "%"}
               </span>
             ) : (
               <span
@@ -201,7 +201,7 @@ class Dumbbell extends React.Component {
                 {/* {this.getActualPercent(dot2Percent)}% */}
                 {this.getActualPercent(dot2Percent) < 0.05
                   ? "<0.1%"
-                  : this.getActualPercent(dot2Percent).toFixed(1) + "%"}
+                  : parseFloat(this.getActualPercent(dot2Percent).toFixed(1)) + "%"}
               </span>
             )}
             {/* Mid bar */}
