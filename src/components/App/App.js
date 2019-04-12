@@ -161,7 +161,8 @@ class App extends React.Component {
 
     // Get top percentile stats from data
     let currentTopPercentValue = +getLgaTop(this.lgaData, lgaObject.value).TOP;
-    let percentageDifference = currentTopPercentValue - NATIONAL_AVERAGE_IN_TOP; // Aust-wide percent in top bracket
+    let percentageDifference =
+      currentTopPercentValue.toFixed(1) - NATIONAL_AVERAGE_IN_TOP; // Aust-wide percent in top bracket
     let currentRank = getLgaTop(this.lgaData, lgaObject.value).RANK;
 
     // To compare with highest in state
@@ -180,15 +181,14 @@ class App extends React.Component {
     // Modify panels according to LGA choice
     // Note: modified to detect singular and plural
     // Also modified to be "on par with national average if zero"
-    const roundedPercentageDifference = 
-      Math.abs(percentageDifference.toFixed(1))
-    ;
-
+    const roundedPercentageDifference = Math.abs(
+      percentageDifference.toFixed(1)
+    );
     const userLgaText = `In the <strong>${
       lgaObject.label.replace(/ *\([^)]*\) */g, "") // Strip (NSW) etc.
-    }</strong> LGA, <strong>${
-      +currentTopPercentValue.toFixed(1)
-    } per cent</strong> of income earners are in the top bracket, which is 
+    }</strong> LGA, <strong>${+currentTopPercentValue.toFixed(
+      1
+    )} per cent</strong> of income earners are in the top bracket, which is 
     ${
       roundedPercentageDifference === 0
         ? "on par with the national average."
@@ -284,17 +284,21 @@ class App extends React.Component {
       }
     };
 
-    const statePercentDifferent = getStateInfo(stateCode).percent - NATIONAL_AVERAGE_IN_TOP; // National average
+    const statePercentDifferent =
+      parseFloat(getStateInfo(stateCode).percent).toFixed(1) - NATIONAL_AVERAGE_IN_TOP; // National average
 
-    const roundedStatePercentDifferent = 
-      Math.abs(statePercentDifferent.toFixed(2))
-    ;
-
-    const stateText = `Zooming out to <strong>${
-      getStateInfo(stateCode).text
-    }</strong>, <strong>${
+    const roundedStatePercentDifferent = Math.abs(
+      statePercentDifferent.toFixed(1)
+    );
+    const stateText = `Zooming ${
+      getStateInfo(stateCode).text !== "Australian Capital Territory"
+        ? "out"
+        : ""
+    } to <strong>${getStateInfo(stateCode).text}</strong>, <strong>${parseFloat(
       getStateInfo(stateCode).percent
-    } per cent</strong> of income earners are in the top bracket, which is 
+    ).toFixed(
+      1
+    )} per cent</strong> of income earners are in the top bracket, which is 
     ${
       roundedStatePercentDifferent === 0
         ? "on par with the national average."
@@ -318,14 +322,14 @@ class App extends React.Component {
     let leadPanelRankText;
 
     if (userLgaCode === leadLgaCode) {
-      leadPanelText = `Your LGA, <strong>${leadLga}</strong>, has the highest concentration of top income earners in ${leadLgaState} at <strong>${
-        leadLgaPercent.toFixed(1)
-      } per cent</strong>.`;
+      leadPanelText = `Your LGA, <strong>${leadLga}</strong>, has the highest concentration of top income earners in ${leadLgaState} at <strong>${leadLgaPercent.toFixed(
+        1
+      )} per cent</strong>.`;
       leadPanelRankText = `It is ranked number <strong>${leadLgaRank}</strong> out of all LGAs in Australia on this measure.`;
     } else {
-      leadPanelText = `The area with the highest concentration of top earners in ${leadLgaState} is <strong>${leadLga}</strong>, at <strong>${
-        leadLgaPercent.toFixed(1)
-      } per cent</strong>.`;
+      leadPanelText = `The area with the highest concentration of top earners in ${leadLgaState} is <strong>${leadLga}</strong>, at <strong>${leadLgaPercent.toFixed(
+        1
+      )} per cent</strong>.`;
       leadPanelRankText = `It is ranked number <strong>${leadLgaRank}</strong> out of all LGAs in Australia on this measure.`;
     }
 
@@ -806,7 +810,7 @@ class App extends React.Component {
           />
           <Dumbbell
             label="Owns three or more cars"
-            dot1Percent={this.state.hasSetBracket ? user.car3ormore: false}
+            dot1Percent={this.state.hasSetBracket ? user.car3ormore : false}
             dot2Percent={isInTopBracket ? 33.16 : 24.04}
             dot2Color={isInTopBracket ? "#607477" : undefined}
             dot2TextColor={isInTopBracket ? "#607477" : undefined}
@@ -880,7 +884,9 @@ class App extends React.Component {
           />
           <Dumbbell
             label="Never married (control)"
-            dot1Percent={this.state.hasSetBracket ? user.contnevermarried : false}
+            dot1Percent={
+              this.state.hasSetBracket ? user.contnevermarried : false
+            }
             dot2Percent={isInTopBracket ? 29.7 : 26.06}
             dot2Color={isInTopBracket ? "#607477" : undefined}
             dot2TextColor={isInTopBracket ? "#607477" : undefined}
