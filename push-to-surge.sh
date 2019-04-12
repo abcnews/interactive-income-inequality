@@ -1,2 +1,2 @@
-aunty build
-surge -d lgas.surge.sh build
+aunty build --local
+surge -d income-scale.surge.sh build
