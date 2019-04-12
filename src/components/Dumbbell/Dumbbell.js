@@ -142,9 +142,9 @@ class Dumbbell extends React.Component {
               (dot1Align === "left" ? (
                 <span className={styles.dot1Percent} style={dot1PercentStyle}>
                   {/* {this.getActualPercent(dot1Percent)}% */}
-                  {Math.round(this.getActualPercent(dot1Percent)) < 0.5
-                    ? "<1%"
-                    : Math.round(this.getActualPercent(dot1Percent)) + "%"}
+                  {this.getActualPercent(dot1Percent) < 0.05
+                    ? "<0.1%"
+                    : this.getActualPercent(dot1Percent).toFixed(1) + "%"}
                 </span>
               ) : (
                 <span
@@ -152,9 +152,9 @@ class Dumbbell extends React.Component {
                   style={dot1PercentRightStyle}
                 >
                   {/* {this.getActualPercent(dot1Percent)}% */}
-                  {Math.round(this.getActualPercent(dot1Percent)) < 0.5
-                    ? "<1%"
-                    : Math.round(this.getActualPercent(dot1Percent)) + "%"}
+                  {this.getActualPercent(dot1Percent) < 0.05
+                    ? "<0.1%"
+                    : this.getActualPercent(dot1Percent).toFixed(1) + "%"}
                 </span>
               ))}
             {/* Dot 1 labels if applicable */}
@@ -189,9 +189,9 @@ class Dumbbell extends React.Component {
             {dot2Align === "left" ? (
               <span className={styles.dot2Percent} style={dot2PercentStyle}>
                 {/* {this.getActualPercent(dot2Percent)}% */}
-                {Math.round(this.getActualPercent(dot2Percent)) < 0.5
-                  ? "<1%"
-                  : Math.round(this.getActualPercent(dot2Percent)) + "%"}
+                {this.getActualPercent(dot2Percent) < 0.05
+                  ? "<0.1%"
+                  : this.getActualPercent(dot2Percent).toFixed(1) + "%"}
               </span>
             ) : (
               <span
@@ -199,9 +199,9 @@ class Dumbbell extends React.Component {
                 style={dot2PercentRightStyle}
               >
                 {/* {this.getActualPercent(dot2Percent)}% */}
-                {Math.round(this.getActualPercent(dot2Percent)) < 0.5
-                  ? "<1%"
-                  : Math.round(this.getActualPercent(dot2Percent)) + "%"}
+                {this.getActualPercent(dot2Percent) < 0.05
+                  ? "<0.1%"
+                  : this.getActualPercent(dot2Percent).toFixed(1) + "%"}
               </span>
             )}
             {/* Mid bar */}

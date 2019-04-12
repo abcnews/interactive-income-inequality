@@ -24,6 +24,8 @@ let PUBLIC_URL_BASE =
 if (fragmentData && fragmentData.dataset.rootUrl)
   PUBLIC_URL_BASE = fragmentData.dataset.rootUrl;
 
+if (__webpack_public_path__) PUBLIC_URL_BASE = __webpack_public_path__;
+
 class IncomeInput extends React.Component {
   constructor(props) {
     super(props);
@@ -121,7 +123,7 @@ class IncomeInput extends React.Component {
     ) {
       ABC.News.trackEvent({
         category: "weeklyPay",
-        action: this.state.income,
+        action: this.state.income === 0 ? "0" : this.state.income,
         label: "storyLabIncome",
         value: this.state.income
       });
@@ -956,8 +958,8 @@ class IncomeInput extends React.Component {
             {this.state.narrativeState === "locked" && (
               <div className={styles.column + " " + styles.one}>
                 <div className={styles.boldtext}>
-                  Where do you think your income bracket sits on the scale of
-                  least to most rich Australians?
+                Where do you think your income sits on the scale of lowest to
+                  highest-earning Australians?
                 </div>
                 <div className={styles.smalltext}>
                   Use the slider to estimate your position →
@@ -1022,7 +1024,7 @@ class IncomeInput extends React.Component {
                     </span>{" "}
                     per annum income bracket for Australia, with{" "}
                     <span className={styles.resultsStandard}>
-                      {Math.round(this.results.percent)} per cent
+                      {parseFloat(this.results.percent).toFixed(1)} per cent
                     </span>{" "}
                     of other income earners.
                   </div>
