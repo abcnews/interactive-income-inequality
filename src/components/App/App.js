@@ -543,11 +543,14 @@ class App extends React.Component {
         {this.state.currentBracketNumber !== 13 && this.state.hasSetBracket && (
           <DumbbellUser>
             <p className={styles.paragraphText}>
-              Now, let's look at the five most common jobs for people in your tax bracket. Only{' '}
+              Now, let's look at the five most common jobs for people in your tax bracket.{' '}
+              {parseFloat(user.top1 + user.top2 + user.top3 + user.top4 + user.top5) < 10
+                ? 'Only'
+                : 'Around'}{' '}
               <strong>
                 {' '}
-                {parseFloat(user.top1 + user.top2 + user.top3 + user.top4 + user.top5).toFixed(
-                  2
+                {Math.round(
+                  parseFloat(user.top1 + user.top2 + user.top3 + user.top4 + user.top5).toFixed(1)
                 )}{' '}
                 per cent
               </strong>{' '}

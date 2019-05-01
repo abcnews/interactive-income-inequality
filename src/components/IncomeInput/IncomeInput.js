@@ -984,7 +984,7 @@ class IncomeInput extends React.Component {
                     </form>
                   </div>
                   <div className={styles.smalltext}>
-                    Enter your weekly income
+                    Enter your weekly income after tax
                   </div>{" "}
                   <button
                     className={styles.showMe}
