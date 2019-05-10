@@ -347,10 +347,13 @@ class App extends React.Component {
       panels[3].nodes[0].innerHTML = leadPanelText;
       panels[3].nodes[1].innerHTML = leadPanelRankText;
 
-      // If user is in Ashburton
+      // If user is in Ashburton say something different for the 3rd time
       if (userLgaCode === 50250) {
         panels[5].nodes[0].innerHTML =
           'As we said before, your LGA is ranked number one on this measure, with more than one in three income earners in the top bracket, ostensibly due to the prevalence of the mining industry in the area.';
+      } else if (stateCode === 5) { // Western Australians will see Ashburton twice
+        panels[5].nodes[0].innerHTML =
+          'As we said before, the large LGA of <strong>Ashburton</strong> in northern Western Australia has the highest proportion of top income bracket earners in Australia at <strong>35 per cent</strong>, or more than one in three, ostensibly due to the prevalence of the mining industry in the area.';
       } else {
         panels[5].nodes[0].innerHTML =
           'The large LGA of <strong>Ashburton</strong> in northern Western Australia has the highest proportion of top income bracket earners in Australia at <strong>35 per cent</strong>, or more than one in three, ostensibly due to the prevalence of the mining industry in the area.';
