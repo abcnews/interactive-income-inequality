@@ -317,10 +317,10 @@ class App extends React.Component {
     const stateShouldBeWhole = leadLgaPercent > WHOLE_NUMBER_THRESHOLD ? true : false;
 
     if (userLgaCode === leadLgaCode) {
-      leadPanelText = `Your LGA, <strong>${leadLga}</strong>, has the highest concentration of top income earners in ${leadLgaState} at <strong>${
+      leadPanelText = `As we’ve already mentioned, your LGA, <strong>${leadLga}</strong>, has the highest concentration of top income earners in ${leadLgaState} at <strong>${
         stateShouldBeWhole ? Math.round(leadLgaPercent) : leadLgaPercent.toFixed(1)
       } per cent</strong>.`;
-      leadPanelRankText = `It is ranked number <strong>${leadLgaRank}</strong> out of all LGAs in Australia on this measure.`;
+      leadPanelRankText = ``; // It is ranked number <strong>${leadLgaRank}</strong> out of all LGAs in Australia on this measure.`;
     } else {
       leadPanelText = `The area with the highest concentration of top earners in ${leadLgaState} is <strong>${leadLga}</strong>, at <strong>${
         stateShouldBeWhole ? Math.round(leadLgaPercent) : leadLgaPercent.toFixed(1)
@@ -347,10 +347,21 @@ class App extends React.Component {
       panels[3].nodes[0].innerHTML = leadPanelText;
       panels[3].nodes[1].innerHTML = leadPanelRankText;
 
-      if (leadPanelRankText === '') {
-        panels[3].nodes[0].style.marginBottom = '0px';
+      // If user is in Ashburton
+      if (userLgaCode === 50250) {
+        panels[5].nodes[0].innerHTML =
+          'As we said before, your LGA is ranked number one on this measure, with more than one in three income earners in the top bracket, ostensibly due to the prevalence of the mining industry in the area.';
       } else {
-        panels[3].nodes[0].style.marginBottom = '2.25rem';
+        panels[5].nodes[0].innerHTML =
+          'The large LGA of <strong>Ashburton</strong> in northern Western Australia has the highest proportion of top income bracket earners in Australia at <strong>35 per cent</strong>, or more than one in three, ostensibly due to the prevalence of the mining industry in the area.';
+      }
+
+      if (leadPanelRankText == '') {
+        panels[3].nodes[0].style.paddingBottom = '2.25rem';
+        panels[3].nodes[1].style.display = 'none';
+      } else {
+        panels[3].nodes[0].style.paddingBottom = '1.125rem';
+        panels[3].nodes[1].style.display = 'block';
       }
 
       return {
