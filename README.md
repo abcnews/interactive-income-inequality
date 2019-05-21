@@ -1,6 +1,6 @@
 # Income Comparisons
 
-Interactive component of ABC News "How does your income compare to everyone else’s?" story.
+Interactive component of ABC News "How does your income compare to everyone else's?" story.
 
 Built mainly using [React](https://reactjs.org/) and [D3](https://d3js.org/).
 
