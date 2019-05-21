@@ -753,6 +753,7 @@ class App extends React.Component {
             percentMultiplier={1}
             maxValue={10}
             isInTopBracket={isInTopBracket}
+            toFixed={true}
           />
         </DumbbellIndigenous>
         <DumbbellBorn>

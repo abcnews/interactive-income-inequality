@@ -17,7 +17,7 @@ class Dumbbell extends React.Component {
 
   getActualPercent(percent) {
     let actualPercent = percent * this.props.percentMultiplier || percent * 1;
-    return parseFloat(actualPercent.toFixed(2));
+    return parseFloat(actualPercent.toFixed(1));
   }
 
   componentWillReceiveProps(nextProps) {
@@ -129,10 +129,7 @@ class Dumbbell extends React.Component {
           <div className={styles.label}>{this.props.label}</div>
           <div className={styles.chart}>
             {line1Percent && (
-              <span
-                className={styles.line1}
-                style={{ left: this.scale(line1Percent) + "%" }}
-              />
+              <span className={styles.line1} style={{ left: this.scale(line1Percent) + "%" }} />
             )}
 
             {dot1Percent && <span className={styles.dot1} style={dot1Style} />}
@@ -141,19 +138,18 @@ class Dumbbell extends React.Component {
             {dot1Percent &&
               (dot1Align === "left" ? (
                 <span className={styles.dot1Percent} style={dot1PercentStyle}>
-                  {/* {this.getActualPercent(dot1Percent)}% */}
                   {this.getActualPercent(dot1Percent) < 0.5
                     ? "<0.5%"
+                    : this.props.toFixed
+                    ? this.getActualPercent(dot1Percent) + "%"
                     : Math.round(this.getActualPercent(dot1Percent)) + "%"}
                 </span>
               ) : (
-                <span
-                  className={styles.dot1PercentRight}
-                  style={dot1PercentRightStyle}
-                >
-                  {/* {this.getActualPercent(dot1Percent)}% */}
+                <span className={styles.dot1PercentRight} style={dot1PercentRightStyle}>
                   {this.getActualPercent(dot1Percent) < 0.5
                     ? "<0.5%"
+                    : this.props.toFixed
+                    ? this.getActualPercent(dot1Percent) + "%"
                     : Math.round(this.getActualPercent(dot1Percent)) + "%"}
                 </span>
               ))}
@@ -164,10 +160,7 @@ class Dumbbell extends React.Component {
                   {this.props.dot1Label}
                 </span>
               ) : (
-                <span
-                  className={styles.dot1LabelRight}
-                  style={dot1LabelRightStyle}
-                >
+                <span className={styles.dot1LabelRight} style={dot1LabelRightStyle}>
                   {this.props.dot1Label}
                 </span>
               ))}
@@ -178,29 +171,25 @@ class Dumbbell extends React.Component {
                   {this.props.dot2Label}
                 </span>
               ) : (
-                <span
-                  className={styles.dot2LabelRight}
-                  style={dot2LabelRightStyle}
-                >
+                <span className={styles.dot2LabelRight} style={dot2LabelRightStyle}>
                   {this.props.dot2Label}
                 </span>
               ))}
             {/* Check if we want dot2 percents left or right */}
             {dot2Align === "left" ? (
               <span className={styles.dot2Percent} style={dot2PercentStyle}>
-                {/* {this.getActualPercent(dot2Percent)}% */}
                 {this.getActualPercent(dot2Percent) < 0.5
                   ? "<0.5%"
+                  : this.props.toFixed
+                  ? this.getActualPercent(dot2Percent) + "%"
                   : Math.round(this.getActualPercent(dot2Percent)) + "%"}
               </span>
             ) : (
-              <span
-                className={styles.dot2PercentRight}
-                style={dot2PercentRightStyle}
-              >
-                {/* {this.getActualPercent(dot2Percent)}% */}
+              <span className={styles.dot2PercentRight} style={dot2PercentRightStyle}>
                 {this.getActualPercent(dot2Percent) < 0.5
                   ? "<0.5%"
+                  : this.props.toFixed
+                  ? this.getActualPercent(dot2Percent) + "%"
                   : Math.round(this.getActualPercent(dot2Percent)) + "%"}
               </span>
             )}
