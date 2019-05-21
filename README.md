@@ -1,9 +1,9 @@
-# Income Comparisons React
+# Income Comparisons
 
-Looking at Australian Incomes
+Interactive component of ABC News "How does your income compare to everyone else’s?" story.
 
-http://nucwed.aus.aunty.abc.net.au/news/2019-04-09/the-2.5-per-cent/9301378#devmode
+https://www.abc.net.au/news/2019-05-21/income-scale-australia/9301378
 
 ## Authors
 
-- Joshua Byrd ([phocks@gmail.com](mailto:phocks@gmail.com))
+- [Joshua Byrd](https://github.com/phocks)
