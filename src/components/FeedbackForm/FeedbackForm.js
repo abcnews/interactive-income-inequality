@@ -15,22 +15,6 @@ class FeedbackForm extends React.Component {
   }
 
   handleSubmit(event) {
-    // Send feedback if logging is turned on
-    if (
-      sessionStorage &&
-      sessionStorage.loggingLevel &&
-      sessionStorage.loggingLevel !== "0"
-    ) {
-      ABC.News.trackEvent({
-        category: "userFeedback",
-        action: this.state.feedbackText
-          ? this.state.feedbackText
-          : "FIELD LEFT EMPTY BY USER",
-        label: "storyLabIncome",
-        value: this.state.feedbackText ? 1 : -1
-      });
-    }
-
     this.setState({ submitted: true });
 
     event.preventDefault();

@@ -87,27 +87,12 @@ class LgaSearch extends React.Component {
     this.setState({ selectedOption });
     this.props.setCurrentLga(selectedOption);
 
-    // Send some stats to Loggly
-    if (
-      selectedOption &&
-      sessionStorage &&
-      sessionStorage.loggingLevel &&
-      sessionStorage.loggingLevel !== "0"
-    ) {
-      ABC.News.trackEvent({
-        category: "lgaDropdown",
-        action: selectedOption.label,
-        label: "storyLabIncome",
-        value: selectedOption.value
-      });
-    }
-
     // Handle clear the select
     if (selectedOption == null) return;
 
     // Select element and scroll to it
     let firstPanel = document.querySelector('[name="scrolltothispoint"]');
-    
+
     if (!firstPanel) return;
 
     // Use an NPM module to scroll because native scolling is not consistent across browsers
