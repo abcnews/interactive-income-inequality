@@ -62,27 +62,6 @@ class IncomeInput extends React.Component {
 
     // Lock the slider so no more changes can be made
     this.slider.setAttribute("disabled", true);
-
-    // Send percent guess and bracket guess to Loggly
-    if (
-      sessionStorage &&
-      sessionStorage.loggingLevel &&
-      sessionStorage.loggingLevel !== "0"
-    ) {
-      ABC.News.trackEvent({
-        category: "percentGuess",
-        action: this.state.sliderGuess,
-        label: "storyLabIncome",
-        value: this.state.sliderGuess
-      });
-
-      ABC.News.trackEvent({
-        category: "bracketGuess",
-        action: this.state.guessBracket,
-        label: "storyLabIncome",
-        value: this.state.guessBracket
-      });
-    }
   }
 
   splitUpBar() {
@@ -114,20 +93,6 @@ class IncomeInput extends React.Component {
 
     // Wait a while then show result
     setTimeout(this.showResult.bind(this), 1000);
-
-    // Send weekly pay to Loggly
-    if (
-      sessionStorage &&
-      sessionStorage.loggingLevel &&
-      sessionStorage.loggingLevel !== "0"
-    ) {
-      ABC.News.trackEvent({
-        category: "weeklyPay",
-        action: this.state.income === 0 ? "0" : this.state.income,
-        label: "storyLabIncome",
-        value: this.state.income
-      });
-    }
   }
 
   showResult() {
@@ -147,20 +112,6 @@ class IncomeInput extends React.Component {
     this.setState({ narrativeState: "result" });
 
     setTimeout(this.splitUpBar.bind(this), 200);
-
-    // Send calculated bracket to Loggly
-    if (
-      sessionStorage &&
-      sessionStorage.loggingLevel &&
-      sessionStorage.loggingLevel !== "0"
-    ) {
-      ABC.News.trackEvent({
-        category: "incomeBracket",
-        action: this.state.incomeBracket,
-        label: "storyLabIncome",
-        value: this.state.incomeBracket
-      });
-    }
   }
 
   tryAgain(event) {
@@ -958,7 +909,7 @@ class IncomeInput extends React.Component {
             {this.state.narrativeState === "locked" && (
               <div className={styles.column + " " + styles.one}>
                 <div className={styles.boldtext}>
-                Where do you think your income sits on the scale of lowest to
+                  Where do you think your income sits on the scale of lowest to
                   highest-earning Australians?
                 </div>
                 <div className={styles.smalltext}>
