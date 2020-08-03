@@ -16,7 +16,7 @@ const Async = require("react-select").Async;
 // Configuration
 const config = {
   mapbox_token:
-    "cGsuZXlKMUlqb2libVYzY3kxdmJqRnBibVVpTENKaElqb2lZMnBqYXpFM09UbDNNRFV5ZVRKM2NHbDJOV1J4Y0RocE55SjkuS3c0bGhBYkxVazlJUGF6dXRCZTI4dw=="
+    "<INSERT YOUR BASE64 ENCODED MAPBOX TOKEN HERE>"
 };
 
 // Constants
