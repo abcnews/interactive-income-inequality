@@ -9,3 +9,4 @@ https://www.abc.net.au/news/2019-05-21/income-scale-australia/9301378
 ## Authors
 
 - [Joshua Byrd](https://github.com/phocks)
+- Colin Gourlay ([gourlay.colin@abc.net.au](mailto:gourlay.colin@abc.net.au))
