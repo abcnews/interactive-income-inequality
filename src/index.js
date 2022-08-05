@@ -5,6 +5,8 @@ const { render } = require('react-dom');
 const spanify = require('spanify');
 const gemini = require('@abcnews/gemini');
 
+import { isMount, getMountValue, selectMounts } from '@abcnews/mount-utils';
+
 // Directly pull in some code
 // require('react-select/dist/react-select.css');
 require('./lib/modernizr.js'); // Detect browser features
@@ -34,34 +36,61 @@ function init() {
   // }); // Turn anchor hash tags into divs
 
   // Add class via CoreMedia hashtags eg. #classverytop
-  function hashNext(targetString) {
+  function hashNext(targetString = 'class') {
     // Set deafult for params
-    if (targetString === undefined) {
-      targetString = 'class';
-    }
+    // if (targetString === undefined) {
+    //   targetString = 'class';
+    // }
 
-    const anchors = document.querySelectorAll('a');
+    const mounts = selectMounts(targetString);
 
-    // Loop through all the anchor nodes
-    anchors.forEach(anchor => {
+    console.log(mounts);
+
+    // Loop through mounts
+    mounts.forEach(mount => {
       // Leave normal links on the page alone
-      if (anchor.innerHTML !== ' ') return;
+      // if (anchor.innerHTML !== ' ') return;
 
-      // Get name value
-      const elementName = anchor.getAttribute('name');
+      // // Get name value
+      // const elementName = anchor.getAttribute('name');
 
-      // Detect class
-      if (elementName.slice(0, targetString.length) !== targetString) return;
+      const mountName = getMountValue(mount);
+
+      // Detect targetString is the same
+      if (mountName.slice(0, targetString.length) !== targetString) return;
 
       // Get class name to apply
-      const classToApply = elementName.substr(targetString.length);
+      const classToApply = mountName.substring(targetString.length);
 
       // Get the next paragraph to work with
-      const nextElement = anchor.nextElementSibling;
+      const nextElement = mount.nextElementSibling;
 
       // Apply the class
       nextElement.classList.add(classToApply);
     });
+
+    // const anchors = document.querySelectorAll('a');
+
+    // // Loop through all the anchor nodes
+    // anchors.forEach(anchor => {
+    //   // Leave normal links on the page alone
+    //   if (anchor.innerHTML !== ' ') return;
+
+    //   // Get name value
+    //   const elementName = anchor.getAttribute('name');
+
+    //   // Detect class
+    //   if (elementName.slice(0, targetString.length) !== targetString) return;
+
+    //   // Get class name to apply
+    //   const classToApply = elementName.substr(targetString.length);
+
+    //   // Get the next paragraph to work with
+    //   const nextElement = anchor.nextElementSibling;
+
+    //   // Apply the class
+    //   nextElement.classList.add(classToApply);
+    // });
   }
 
   hashNext();

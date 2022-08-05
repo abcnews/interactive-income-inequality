@@ -1,5 +1,5 @@
 const React = require('react');
-const styles = require('./App.scss');
+const styles = require('./App.scss').default;
 
 // External modules
 const d3Q = require('d3-queue');
@@ -29,8 +29,6 @@ const scrollyteller = require('@abcnews/scrollyteller').loadScrollyteller(
   'u-full',
   'mark'
 );
-
-console.log(scrollyteller)
 
 // Let devs specify a custom base URL
 const fragmentData = document.querySelector('[data-income-comparisons-root]');
@@ -204,6 +202,8 @@ class App extends React.Component {
      * Then set up Australian state panel
      */
 
+    console.log(lgaObject)
+
     // Calculate Australian state from LGA
     let stateCode = Math.floor(lgaObject.value / 10000);
 
@@ -337,15 +337,15 @@ class App extends React.Component {
       // User's LGA
       panels[1].nodes[0].innerHTML = userLgaText;
       panels[1].nodes[1].innerHTML = userRankText;
-      panels[1].config.zoom = 0;
-      panels[1].config.lga = lgaObject.value;
+      panels[1].data.zoom = 0;
+      panels[1].data.lga = lgaObject.value;
 
       // User's Australian State
-      panels[2].config.lga = stateCode;
+      panels[2].data.lga = stateCode;
       panels[2].nodes[0].innerHTML = stateText;
 
       // Lead LGA in User's Australian State
-      panels[3].config.lga = leadLgaCode;
+      panels[3].data.lga = leadLgaCode;
       panels[3].nodes[0].innerHTML = leadPanelText;
       panels[3].nodes[1].innerHTML = leadPanelRankText;
 

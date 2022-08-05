@@ -127,11 +127,12 @@ class MapScroller extends React.Component {
 
   canvasInit(mapData, ausStatesGeo) {
     // Hack to hide the a tag we scroll to with LgaSearch
-    const scrollToEl = document.querySelector('#scrolltothispoint');
-    if (scrollToEl) {
-      scrollToEl.style.position = 'absolute';
-      scrollToEl.style.top = '-50vh';
-    }
+    // const scrollToEl = document.querySelector('#scrolltothispoint');
+    // console.log(scrollToEl);
+    // if (scrollToEl) {
+    //   scrollToEl.style.position = 'absolute';
+    //   scrollToEl.style.top = '-50vh';
+    // }
 
     // Check to see if position.sticky is supported
     // and then apply sticky styles. To reduce scroll jank when stage is fixed to screen
@@ -254,16 +255,16 @@ class MapScroller extends React.Component {
 
     // Override the viewheight vh margins to prevent jumping on mobile scroll changing directions
     // This seems to only happen in Chrome and probably the Facebook browser
-    let blockArray = document.getElementsByClassName('Block-content');
+    // let blockArray = document.getElementsByClassName('Block-content');
 
-    for (var i = 0; i < blockArray.length; i++) {
-      blockArray[i].style.marginTop = screenHeight / 2 - 32 + 'px';
-      blockArray[i].style.marginBottom = screenHeight / 2 - 32 + 'px';
-    }
+    // for (var i = 0; i < blockArray.length; i++) {
+    //   blockArray[i].style.marginTop = screenHeight / 2 - 32 + 'px';
+    //   blockArray[i].style.marginBottom = screenHeight / 2 - 32 + 'px';
+    // }
 
     // Top and bottom have full length margins
-    blockArray[0].style.marginTop = screenHeight + 'px';
-    blockArray[blockArray.length - 1].style.marginBottom = screenHeight + 'px';
+    // blockArray[0].style.marginTop = screenHeight + 'px';
+    // blockArray[blockArray.length - 1].style.marginBottom = screenHeight + 'px';
   }
 
   resizeCanvas() {
@@ -320,6 +321,7 @@ class MapScroller extends React.Component {
   }
 
   doMarker(markerData, callback) {
+    console.log(markerData)
     // Only animate the last transition in the queue
     // This prevents consecutive build-up of animations
     if (q._waiting < 1) {
@@ -719,8 +721,8 @@ class MapScroller extends React.Component {
       <div className={styles.wrapper}>
         <Scrollyteller
           panels={scrollyteller.panels}
-          className={`scrolly Block is-richtext is-piecemeal ${styles.scrollyteller}`}
-          panelClassName="Block-content u-layout u-richtext"
+          className={`scrolly ${styles.scrollyteller}`}
+          panelClassName={`${styles.scrollytellerPanel}`}
           onMarker={this.markTrigger}
         >
           <div aria-hidden="true">

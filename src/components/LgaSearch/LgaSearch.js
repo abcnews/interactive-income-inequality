@@ -6,7 +6,6 @@ const debounce = require('debounce');
 const smoothScroll = require('smoothscroll');
 
 const styles = require('./LgaSearch.scss').default;
-console.log(styles)
 
 // Smooth scroll into view support for Safari, Edge, IE, etc.
 const smoothScrollPollyfill = require('smoothscroll-polyfill');
@@ -93,7 +92,7 @@ class LgaSearch extends React.Component {
     if (selectedOption == null) return;
 
     // Select element and scroll to it
-    let firstPanel = document.querySelector('[name="scrolltothispoint"]');
+    let firstPanel = document.querySelector('#scrolltothispoint');
 
     if (!firstPanel) return;
 
