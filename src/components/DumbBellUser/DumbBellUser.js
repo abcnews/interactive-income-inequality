@@ -7,7 +7,7 @@ class DumbbellUser extends React.Component {
   render() {
     return ReactDOM.createPortal(
       <div className={styles.wrapper}>{this.props.children}</div>,
-      document.querySelector(".dumbbelluser")
+      document.querySelector("#dumbbelluser")
     );
   }
 }

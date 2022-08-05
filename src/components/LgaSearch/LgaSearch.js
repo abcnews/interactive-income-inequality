@@ -1,22 +1,23 @@
-const React = require("react");
-const ReactDOM = require("react-dom");
-const MapboxClient = require("mapbox");
-const inside = require("point-in-polygon");
-const debounce = require("debounce");
-const smoothScroll = require("smoothscroll");
+const React = require('react');
+const ReactDOM = require('react-dom');
+const MapboxClient = require('mapbox');
+const inside = require('point-in-polygon');
+const debounce = require('debounce');
+const smoothScroll = require('smoothscroll');
 
-const styles = require("./LgaSearch.scss");
+const styles = require('./LgaSearch.scss');
 
 // Smooth scroll into view support for Safari, Edge, IE, etc.
-const smoothScrollPollyfill = require("smoothscroll-polyfill");
+const smoothScrollPollyfill = require('smoothscroll-polyfill');
 smoothScrollPollyfill.polyfill();
 
-const Async = require("react-select").Async;
+const Async = require('react-select').Async;
+
+const secret = require('../../../secret.json');
 
 // Configuration
 const config = {
-  mapbox_token:
-    "<INSERT YOUR BASE64 ENCODED MAPBOX TOKEN HERE>"
+  mapbox_token: secret.mapbox_token_base64
 };
 
 // Constants
@@ -27,13 +28,13 @@ const ADDRESS_RELEVANCE_THRESHOLD = 0.5;
 const client = new MapboxClient(MAPBOX_TOKEN);
 
 // Load up all the LGAs
-const lgaData = require("./lgas.json").lgas;
+const lgaData = require('./lgas.json').lgas;
 
 // Remove the extra LGA codes
 let lgas = lgaData.map(lga => {
   return {
     value: lga.LGA_CODE_2016,
-    label: lga.LGA.replace(/ *\([^)]*\) */g, "")
+    label: lga.LGA.replace(/ *\([^)]*\) */g, '')
   };
 });
 
@@ -42,23 +43,23 @@ lgas = lgas.map(lga => {
   let stateCode = Math.floor(lga.value / 10000);
 
   if (stateCode === 1) {
-    return { value: lga.value, label: lga.label + " (NSW)" };
+    return { value: lga.value, label: lga.label + ' (NSW)' };
   } else if (stateCode === 2) {
-    return { value: lga.value, label: lga.label + " (VIC)" };
+    return { value: lga.value, label: lga.label + ' (VIC)' };
   } else if (stateCode === 3) {
-    return { value: lga.value, label: lga.label + " (QLD)" };
+    return { value: lga.value, label: lga.label + ' (QLD)' };
   } else if (stateCode === 4) {
-    return { value: lga.value, label: lga.label + " (SA)" };
+    return { value: lga.value, label: lga.label + ' (SA)' };
   } else if (stateCode === 5) {
-    return { value: lga.value, label: lga.label + " (WA)" };
+    return { value: lga.value, label: lga.label + ' (WA)' };
   } else if (stateCode === 6) {
-    return { value: lga.value, label: lga.label + " (TAS)" };
+    return { value: lga.value, label: lga.label + ' (TAS)' };
   } else if (stateCode === 7) {
-    return { value: lga.value, label: lga.label + " (NT)" };
+    return { value: lga.value, label: lga.label + ' (NT)' };
   } else if (stateCode === 8) {
-    return { value: lga.value, label: lga.label + " (ACT)" };
+    return { value: lga.value, label: lga.label + ' (ACT)' };
   } else if (stateCode === 9) {
-    return { value: lga.value, label: lga.label + " (OTHER)" };
+    return { value: lga.value, label: lga.label + ' (OTHER)' };
   } else {
     return { value: lga.value, label: lga.label };
   }
@@ -104,11 +105,11 @@ class LgaSearch extends React.Component {
 
     // GET data from the MapBox API to get LongLat of an address string
     const returnedData = await client
-      .geocodeForward(searchString, { country: "au" })
-      .catch(error => console.log("An error occurred with MapBox... ", error));
+      .geocodeForward(searchString, { country: 'au' })
+      .catch(error => console.log('An error occurred with MapBox... ', error));
 
     // Handle some errors
-    if (returnedData.entity.message === "Not Found") return [];
+    if (returnedData.entity.message === 'Not Found') return [];
 
     if (returnedData && returnedData.entity.features.length === 0) {
       // TODO: alert the user maybe
@@ -139,12 +140,12 @@ class LgaSearch extends React.Component {
       localAreas.forEach(LGA => {
         let currentLGA = LGA.geometry;
 
-        if (currentLGA && currentLGA.type === "Polygon") {
+        if (currentLGA && currentLGA.type === 'Polygon') {
           // Handle Polygon geometry types
           if (inside(searchLongLat, currentLGA.coordinates[0])) {
             foundLGA = LGA;
           }
-        } else if (currentLGA && currentLGA.type === "MultiPolygon") {
+        } else if (currentLGA && currentLGA.type === 'MultiPolygon') {
           // Handle MultiPolygon geometry type
           currentLGA.coordinates.forEach(polygon => {
             if (inside(searchLongLat, polygon[0])) {
@@ -166,14 +167,9 @@ class LgaSearch extends React.Component {
 
       // Check if string is a postcode
       if (/^[0-9]{4}$/.test(input)) {
-        let lgaFromPostcode = await this.addressToLGAs(
-          input,
-          this.props.mapData
-        );
+        let lgaFromPostcode = await this.addressToLGAs(input, this.props.mapData);
 
-        const lgaCode =
-          lgaFromPostcode[0] &&
-          Number(lgaFromPostcode[0].properties.LGA_CODE16);
+        const lgaCode = lgaFromPostcode[0] && Number(lgaFromPostcode[0].properties.LGA_CODE16);
 
         filteredLgas = lgas.filter(lga => {
           return lga.value === lgaCode;
@@ -189,14 +185,9 @@ class LgaSearch extends React.Component {
 
         // Show matching local LGAs otherwise assume address search
         if (filteredLgas.length == 0) {
-          let lgasFromAddress = await this.addressToLGAs(
-            input,
-            this.props.mapData
-          );
+          let lgasFromAddress = await this.addressToLGAs(input, this.props.mapData);
 
-          const lgaCodes = lgasFromAddress.map(
-            lga => lga && Number(lga.properties.LGA_CODE16)
-          );
+          const lgaCodes = lgasFromAddress.map(lga => lga && Number(lga.properties.LGA_CODE16));
 
           filteredLgas = [];
 
@@ -211,7 +202,7 @@ class LgaSearch extends React.Component {
           });
 
           // Remove duplicates
-          let uniqueFilteredLgas = filteredLgas.filter(function(item, pos) {
+          let uniqueFilteredLgas = filteredLgas.filter(function (item, pos) {
             return filteredLgas.indexOf(item) == pos;
           });
 
@@ -230,7 +221,7 @@ class LgaSearch extends React.Component {
 
   renderOption(option) {
     // Add formatting tags to drop down options
-    let labelSplit = option.label.split("(");
+    let labelSplit = option.label.split('(');
 
     labelSplit[0] = labelSplit[0].slice(0, -1);
     labelSplit[1] = labelSplit[1].slice(0, -1);
@@ -239,16 +230,15 @@ class LgaSearch extends React.Component {
     let stateAbbreviation = labelSplit[1];
     let stateFullName = stateAbbreviation;
 
-    if (stateAbbreviation === "NSW") stateFullName = "New South Wales";
-    else if (stateAbbreviation === "VIC") stateFullName = "Victoria";
-    else if (stateAbbreviation === "QLD") stateFullName = "Queensland";
-    else if (stateAbbreviation === "SA") stateFullName = "South Australia";
-    else if (stateAbbreviation === "WA") stateFullName = "Western Australia";
-    else if (stateAbbreviation === "TAS") stateFullName = "Tasmania";
-    else if (stateAbbreviation === "NT") stateFullName = "Northern Territory";
-    else if (stateAbbreviation === "ACT")
-      stateFullName = "Australian Capital Territory";
-    else if (stateAbbreviation === "OTHER") stateFullName = "Other";
+    if (stateAbbreviation === 'NSW') stateFullName = 'New South Wales';
+    else if (stateAbbreviation === 'VIC') stateFullName = 'Victoria';
+    else if (stateAbbreviation === 'QLD') stateFullName = 'Queensland';
+    else if (stateAbbreviation === 'SA') stateFullName = 'South Australia';
+    else if (stateAbbreviation === 'WA') stateFullName = 'Western Australia';
+    else if (stateAbbreviation === 'TAS') stateFullName = 'Tasmania';
+    else if (stateAbbreviation === 'NT') stateFullName = 'Northern Territory';
+    else if (stateAbbreviation === 'ACT') stateFullName = 'Australian Capital Territory';
+    else if (stateAbbreviation === 'OTHER') stateFullName = 'Other';
 
     return (
       <div>
@@ -259,10 +249,10 @@ class LgaSearch extends React.Component {
 
   componentDidMount() {
     // Add accessibility options to drop-down menu so they are read out aloud by screen reader
-    const selectPlaceholder = document.querySelector(".Select-input");
+    const selectPlaceholder = document.querySelector('.Select-input');
     const selectInput = selectPlaceholder.firstElementChild;
-    selectPlaceholder.setAttribute("id", "addressLbl");
-    selectInput.setAttribute("aria-labelledby", "addressLbl");
+    selectPlaceholder.setAttribute('id', 'addressLbl');
+    selectInput.setAttribute('aria-labelledby', 'addressLbl');
   }
 
   render() {
@@ -289,7 +279,7 @@ class LgaSearch extends React.Component {
           optionRenderer={this.renderOption}
         />
       </div>,
-      document.querySelector(".addressinput")
+      document.querySelector('.addressinput')
     );
   }
 }

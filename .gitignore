@@ -10,4 +10,6 @@
 npm-debug.log
 
 #secrets
-secret.json
+./secret.json
+
+.env

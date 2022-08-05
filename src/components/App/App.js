@@ -24,11 +24,11 @@ const DumbbellBorn = require('../DumbbellBorn/DumbbellBorn');
 const DumbbellVoluntary = require('../DumbbellVoluntary/DumbbellVoluntary');
 const DumbbellContMarriage = require('../DumbbellContMarriage/DumbbellContMarriage');
 
-const scrollyteller = require('@abcnews/scrollyteller').loadOdysseyScrollyteller(
-  '',
-  'u-full',
-  'mark'
-);
+// const scrollyteller = require('@abcnews/scrollyteller').loadOdysseyScrollyteller(
+//   '',
+//   'u-full',
+//   'mark'
+// );
 
 // Let devs specify a custom base URL
 const fragmentData = document.querySelector('[data-income-comparisons-root]');
@@ -87,7 +87,7 @@ class App extends React.Component {
       mapDataScroller: null,
       currentLga: null,
       currentAusState: 1, // default NSW
-      scrollytellerObject: scrollyteller,
+      scrollytellerObject: null,//scrollyteller,
       currentBracketNumber: 8, // default bracket
       hasSetBracket: false
     };
@@ -417,10 +417,10 @@ class App extends React.Component {
     return (
       <div className={styles.root}>
         <IncomeInput setCurrentBracket={this.setCurrentBracket} />
-        <LgaSearch setCurrentLga={this.setCurrentLga} mapData={this.state.mapData} />
+        {/* <LgaSearch setCurrentLga={this.setCurrentLga} mapData={this.state.mapData} /> */}
 
         {/* Conditionally render MapScroller if data loaded */}
-        {this.state.mapData && this.state.scrollytellerObject && (
+        {/* {this.state.mapData && this.state.scrollytellerObject && (
           <MapScroller
             scrollyteller={this.state.scrollytellerObject}
             mapData={this.state.mapDataScroller}
@@ -429,7 +429,7 @@ class App extends React.Component {
             lgaData={this.lgaData}
             currentAusState={this.state.currentAusState}
           />
-        )}
+        )} */}
 
         {/* Top 5 jobs in top bracket */}
         {this.state.currentBracketNumber !== 13 && (
