@@ -1,5 +1,5 @@
 const React = require("react");
-const styles = require("./FeedbackForm.scss");
+const styles = require("./FeedbackForm.scss").default;
 
 class FeedbackForm extends React.Component {
   constructor(props) {

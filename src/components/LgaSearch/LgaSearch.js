@@ -5,7 +5,8 @@ const inside = require('point-in-polygon');
 const debounce = require('debounce');
 const smoothScroll = require('smoothscroll');
 
-const styles = require('./LgaSearch.scss');
+const styles = require('./LgaSearch.scss').default;
+console.log(styles)
 
 // Smooth scroll into view support for Safari, Edge, IE, etc.
 const smoothScrollPollyfill = require('smoothscroll-polyfill');
@@ -279,7 +280,7 @@ class LgaSearch extends React.Component {
           optionRenderer={this.renderOption}
         />
       </div>,
-      document.querySelector('.addressinput')
+      document.querySelector('#addressinput')
     );
   }
 }

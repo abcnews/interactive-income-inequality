@@ -217,7 +217,6 @@ class IncomeInput extends React.Component {
   }
 
   render() {
-    console.log(styles)
     return ReactDOM.createPortal(
       <div>
         <div aria-live="polite" className={styles.wrapper}>

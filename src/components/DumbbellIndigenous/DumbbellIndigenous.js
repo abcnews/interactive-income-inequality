@@ -1,7 +1,7 @@
 const React = require("react");
 const ReactDOM = require("react-dom");
 
-const styles = require("./DumbbellIndigenous.scss");
+const styles = require("./DumbbellIndigenous.scss").default;
 
 class DumbbellIndigenous extends React.Component {
   render() {

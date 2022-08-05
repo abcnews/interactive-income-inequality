@@ -1,7 +1,7 @@
 const React = require("react");
 const ReactDOM = require("react-dom");
 
-const styles = require("./DumbbellMarriage.scss");
+const styles = require("./DumbbellMarriage.scss").default;
 
 class DumbbellMarriage extends React.Component {
   render() {

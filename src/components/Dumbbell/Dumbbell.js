@@ -1,7 +1,7 @@
 const React = require("react");
 const d3Scale = require("d3-scale");
 
-const styles = require("./Dumbbell.scss");
+const styles = require("./Dumbbell.scss").default;
 
 class Dumbbell extends React.Component {
   constructor(props) {

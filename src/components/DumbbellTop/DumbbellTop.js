@@ -1,7 +1,7 @@
 const React = require("react");
 const ReactDOM = require("react-dom");
 
-const styles = require("./DumbbellTop.scss");
+const styles = require("./DumbbellTop.scss").default;
 
 class DumbbellTop extends React.Component {
   render() {

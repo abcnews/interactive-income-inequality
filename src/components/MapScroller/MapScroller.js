@@ -1,23 +1,23 @@
-const React = require("react");
-const ReactDOM = require("react-dom");
-const Scrollyteller = require("@abcnews/scrollyteller");
-const topojson = require("topojson");
-const canvasDpiScaler = require("canvas-dpi-scaler");
+const React = require('react');
+const ReactDOM = require('react-dom');
+const Scrollyteller = require('@abcnews/scrollyteller').default;
+const topojson = require('topojson');
+const canvasDpiScaler = require('canvas-dpi-scaler');
 
 // Load up some helper functions etc
-const utils = require("../../lib/utils");
+const utils = require('../../lib/utils');
 
 // D3 modules
-const d3Selection = require("d3-selection");
-require("d3-transition");
-const d3Geo = require("d3-geo");
-const d3Interpolate = require("d3-interpolate");
-const d3Scale = require("d3-scale");
-const d3Ease = require("d3-ease");
-const d3Queue = require("d3-queue");
+const d3Selection = require('d3-selection');
+require('d3-transition');
+const d3Geo = require('d3-geo');
+const d3Interpolate = require('d3-interpolate');
+const d3Scale = require('d3-scale');
+const d3Ease = require('d3-ease');
+const d3Queue = require('d3-queue');
 
 // Import styles
-const styles = require("./MapScroller.scss");
+const styles = require('./MapScroller.scss').default;
 
 // Set up pre-compiled simplification levels
 let baseSimplification = 0.02;
@@ -44,7 +44,7 @@ let canvasEl;
 let prefersReducedMotion;
 
 // Set up reduced motion if set on browser
-var media = window.matchMedia("screen and (prefers-reduced-motion: reduce)");
+var media = window.matchMedia('screen and (prefers-reduced-motion: reduce)');
 if (media.matches) prefersReducedMotion = true;
 else prefersReducedMotion = false;
 
@@ -59,12 +59,11 @@ let ausStates = [];
 let tweening = 1;
 
 // Set defaults
-let currentFocus = "72330"; // Middle of Australia (pretty much)
+let currentFocus = '72330'; // Middle of Australia (pretty much)
 let currentLongLat = [133.15399233370441, -24.656909465155994];
 
 // documentElement is for Firefox support apparently
-let screenWidth =
-  document.documentElement.clientWidth || document.body.clientWidth; // minus scroll bars
+let screenWidth = document.documentElement.clientWidth || document.body.clientWidth; // minus scroll bars
 let screenHeight = window.innerHeight;
 let margins = Math.min(screenWidth, screenHeight) * 0.1;
 
@@ -76,19 +75,19 @@ const colorScale = d3Scale
   .scaleLinear()
   .domain(getScaleDomain(0, 35, 13))
   .range([
-    "#E1E6DA",
-    "#BFE3CD",
-    "#9CD9CE",
-    "#7ACFD4",
-    "#5EC0CD",
-    "#3FB2C6",
-    "#24A3BC",
-    "#188CAD",
-    "#0F75A0",
-    "#085B96",
-    "#03418D",
-    "#002875",
-    "#00114B"
+    '#E1E6DA',
+    '#BFE3CD',
+    '#9CD9CE',
+    '#7ACFD4',
+    '#5EC0CD',
+    '#3FB2C6',
+    '#24A3BC',
+    '#188CAD',
+    '#0F75A0',
+    '#085B96',
+    '#03418D',
+    '#002875',
+    '#00114B'
   ]);
 
 // Calculate current zoom and set up simplification scale
@@ -118,19 +117,21 @@ class MapScroller extends React.Component {
   componentDidMount() {
     // Wait until mounted and then initialise the canvas
     this.canvasInit(this.props.mapData, this.props.ausStatesGeo);
-    window.addEventListener("resize", this.resizeCanvas);
+    window.addEventListener('resize', this.resizeCanvas);
   }
 
   componentWillUnmount() {
     // Unmount listener on hot reload etc
-    window.removeEventListener("resize", this.resizeCanvas);
+    window.removeEventListener('resize', this.resizeCanvas);
   }
 
   canvasInit(mapData, ausStatesGeo) {
     // Hack to hide the a tag we scroll to with LgaSearch
-    const scrollToEl = document.querySelector('[name="scrolltothispoint"]');
-    scrollToEl.style.position = "absolute";
-    scrollToEl.style.top = "-50vh";
+    const scrollToEl = document.querySelector('#scrolltothispoint');
+    if (scrollToEl) {
+      scrollToEl.style.position = 'absolute';
+      scrollToEl.style.top = '-50vh';
+    }
 
     // Check to see if position.sticky is supported
     // and then apply sticky styles. To reduce scroll jank when stage is fixed to screen
@@ -141,19 +142,12 @@ class MapScroller extends React.Component {
 
       const simplifiedMapData = topojson.simplify(preSimplifiedMapData, level);
 
-      const geoJSON = topojson.feature(
-        simplifiedMapData,
-        mapData.objects.LGA_2016_AUST
-      );
+      const geoJSON = topojson.feature(simplifiedMapData, mapData.objects.LGA_2016_AUST);
 
       // topojson.mesh gives us MultiLineStrings so we can hide ones we don't need to draw
-      const ausOutline = topojson.mesh(
-        simplifiedMapData,
-        mapData.objects.LGA_2016_AUST,
-        function(a, b) {
-          return a === b;
-        }
-      );
+      const ausOutline = topojson.mesh(simplifiedMapData, mapData.objects.LGA_2016_AUST, function (a, b) {
+        return a === b;
+      });
 
       // Divide large outlines into multiple small lines
       let newCoords = [];
@@ -177,7 +171,7 @@ class MapScroller extends React.Component {
 
       // Create a new GeoJSON outline
       const ausOutlineDivided = {
-        type: "MultiLineString",
+        type: 'MultiLineString',
         coordinates: newCoords
       };
 
@@ -232,65 +226,58 @@ class MapScroller extends React.Component {
 
     // Set up the canvas element
     canvas = d3Selection
-      .select("." + styles.stage)
-      .style("background-color", "#f9f9f9")
-      .attr("width", screenWidth)
-      .attr("height", screenHeight);
+      .select('.' + styles.stage)
+      .style('background-color', '#f9f9f9')
+      .attr('width', screenWidth)
+      .attr('height', screenHeight);
 
     // Set up our canvas drawing context aka pen
-    context = canvas.node().getContext("2d");
+    context = canvas.node().getContext('2d');
 
     // A non-d3 element selection for Retina dn High DPI scaling
-    canvasEl = document.querySelector("." + styles.stage);
+    canvasEl = document.querySelector('.' + styles.stage);
 
     // Auto-convert canvas to Retina display and High DPI monitor scaling
     canvasDpiScaler(canvasEl, context);
 
     // Build a path generator for our orthographic projection
-    path = d3Geo
-      .geoPath()
-      .projection(projection)
-      .context(context);
+    path = d3Geo.geoPath().projection(projection).context(context);
 
     // Draw the inital state of the world
     this.drawWorld(australia[0], australiaOutline[0], null, 1);
 
     // Fix subsequent Odyssey changes
-    const panelParagraphs = d3Selection.selectAll(".Block-content p");
+    const panelParagraphs = d3Selection.selectAll('.Block-content p');
 
-    panelParagraphs.classed("panel-fix", true);
-    panelParagraphs.attr("id", "panel-fix");
+    panelParagraphs.classed('panel-fix', true);
+    panelParagraphs.attr('id', 'panel-fix');
 
     // Override the viewheight vh margins to prevent jumping on mobile scroll changing directions
     // This seems to only happen in Chrome and probably the Facebook browser
-    let blockArray = document.getElementsByClassName("Block-content");
+    let blockArray = document.getElementsByClassName('Block-content');
 
     for (var i = 0; i < blockArray.length; i++) {
-      blockArray[i].style.marginTop = screenHeight / 2 - 32 + "px";
-      blockArray[i].style.marginBottom = screenHeight / 2 - 32 + "px";
+      blockArray[i].style.marginTop = screenHeight / 2 - 32 + 'px';
+      blockArray[i].style.marginBottom = screenHeight / 2 - 32 + 'px';
     }
 
     // Top and bottom have full length margins
-    blockArray[0].style.marginTop = screenHeight + "px";
-    blockArray[blockArray.length - 1].style.marginBottom = screenHeight + "px";
+    blockArray[0].style.marginTop = screenHeight + 'px';
+    blockArray[blockArray.length - 1].style.marginBottom = screenHeight + 'px';
   }
 
   resizeCanvas() {
     // Dont resize if height resize is negligable
     // To counteract mobile phone resize events when scroll direction changes
-    if (
-      window.innerHeight < screenHeight &&
-      window.innerHeight > screenHeight - 2
-    ) {
+    if (window.innerHeight < screenHeight && window.innerHeight > screenHeight - 2) {
       return;
     }
 
-    screenWidth =
-      document.documentElement.clientWidth || document.body.clientWidth; // minus scroll bars
+    screenWidth = document.documentElement.clientWidth || document.body.clientWidth; // minus scroll bars
     screenHeight = window.innerHeight;
     margins = Math.min(screenWidth, screenHeight) * 0.1;
 
-    canvas.attr("width", screenWidth).attr("height", screenHeight);
+    canvas.attr('width', screenWidth).attr('height', screenHeight);
 
     let preRotateScale = projection.scale();
     let preRotateRotation = projection.rotate();
@@ -336,7 +323,7 @@ class MapScroller extends React.Component {
     // Only animate the last transition in the queue
     // This prevents consecutive build-up of animations
     if (q._waiting < 1) {
-      currentFocus = markerData.lga + ""; // Turn into string
+      currentFocus = markerData.lga + ''; // Turn into string
 
       // Should we highlight current focus?
       // Currently puts in inset orange line
@@ -346,7 +333,7 @@ class MapScroller extends React.Component {
       // Make sure we are mounted before proceeding or we die
       if (projection) {
         // Handle bottom brackets dark background
-        if (!markerData.background) canvas.style("background-color", "#f9f9f9");
+        if (!markerData.background) canvas.style('background-color', '#f9f9f9');
 
         let currentLgaGeometry = getLGA(currentFocus).geometry;
 
@@ -387,10 +374,8 @@ class MapScroller extends React.Component {
                 Math.min(screenWidth, screenHeight) * marginMultiplier
               ],
               [
-                screenWidth -
-                  Math.min(screenWidth, screenHeight) * marginMultiplier,
-                screenHeight -
-                  Math.min(screenWidth, screenHeight) * marginMultiplier
+                screenWidth - Math.min(screenWidth, screenHeight) * marginMultiplier,
+                screenHeight - Math.min(screenWidth, screenHeight) * marginMultiplier
               ]
             ],
             currentLgaGeometry
@@ -408,8 +393,7 @@ class MapScroller extends React.Component {
 
           // Set limits on zoom otherwise things could get crazy
           if (markerData.lga <= 8) {
-            if (newGlobeScale < initialGlobeScale)
-              newGlobeScale = initialGlobeScale;
+            if (newGlobeScale < initialGlobeScale) newGlobeScale = initialGlobeScale;
           } else {
             if (newGlobeScale < MIN_ZOOM_LEVEL) newGlobeScale = MIN_ZOOM_LEVEL;
           }
@@ -423,11 +407,7 @@ class MapScroller extends React.Component {
         // Calculate the duration of the transitions based on location and zoom
         // This isn't as useful as I thought it was going to be (so limited use)
         let timeZoomInterpolate = d3Interpolate.interpolateZoom(
-          [
-            previousRotation[0],
-            previousRotation[1],
-            previousGlobeScale * 0.005
-          ],
+          [previousRotation[0], previousRotation[1], previousGlobeScale * 0.005],
           [-currentRotation[0], -currentRotation[1], newGlobeScale * 0.005]
         );
 
@@ -439,10 +419,7 @@ class MapScroller extends React.Component {
         ]);
 
         // Same with scale interpolator function
-        let scaleInterpolate = d3Interpolate.interpolate(
-          projection.scale(),
-          newGlobeScale
-        );
+        let scaleInterpolate = d3Interpolate.interpolate(projection.scale(), newGlobeScale);
 
         let rotationDelay = 0;
         let zoomDelay = 0;
@@ -454,11 +431,9 @@ class MapScroller extends React.Component {
         transitionTime = Math.abs(timeZoomInterpolate.duration);
 
         // Don't take too long
-        if (transitionTime > maxTransitionTime)
-          transitionTime = maxTransitionTime;
+        if (transitionTime > maxTransitionTime) transitionTime = maxTransitionTime;
         // Don't go too fast
-        if (transitionTime < minTransitionTime)
-          transitionTime = minTransitionTime;
+        if (transitionTime < minTransitionTime) transitionTime = minTransitionTime;
 
         if (prefersReducedMotion) transitionTime = 0;
 
@@ -478,7 +453,7 @@ class MapScroller extends React.Component {
 
         const rotationTween = d3Selection
           .select(dummyTransition)
-          .transition("rotation")
+          .transition('rotation')
           .delay(rotationDelay)
           .duration(transitionTime);
 
@@ -489,21 +464,21 @@ class MapScroller extends React.Component {
 
         const zoomTween = d3Selection
           .select(dummyTransition)
-          .transition("zoom")
+          .transition('zoom')
           .delay(zoomDelay)
           .duration(transitionTime);
 
         if (isZoomingIn) zoomTween.ease(d3Ease.easeExp);
         else zoomTween.ease(d3Ease.easeExp);
 
-        rotationTween.tween("rotation", () => {
+        rotationTween.tween('rotation', () => {
           // Return the tween function
           return time => {
             projection.rotate(rotationInterpolate(time));
           };
         });
 
-        zoomTween.tween("zoom", () => {
+        zoomTween.tween('zoom', () => {
           return time => {
             projection.scale(Math.round(scaleInterpolate(time)));
           };
@@ -512,10 +487,10 @@ class MapScroller extends React.Component {
         // The render tween to actually call the drawWorld render function
         d3Selection
           .select(dummyTransition)
-          .transition("render")
+          .transition('render')
           .delay(0)
           .duration(transitionTime + Math.max(zoomDelay, rotationDelay)) // transition + delay
-          .tween("render", () => {
+          .tween('render', () => {
             // Return the tween function
             return time => {
               // If tweening > 1 then it means it's tweening;
@@ -531,16 +506,14 @@ class MapScroller extends React.Component {
                 tweening
               );
 
-              if (tweening === 1)
-                this.setState({ previousMarkerData: markerData });
+              if (tweening === 1) this.setState({ previousMarkerData: markerData });
             };
           });
 
-        setTimeout(function() {
-          canvas.style("transition", "background-color 0.3s");
+        setTimeout(function () {
+          canvas.style('transition', 'background-color 0.3s');
           // Transition background after spin/zoom
-          if (markerData.background && markerData.background === "dark")
-            canvas.style("background-color", "#414F54");
+          if (markerData.background && markerData.background === 'dark') canvas.style('background-color', '#414F54');
 
           // Call back d3-queue to let it know the transition is finished
           callback(null);
@@ -575,16 +548,12 @@ class MapScroller extends React.Component {
       // Highlight Australian state if specified in Scrollyteller
       // Fade out all the rest
       // TODO: if already faded out don't draw invisible LGA
-      if (
-        markerData &&
-        markerData.state &&
-        element.properties.STE_CODE16 !== this.props.currentAusState + ""
-      ) {
+      if (markerData && markerData.state && element.properties.STE_CODE16 !== this.props.currentAusState + '') {
         context.globalAlpha = fadeOutOpacity;
       } else if (
         this.state.previousMarkerData &&
         this.state.previousMarkerData.state &&
-        element.properties.STE_CODE16 !== this.props.currentAusState + ""
+        element.properties.STE_CODE16 !== this.props.currentAusState + ''
       ) {
         context.globalAlpha = fadeInOpacity;
       } else if (
@@ -603,9 +572,7 @@ class MapScroller extends React.Component {
           markerData.focus.indexOf(elementLgaCode) > -1
         ) {
           context.globalAlpha = 1;
-        } else if (
-          this.state.previousMarkerData.focus.indexOf(elementLgaCode) > -1
-        ) {
+        } else if (this.state.previousMarkerData.focus.indexOf(elementLgaCode) > -1) {
           context.globalAlpha = fadeOutOpacity;
         } else if (markerData.focus.indexOf(elementLgaCode) > -1) {
           context.globalAlpha = fadeInOpacity;
@@ -620,10 +587,7 @@ class MapScroller extends React.Component {
         } else {
           context.globalAlpha = fadeOutOpacity;
         }
-      } else if (
-        this.state.previousMarkerData &&
-        this.state.previousMarkerData.focus
-      ) {
+      } else if (this.state.previousMarkerData && this.state.previousMarkerData.focus) {
         let elementLgaCode = +element.properties.LGA_CODE16;
         if (this.state.previousMarkerData.focus.indexOf(elementLgaCode) > -1) {
           context.globalAlpha = 1;
@@ -671,11 +635,7 @@ class MapScroller extends React.Component {
       // }
 
       // Render current LGA a different colour/style
-      if (
-        markerData &&
-        this.state.highlight &&
-        element.properties.LGA_CODE16 === markerData.lga + ""
-      ) {
+      if (markerData && this.state.highlight && element.properties.LGA_CODE16 === markerData.lga + '') {
         targetElement = element;
         // context.beginPath();
         // context.fillStyle = colorScale(element.properties.TOP); //"#FF5733";
@@ -690,7 +650,7 @@ class MapScroller extends React.Component {
 
       context.beginPath();
       context.fillStyle = colorScale(element.properties.TOP);
-      context.strokeStyle = "rgba(255, 255, 255, 0.4)";
+      context.strokeStyle = 'rgba(255, 255, 255, 0.4)';
       context.lineWidth = 1.1;
       path(element);
       context.fill();
@@ -700,7 +660,7 @@ class MapScroller extends React.Component {
     // If the Australian Outline is a MultiLineString we can chop it up and render only lines on screen
     australiaOutline.coordinates.forEach(line => {
       const lineString = {
-        type: "LineString",
+        type: 'LineString',
         coordinates: line
       };
 
@@ -714,7 +674,7 @@ class MapScroller extends React.Component {
       // Draw the outline paths
       context.beginPath();
       context.globalAlpha = 1;
-      context.strokeStyle = "rgba(130, 130, 130, 0.6)";
+      context.strokeStyle = 'rgba(130, 130, 130, 0.6)';
       context.lineWidth = 1.1;
       path(lineString);
       context.stroke();
@@ -726,7 +686,7 @@ class MapScroller extends React.Component {
       // Fill the target on top
       context.beginPath();
       context.fillStyle = colorScale(targetElement.properties.TOP); //"#FF5733";
-      context.strokeStyle = "#FF5733";
+      context.strokeStyle = '#FF5733';
       context.lineWidth = 1.2;
       path(targetElement);
       context.fill();
@@ -739,12 +699,10 @@ class MapScroller extends React.Component {
 
       // Thin line until we zoom in
       context.beginPath();
-      context.strokeStyle = "#FF5733";
+      context.strokeStyle = '#FF5733';
       // Expand line width depending on screen size
-      if (tweening > 0.9 && Math.min(screenWidth, screenHeight) > 400)
-        context.lineWidth = 5.3;
-      else if (tweening > 0.9 && Math.min(screenWidth, screenHeight) > 350)
-        context.lineWidth = 2.2;
+      if (tweening > 0.9 && Math.min(screenWidth, screenHeight) > 400) context.lineWidth = 5.3;
+      else if (tweening > 0.9 && Math.min(screenWidth, screenHeight) > 350) context.lineWidth = 2.2;
       else if (tweening > 0.9) context.lineWidth = 1.8;
       else context.lineWidth = 1.1;
       path(targetElement);
@@ -752,8 +710,6 @@ class MapScroller extends React.Component {
       context.restore();
     }
   }
-
-  componentWillUpdate() {}
 
   render() {
     // Create props vars passed to this component
@@ -763,9 +719,7 @@ class MapScroller extends React.Component {
       <div className={styles.wrapper}>
         <Scrollyteller
           panels={scrollyteller.panels}
-          className={`scrolly Block is-richtext is-piecemeal ${
-            styles.scrollyteller
-          }`}
+          className={`scrolly Block is-richtext is-piecemeal ${styles.scrollyteller}`}
           panelClassName="Block-content u-layout u-richtext"
           onMarker={this.markTrigger}
         >
@@ -780,11 +734,11 @@ class MapScroller extends React.Component {
                 </div>
                 <div className={styles.leftRight}>
                   <img src="data:image/svg+xml,%3C%3Fxml version='1.0' encoding='UTF-8'%3F%3E%3Csvg width='12px' height='9px' viewBox='0 0 12 9' version='1.1' xmlns='http://www.w3.org/2000/svg' xmlns:xlink='http://www.w3.org/1999/xlink'%3E%3C!-- Generator: Sketch 49.3 %2851167%29 - http://www.bohemiancoding.com/sketch --%3E%3Ctitle%3EUntitled%3C/title%3E%3Cdesc%3ECreated with Sketch.%3C/desc%3E%3Cdefs%3E%3C/defs%3E%3Cg id='Page-1' stroke='none' stroke-width='1' fill='none' fill-rule='evenodd'%3E%3Cg id='arrow-left' fill='%23000000' fill-rule='nonzero'%3E%3Cpolygon id='arrow-left-copy' points='4.26153964 8.66666667 4.98778912 7.92670828 1.96710226 4.84900202 11.9882418 4.84806368 12 3.79274075 1.93289915 3.79444166 4.95080298 0.719570949 4.24456323 0 0 4.32468491'%3E%3C/polygon%3E%3C/g%3E%3C/g%3E%3C/svg%3E" />
-                  {"\u00a0\u00a0\u00a0"}
-                  Lowest{" "}
+                  {'\u00a0\u00a0\u00a0'}
+                  Lowest{' '}
                   <span>
                     Highest
-                    {"\u00a0\u00a0\u00a0"}
+                    {'\u00a0\u00a0\u00a0'}
                     <img src="data:image/svg+xml,%3C%3Fxml version='1.0' encoding='UTF-8'%3F%3E%3Csvg width='12px' height='9px' viewBox='0 0 12 9' version='1.1' xmlns='http://www.w3.org/2000/svg' xmlns:xlink='http://www.w3.org/1999/xlink'%3E%3C!-- Generator: Sketch 49.3 %2851167%29 - http://www.bohemiancoding.com/sketch --%3E%3Ctitle%3EUntitled%3C/title%3E%3Cdesc%3ECreated with Sketch.%3C/desc%3E%3Cdefs%3E%3C/defs%3E%3Cg id='Page-1' stroke='none' stroke-width='1' fill='none' fill-rule='evenodd'%3E%3Cg id='arrow-right' fill='%23000000' fill-rule='nonzero'%3E%3Cpolygon id='arrow-left-copy' transform='translate%286.000000, 4.333333%29 scale%28-1, 1%29 translate%28-6.000000, -4.333333%29 ' points='4.2615396 8.66666667 4.9877891 7.92670828 1.9671023 4.84900202 11.9882418 4.84806368 12 3.79274075 1.9328991 3.79444166 4.950803 0.719570949 4.2445632 0 0 4.32468491'%3E%3C/polygon%3E%3C/g%3E%3C/g%3E%3C/svg%3E" />
                   </span>
                 </div>
@@ -800,24 +754,24 @@ class MapScroller extends React.Component {
 } // End of MapScroller component
 
 function stickifyStage() {
-  var chrome = navigator.userAgent.indexOf("Chrome") > -1;
-  var explorer = navigator.userAgent.indexOf("MSIE") > -1;
-  var firefox = navigator.userAgent.indexOf("Firefox") > -1;
-  var safari = navigator.userAgent.indexOf("Safari") > -1;
-  var camino = navigator.userAgent.indexOf("Camino") > -1;
-  var opera = navigator.userAgent.toLowerCase().indexOf("op") > -1;
+  var chrome = navigator.userAgent.indexOf('Chrome') > -1;
+  var explorer = navigator.userAgent.indexOf('MSIE') > -1;
+  var firefox = navigator.userAgent.indexOf('Firefox') > -1;
+  var safari = navigator.userAgent.indexOf('Safari') > -1;
+  var camino = navigator.userAgent.indexOf('Camino') > -1;
+  var opera = navigator.userAgent.toLowerCase().indexOf('op') > -1;
   if (chrome && safari) safari = false;
   if (chrome && opera) chrome = false;
 
   // Detect whether position: sticky is supported (and not IE or Edge browser) and apply styles
   // Weirdly Safari adds a horizontal scroll if we set body overflow to visible, so disable for now
   if (Modernizr.csspositionsticky && utils.detectIE() === false && !safari) {
-    document.body.style.overflowX = "visible";
-    document.body.style.overflowY = "visible";
+    document.body.style.overflowX = 'visible';
+    document.body.style.overflowY = 'visible';
 
-    let scrollyEl = document.querySelector(".scrolly");
+    let scrollyEl = document.querySelector('.scrolly');
 
-    utils.addClass(scrollyEl, "yes-csspositionsticky");
+    utils.addClass(scrollyEl, 'yes-csspositionsticky');
   }
 }
 
@@ -827,9 +781,7 @@ function getLGA(lgaCode) {
   if (Number(lgaCode) <= 8) return ausStates[Number(lgaCode) - 1];
 
   // Otherwise return LGA geography as per normal
-  return australia[australia.length - 1].features.find(
-    lga => lga.properties.LGA_CODE16 === lgaCode
-  );
+  return australia[australia.length - 1].features.find(lga => lga.properties.LGA_CODE16 === lgaCode);
 }
 
 function invertLongLat(longlat) {
@@ -857,7 +809,7 @@ function polygonArea(points) {
   if (length < 3) {
     return sum;
   }
-  points.forEach(function(d1, i1) {
+  points.forEach(function (d1, i1) {
     i2 = (i1 + 1) % length;
     d2 = points[i2];
     sum += d2[1] * d1[0] - d1[1] * d2[0];
@@ -868,8 +820,8 @@ function polygonArea(points) {
 // Polyfill for .find()
 // https://tc39.github.io/ecma262/#sec-array.prototype.find
 if (!Array.prototype.find) {
-  Object.defineProperty(Array.prototype, "find", {
-    value: function(predicate) {
+  Object.defineProperty(Array.prototype, 'find', {
+    value: function (predicate) {
       // 1. Let O be ? ToObject(this value).
       if (this == null) {
         throw new TypeError('"this" is null or not defined');
@@ -881,8 +833,8 @@ if (!Array.prototype.find) {
       var len = o.length >>> 0;
 
       // 3. If IsCallable(predicate) is false, throw a TypeError exception.
-      if (typeof predicate !== "function") {
-        throw new TypeError("predicate must be a function");
+      if (typeof predicate !== 'function') {
+        throw new TypeError('predicate must be a function');
       }
 
       // 4. If thisArg was supplied, let T be thisArg; else let T be undefined.
@@ -932,23 +884,23 @@ function detectIE() {
   // Edge 13
   // ua = 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/46.0.2486.0 Safari/537.36 Edge/13.10586';
 
-  var msie = ua.indexOf("MSIE ");
+  var msie = ua.indexOf('MSIE ');
   if (msie > 0) {
     // IE 10 or older => return version number
-    return parseInt(ua.substring(msie + 5, ua.indexOf(".", msie)), 10);
+    return parseInt(ua.substring(msie + 5, ua.indexOf('.', msie)), 10);
   }
 
-  var trident = ua.indexOf("Trident/");
+  var trident = ua.indexOf('Trident/');
   if (trident > 0) {
     // IE 11 => return version number
-    var rv = ua.indexOf("rv:");
-    return parseInt(ua.substring(rv + 3, ua.indexOf(".", rv)), 10);
+    var rv = ua.indexOf('rv:');
+    return parseInt(ua.substring(rv + 3, ua.indexOf('.', rv)), 10);
   }
 
-  var edge = ua.indexOf("Edge/");
+  var edge = ua.indexOf('Edge/');
   if (edge > 0) {
     // Edge (IE 12+) => return version number
-    return parseInt(ua.substring(edge + 5, ua.indexOf(".", edge)), 10);
+    return parseInt(ua.substring(edge + 5, ua.indexOf('.', edge)), 10);
   }
 
   // other browser

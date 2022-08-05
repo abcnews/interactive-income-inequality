@@ -1,7 +1,7 @@
 const React = require("react");
 const ReactDOM = require("react-dom");
 
-const styles = require("./DumbbellEducation.scss");
+const styles = require("./DumbbellEducation.scss").default;
 
 class DumbbellEducation extends React.Component {
   render() {
