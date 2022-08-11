@@ -3,7 +3,7 @@
  * and uses a slider to compare income brackets.
  */
 const React = require("react");
-const styles = require("./IncomeInput.scss");
+const styles = require("./IncomeInput.scss").default;
 const ReactDOM = require("react-dom");
 const noUiSlider = require("nouislider");
 const wNumb = require("wnumb");
@@ -1023,7 +1023,7 @@ class IncomeInput extends React.Component {
           </div>
         )} */}
       </div>,
-      document.querySelector(".incomeinput")
+      document.querySelector("#incomeinput")
     );
   }
 }

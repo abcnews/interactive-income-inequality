@@ -1,13 +1,13 @@
 const React = require("react");
 const ReactDOM = require("react-dom");
 
-const styles = require("./DumbbellVoluntary.scss");
+const styles = require("./DumbbellVoluntary.scss").default;
 
 class DumbbellVoluntary extends React.Component {
   render() {
     return ReactDOM.createPortal(
       <div className={styles.wrapper}>{this.props.children}</div>,
-      document.querySelector(".dumbbellvoluntary")
+      document.querySelector("#dumbbellvoluntary")
     );
   }
 }

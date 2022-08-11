@@ -27,19 +27,19 @@
   height: 15px;
   background: linear-gradient(
     to right,
-    #E1E6DA,
-    #BFE3CD,
-    #9CD9CE,
-    #7ACFD4,
-    #5EC0CD,
-    #3FB2C6,
-    #24A3BC,
-    #188CAD,
-    #0F75A0,
-    #085B96,
-    #03418D,
+    #e1e6da,
+    #bfe3cd,
+    #9cd9ce,
+    #7acfd4,
+    #5ec0cd,
+    #3fb2c6,
+    #24a3bc,
+    #188cad,
+    #0f75a0,
+    #085b96,
+    #03418d,
     #002875,
-    #00114B
+    #00114b
   );
   border-radius: 2px;
 }
@@ -50,7 +50,6 @@
   padding-right: 5px;
   padding-top: 5px;
   padding-bottom: 5px;
-
 }
 
 .left-right span {
@@ -69,7 +68,7 @@
       width: 100%;
     }
   }
-  
+
   .Block-content:last-child {
     margin-bottom: 99vh !important; // So content scrolls off before moving on
     // We use 99vh so that there's a little bit always on the screen
@@ -96,7 +95,7 @@
     top: 0px;
     z-index: -1;
   }
-  .yes-csspositionsticky.is-piecemeal > .Block-content:nth-child(2) {
+  .yes-csspositionsticky > div:nth-child(2) {
     // For position sticky the block takes up space so we don't want margin-top
     margin-top: 0px !important;
   }
@@ -106,5 +105,26 @@
   div.Block-content > p#panel-fix {
     margin-top: 0px !important;
     margin-bottom: 0px !important;
+  }
+}
+
+.scrollytellerPanel {
+  &::before {
+    content: none;
+  }
+
+  p {
+    color: #111;
+    background-color: rgba(255,255,255,.9);
+    margin: 0;
+    padding: 12px 28px;
+
+    &:first-child {
+      padding-top: 24px;
+    }
+
+    &:last-child {
+      padding-bottom: 24px;
+    }
   }
 }
