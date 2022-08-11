@@ -1,6 +1,6 @@
 const React = require('react');
 const ReactDOM = require('react-dom');
-const Scrollyteller = require('@abcnews/scrollyteller').default;
+const Scrollyteller = require('scrollyteller-panel-fix').default;
 const topojson = require('topojson');
 const canvasDpiScaler = require('canvas-dpi-scaler');
 
@@ -321,7 +321,6 @@ class MapScroller extends React.Component {
   }
 
   doMarker(markerData, callback) {
-    console.log(markerData)
     // Only animate the last transition in the queue
     // This prevents consecutive build-up of animations
     if (q._waiting < 1) {

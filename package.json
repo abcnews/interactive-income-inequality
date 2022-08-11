@@ -1,6 +1,6 @@
 {
 	"name": "interactive-income-inequality",
-	"version": "1.1.2",
+	"version": "2.0.0",
 	"description": "Measure income amongst Australians",
 	"license": "MIT",
 	"private": true,
@@ -13,13 +13,14 @@
 		"test": "aunty test"
 	},
 	"devDependencies": {
-		"@abcnews/aunty": "^12.2.0",
+		"@abcnews/aunty": "^13.0.0",
 		"react-test-renderer": "^16.4.1"
 	},
 	"dependencies": {
+		"@abcnews/alternating-case-to-object": "^3.0.2",
 		"@abcnews/gemini": "^1.0.0",
 		"@abcnews/mount-utils": "^2.0.0",
-		"@abcnews/scrollyteller": "^4.1.1",
+		"scrollyteller-panel-fix": "1.0.0",
 		"canvas-dpi-scaler": "0.0.3",
 		"d3-ease": "^1.0.3",
 		"d3-geo": "^1.10.0",

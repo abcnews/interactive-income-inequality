@@ -44,8 +44,6 @@ function init() {
 
     const mounts = selectMounts(targetString);
 
-    console.log(mounts);
-
     // Loop through mounts
     mounts.forEach(mount => {
       // Leave normal links on the page alone

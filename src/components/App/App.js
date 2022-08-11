@@ -5,6 +5,7 @@ const styles = require('./App.scss').default;
 const d3Q = require('d3-queue');
 const d3Request = require('d3-request');
 const topojson = require('topojson');
+const cloneDeep = require('lodash.clonedeep');
 
 // Other React components
 const LgaSearch = require('../LgaSearch/LgaSearch');
@@ -24,11 +25,7 @@ const DumbbellBorn = require('../DumbbellBorn/DumbbellBorn');
 const DumbbellVoluntary = require('../DumbbellVoluntary/DumbbellVoluntary');
 const DumbbellContMarriage = require('../DumbbellContMarriage/DumbbellContMarriage');
 
-const scrollyteller = require('@abcnews/scrollyteller').loadScrollyteller(
-  '',
-  'u-full',
-  'mark'
-);
+const scrollyteller = require('scrollyteller-panel-fix').loadScrollyteller('', 'u-full', 'mark');
 
 // Let devs specify a custom base URL
 const fragmentData = document.querySelector('[data-income-comparisons-root]');
@@ -183,17 +180,15 @@ class App extends React.Component {
       lgaObject.label.replace(/ *\([^)]*\) */g, '') // Strip (NSW) etc.
     }</strong> LGA, <strong>${
       shouldBeWhole ? Math.round(currentTopPercentValue) : +currentTopPercentValue.toFixed(1)
-    } per cent</strong> of income earners are in the top bracket, which is ${
-      shouldBeWhole ? 'around' : ''
-    } 
+    } per cent</strong> of income earners are in the top bracket, which is ${shouldBeWhole ? 'around' : ''} 
     ${
       roundedPercentageDifference === 0
         ? 'on par with the national average.'
         : `<strong>${
             shouldBeWhole ? Math.round(roundedPercentageDifference) : roundedPercentageDifference
-          }</strong> percentage ${
-            roundedPercentageDifference === 1 ? 'point' : 'points'
-          } ${higherOrLower(percentageDifference)} than the average.`
+          }</strong> percentage ${roundedPercentageDifference === 1 ? 'point' : 'points'} ${higherOrLower(
+            percentageDifference
+          )} than the average.`
     }`;
 
     const userRankText = `It is ranked <strong>${currentRank}</strong> out of all 547 LGAs in Australia.`;
@@ -201,8 +196,6 @@ class App extends React.Component {
     /*
      * Then set up Australian state panel
      */
-
-    console.log(lgaObject)
 
     // Calculate Australian state from LGA
     let stateCode = Math.floor(lgaObject.value / 10000);
@@ -285,8 +278,7 @@ class App extends React.Component {
       }
     };
 
-    const statePercentDifferent =
-      parseFloat(getStateInfo(stateCode).percent).toFixed(1) - NATIONAL_AVERAGE_IN_TOP; // National average
+    const statePercentDifferent = parseFloat(getStateInfo(stateCode).percent).toFixed(1) - NATIONAL_AVERAGE_IN_TOP; // National average
 
     const roundedStatePercentDifferent = Math.abs(statePercentDifferent.toFixed(1));
     const stateText = `Zooming ${
@@ -332,6 +324,9 @@ class App extends React.Component {
 
     // Then update the component state which will change text on all panels
     this.setState((prevState, props) => {
+      // This whole section horribly mutates data but it doesn't
+      // seem to work otherwise. Find a better way later.
+      
       let panels = prevState.scrollytellerObject.panels;
 
       // User's LGA
@@ -353,7 +348,8 @@ class App extends React.Component {
       if (userLgaCode === 50250) {
         panels[5].nodes[0].innerHTML =
           'As we said before, your LGA is ranked number one on this measure, with more than one in three income earners in the top bracket, ostensibly due to the prevalence of the mining industry in the area.';
-      } else if (stateCode === 5) { // Western Australians will see Ashburton twice
+      } else if (stateCode === 5) {
+        // Western Australians will see Ashburton twice
         panels[5].nodes[0].innerHTML =
           'As we said before, the large LGA of <strong>Ashburton</strong> in northern Western Australia has the highest proportion of top income bracket earners in Australia at <strong>35 per cent</strong>, or more than one in three, ostensibly due to the prevalence of the mining industry in the area.';
       } else {
@@ -560,15 +556,10 @@ class App extends React.Component {
           <DumbbellUser>
             <p className={styles.paragraphText}>
               Now, let's look at the five most common jobs for people in your tax bracket.{' '}
-              {parseFloat(user.top1 + user.top2 + user.top3 + user.top4 + user.top5) < 10
-                ? 'Only'
-                : 'Around'}{' '}
+              {parseFloat(user.top1 + user.top2 + user.top3 + user.top4 + user.top5) < 10 ? 'Only' : 'Around'}{' '}
               <strong>
                 {' '}
-                {Math.round(
-                  parseFloat(user.top1 + user.top2 + user.top3 + user.top4 + user.top5).toFixed(1)
-                )}{' '}
-                per cent
+                {Math.round(parseFloat(user.top1 + user.top2 + user.top3 + user.top4 + user.top5).toFixed(1))} per cent
               </strong>{' '}
               of people in those jobs make it into the top earners group.
             </p>
@@ -632,8 +623,7 @@ class App extends React.Component {
           <DumbbellUser>
             <p className={styles.paragraphText}>
               Now, let's look at the five most common jobs for people earning the least. Only{' '}
-              <strong>2 per cent</strong> of people in those jobs make it into the top earners
-              group.
+              <strong>2 per cent</strong> of people in those jobs make it into the top earners group.
             </p>
             <Dumbbell
               label="Sales Assistants and Salespersons"

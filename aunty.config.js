@@ -1,3 +1,5 @@
+const path = require('path');
+
 module.exports = {
   type: 'react',
   webpack: config => {
@@ -8,6 +10,13 @@ module.exports = {
       url: require.resolve('url/')
     };
 
-    return config;
+    return {
+      ...config,
+      resolve: {
+        alias: {
+          react: path.resolve(__dirname, 'node_modules/react')
+        }
+      }
+    };
   }
 };

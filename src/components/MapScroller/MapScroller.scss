@@ -95,7 +95,7 @@
     top: 0px;
     z-index: -1;
   }
-  .yes-csspositionsticky.is-piecemeal > .Block-content:nth-child(2) {
+  .yes-csspositionsticky > div:nth-child(2) {
     // For position sticky the block takes up space so we don't want margin-top
     margin-top: 0px !important;
   }
@@ -115,5 +115,16 @@
 
   p {
     color: #111;
+    background-color: rgba(255,255,255,.9);
+    margin: 0;
+    padding: 12px 28px;
+
+    &:first-child {
+      padding-top: 24px;
+    }
+
+    &:last-child {
+      padding-bottom: 24px;
+    }
   }
 }

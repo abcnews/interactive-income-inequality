@@ -4,6 +4,13 @@
 }
 
 :global {
+  #scrolltothispoint {
+    position: absolute;
+    margin-top: -50vh;
+  }
+}
+
+:global {
   /**
  * React Select
  * ============
