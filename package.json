@@ -18,7 +18,6 @@
 	},
 	"dependencies": {
 		"@abcnews/alternating-case-to-object": "^3.0.2",
-		"@abcnews/gemini": "^1.0.0",
 		"@abcnews/mount-utils": "^2.0.0",
 		"scrollyteller-panel-fix": "1.0.0",
 		"canvas-dpi-scaler": "0.0.3",
@@ -42,7 +41,6 @@
 		"regenerator-runtime": "^0.13.9",
 		"smoothscroll": "^0.4.0",
 		"smoothscroll-polyfill": "^0.4.3",
-		"spanify": "^1.2.5",
 		"topojson": "^3.0.2",
 		"url": "^0.11.0",
 		"wnumb": "^1.1.0",

@@ -2,8 +2,8 @@ require('regenerator-runtime/runtime'); // for async/await to work
 const React = require('react');
 const { render } = require('react-dom');
 // const xhr = require("xhr");
-const spanify = require('spanify');
-const gemini = require('@abcnews/gemini');
+// const spanify = require('spanify');
+// const gemini = require('@abcnews/gemini');
 
 import { isMount, getMountValue, selectMounts } from '@abcnews/mount-utils';
 

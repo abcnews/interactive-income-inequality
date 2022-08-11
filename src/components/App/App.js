@@ -5,7 +5,6 @@ const styles = require('./App.scss').default;
 const d3Q = require('d3-queue');
 const d3Request = require('d3-request');
 const topojson = require('topojson');
-const cloneDeep = require('lodash.clonedeep');
 
 // Other React components
 const LgaSearch = require('../LgaSearch/LgaSearch');
@@ -326,6 +325,13 @@ class App extends React.Component {
     this.setState((prevState, props) => {
       // This whole section horribly mutates data but it doesn't
       // seem to work otherwise. Find a better way later.
+
+      // TODO: The plan is instead of setting the default LGA in CoreMedia
+      // set the panel to somehow tell us which panel we are on eg. panels[1]
+      // the second panel, or panels[2] the third panel etc.
+      // then instead of updating the panels (which are now immutable in scrollyteller@^4.0.0)
+      // *** for now we have a custom version of scrollyteller that fixes this though ***
+      // 'scrollyteller-panel-fix'
       
       let panels = prevState.scrollytellerObject.panels;
 
